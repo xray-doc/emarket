@@ -5,11 +5,16 @@
 
 {% block content %}
     <div class="section-top">
-        <img src="{% static 'img/slider0.jpg' %}" class="img-responsive">
+        <img src="{% static 'static_dev/img/slider0.jpg' %}" class="img-responsive">
     </div>
-    <div class="section">
+    <div class="section section1">
         <div class="container">
             <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="text-center">
+                        Новые поступления
+                    </h1>
+                </div>
                 {% for product_image in products_images %}
                     <div class="col-lg-3">
                         <div class="product-item">
@@ -35,5 +40,70 @@
         </div>
     </div>
 
+    <div class="section section2">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="text-center">
+                        Новые поступления
+                    </h1>
+                </div>
+                {% for product_image in products_images %}
+                    <div class="col-lg-3">
+                        <div class="product-item">
+                            <div class="center-core">
+                                <img src="{{ product_image.image.url }}" class="img-responsive">
+                            </div>
+                            <h4>{{ product_image.product.name }}</h4>
+                            <p>
+                                {{ product_image.product.description|truncatechars_html:100 }}
+                            </p>
+                            <div>
+                                {{ product_image.product.price }} RUB
+                            </div>
+                            <div class="add-to-cart-btn">
+                                <button class="btn btn-success">
+                                    Добавить в корзину
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <div class="section section3">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="text-center">
+                        Новые поступления
+                    </h1>
+                </div>
+                {% for product_image in products_images %}
+                    <div class="col-lg-3">
+                        <div class="product-item">
+                            <div class="center-core">
+                                <img src="{{ product_image.image.url }}" class="img-responsive">
+                            </div>
+                            <h4>{{ product_image.product.name }}</h4>
+                            <p>
+                                {{ product_image.product.description|truncatechars_html:100 }}
+                            </p>
+                            <div>
+                                {{ product_image.product.price }} RUB
+                            </div>
+                            <div class="add-to-cart-btn">
+                                <button class="btn btn-success">
+                                    Добавить в корзину
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 {% endblock %}
 

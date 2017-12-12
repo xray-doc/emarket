@@ -5,8 +5,12 @@ html, body{
     background-color: #edeef0;
 }
 
+.navbar{
+    margin-bottom: 0px;
+}
+
 .section-top{
-    margin: 20px;
+    margin-bottom: 20px;
 }
 
 .product-item{
@@ -35,4 +39,8 @@ html, body{
     left: 50px;
 }
 
-
+.footer{
+    margin-bottom: -100px;
+    background-color: white;
+    height: 200px;
+}
