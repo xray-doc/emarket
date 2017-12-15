@@ -44,3 +44,10 @@ html, body{
     background-color: white;
     height: 200px;
 }
+
+.basket{
+    position: absolute;
+    height: 200px;
+    width: 200px;
+    background: greenyellow;
+}
