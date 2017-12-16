@@ -9,37 +9,40 @@
         <img src="{% static 'static_dev/img/slider0.jpg' %}" class="img-responsive">
     </div>
 
-    <div class="section section1">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="text-center">
-                        Новые поступления
-                    </h1>
-                </div>
-                {% for product_image in products_images %}
-                    <div class="col-lg-3">
-                        <div class="product-item">
-                            <div class="center-core">
-                                <img src="{{ product_image.image.url }}" class="img-responsive">
-                            </div>
-                            <h4>{{ product_image.product.name }}</h4>
-                            <p>
-                                {{ product_image.product.short_description }}
-                            </p>
-                            <div class="price">
-                                <h4>{{ product_image.product.price }} RUB </h4>
-                            </div>
-                            <div class="add-to-cart-btn">
-                                <button class="btn btn-success">
-                                    Добавить в корзину
-                                </button>
+    {% for list in devices_list %}
+        <div class="section section1">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="text-center">
+                            {{ list.0 }}
+                        </h1>
+                    </div>
+
+                    {% for product in list.1 %}
+                        <div class="col-lg-3">
+                            <div class="product-item">
+                                <div class="center-core">
+                                    <img src="{{ product.img.image.url }}" class="img-responsive">
+                                </div>
+                                <h4>{{ product.device.name }}</h4>
+                                <p>
+                                    {{ product.device.short_description }}
+                                </p>
+                                <div class="price">
+                                    <h4>{{ product.device.price }} RUB </h4>
+                                </div>
+                                <div class="add-to-cart-btn">
+                                    <button class="btn btn-success">
+                                        Добавить в корзину
+                                    </button>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                {% endfor %}
+                    {% endfor %}
+                </div>
             </div>
         </div>
-    </div>
+    {% endfor %}
 
 {% endblock %}

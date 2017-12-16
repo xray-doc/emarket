@@ -20,13 +20,10 @@ bask_btn.onmouseout = function (e) {
 // Центрирование картинки и цены в карточке товара на главной странице
 
 var imgs = document.querySelectorAll('.center-core img');
-
-var div_of_imgs = document.getElementsByClassName('center-core')[0];
-var div_of_imgs_width = parseFloat(getComputedStyle(div_of_imgs).width);
+var div_of_imgs_width = document.getElementsByClassName('center-core')[0].clientWidth
 
 for (let img of imgs){
-    var img_wdth = parseFloat(getComputedStyle(img).width);
-    var new_img_left = Math.floor((div_of_imgs_width - img_wdth) / 2);
+    var new_img_left = Math.floor((div_of_imgs_width - img.clientWidth) / 2);
     img.style.left = new_img_left + 'px';
 }
 
