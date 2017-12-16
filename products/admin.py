@@ -8,6 +8,16 @@ class ProductImageInline(admin.TabularInline):
     extra = 0
 
 
+# class OperationalSystemAdmin(admin.ModelAdmin):
+#     list_display = [field.name for field in Operational_system._meta.fields]
+#
+#     class Meta:
+#         model = Operational_system
+#
+# admin.site.register(Operational_system, OperationalSystemAdmin)
+
+
+
 class ProductAdmin(admin.ModelAdmin):
     list_display = [field.name for field in Product._meta.fields]
     inlines = [ProductImageInline]
@@ -26,6 +36,9 @@ class ProductImageAdmin(admin.ModelAdmin):
         model = ProductImage
 
 admin.site.register(ProductImage, ProductImageAdmin)
+
+
+
 
 
 
