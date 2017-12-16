@@ -13,6 +13,11 @@ html, body{
     margin-bottom: 20px;
 }
 
+
+
+
+/*Стили карточки товара на главной странице*/
+
 .product-item{
     height: 400px;
     margin-bottom: 10px;
@@ -23,31 +28,45 @@ html, body{
     text-align: center;
 }
 
+.add-to-cart-btn{
+    position: absolute;
+    bottom: 8px;
+    left: 54px;
+}
+
 .center-core{
-    width: 180px;
+    position: relative;
+    width: auto;
     height: 200px;
     margin: 0 auto;
 }
 
 .center-core img{
-    height: 200px;
-}
-
-.add-to-cart-btn{
     position: absolute;
-    bottom: 5px;
-    left: 50px;
+    width: auto;
+    height: 100%;
 }
 
-.footer{
-    margin-bottom: -100px;
-    background-color: white;
-    height: 200px;
+.price{
+    width: 100%;
+    position: absolute;
+    bottom: 40px;
 }
+
+/*Стили кнопки корзина и появляющегося списка*/
 
 .basket{
     position: absolute;
     height: 200px;
     width: 200px;
     background: greenyellow;
+}
+
+
+/* Footer */
+
+.footer{
+    margin-bottom: -100px;
+    background-color: white;
+    height: 200px;
 }

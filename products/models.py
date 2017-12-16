@@ -20,7 +20,7 @@ class Product(models.Model):
     name = models.CharField(max_length=64, blank=True, null=True, default=None)
     price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     os = models.ForeignKey(Operational_system)
-    short_description = models.TextField(blank=True, null=True, default=None)
+    short_description = models.CharField(max_length=100, blank=True, null=True, default=None)
     description = models.TextField(blank=True, null=True, default=None)
     is_active = models.BooleanField(default=True)
     created = models.DateTimeField(auto_now_add=True, auto_now=False)

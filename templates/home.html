@@ -25,10 +25,10 @@
                             </div>
                             <h4>{{ product_image.product.name }}</h4>
                             <p>
-                                {{ product_image.product.description|truncatechars_html:100 }}
+                                {{ product_image.product.short_description }}
                             </p>
-                            <div>
-                                {{ product_image.product.price }} RUB
+                            <div class="price">
+                                <h4>{{ product_image.product.price }} RUB </h4>
                             </div>
                             <div class="add-to-cart-btn">
                                 <button class="btn btn-success">
