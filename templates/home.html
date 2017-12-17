@@ -9,50 +9,47 @@
         <img src="{% static 'static_dev/img/slider0.jpg' %}" class="img-responsive">
     </div>
 
-    {% for list in devices_list %}
-        <div class="section section">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <h1 class="text-center">
-                            {{ list.0 }}            {# [header, list-of-devices] #}
-                        </h1>
-                    </div>
 
-                    {% for product in list.1 %}     {# [header, list-of-devices] #}
-                        <div class="col-lg-3">
+{# Android section #}
 
-                            <div class="product-item">
-                                <div class="center-core">
-                                        <img src="{{ product.img.image.url }}" class="img-responsive">
-                                </div>
-                                {%  if product.device.discount  %}
-                                    <div class="discount">
-                                        {{ product.device.discount }}
-                                    </div>
-                                {% endif %}
-                                <a href="{% url 'product' product.device.id %}">
-                                    <h4>{{ product.device.name }}</h4>
-                                </a>
-                                <p>
-                                    {{ product.device.short_description }}
-                                </p>
-                                <div class="price">
-                                    <h4>{{ product.device.price }} RUB </h4>
-                                </div>
-                                <div class="add-to-cart-btn">
-                                    <button class="btn btn-success">
-                                        Добавить в корзину
-                                    </button>
-                                </div>
-                            </div>
+    <div class="section">
+        <div class="container">
+            <div class="row">
 
-                        </div>
-                    {% endfor %}
+                <div class="col-lg-12">
+                    <h1 class="text-center">
+                       Android
+                    </h1>
                 </div>
+
+                {% for product in android_devices %}
+                    {% include 'product_item.html' %}
+                {% endfor %}
+
             </div>
         </div>
-    {% endfor %}
+    </div>
+
+
+{# iOS section #}
+
+    <div class="section">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-12">
+                    <h1 class="text-center">
+                       iOS
+                    </h1>
+                </div>
+
+                {% for product in ios_devices %}
+                    {% include 'product_item.html' %}
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
 
     <script src="{% static 'static_dev/js/home.js' %}"></script>
 {% endblock %}

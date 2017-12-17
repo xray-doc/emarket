@@ -28,6 +28,9 @@ class Product(models.Model):
     created = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated = models.DateTimeField(auto_now_add=False, auto_now=True)
 
+    def get_main_img_url(self):
+        return ProductImage.objects.get(product=self, is_main=True).image.url
+
     def __str__(self):
         return "%s, %s" % (self.price, self.name)
 

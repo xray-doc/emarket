@@ -4,21 +4,9 @@ from products.models import *
 
 
 def home(request):
-    osList = [
-        'iOS',
-        'Android'
-    ]
-
-    devices_list = []
-    for os in osList:
-        devices = []
-        for device in Product.objects.filter(os__name=os):
-            img = ProductImage.objects.get(product=device, is_main=True)
-            devices.append({'device': device, 'img': img})
-        devices_list.append([os, devices])
-
+    ios_devices = Product.objects.filter(os__name='iOS')
+    android_devices = Product.objects.filter(os__name='Android')
 
     return render(request, 'home.html', locals())
 
 
-0
