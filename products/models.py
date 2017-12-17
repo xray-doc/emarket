@@ -22,6 +22,8 @@ class Product(models.Model):
     os = models.ForeignKey(Operational_system)
     short_description = models.CharField(max_length=100, blank=True, null=True, default=None)
     description = models.TextField(blank=True, null=True, default=None)
+    discount = models.IntegerField(null=True, blank=True, default=0)
+
     is_active = models.BooleanField(default=True)
     created = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated = models.DateTimeField(auto_now_add=False, auto_now=True)

@@ -16,6 +16,8 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 
-urlpatterns = [
+from . import views
 
+urlpatterns = [
+    url(r'^product/(?P<product_id>\w+)/$', views.product, name='product'),
 ]

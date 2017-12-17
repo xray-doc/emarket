@@ -10,22 +10,30 @@
     </div>
 
     {% for list in devices_list %}
-        <div class="section section1">
+        <div class="section section">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="text-center">
-                            {{ list.0 }}
+                            {{ list.0 }}            {# [header, list-of-devices] #}
                         </h1>
                     </div>
 
-                    {% for product in list.1 %}
+                    {% for product in list.1 %}     {# [header, list-of-devices] #}
                         <div class="col-lg-3">
+
                             <div class="product-item">
                                 <div class="center-core">
-                                    <img src="{{ product.img.image.url }}" class="img-responsive">
+                                        <img src="{{ product.img.image.url }}" class="img-responsive">
                                 </div>
-                                <h4>{{ product.device.name }}</h4>
+                                {%  if product.device.discount  %}
+                                    <div class="discount">
+                                        {{ product.device.discount }}
+                                    </div>
+                                {% endif %}
+                                <a href="{% url 'product' product.device.id %}">
+                                    <h4>{{ product.device.name }}</h4>
+                                </a>
                                 <p>
                                     {{ product.device.short_description }}
                                 </p>
@@ -38,6 +46,7 @@
                                     </button>
                                 </div>
                             </div>
+
                         </div>
                     {% endfor %}
                 </div>

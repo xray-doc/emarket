@@ -13,10 +13,19 @@ html, body{
     margin-bottom: 20px;
 }
 
+.wrapper{
+    min-height: 100%;
+}
+
+.wrapper-content{
+    overflow: auto;
+    padding-bottom: 180px;
+}
 
 
-
-/*Стили карточки товара на главной странице*/
+/*
+Стили карточки товара на главной странице
+*/
 
 .product-item{
     height: 400px;
@@ -53,7 +62,21 @@ html, body{
     bottom: 40px;
 }
 
-/*Стили кнопки корзина и появляющегося списка*/
+.discount{
+    position: absolute;
+    top: 10%;
+    background-color: rgba(36, 255, 124, 0.67);
+    width: 35%;
+    left: 0;
+    padding: 3px;
+    border-radius: 2px 5px 5px 2px;
+}
+
+
+
+/*
+Стили кнопки корзина и появляющегося списка
+*/
 
 .basket{
     position: absolute;
@@ -63,10 +86,16 @@ html, body{
 }
 
 
-/* Footer */
+
+/*
+Footer
+*/
 
 .footer{
-    margin-bottom: -100px;
+    position: absolute;
+    margin-top: -180px;
+    clear: both;
     background-color: white;
-    height: 200px;
+    height: 180px;
+    width: 100%;
 }
