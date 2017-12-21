@@ -1,18 +1,18 @@
 <div class="col-lg-3">
     <div class="product-item">
-
-        <div class="center-core">
-                <img src="{{ product.get_main_img_url }}" class="img-responsive">
-        </div>
-
-        {%  if product.discount  %}
-            <div class="discount">
-                {{ product.discount }}
-            </div>
-        {% endif %}
-
         <a href="{% url 'product' product.id %}">
-            <h4>{{ product.name }}</h4>
+            <div class="center-core">
+                    <img src="{{ product.get_main_img_url }}" class="img-responsive">
+            </div>
+
+            {%  if product.discount  %}
+                <div class="discount">
+                    {{ product.discount }}
+                </div>
+            {% endif %}
+
+
+                <h4>{{ product.name }}</h4>
         </a>
 
         <p> {{ product.short_description }} </p>

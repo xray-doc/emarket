@@ -86,6 +86,22 @@ html, body{
 }
 
 
+/*
+Стили страницы товара
+ */
+
+.component{
+    padding: 20px;
+    background-color: white;
+    border-radius: 7px;
+    margin: 20px
+}
+
+#num-products-input{
+    width: 50px;
+    padding-left: 7px;
+}
+
 
 /*
 Footer

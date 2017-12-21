@@ -16,5 +16,3 @@ bask_btn.onmouseout = function (e) {
 
 
 
-
-

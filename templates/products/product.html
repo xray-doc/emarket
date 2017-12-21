@@ -15,18 +15,27 @@
                 <h1 class="text-center">
                     {{ product.name }}
                 </h1>
+                </br>
+                </br>
                 <div>
                     <p>
-                        Price: {{ product.price }}
+                        <b>Цена:</b> {{ product.price }} руб.
                     </p>
                 </div>
+                </br>
                 <div>
                     {{ product.description }}
                 </div>
-                <div>
-                    <button class="btn btn-success">
+                </br>
+                </br>
+                <div class="add-to-basket-form">
+                    <form method="post">
+                        Количество:
+                       <input type="number" size="1" value="1" id="num-products-input"> шт.
+                    <button type="submit" class="btn btn-success">
                         Добавить в корзину
                     </button>
+                    </form>
                 </div>
             </div>
         </div>
