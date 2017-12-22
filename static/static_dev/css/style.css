@@ -85,6 +85,10 @@ html, body{
     background: greenyellow;
 }
 
+.basket ul{
+    padding: 10px;
+}
+
 
 /*
 Стили страницы товара
