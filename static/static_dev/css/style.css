@@ -82,11 +82,21 @@ html, body{
     position: absolute;
     height: 200px;
     width: 200px;
-    background: greenyellow;
+    background: lightblue;
 }
 
 .basket ul{
     padding: 10px;
+}
+
+.basket li{
+    color: darkblue;
+    border-style: groove;
+    padding: 5px;
+}
+
+.delete-item{
+    color: red;
 }
 
 
