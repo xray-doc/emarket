@@ -43,7 +43,7 @@
                 </br>
                 </br>
                 <div class="add-to-basket-form">
-                    <form method="post" id="form_buying_product" class="form-inline">
+                    <form method="post" id="form_buying_product" class="form-inline" action="{% url 'basket_adding' %}">{% csrf_token %}
                         Количество:
                         <input type="number" size="1" value="1" id="num-products-input"> шт.
                         <button type="submit" class="btn btn-success" id="submit-btn"
