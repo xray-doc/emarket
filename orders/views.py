@@ -4,8 +4,8 @@ from .models import ProductInBasket
 
 def basket_adding(request):
     session_key = request.session.session_key
-    return_dict = {}
 
+    return_dict = {}
     data = request.POST
     product_id = data.get("product_id")
     nmb = data.get("nmb")

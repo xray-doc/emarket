@@ -45,8 +45,6 @@ $(document).ready(function () {
         });
 
 
-
-
         $('.container .basket ul').append('<li>'+product_name+', '+nmb+' шт., по '+product_price+' RUB ' +
             '<a href="" class="delete-item">x</a>' +
             '</li>')
