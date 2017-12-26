@@ -18,8 +18,6 @@ $(document).ready(function () {
         var nmb = $('#num-products-input').val();
 
         var submit_btn = $('#submit-btn');
-        var product_name = submit_btn.data('name');
-        var product_price = submit_btn.data('price');
         var product_id = submit_btn.data('id');
 
         var data = {};
@@ -34,9 +32,14 @@ $(document).ready(function () {
             url: url,
             type: 'POST',
             data: data,
+            cache: true,
             success: function (data) {
                 if (data.products_total_nmb) {
                     $('#basket_total_nmb').text("("+data.products_total_nmb+")")
+                    $('.basket-products-list').html("");
+                    $.each(data.products, function (k, v) {
+                        $('.basket-products-list').append('<li>'+ v.name + ', ' + v.nmb + '</li>');
+                    });
                 }
             },
             error: function () {
@@ -44,19 +47,15 @@ $(document).ready(function () {
             }
         });
 
-
-        $('.container .basket ul').append('<li>'+product_name+', '+nmb+' шт., по '+product_price+' RUB ' +
-            '<a href="" class="delete-item">x</a>' +
-            '</li>')
     });
 
 
-    // Удаление из списка корзины
-
-    $(document).on('click', '.delete-item', function (e) {
-        e.preventDefault();
-        $(this).closest('li').remove();
-    });
+    // // Удаление из списка корзины
+    //
+    // $(document).on('click', '.delete-item', function (e) {
+    //     e.preventDefault();
+    //     $(this).closest('li').remove();
+    // });
 
 });
 

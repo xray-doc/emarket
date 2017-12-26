@@ -79,26 +79,33 @@ html, body{
 */
 
 .basket{
+    padding: 0;
     position: absolute;
-    height: 200px;
+    height: auto;
     width: 200px;
     background: lightblue;
+    border-style: solid;
 }
 
-.basket ul{
-    padding: 10px;
+.basket-products-list{
+    height: 180px;
+    overflow: auto;
 }
 
-.basket li{
-    color: darkblue;
-    border-style: groove;
+.product-in-basket{
+    margin: 5px 0 5px 0;
+    padding: 5px 5px 5px 10px;
+    background-color: aliceblue;
+}
+
+.basket-summ{
+    color: midnightblue;
+    text-align: center;
     padding: 5px;
+    background-color: honeydew;
+    border: bisque;
+    border-style: solid;
 }
-
-.delete-item{
-    color: red;
-}
-
 
 /*
 Стили страницы товара

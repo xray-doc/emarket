@@ -41,11 +41,15 @@
                     {% endif %}
                 </span></a>
                 <div class="container basket hidden">
-                    <ul class="">
+                    <div class="basket-products-list">
                         {% for product_in_basket in products_in_basket %}
-                            <li>{{ product_in_basket.product.name }}</li>
+                            <div class="product-in-basket">{{ product_in_basket.product.name }}, {{ product_in_basket.nmb }}</div>
                         {% endfor %}
-                    </ul>
+                    </div>
+                    <div class="basket-summ">
+                        Сумма: {{  }} руб
+                    </div>
+
                 </div>
             </li>
           </ul>
