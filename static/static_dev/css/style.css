@@ -84,11 +84,11 @@ html, body{
     height: auto;
     width: 200px;
     background: lightblue;
-    border-style: solid;
+    border-style: groove;
 }
 
 .basket-products-list{
-    height: 180px;
+    max-height: 220px;
     overflow: auto;
 }
 
@@ -98,14 +98,23 @@ html, body{
     background-color: aliceblue;
 }
 
-.basket-summ{
+#empty-basket{
+    text-align: center;
+}
+
+#basket-summ{
     color: midnightblue;
     text-align: center;
     padding: 5px;
     background-color: honeydew;
-    border: bisque;
-    border-style: solid;
+    border: initial;
+    border-style: groove;
 }
+
+.delete-button{
+
+}
+
 
 /*
 Стили страницы товара

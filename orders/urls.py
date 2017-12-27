@@ -18,5 +18,5 @@ from django.contrib import admin
 from . import views
 
 urlpatterns = [
-    url(r'^basket_adding/$', views.basket_adding, name="basket_adding"),
+    url(r'^basket_list/$', views.basket_list, name="basket_list"),
 ]

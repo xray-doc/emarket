@@ -98,6 +98,13 @@ class ProductInBasket(models.Model):
     created = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated = models.DateTimeField(auto_now_add=False, auto_now=True)
 
+    def get_basket_total_price(session_key):
+        basket_total_price = 0
+        products_in_basket = ProductInBasket.objects.filter(session_key=session_key, is_active=True)
+        for product in products_in_basket:
+            basket_total_price += product.total_price
+        return basket_total_price
+
     def __str__(self):
         return "%s" % self.product.name
 
