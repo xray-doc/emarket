@@ -10,3 +10,11 @@ def home(request):
     return render(request, 'home.html', locals())
 
 
+
+def delivery(request):
+    return render(request, 'delivery.html', locals())
+
+
+
+def contacts(request):
+    return render(request, 'contacts.html', locals())

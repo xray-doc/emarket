@@ -37,6 +37,7 @@ $(document).ready(function () {
     updateBasketList('GET');
 
 
+
     // Появление списка корзины при наведении на кнопку "Корзина"
 
     $("#basket-btn").mouseover(function (e) {
@@ -45,6 +46,7 @@ $(document).ready(function () {
     $('#basket-btn').mouseout(function (e) {
         $(".basket").addClass('hidden')
     });
+
 
 
     // Добавление товара в список при нажатии кнопки "Добавить в корзину"
@@ -67,6 +69,7 @@ $(document).ready(function () {
     });
 
 
+
     // Удаление из списка корзины
 
     $(document).on('click', '.delete-button', function (e) {
@@ -79,5 +82,19 @@ $(document).ready(function () {
         updateBasketList('GET', data);
     });
 
+
+
+    // Подсветка активного пункта меню
+
+    if (window.location.href.indexOf('delivery') !== -1){
+        $('.active').removeClass('active');
+        $('#delivery').addClass('active');
+    } else if (window.location.href.indexOf('contacts') !== -1) {
+        $('.active').removeClass('active');
+        $('#contacts').addClass('active');
+    } else {
+        $('.active').removeClass('active');
+        $('#main').addClass('active');
+    }
 
 });

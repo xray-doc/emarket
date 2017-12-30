@@ -23,6 +23,17 @@ html, body{
 }
 
 
+
+/*
+Навбар
+ */
+
+.navbar{
+    background-color: #f8f8f8;
+    border-bottom: none;
+}
+
+
 /*
 Стили карточки товара на главной странице
 */
@@ -116,6 +127,7 @@ html, body{
 }
 
 
+
 /*
 Стили страницы товара
  */
@@ -132,6 +144,28 @@ html, body{
     padding-left: 7px;
 }
 
+.carousel{
+    height: 400px;
+}
+
+.item > img{
+    max-height: 400px;
+    margin: auto;
+}
+
+
+
+/*
+Стили страницы доставки и страницы контактов
+ */
+
+.delivery .row,
+.contacts .row {
+    background-color: white;
+    height: -webkit-fill-available;
+}
+
+
 
 /*
 Footer
@@ -141,7 +175,7 @@ Footer
     position: absolute;
     margin-top: -180px;
     clear: both;
-    background-color: white;
+    background-color: #f8f8f8;
     height: 180px;
     width: 100%;
 }

@@ -26,6 +26,8 @@ from . import views
 
 urlpatterns = [
     url(r'^$', views.home, name='home'),
+    url(r'^delivery/', views.delivery, name='delivery'),
+    url(r'^contacts/', views.contacts, name='contacts'),
     url(r'^admin/', admin.site.urls),
     url(r'^', include('orders.urls')),
     url(r'^', include('products.urls')),
