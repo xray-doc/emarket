@@ -84,26 +84,33 @@ $(document).ready(function () {
     });
 
 
-    // Удаление из списка корзины
+    // Удаление из списка корзины одновременно в навбаре и на странице checkout
 
-    function removeFromBasket(product_id) {
+    function removeFromNavbarBasketList (product_id) {
         var data = {};
         data.remove_product_id = product_id;
         updateBasketList('GET', data);
     }
 
+    function removeFromCheckoutBasketList (product_id) {
+        $("[data-id=" + product_id + "]").remove();
+    }
+
     $(document).on('click', '.delete-from-basket', function (e) {
         e.preventDefault();
         var product_id = $(this).attr('data-id');
-        removeFromBasket(product_id);
+        removeFromNavbarBasketList(product_id);
+
+        if (window.location.href.indexOf('checkout') !== -1) {
+            removeFromCheckoutBasketList(product_id);
+        }
     });
 
-    $('.product-price').on('click', function (e) {
+    $('.checkout-delete-from-basket').on('click', function (e) {
         e.preventDefault();
-        var parent = $(this).closest('tr');
-        var product_id = parent.attr('data-id');
-        parent.remove();
-        removeFromBasket(product_id);
+        var product_id = $(this).closest('tr').attr('data-id');
+        removeFromNavbarBasketList(product_id);
+        removeFromCheckoutBasketList(product_id);
     });
 
 
