@@ -163,7 +163,17 @@ html, body{
     height: -webkit-fill-available;
 }
 
+/*
+Стили страницы checkout
+ */
 
+.form-error{
+    color: red;
+}
+
+.total_price.checkout {
+    color: #337ab7;
+}
 
 /*
 Footer

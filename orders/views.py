@@ -1,6 +1,8 @@
 from django.http import JsonResponse
-from .models import ProductInBasket
 from django.shortcuts import render
+
+from .models import ProductInBasket
+from .forms import *
 
 
 
@@ -49,16 +51,6 @@ def basket_list(request):
 
 
 
-def checkout(request):
-    session_key = request.session.session_key
-
-    products_in_basket = ProductInBasket.objects.filter(session_key=session_key)
-    products_total_price = ProductInBasket.get_basket_total_price(session_key)
-
-    return render(request, 'checkout.html', locals())
-
-
-
 def changeProductInBasket(request):
     session_key = request.session.session_key
     return_dict = {}
@@ -71,3 +63,29 @@ def changeProductInBasket(request):
     return_dict["total_product_price"] = product.total_price
 
     return JsonResponse(return_dict)
+
+
+
+def checkout(request):
+    session_key = request.session.session_key
+    products_in_basket = ProductInBasket.objects.filter(session_key=session_key)
+    products_total_price = ProductInBasket.get_basket_total_price(session_key)
+
+    form = CheckoutContactForm(request.POST or None)
+    if request.POST:
+        if form.is_valid():
+            data = request.POST
+            name = data["name"]
+            phone = data["phone"]
+            email = data["email"]
+
+            # user, created = User.objects.get_or_create(username=phone, defaults={"first_name": name})
+            #
+            # order = Order.objects.create(user=user, customer_name=name, customer_phone=phone, status_id=1)
+
+
+
+
+    return render(request, 'checkout.html', locals())
+
+
