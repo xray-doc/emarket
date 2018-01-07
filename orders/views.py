@@ -53,22 +53,21 @@ def checkout(request):
     session_key = request.session.session_key
 
     products_in_basket = ProductInBasket.objects.filter(session_key=session_key)
+    products_total_price = ProductInBasket.get_basket_total_price(session_key)
+
     return render(request, 'checkout.html', locals())
 
 
 
 def changeProductInBasket(request):
     session_key = request.session.session_key
-
+    return_dict = {}
     data = request.POST
     product_id = data.get("product_id")
     nmb = data.get("nmb")
-
     product = ProductInBasket.objects.get(session_key=session_key, id=product_id)
     product.nmb = int(nmb)
     product.save(force_update=True)
-
-    return_dict = {}
-    return_dict["product_total_price"] = product.total_price
+    return_dict["total_product_price"] = product.total_price
 
     return JsonResponse(return_dict)

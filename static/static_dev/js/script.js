@@ -1,7 +1,21 @@
 $(document).ready(function () {
 
 
-    // Обновление списка корзины через ajax
+    // Подсветка активного пункта меню
+
+    if (window.location.href.indexOf('delivery') !== -1){
+        $('.active').removeClass('active');
+        $('#delivery').addClass('active');
+    } else if (window.location.href.indexOf('contacts') !== -1) {
+        $('.active').removeClass('active');
+        $('#contacts').addClass('active');
+    } else {
+        $('.active').removeClass('active');
+        $('#main').addClass('active');
+    }
+
+
+    // Обновление списка корзины через ajax и total_price на странице checkout
 
     function updateNavbarBasket(data) {
         if (data.products_total_nmb) {
@@ -22,7 +36,7 @@ $(document).ready(function () {
                 '<div class="product-in-basket" id="empty-basket"> Корзина пуста! </div>'
             );
         }
-        $('#total_price').text(data.products_total_price)
+        $('.total_price').text(data.products_total_price)
     }
 
 
@@ -114,26 +128,12 @@ $(document).ready(function () {
     });
 
 
-    // Подсветка активного пункта меню
-
-    if (window.location.href.indexOf('delivery') !== -1){
-        $('.active').removeClass('active');
-        $('#delivery').addClass('active');
-    } else if (window.location.href.indexOf('contacts') !== -1) {
-        $('.active').removeClass('active');
-        $('#contacts').addClass('active');
-    } else {
-        $('.active').removeClass('active');
-        $('#main').addClass('active');
-    }
-
-
-    // Пересчет суммы при изменении количества товара в checkout
+    // Пересчет суммы одного товара при изменении его количества в checkout
 
     $('.num-products-input.checkout').on('change', function (event) {
-        var parent = $(this).closest('tr');
+        var product_to_change = $(this).closest('tr');
         var nmb = $(this).val();
-        var product_id = parent.attr('data-id');
+        var product_id = product_to_change.attr('data-id');
 
         var data = {};
         data["csrfmiddlewaretoken"] =  $('#form_change_product [name="csrfmiddlewaretoken"]').val();
@@ -146,13 +146,14 @@ $(document).ready(function () {
             data: data,
             cache: true,
             success: function (data) {
-                parent.find('.total-product-price').text(data.product_total_price)
-                updateBasketList()
+                product_to_change.find('.total-product-price').text(data.total_product_price);
+                updateBasketList();
             },
             error: function () {
                 console.log("error")
             }
         });
+
     });
 
 
