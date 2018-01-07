@@ -19,4 +19,6 @@ from . import views
 
 urlpatterns = [
     url(r'^basket_list/$', views.basket_list, name="basket_list"),
+    url(r'^checkout/$', views.checkout, name="checkout"),
+    url(r'^changeBasket/$', views.changeProductInBasket, name="changeBasket"),
 ]

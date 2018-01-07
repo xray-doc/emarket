@@ -33,7 +33,7 @@
 
           <ul class="nav navbar-nav navbar-right">
             <li id="basket-btn">
-                <a href="../navbar/">Корзина <span id="basket_total_nmb">
+                <a href="{% url 'checkout' %}">Корзина <span id="basket_total_nmb">
                     {% if products_total_nmb %}
                         ({{ products_total_nmb }})
                     {% endif %}
@@ -41,9 +41,26 @@
 
                 <div class="container basket hidden">
                     <div class="basket-products-list">
-                            <div class="product-in-basket"> Корзина пуста! </div>
+                        {% if products_in_basket %}
+                            {% for product_in_basket in products_in_basket %}
+                                <div class="product-in-basket">
+                                    {{ product_in_basket.product.name }},
+                                    {{ product_in_basket.nmb }} шт.
+
+                                    <button type="button" class="close delete-from-basket" data-id='{{ product_in_basket.id }}'
+                                            aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            <div class="product-in-basket" id="empty-basket">Корзина пуста!</div>
+                        {% endif %}
                     </div>
-                    <div id="basket-summ"></div>
+                    <div id="total_price_div">
+                        Сумма: <span id="total_price">{{ get_basket_total_price }}</span> руб.
+                    </div>
                 </div>
 
             </li>

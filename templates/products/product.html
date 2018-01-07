@@ -65,7 +65,7 @@
                     <form method="post" id="form_buying_product" class="form-inline">
                         {% csrf_token %}
                         Количество:
-                        <input type="number" size="1" value="1" id="num-products-input"> шт.
+                        <input type="number" size="1" value="1" min="1" class="num-products-input"> шт.
                         <button type="submit" class="btn btn-success" id="submit-btn"
                             data-id="{{ product.id }}">
                             Добавить в корзину

@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h3 class="text-center">Товары в корзине</h3>
+                <h5 class="text-center">Общая стоимость</h5>
+
+                <form id="form_change_product">
+                    {% csrf_token %}
+                    <table class="table text-left">
+                        <thead>
+                            <tr>
+                                <th>Название товара</th>
+                                <th>Количество</th>
+                                <th>Цена за единицу</th>
+                                <th>Общая цена</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for product_in_basket in products_in_basket %}
+                                <tr data-id="{{ product_in_basket.id }}">
+                                    <td>
+                                        {{ product_in_basket.product.name }}
+                                    </td>
+                                    <td>
+                                        <input value="{{ product_in_basket.nmb }}" type="number"
+                                               class="num-products-input checkout" min="1">
+                                    </td>
+                                    <td>
+                                        <span class="product-price">
+                                            {{ product_in_basket.price_per_item }}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span class="total-product-price">
+                                            {{ product_in_basket.total_price }}
+                                        </span>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
