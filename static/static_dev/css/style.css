@@ -19,7 +19,7 @@ html, body{
 
 .wrapper-content{
     overflow: auto;
-    padding-bottom: 180px;
+    padding-bottom: 235px;
 }
 
 
@@ -186,12 +186,19 @@ Footer
 
 .footer{
     position: absolute;
-    margin-top: -180px;
+    margin-top: -235px;
     clear: both;
     background-color: #f8f8f8;
-    height: 180px;
+    height: 235px;
     width: 100%;
 }
 
+.footer > li {
+    list-style-type: none;
+}
+
+.copyright{
+    margin-bottom: 10px;
+}
 
 

@@ -17,26 +17,13 @@ $(document).ready(function () {
         }
     });
 
-    // if (window.location.href.indexOf('delivery') !== -1){
-    //     $('.active').removeClass('active');
-    //     $('#delivery').addClass('active');
-    // } else if (window.location.href.indexOf('contacts') !== -1) {
-    //     $('.active').removeClass('active');
-    //     $('#contacts').addClass('active');
-    // } else if (window.location.href.indexOf('checkout') !== -1) {
-    //     $('.active').removeClass('active');
-    //     $('#checkout').addClass('active');
-    // } else {
-    //     $('.active').removeClass('active');
-    //     $('#main').addClass('active');
-    // }
 
 
     // Обновление списка корзины через ajax и total_price на странице checkout
 
     function updateNavbarBasket(data) {
         if (data.products_total_nmb) {
-            $('#basket_total_nmb').text("("+data.products_total_nmb+")")
+            $('#basket_total_nmb').text("("+data.products_total_nmb+")");
             $('.basket-products-list').html("");
             $.each(data.products, function (k, v) {
                 $('.basket-products-list').append(
