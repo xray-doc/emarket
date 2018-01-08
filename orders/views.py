@@ -1,7 +1,8 @@
 from django.http import JsonResponse
 from django.shortcuts import render
+from django.contrib.auth.models import User
 
-from .models import ProductInBasket
+from .models import *
 from .forms import *
 
 
@@ -72,20 +73,30 @@ def checkout(request):
     products_total_price = ProductInBasket.get_basket_total_price(session_key)
 
     form = CheckoutContactForm(request.POST or None)
-    if request.POST:
-        if form.is_valid():
-            data = request.POST
-            name = data["name"]
-            phone = data["phone"]
-            email = data["email"]
+    if request.POST and form.is_valid():
+        data = request.POST
+        name = data["name"]
+        phone = data["phone"]
+        email = data["email"]
 
-            # user, created = User.objects.get_or_create(username=phone, defaults={"first_name": name})
-            #
-            # order = Order.objects.create(user=user, customer_name=name, customer_phone=phone, status_id=1)
+        user, created = User.objects.get_or_create(username=phone, defaults={"first_name": name})
+        order = Order.objects.create(
+            user=user,
+            customer_name=name,
+            customer_phone=phone,
+            customer_email=email,
+            status_id=1
+        )
 
+        for product_in_basket in products_in_basket:
+            ProductInOrder.objects.create(
+                order = order,
+                product = product_in_basket.product,
+                nmb = product_in_basket.nmb,
+                price_per_item = product_in_basket.price_per_item,
+                total_price = product_in_basket.total_price
+            )
 
+        return render(request, 'orders/done.html', locals())
 
-
-    return render(request, 'checkout.html', locals())
-
-
+    return render(request, 'orders/checkout.html', locals())

@@ -14,7 +14,7 @@
 
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li id="main"><a href="/">Главная</a></li>
+            <li id="main"><a href="{% url 'main' %}">Главная</a></li>
             <li id="delivery"><a href="{% url 'delivery' %}">Оплата и доставка</a></li>
             <li id="contacts"><a href="{% url 'contacts' %}">Контакты</a></li>
 {#            <li class="dropdown">#}
@@ -32,7 +32,7 @@
           </ul>
 
           <ul class="nav navbar-nav navbar-right">
-            <li id="basket-btn">
+            <li id="checkout">
                 <a href="{% url 'checkout' %}">Корзина <span id="basket_total_nmb">
                     {% if products_total_nmb %}
                         ({{ products_total_nmb }})

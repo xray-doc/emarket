@@ -175,6 +175,11 @@ html, body{
     color: #337ab7;
 }
 
+#form_client_data > div > input {
+    width: 300px;
+}
+
+
 /*
 Footer
 */

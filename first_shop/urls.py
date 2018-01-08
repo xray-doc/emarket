@@ -19,13 +19,15 @@ from django.conf.urls import include
 from django.contrib.staticfiles import *
 from django.conf.urls.static import static
 from django.conf import settings
+from django.views.generic.base import RedirectView
 
 from . import views
 
 
 
 urlpatterns = [
-    url(r'^$', views.home, name='home'),
+    url(r'^$', RedirectView.as_view(url='main/')),
+    url(r'^main/', views.main, name='main'),
     url(r'^delivery/', views.delivery, name='delivery'),
     url(r'^contacts/', views.contacts, name='contacts'),
     url(r'^admin/', admin.site.urls),

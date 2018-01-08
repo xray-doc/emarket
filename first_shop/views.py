@@ -3,7 +3,7 @@ from products.models import *
 
 
 
-def home(request):
+def main(request):
     ios_devices = Product.objects.filter(os__name='iOS')
     android_devices = Product.objects.filter(os__name='Android')
 

@@ -3,16 +3,33 @@ $(document).ready(function () {
 
     // Подсветка активного пункта меню
 
-    if (window.location.href.indexOf('delivery') !== -1){
-        $('.active').removeClass('active');
-        $('#delivery').addClass('active');
-    } else if (window.location.href.indexOf('contacts') !== -1) {
-        $('.active').removeClass('active');
-        $('#contacts').addClass('active');
-    } else {
-        $('.active').removeClass('active');
-        $('#main').addClass('active');
-    }
+    var menus = [
+        'main',
+        'delivery',
+        'contacts',
+        'checkout'
+    ];
+
+    menus.forEach(function (menu) {
+        if (window.location.href.indexOf(menu) !== -1){
+            $('.active').removeClass('active');
+            $('#' + menu).addClass('active');
+        }
+    });
+
+    // if (window.location.href.indexOf('delivery') !== -1){
+    //     $('.active').removeClass('active');
+    //     $('#delivery').addClass('active');
+    // } else if (window.location.href.indexOf('contacts') !== -1) {
+    //     $('.active').removeClass('active');
+    //     $('#contacts').addClass('active');
+    // } else if (window.location.href.indexOf('checkout') !== -1) {
+    //     $('.active').removeClass('active');
+    //     $('#checkout').addClass('active');
+    // } else {
+    //     $('.active').removeClass('active');
+    //     $('#main').addClass('active');
+    // }
 
 
     // Обновление списка корзины через ajax и total_price на странице checkout
@@ -59,10 +76,10 @@ $(document).ready(function () {
 
     // Появление списка корзины при наведении на кнопку "Корзина"
 
-    $("#basket-btn").mouseover(function (e) {
+    $("#checkout").mouseover(function (e) {
         $(".basket").removeClass('hidden');
     });
-    $('#basket-btn').mouseout(function (e) {
+    $('#checkout').mouseout(function (e) {
         $(".basket").addClass('hidden')
     });
 
