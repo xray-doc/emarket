@@ -94,7 +94,6 @@ def checkout(request):
                 product = product_in_basket.product,
                 nmb = product_in_basket.nmb,
                 price_per_item = product_in_basket.price_per_item,
-                total_price = product_in_basket.total_price
             )
 
         return render(request, 'orders/done.html', locals())

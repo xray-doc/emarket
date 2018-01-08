@@ -5,11 +5,11 @@ from django.contrib.auth.models import User
 
 
 class Status(models.Model):
-    name = models.CharField(max_length=64, blank=True, null=True, default=None)
-    is_active = models.BooleanField(default=True)
+    name = models.CharField("Название", max_length=64, blank=True, null=True, default=None)
+    is_active = models.BooleanField("Активен", default=True)
 
-    created = models.DateTimeField(auto_now_add=True, auto_now=False)
-    updated = models.DateTimeField(auto_now_add=False, auto_now=True)
+    created = models.DateTimeField("Создан", auto_now_add=True, auto_now=False)
+    updated = models.DateTimeField("Обновлен", auto_now_add=False, auto_now=True)
 
     def __str__(self):
         return "%s" % self.name
@@ -22,17 +22,17 @@ class Status(models.Model):
 
 
 class Order(models.Model):
-    user = models.ForeignKey(User, blank=True, null=True, default=None)
-    customer_name = models.CharField(max_length=64, blank=True, null=True, default=None)
-    customer_email = models.EmailField(blank=True, null=True, default=None)
-    customer_phone = models.CharField(blank=True, null=True, default=None, max_length=48)
-    customer_address = models.CharField(blank=True, null=True, default=None, max_length=128)
-    comments = models.TextField(blank=True, null=True, default=None)
-    status = models.ForeignKey(Status)
-    total_price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    user = models.ForeignKey(User, blank=True, null=True, default=None, verbose_name="Пользователь")
+    customer_name = models.CharField("Имя", max_length=64, blank=True, null=True, default=None)
+    customer_email = models.EmailField("Email", blank=True, null=True, default=None)
+    customer_phone = models.CharField("Телефон", blank=True, null=True, default=None, max_length=48)
+    customer_address = models.CharField("Адрес", blank=True, null=True, default=None, max_length=128)
+    comments = models.TextField("Комментарий", blank=True, null=True, default=None)
+    status = models.ForeignKey(Status, verbose_name="Статус")
+    total_price = models.DecimalField("Сумма заказа", max_digits=10, decimal_places=2, default=0)
 
-    created = models.DateTimeField(auto_now_add=True, auto_now=False)
-    updated = models.DateTimeField(auto_now_add=False, auto_now=True)
+    created = models.DateTimeField("Создан", auto_now_add=True, auto_now=False)
+    updated = models.DateTimeField("Обновлен", auto_now_add=False, auto_now=True)
 
     def __str__(self):
         return "Заказ %s %s" % (self.id, self.status.name)
@@ -44,14 +44,14 @@ class Order(models.Model):
 
 
 class ProductInOrder(models.Model):
-    order = models.ForeignKey(Order, blank=True, null=True, default=None)
-    product = models.ForeignKey(Product, blank=True, null=True, default=None)
-    nmb = models.IntegerField(default=1)
-    price_per_item = models.DecimalField(max_digits=10, decimal_places=2, default=0)
-    total_price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
-    is_active = models.BooleanField(default=True)
-    created = models.DateTimeField(auto_now_add=True, auto_now=False)
-    updated = models.DateTimeField(auto_now_add=False, auto_now=True)
+    order = models.ForeignKey(Order, verbose_name="Заказ", blank=True, null=True, default=None)
+    product = models.ForeignKey(Product, verbose_name="Товар", blank=True, null=True, default=None)
+    nmb = models.IntegerField("Количество", default=1)
+    price_per_item = models.DecimalField("Цена за единицу", max_digits=10, decimal_places=2, default=0)
+    total_price = models.DecimalField("Общая цена", max_digits=10, decimal_places=2, default=0)
+    is_active = models.BooleanField("Активен", default=True)
+    created = models.DateTimeField("Создан", auto_now_add=True, auto_now=False)
+    updated = models.DateTimeField("Обновлен", auto_now_add=False, auto_now=True)
 
     def __str__(self):
         return "%s" % self.product.name
@@ -63,8 +63,10 @@ class ProductInOrder(models.Model):
 
     def save(self, *args, **kwargs):
         price_per_item = self.product.price
+        discount = self.product.discount
         self.price_per_item = price_per_item
-        self.total_price = self.nmb * price_per_item
+        price_per_item -= price_per_item / 100 * discount
+        self.total_price = int(self.nmb) * price_per_item
 
         super(ProductInOrder, self).save(*args, **kwargs)
 
@@ -90,15 +92,16 @@ post_save.connect(product_in_order_post_save, sender=ProductInOrder)
 
 
 class ProductInBasket(models.Model):
-    session_key = models.CharField(max_length=128, blank=True, null=True, default=True)
-    order = models.ForeignKey(Order, blank=True, null=True, default=None)
-    product = models.ForeignKey(Product, blank=True, null=True, default=None)
-    nmb = models.IntegerField(default=1)
-    price_per_item = models.DecimalField(max_digits=10, decimal_places=2, default=0)
-    total_price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
-    is_active = models.BooleanField(default=True)
-    created = models.DateTimeField(auto_now_add=True, auto_now=False)
-    updated = models.DateTimeField(auto_now_add=False, auto_now=True)
+    session_key = models.CharField("Ключ сессии", max_length=128, blank=True, null=True, default=True)
+    order = models.ForeignKey(Order, verbose_name="Заказ", blank=True, null=True, default=None)
+    product = models.ForeignKey(Product, verbose_name="Товар", blank=True, null=True, default=None)
+    nmb = models.IntegerField("Количество", default=1)
+    price_per_item = models.DecimalField("Цена за единицу", max_digits=10, decimal_places=2, default=0)
+    discount = models.IntegerField("Скидка", null=True, blank=True, default=0)
+    total_price = models.DecimalField("Общая цена", max_digits=10, decimal_places=2, default=0)
+    is_active = models.BooleanField("Активен", default=True)
+    created = models.DateTimeField("Создан", auto_now_add=True, auto_now=False)
+    updated = models.DateTimeField("Обновлен", auto_now_add=False, auto_now=True)
 
     def get_basket_total_price(session_key):
         basket_total_price = 0
@@ -116,7 +119,9 @@ class ProductInBasket(models.Model):
 
     def save(self, *args, **kwargs):
         price_per_item = self.product.price
+        discount = self.product.discount
         self.price_per_item = price_per_item
+        price_per_item -= price_per_item / 100 * discount
         self.total_price = int(self.nmb) * price_per_item
 
         super(ProductInBasket, self).save(*args, **kwargs)
