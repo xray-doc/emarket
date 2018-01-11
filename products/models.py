@@ -1,6 +1,7 @@
 from django.db import models
 
 
+
 class Operational_system(models.Model):
     name = models.CharField("Название", max_length=64, blank=True, null=True, default=None)
     is_active = models.BooleanField("Активна", default=True)
@@ -14,6 +15,7 @@ class Operational_system(models.Model):
     class Meta:
         verbose_name = "ОС"
         verbose_name_plural = "ОС"
+
 
 
 class Product(models.Model):

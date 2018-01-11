@@ -95,8 +95,7 @@ html, body{
     position: absolute;
     height: auto;
     width: 200px;
-    background: lightblue;
-    border-style: groove;
+    background: initial;
 }
 
 .basket-products-list{
@@ -105,25 +104,28 @@ html, body{
 }
 
 .product-in-basket{
-    margin: 5px 0 5px 0;
+    margin: 5px 7px;
     padding: 5px 5px 5px 10px;
-    background-color: aliceblue;
+    background-color: lightskyblue;
 }
 
 #empty-basket{
     text-align: center;
 }
 
-#total_price_div{
+.total_price_div{
     color: midnightblue;
     text-align: center;
     padding: 5px;
-    background-color: honeydew;
+    background-color: lightcoral;
     border: initial;
-    border-style: groove;
+    /*border-style: groove;*/
 }
 
-
+#btn_to_basket{
+    width: 140px;
+    margin: 5px 0 5px 30px;
+}
 
 
 /*

@@ -27,7 +27,7 @@ $(document).ready(function () {
             $('.basket-products-list').html("");
             $.each(data.products, function (k, v) {
                 $('.basket-products-list').append(
-                    '<div class="product-in-basket" >' +v.name+ ', ' +v.nmb+ ' шт. '+
+                    '<div class="product-in-basket" >' +v.name+ ', <strong>' + v.nmb + ' шт.</strong>'+
                         '<button type="button" class="close delete-from-basket"' +
                         'data-id=' +v.id+ ' aria-label="Close">' +
                         '<span aria-hidden="true">&times;</span> </button>' +

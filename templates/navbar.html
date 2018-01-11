@@ -17,18 +17,6 @@
             <li id="main"><a href="{% url 'main' %}">Главная</a></li>
             <li id="delivery"><a href="{% url 'delivery' %}">Оплата и доставка</a></li>
             <li id="contacts"><a href="{% url 'contacts' %}">Контакты</a></li>
-{#            <li class="dropdown">#}
-{#              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>#}
-{#              <ul class="dropdown-menu">#}
-{#                <li><a href="#">Action</a></li>#}
-{#                <li><a href="#">Another action</a></li>#}
-{#                <li><a href="#">Something else here</a></li>#}
-{#                <li role="separator" class="divider"></li>#}
-{#                <li class="dropdown-header">Nav header</li>#}
-{#                <li><a href="#">Separated link</a></li>#}
-{#                <li><a href="#">One more separated link</a></li>#}
-{#              </ul>#}
-{#            </li>#}
           </ul>
 
           <ul class="nav navbar-nav navbar-right">
@@ -45,7 +33,7 @@
                             {% for product_in_basket in products_in_basket %}
                                 <div class="product-in-basket">
                                     {{ product_in_basket.product.name }},
-                                    {{ product_in_basket.nmb }} шт.
+                                    <strong>{{ product_in_basket.nmb }} шт.</strong>
 
                                     <button type="button" class="close delete-from-basket" data-id='{{ product_in_basket.id }}'
                                             aria-label="Close">
@@ -58,9 +46,13 @@
                             <div class="product-in-basket" id="empty-basket">Корзина пуста!</div>
                         {% endif %}
                     </div>
-                    <div id="total_price_div">
+                    <div class="total_price_div">
                         Сумма: <span class="total_price">{{ get_basket_total_price }}</span> руб.
                     </div>
+
+                    <form action="{% url 'checkout' %}">
+                         <button class="btn btn-success" id="btn_to_basket">В корзину</button>
+                    </form>
                 </div>
 
             </li>
