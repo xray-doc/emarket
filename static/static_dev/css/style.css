@@ -146,6 +146,7 @@ html, body{
 
 .carousel{
     height: 400px;
+    background-color: white;
 }
 
 .item > img{

@@ -11,24 +11,15 @@
             <div class="col-lg-6">
                 <div id="carouselImages" class="carousel slide" data-ride="carousel">
                   <div class="carousel-inner">
-
-                        <div class="item active">
-                          <img class="d-block w-100" src="/static/media/products_images/lenovo.webp" alt="">
+                      {% for image in product.productimage_set.all %}
+                        <div class="item
+                            {% if image.is_main %}
+                              active
+                            {% endif %}
+                        ">
+                          <img  class="d-block w-100" src="{{ image.image.url }}" alt="">
                         </div>
-
-                        <div class="item">
-                          <img class="d-block w-100" src="/static/media/products_images/len2.webp" alt="">
-                        </div>
-
-                        <div class="item">
-                          <img class="d-block w-100" src="/static/media/products_images/len3.webp" alt="">
-                        </div>
-
-{#                      {% for image in product.productimage_set.all %}#}
-{#                        <div class="item">#}
-{#                          <img class="d-block w-100" src="{{ image.image.url }}" alt="">#}
-{#                        </div>#}
-{#                      {% endfor %}#}
+                      {% endfor %}
                   </div>
 
                   <a class="left carousel-control" href="#carouselImages" role="button" data-slide="prev">
