@@ -5,60 +5,60 @@ from django.contrib.auth.models import User
 
 
 class Status(models.Model):
-    name = models.CharField("Название", max_length=64, blank=True, null=True, default=None)
-    is_active = models.BooleanField("Активен", default=True)
+    name = models.CharField(max_length=64, blank=True, null=True, default=None)
+    is_active = models.BooleanField(default=True)
 
-    created = models.DateTimeField("Создан", auto_now_add=True, auto_now=False)
-    updated = models.DateTimeField("Обновлен", auto_now_add=False, auto_now=True)
+    created = models.DateTimeField(auto_now_add=True, auto_now=False)
+    updated = models.DateTimeField(auto_now_add=False, auto_now=True)
 
     def __str__(self):
         return "%s" % self.name
 
     class Meta:
-        verbose_name = "Статус"
-        verbose_name_plural = "Статусы заказа"
+        verbose_name = "Status"
+        verbose_name_plural = "Order status"
 
 
 
 
 class Order(models.Model):
-    user = models.ForeignKey(User, blank=True, null=True, default=None, verbose_name="Пользователь")
-    customer_name = models.CharField("Имя", max_length=64, blank=True, null=True, default=None)
-    customer_email = models.EmailField("Email", blank=True, null=True, default=None)
-    customer_phone = models.CharField("Телефон", blank=True, null=True, default=None, max_length=48)
-    customer_address = models.CharField("Адрес", blank=True, null=True, default=None, max_length=128)
-    comments = models.TextField("Комментарий", blank=True, null=True, default=None)
-    status = models.ForeignKey(Status, verbose_name="Статус")
-    total_price = models.DecimalField("Сумма заказа", max_digits=10, decimal_places=2, default=0)
+    user = models.ForeignKey(User, blank=True, null=True, default=None)
+    customer_name = models.CharField(max_length=64, blank=True, null=True, default=None)
+    customer_email = models.EmailField(blank=True, null=True, default=None)
+    customer_phone = models.CharField(blank=True, null=True, default=None, max_length=48)
+    customer_address = models.CharField(blank=True, null=True, default=None, max_length=128)
+    comments = models.TextField(blank=True, null=True, default=None)
+    status = models.ForeignKey(Status)
+    total_price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
 
-    created = models.DateTimeField("Создан", auto_now_add=True, auto_now=False)
-    updated = models.DateTimeField("Обновлен", auto_now_add=False, auto_now=True)
+    created = models.DateTimeField(auto_now_add=True, auto_now=False)
+    updated = models.DateTimeField(auto_now_add=False, auto_now=True)
 
     def __str__(self):
-        return "Заказ %s %s" % (self.id, self.status.name)
+        return "Order %s %s" % (self.id, self.status.name)
 
     class Meta:
-        verbose_name = "Заказ"
-        verbose_name_plural = "Заказы"
+        verbose_name = "Order"
+        verbose_name_plural = "Orders"
 
 
 
 class ProductInOrder(models.Model):
-    order = models.ForeignKey(Order, verbose_name="Заказ", blank=True, null=True, default=None)
-    product = models.ForeignKey(Product, verbose_name="Товар", blank=True, null=True, default=None)
-    nmb = models.IntegerField("Количество", default=1)
-    price_per_item = models.DecimalField("Цена за единицу", max_digits=10, decimal_places=2, default=0)
-    total_price = models.DecimalField("Общая цена", max_digits=10, decimal_places=2, default=0)
-    is_active = models.BooleanField("Активен", default=True)
-    created = models.DateTimeField("Создан", auto_now_add=True, auto_now=False)
-    updated = models.DateTimeField("Обновлен", auto_now_add=False, auto_now=True)
+    order = models.ForeignKey(Order, blank=True, null=True, default=None)
+    product = models.ForeignKey(Product, blank=True, null=True, default=None)
+    nmb = models.IntegerField(default=1)
+    price_per_item = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    total_price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    is_active = models.BooleanField(default=True)
+    created = models.DateTimeField(auto_now_add=True, auto_now=False)
+    updated = models.DateTimeField(auto_now_add=False, auto_now=True)
 
     def __str__(self):
         return "%s" % self.product.name
 
     class Meta:
-        verbose_name = "Товар в заказе"
-        verbose_name_plural = "Товары в заказе"
+        verbose_name = "Product in order"
+        verbose_name_plural = "Products in order"
 
 
     def save(self, *args, **kwargs):
@@ -92,16 +92,16 @@ post_save.connect(product_in_order_post_save, sender=ProductInOrder)
 
 
 class ProductInBasket(models.Model):
-    session_key = models.CharField("Ключ сессии", max_length=128, blank=True, null=True, default=True)
-    order = models.ForeignKey(Order, verbose_name="Заказ", blank=True, null=True, default=None)
-    product = models.ForeignKey(Product, verbose_name="Товар", blank=True, null=True, default=None)
-    nmb = models.IntegerField("Количество", default=1)
-    price_per_item = models.DecimalField("Цена за единицу", max_digits=10, decimal_places=2, default=0)
-    discount = models.IntegerField("Скидка", null=True, blank=True, default=0)
-    total_price = models.DecimalField("Общая цена", max_digits=10, decimal_places=2, default=0)
-    is_active = models.BooleanField("Активен", default=True)
-    created = models.DateTimeField("Создан", auto_now_add=True, auto_now=False)
-    updated = models.DateTimeField("Обновлен", auto_now_add=False, auto_now=True)
+    session_key = models.CharField(max_length=128, blank=True, null=True, default=True)
+    order = models.ForeignKey(Order, blank=True, null=True, default=None)
+    product = models.ForeignKey(Product, blank=True, null=True, default=None)
+    nmb = models.IntegerField(default=1)
+    price_per_item = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    discount = models.IntegerField(null=True, blank=True, default=0)
+    total_price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    is_active = models.BooleanField(default=True)
+    created = models.DateTimeField(auto_now_add=True, auto_now=False)
+    updated = models.DateTimeField(auto_now_add=False, auto_now=True)
 
     def get_basket_total_price(session_key):
         basket_total_price = 0
@@ -114,8 +114,8 @@ class ProductInBasket(models.Model):
         return "%s" % self.product.name
 
     class Meta:
-        verbose_name = "Товар в корзине"
-        verbose_name_plural = "Товары в корзине"
+        verbose_name = "Product in basket"
+        verbose_name_plural = "Products in basket"
 
     def save(self, *args, **kwargs):
         price_per_item = self.product.price

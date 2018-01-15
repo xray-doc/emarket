@@ -16,7 +16,7 @@ def basket_list(request):
     else:
         data = request.GET
 
-    # Добавление товара в корзину
+    # Adding product to basket
     if data.get("product_id"):
         product_id = data.get("product_id")
         nmb = data.get("nmb") or 1
@@ -27,11 +27,11 @@ def basket_list(request):
             new_product.nmb += int(nmb)
             new_product.save(force_update=True)
 
-    # Удаление из корзины
+    # Removing product from basket
     if data.get("remove_product_id"):
         ProductInBasket.objects.get(id=request.GET.get("remove_product_id")).delete()
 
-    # Получение списка корзины
+    # Getting basket list
     products_in_basket = ProductInBasket.objects.filter(session_key=session_key, is_active=True)
     products_total_nmb = products_in_basket.count()
     products_total_price = ProductInBasket.get_basket_total_price(session_key)
