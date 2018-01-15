@@ -140,7 +140,14 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
 
+# try:
+#     from .settings_prod import *
+# except:
+#     pass
+
+
 db_from_env = dj_database_url.config()
 DATABASES['default'].update(db_from_env)
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
