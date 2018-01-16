@@ -140,10 +140,10 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
 
-# try:
-#     from .settings_prod import *
-# except:
-#     pass
+#try:
+#    from .settings_prod import *
+#except:
+#    pass
 
 
 db_from_env = dj_database_url.config()
