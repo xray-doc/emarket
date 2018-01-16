@@ -1,1 +1,2810 @@
 [
+{
+   "model": "contenttypes.contenttype",
+   "pk": 1,
+   "fields": {
+      "app_label": "admin",
+      "model": "logentry"
+   }
+},
+{
+   "model": "contenttypes.contenttype",
+   "pk": 2,
+   "fields": {
+      "app_label": "auth",
+      "model": "group"
+   }
+},
+{
+   "model": "contenttypes.contenttype",
+   "pk": 3,
+   "fields": {
+      "app_label": "auth",
+      "model": "user"
+   }
+},
+{
+   "model": "contenttypes.contenttype",
+   "pk": 4,
+   "fields": {
+      "app_label": "auth",
+      "model": "permission"
+   }
+},
+{
+   "model": "contenttypes.contenttype",
+   "pk": 5,
+   "fields": {
+      "app_label": "contenttypes",
+      "model": "contenttype"
+   }
+},
+{
+   "model": "contenttypes.contenttype",
+   "pk": 6,
+   "fields": {
+      "app_label": "sessions",
+      "model": "session"
+   }
+},
+{
+   "model": "contenttypes.contenttype",
+   "pk": 7,
+   "fields": {
+      "app_label": "products",
+      "model": "productimage"
+   }
+},
+{
+   "model": "contenttypes.contenttype",
+   "pk": 8,
+   "fields": {
+      "app_label": "products",
+      "model": "product"
+   }
+},
+{
+   "model": "contenttypes.contenttype",
+   "pk": 9,
+   "fields": {
+      "app_label": "orders",
+      "model": "order"
+   }
+},
+{
+   "model": "contenttypes.contenttype",
+   "pk": 10,
+   "fields": {
+      "app_label": "orders",
+      "model": "status"
+   }
+},
+{
+   "model": "contenttypes.contenttype",
+   "pk": 11,
+   "fields": {
+      "app_label": "orders",
+      "model": "productinorder"
+   }
+},
+{
+   "model": "contenttypes.contenttype",
+   "pk": 12,
+   "fields": {
+      "app_label": "products",
+      "model": "operational_system"
+   }
+},
+{
+   "model": "contenttypes.contenttype",
+   "pk": 13,
+   "fields": {
+      "app_label": "orders",
+      "model": "productinbasket"
+   }
+},
+{
+   "model": "sessions.session",
+   "pk": "2f2fhdu6e3ie5rbxb09d2k0j4vvwze7o",
+   "fields": {
+      "session_data": "MDM4N2QyZmIwNDVmNzU2ZWNiZDEyZTEyNzczNTk2ZTUzYWQ3ZDdjMjp7Il9hdXRoX3VzZXJfaGFzaCI6ImQzY2ZlMDBhYmI2MTc0NGU4OWM2MWUxODVkZDYxZjBjMWQyYzRiMmEiLCJfYXV0aF91c2VyX2lkIjoiMSIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIn0=",
+      "expire_date": "2018-01-22T18:34:27.580Z"
+   }
+},
+{
+   "model": "sessions.session",
+   "pk": "4vhh778xyma4inq0fvn119fk91qzlv4f",
+   "fields": {
+      "session_data": "NmRhYTYyOTc0Y2FmOWQ4NDM3NmY0NzM2ZmM1MjRiNDUzYzE4NDc0Njp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6IjEiLCJfYXV0aF91c2VyX2hhc2giOiJjYjhkNDQ3Yjg2ODU5NmZiYTQyYTVlYzc5YWI2ZjdiNTUzYTAyNmI2In0=",
+      "expire_date": "2017-12-21T16:42:05.751Z"
+   }
+},
+{
+   "model": "sessions.session",
+   "pk": "ew1bdje90i74j236631yb68k7vl5qq0c",
+   "fields": {
+      "session_data": "NTU3OTk0YWZhMDc0YWM1MThiNjZlNjg3MDBlYzU5YjA5NmIxMmMxYTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9oYXNoIjoiMzIwMzIzZjdjNGNjMTk1ZGUxOGI0NGQ0MDY1ZDE2ZWYwYWE3YzMzNiIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIn0=",
+      "expire_date": "2018-01-08T14:49:56.234Z"
+   }
+},
+{
+   "model": "sessions.session",
+   "pk": "y95g4qzknajig92rqrxjzbhal2vvlbiq",
+   "fields": {
+      "session_data": "MDA0ZjM4ZGQxY2NhMWE0ZDVmMjhkNzUyNjY1MzJjYjgxMWU4YmI3ODp7fQ==",
+      "expire_date": "2018-01-22T15:14:49.254Z"
+   }
+},
+{
+   "model": "products.operational_system",
+   "pk": 1,
+   "fields": {
+      "name": "Android",
+      "is_active": true,
+      "created": "2017-12-16T06:33:01.615Z",
+      "updated": "2017-12-16T06:33:01.615Z"
+   }
+},
+{
+   "model": "products.operational_system",
+   "pk": 2,
+   "fields": {
+      "name": "iOS",
+      "is_active": true,
+      "created": "2017-12-16T06:33:08.602Z",
+      "updated": "2017-12-16T06:33:08.602Z"
+   }
+},
+{
+   "model": "products.operational_system",
+   "pk": 3,
+   "fields": {
+      "name": "Windows",
+      "is_active": true,
+      "created": "2017-12-16T06:33:12.823Z",
+      "updated": "2017-12-16T06:33:12.823Z"
+   }
+},
+{
+   "model": "products.product",
+   "pk": 2,
+   "fields": {
+      "name": "Apple iPad 32Gb Wi-Fi 4.5",
+      "price": "23500.00",
+      "os": 2,
+      "short_description": "iPad \u0441 \u0445\u043e\u0440\u043e\u0448\u0435\u0439 \u0430\u0432\u0442\u043e\u043d\u043e\u043c\u043d\u043e\u0441\u0442\u044c\u044e \u0438 \u043e\u0442\u043b\u0438\u0447\u043d\u044b\u043c \u044d\u043a\u0440\u0430\u043d\u043e\u043c",
+      "description": "\u043f\u043b\u0430\u043d\u0448\u0435\u0442 9.7\", 2048x1536, TFT IPS\r\n\u0432\u0441\u0442\u0440\u043e\u0435\u043d\u043d\u0430\u044f \u043f\u0430\u043c\u044f\u0442\u044c 32 \u0413\u0431, \u0431\u0435\u0437 \u0441\u043b\u043e\u0442\u0430 \u0434\u043b\u044f \u043a\u0430\u0440\u0442 \u043f\u0430\u043c\u044f\u0442\u0438\r\niOS, \u041e\u0417\u0423 2 \u0413\u0431, \u043f\u0440\u043e\u0446\u0435\u0441\u0441\u043e\u0440 Apple A9\r\nWi-Fi, Bluetooth, NFC\r\n\u0440\u0430\u0437\u043c\u0435\u0440\u044b 169.5x240x7.5 \u043c\u043c, \u0432\u0435\u0441 469 \u0433\r\n\u0442\u044b\u043b\u043e\u0432\u0430\u044f \u043a\u0430\u043c\u0435\u0440\u0430 8 \u041c\u043f\u0438\u043a\u0441\r\n\u0444\u0440\u043e\u043d\u0442\u0430\u043b\u044c\u043d\u0430\u044f \u043a\u0430\u043c\u0435\u0440\u0430 1.2 \u041c\u043f\u0438\u043a\u0441\r\n\u0432\u0440\u0435\u043c\u044f \u0440\u0430\u0431\u043e\u0442\u044b 10 \u0447\r\n\u0430\u043a\u0441\u0435\u043b\u0435\u0440\u043e\u043c\u0435\u0442\u0440, \u0433\u0438\u0440\u043e\u0441\u043a\u043e\u043f\r\n\u0420\u0430\u0437\u043c\u0435\u0440 \u0432\u0441\u0442\u0440\u043e\u0435\u043d\u043d\u043e\u0439 \u043f\u0430\u043c\u044f\u0442\u0438: 32 \u0413\u0431",
+      "discount": 0,
+      "is_active": true,
+      "created": "2017-12-11T13:38:20.039Z",
+      "updated": "2017-12-16T07:04:33.595Z"
+   }
+},
+{
+   "model": "products.product",
+   "pk": 3,
+   "fields": {
+      "name": "Samsung Galaxy Tab A 10.1 SM-T585 16Gb",
+      "price": "17370.00",
+      "os": 1,
+      "short_description": "\u041a\u0430\u0447\u0435\u0441\u0442\u0432\u0435\u043d\u043d\u044b\u0439 \u0434\u0435\u0432\u0430\u0439\u0441 \u043e\u0442 Samsung",
+      "description": "\u043f\u043b\u0430\u043d\u0448\u0435\u0442 10.1\", 1920x1200\r\n\u0432\u0441\u0442\u0440\u043e\u0435\u043d\u043d\u0430\u044f \u043f\u0430\u043c\u044f\u0442\u044c 16 \u0413\u0431, \u0441\u043b\u043e\u0442 microSDXC\r\nAndroid 6.0, \u041e\u0417\u0423 2 \u0413\u0431, \u043f\u0440\u043e\u0446\u0435\u0441\u0441\u043e\u0440 Samsung Exynos 7870 1600 \u041c\u0413\u0446\r\nWi-Fi, Bluetooth, 3G, 4G LTE, GPS\r\n\u0440\u0430\u0437\u043c\u0435\u0440\u044b 155x254x8 \u043c\u043c, \u0432\u0435\u0441 525 \u0433\r\n\u0440\u0430\u0431\u043e\u0442\u0430 \u0432 \u0440\u0435\u0436\u0438\u043c\u0435 \u0441\u043e\u0442\u043e\u0432\u043e\u0433\u043e \u0442\u0435\u043b\u0435\u0444\u043e\u043d\u0430\r\n\u0442\u044b\u043b\u043e\u0432\u0430\u044f \u043a\u0430\u043c\u0435\u0440\u0430 8 \u041c\u043f\u0438\u043a\u0441\r\n\u0444\u0440\u043e\u043d\u0442\u0430\u043b\u044c\u043d\u0430\u044f \u043a\u0430\u043c\u0435\u0440\u0430 2 \u041c\u043f\u0438\u043a\u0441\r\n\u0432\u0440\u0435\u043c\u044f \u0440\u0430\u0431\u043e\u0442\u044b (\u0432\u0438\u0434\u0435\u043e) 13 \u0447\r\n\u0430\u043a\u0441\u0435\u043b\u0435\u0440\u043e\u043c\u0435\u0442\u0440\r\n\u0420\u0430\u0437\u043c\u0435\u0440 \u0432\u0441\u0442\u0440\u043e\u0435\u043d\u043d\u043e\u0439 \u043f\u0430\u043c\u044f\u0442\u0438: 16 \u0413\u0431",
+      "discount": 0,
+      "is_active": true,
+      "created": "2017-12-11T13:39:17.653Z",
+      "updated": "2017-12-16T07:08:43.294Z"
+   }
+},
+{
+   "model": "products.product",
+   "pk": 4,
+   "fields": {
+      "name": "Huawei Mediapad T3 8.0 16Gb LTE 4.5",
+      "price": "8799.00",
+      "os": 1,
+      "short_description": "\u0414\u043e\u0441\u0442\u0443\u043f\u043d\u044b\u0439 \u0432\u0430\u0440\u0438\u0430\u043d\u0442 \u043e\u0442 Huawei",
+      "description": "\u043f\u043b\u0430\u043d\u0448\u0435\u0442 8\", 1280x800, TFT IPS\r\n\u0432\u0441\u0442\u0440\u043e\u0435\u043d\u043d\u0430\u044f \u043f\u0430\u043c\u044f\u0442\u044c 16 \u0413\u0431, \u0441\u043b\u043e\u0442 microSDXC, \u0434\u043e 128 \u0413\u0431\r\nAndroid 7.0, \u041e\u0417\u0423 2 \u0413\u0431, \u043f\u0440\u043e\u0446\u0435\u0441\u0441\u043e\u0440 Qualcomm 1400 \u041c\u0413\u0446\r\nWi-Fi, Bluetooth, 3G, 4G LTE, GPS\r\n\u0440\u0430\u0437\u043c\u0435\u0440\u044b 124.7x211x8 \u043c\u043c, \u0432\u0435\u0441 350 \u0433\r\n\u0442\u044b\u043b\u043e\u0432\u0430\u044f \u043a\u0430\u043c\u0435\u0440\u0430 5 \u041c\u043f\u0438\u043a\u0441\r\n\u0444\u0440\u043e\u043d\u0442\u0430\u043b\u044c\u043d\u0430\u044f \u043a\u0430\u043c\u0435\u0440\u0430 2 \u041c\u043f\u0438\u043a\u0441\r\n\u0430\u043a\u0441\u0435\u043b\u0435\u0440\u043e\u043c\u0435\u0442\u0440\r\n\u0420\u0430\u0437\u043c\u0435\u0440 \u0432\u0441\u0442\u0440\u043e\u0435\u043d\u043d\u043e\u0439 \u043f\u0430\u043c\u044f\u0442\u0438: 16 \u0413\u0431",
+      "discount": 7,
+      "is_active": true,
+      "created": "2017-12-11T13:39:41.055Z",
+      "updated": "2018-01-11T12:16:54.071Z"
+   }
+},
+{
+   "model": "products.product",
+   "pk": 5,
+   "fields": {
+      "name": "Lenovo Tab 4 TB-X304L 16Gb",
+      "price": "11250.00",
+      "os": 1,
+      "short_description": "\u0412\u0430\u0440\u0438\u0430\u043d\u0442 \u0434\u043b\u044f \u0432\u0441\u0435\u0445, \u043a\u043e\u043c\u0443 \u043d\u0443\u0436\u0435\u043d \u043f\u0440\u043e\u0441\u0442\u043e \u0438\u043d\u0441\u0442\u0440\u0443\u043c\u0435\u043d\u0442 \u0431\u0435\u0437 \u0442\u043e\u043f\u043e\u0432\u044b\u0445 \u0445\u0430\u0440\u0430\u043a\u0442\u0435\u0440\u0438\u0441\u0442\u0438\u043a",
+      "description": "\u043f\u043b\u0430\u043d\u0448\u0435\u0442 10.1\", 1280x800, TFT IPS\r\n\u0432\u0441\u0442\u0440\u043e\u0435\u043d\u043d\u0430\u044f \u043f\u0430\u043c\u044f\u0442\u044c 16 \u0413\u0431, \u0441\u043b\u043e\u0442 microSDXC, \u0434\u043e 128 \u0413\u0431\r\nAndroid 7.0, \u041e\u0417\u0423 2 \u0413\u0431, \u043f\u0440\u043e\u0446\u0435\u0441\u0441\u043e\u0440 Qualcomm Snapdragon 425 1400 \u041c\u0413\u0446\r\nWi-Fi, Bluetooth, 3G, 4G LTE, GPS\r\n\u0440\u0430\u0437\u043c\u0435\u0440\u044b 170x247x8.4 \u043c\u043c, \u0432\u0435\u0441 505 \u0433\r\n\u0442\u044b\u043b\u043e\u0432\u0430\u044f \u043a\u0430\u043c\u0435\u0440\u0430 5 \u041c\u043f\u0438\u043a\u0441\r\n\u0444\u0440\u043e\u043d\u0442\u0430\u043b\u044c\u043d\u0430\u044f \u043a\u0430\u043c\u0435\u0440\u0430 2 \u041c\u043f\u0438\u043a\u0441\r\n\u0432\u0440\u0435\u043c\u044f \u0440\u0430\u0431\u043e\u0442\u044b 12 \u0447\r\n\u0430\u043a\u0441\u0435\u043b\u0435\u0440\u043e\u043c\u0435\u0442\u0440\r\n\u0420\u0430\u0437\u043c\u0435\u0440 \u0432\u0441\u0442\u0440\u043e\u0435\u043d\u043d\u043e\u0439 \u043f\u0430\u043c\u044f\u0442\u0438: 16 \u0413\u0431",
+      "discount": 0,
+      "is_active": true,
+      "created": "2017-12-12T17:13:20.590Z",
+      "updated": "2017-12-16T07:08:59.543Z"
+   }
+},
+{
+   "model": "products.product",
+   "pk": 6,
+   "fields": {
+      "name": "Apple iPad mini 4 128Gb Wi-Fi 4.0",
+      "price": "23880.00",
+      "os": 2,
+      "short_description": "\u041a\u043e\u043c\u043f\u0430\u043a\u0442\u043d\u044b\u0439 iPad mini \u043f\u043e\u0434\u043e\u0439\u0434\u0435\u0442 \u0442\u0435\u043c \u043a\u0442\u043e \u043f\u043e\u0441\u0442\u043e\u044f\u043d\u043d\u043e \u0432 \u043f\u0443\u0442\u0438",
+      "description": "\u043f\u043b\u0430\u043d\u0448\u0435\u0442 7.85\", 2048x1536, TFT IPS\r\n\u0432\u0441\u0442\u0440\u043e\u0435\u043d\u043d\u0430\u044f \u043f\u0430\u043c\u044f\u0442\u044c 128 \u0413\u0431, \u0431\u0435\u0437 \u0441\u043b\u043e\u0442\u0430 \u0434\u043b\u044f \u043a\u0430\u0440\u0442 \u043f\u0430\u043c\u044f\u0442\u0438\r\niOS, \u041e\u0417\u0423 2 \u0413\u0431, \u043f\u0440\u043e\u0446\u0435\u0441\u0441\u043e\u0440 Apple A8\r\nWi-Fi, Bluetooth, NFC\r\n\u0440\u0430\u0437\u043c\u0435\u0440\u044b 135x203.2x6.1 \u043c\u043c, \u0432\u0435\u0441 304 \u0433\r\n\u0442\u044b\u043b\u043e\u0432\u0430\u044f \u043a\u0430\u043c\u0435\u0440\u0430 8 \u041c\u043f\u0438\u043a\u0441\r\n\u0444\u0440\u043e\u043d\u0442\u0430\u043b\u044c\u043d\u0430\u044f \u043a\u0430\u043c\u0435\u0440\u0430 1.2 \u041c\u043f\u0438\u043a\u0441\r\n\u0432\u0440\u0435\u043c\u044f \u0440\u0430\u0431\u043e\u0442\u044b 10 \u0447\r\n\u0430\u043a\u0441\u0435\u043b\u0435\u0440\u043e\u043c\u0435\u0442\u0440, \u0433\u0438\u0440\u043e\u0441\u043a\u043e\u043f\r\n\u0420\u0430\u0437\u043c\u0435\u0440 \u0432\u0441\u0442\u0440\u043e\u0435\u043d\u043d\u043e\u0439 \u043f\u0430\u043c\u044f\u0442\u0438: 128 \u0413\u0431",
+      "discount": 0,
+      "is_active": true,
+      "created": "2017-12-16T07:21:01.595Z",
+      "updated": "2017-12-16T07:21:01.595Z"
+   }
+},
+{
+   "model": "products.product",
+   "pk": 7,
+   "fields": {
+      "name": "Apple iPad 32Gb Wi-Fi + Cellular",
+      "price": "32924.00",
+      "os": 2,
+      "short_description": "\u041f\u043e\u043f\u0443\u043b\u044f\u0440\u043d\u0430\u044f \u043c\u043e\u0434\u0435\u043b\u044c \u043e\u0442 Apple",
+      "description": "\u043f\u043b\u0430\u043d\u0448\u0435\u0442 9.7\", 2048x1536, TFT IPS\r\n\u0432\u0441\u0442\u0440\u043e\u0435\u043d\u043d\u0430\u044f \u043f\u0430\u043c\u044f\u0442\u044c 32 \u0413\u0431, \u0431\u0435\u0437 \u0441\u043b\u043e\u0442\u0430 \u0434\u043b\u044f \u043a\u0430\u0440\u0442 \u043f\u0430\u043c\u044f\u0442\u0438\r\niOS, \u041e\u0417\u0423 2 \u0413\u0431, \u043f\u0440\u043e\u0446\u0435\u0441\u0441\u043e\u0440 Apple A9\r\nWi-Fi, Bluetooth, 3G, 4G LTE, GPS, NFC\r\n\u0440\u0430\u0437\u043c\u0435\u0440\u044b 169.5x240x7.5 \u043c\u043c, \u0432\u0435\u0441 478 \u0433\r\n\u0442\u044b\u043b\u043e\u0432\u0430\u044f \u043a\u0430\u043c\u0435\u0440\u0430 8 \u041c\u043f\u0438\u043a\u0441\r\n\u0444\u0440\u043e\u043d\u0442\u0430\u043b\u044c\u043d\u0430\u044f \u043a\u0430\u043c\u0435\u0440\u0430 1.2 \u041c\u043f\u0438\u043a\u0441\r\n\u0432\u0440\u0435\u043c\u044f \u0440\u0430\u0431\u043e\u0442\u044b 10 \u0447\r\n\u0430\u043a\u0441\u0435\u043b\u0435\u0440\u043e\u043c\u0435\u0442\u0440, \u0433\u0438\u0440\u043e\u0441\u043a\u043e\u043f\r\n\u0420\u0430\u0437\u043c\u0435\u0440 \u0432\u0441\u0442\u0440\u043e\u0435\u043d\u043d\u043e\u0439 \u043f\u0430\u043c\u044f\u0442\u0438: 32 \u0413\u0431",
+      "discount": 0,
+      "is_active": true,
+      "created": "2017-12-16T07:22:53.198Z",
+      "updated": "2017-12-16T07:22:53.198Z"
+   }
+},
+{
+   "model": "products.product",
+   "pk": 8,
+   "fields": {
+      "name": "Samsung Galaxy Tab A 8.0 SM-T385 16Gb",
+      "price": "13690.00",
+      "os": 1,
+      "short_description": "\u041a\u043e\u043c\u043f\u0430\u043a\u0442\u043d\u044b\u0439 Galaxy Tab",
+      "description": "\u043f\u043b\u0430\u043d\u0448\u0435\u0442 8\", 1280x800\r\n\u0432\u0441\u0442\u0440\u043e\u0435\u043d\u043d\u0430\u044f \u043f\u0430\u043c\u044f\u0442\u044c 16 \u0413\u0431, \u0441\u043b\u043e\u0442 microSDXC\r\nAndroid 7.1, \u041e\u0417\u0423 2 \u0413\u0431, \u043f\u0440\u043e\u0446\u0435\u0441\u0441\u043e\u0440 Qualcomm Snapdragon 425 1400 \u041c\u0413\u0446\r\nWi-Fi, Bluetooth, 3G, 4G LTE, GPS\r\n\u0440\u0430\u0437\u043c\u0435\u0440\u044b 124.1x212.1x8.9 \u043c\u043c, \u0432\u0435\u0441 364 \u0433\r\n\u0440\u0430\u0431\u043e\u0442\u0430 \u0432 \u0440\u0435\u0436\u0438\u043c\u0435 \u0441\u043e\u0442\u043e\u0432\u043e\u0433\u043e \u0442\u0435\u043b\u0435\u0444\u043e\u043d\u0430\r\n\u0442\u044b\u043b\u043e\u0432\u0430\u044f \u043a\u0430\u043c\u0435\u0440\u0430 8 \u041c\u043f\u0438\u043a\u0441\r\n\u0444\u0440\u043e\u043d\u0442\u0430\u043b\u044c\u043d\u0430\u044f \u043a\u0430\u043c\u0435\u0440\u0430 5 \u041c\u043f\u0438\u043a\u0441\r\n\u0432\u0440\u0435\u043c\u044f \u0440\u0430\u0431\u043e\u0442\u044b (\u0432\u0438\u0434\u0435\u043e) 14 \u0447\r\n\u0430\u043a\u0441\u0435\u043b\u0435\u0440\u043e\u043c\u0435\u0442\u0440\r\n\u0420\u0430\u0437\u043c\u0435\u0440 \u0432\u0441\u0442\u0440\u043e\u0435\u043d\u043d\u043e\u0439 \u043f\u0430\u043c\u044f\u0442\u0438: 16 \u0413\u0431",
+      "discount": 0,
+      "is_active": true,
+      "created": "2017-12-16T07:24:47.151Z",
+      "updated": "2017-12-16T09:09:29.545Z"
+   }
+},
+{
+   "model": "products.product",
+   "pk": 9,
+   "fields": {
+      "name": "Apple iPad Pro 10.5 64Gb Wi-Fi",
+      "price": "35690.00",
+      "os": 2,
+      "short_description": "\u041f\u0440\u043e\u0438\u0437\u0432\u043e\u0434\u0438\u0442\u0435\u043b\u044c\u043d\u043e\u0441\u0442\u044c \u0438 \u043a\u0430\u0447\u0435\u0441\u0442\u0432\u043e \u043b\u0438\u043d\u0435\u0439\u043a\u0438 Pro \u043e\u0442 Apple",
+      "description": "\u043f\u043b\u0430\u043d\u0448\u0435\u0442 10.5\", 2224x1668, TFT IPS\r\n\u0432\u0441\u0442\u0440\u043e\u0435\u043d\u043d\u0430\u044f \u043f\u0430\u043c\u044f\u0442\u044c 64 \u0413\u0431, \u0431\u0435\u0437 \u0441\u043b\u043e\u0442\u0430 \u0434\u043b\u044f \u043a\u0430\u0440\u0442 \u043f\u0430\u043c\u044f\u0442\u0438\r\niOS, \u041e\u0417\u0423 4 \u0413\u0431, \u043f\u0440\u043e\u0446\u0435\u0441\u0441\u043e\u0440 Apple A10X\r\nWi-Fi, Bluetooth\r\n\u0440\u0430\u0437\u043c\u0435\u0440\u044b 174.1x250.6x6.1 \u043c\u043c, \u0432\u0435\u0441 469 \u0433\r\n\u0442\u044b\u043b\u043e\u0432\u0430\u044f \u043a\u0430\u043c\u0435\u0440\u0430 12 \u041c\u043f\u0438\u043a\u0441\r\n\u0444\u0440\u043e\u043d\u0442\u0430\u043b\u044c\u043d\u0430\u044f \u043a\u0430\u043c\u0435\u0440\u0430 7 \u041c\u043f\u0438\u043a\u0441\r\n\u0432\u0440\u0435\u043c\u044f \u0440\u0430\u0431\u043e\u0442\u044b 10 \u0447\r\n\u0430\u043a\u0441\u0435\u043b\u0435\u0440\u043e\u043c\u0435\u0442\u0440, \u0433\u0438\u0440\u043e\u0441\u043a\u043e\u043f\r\n\u0420\u0430\u0437\u043c\u0435\u0440 \u0432\u0441\u0442\u0440\u043e\u0435\u043d\u043d\u043e\u0439 \u043f\u0430\u043c\u044f\u0442\u0438: 64 \u0413\u0431",
+      "discount": 10,
+      "is_active": true,
+      "created": "2017-12-16T07:27:30.719Z",
+      "updated": "2017-12-17T09:35:22.990Z"
+   }
+},
+{
+   "model": "products.productimage",
+   "pk": 9,
+   "fields": {
+      "image": "products_images/apple.webp",
+      "product": 2,
+      "is_active": true,
+      "is_main": true,
+      "created": "2017-12-11T13:38:45.616Z",
+      "updated": "2017-12-12T14:05:46.484Z"
+   }
+},
+{
+   "model": "products.productimage",
+   "pk": 10,
+   "fields": {
+      "image": "products_images/samsung.webp",
+      "product": 3,
+      "is_active": true,
+      "is_main": true,
+      "created": "2017-12-11T13:39:17.654Z",
+      "updated": "2017-12-12T14:05:41.998Z"
+   }
+},
+{
+   "model": "products.productimage",
+   "pk": 11,
+   "fields": {
+      "image": "products_images/huawei.webp",
+      "product": 4,
+      "is_active": true,
+      "is_main": true,
+      "created": "2017-12-11T13:39:41.057Z",
+      "updated": "2017-12-12T14:05:38.270Z"
+   }
+},
+{
+   "model": "products.productimage",
+   "pk": 16,
+   "fields": {
+      "image": "products_images/lenovo.webp",
+      "product": 5,
+      "is_active": true,
+      "is_main": true,
+      "created": "2017-12-12T17:24:56.998Z",
+      "updated": "2017-12-12T17:24:56.998Z"
+   }
+},
+{
+   "model": "products.productimage",
+   "pk": 17,
+   "fields": {
+      "image": "products_images/apple3.webp",
+      "product": 2,
+      "is_active": true,
+      "is_main": false,
+      "created": "2017-12-16T07:04:33.597Z",
+      "updated": "2017-12-16T07:04:33.597Z"
+   }
+},
+{
+   "model": "products.productimage",
+   "pk": 18,
+   "fields": {
+      "image": "products_images/apple2.webp",
+      "product": 2,
+      "is_active": true,
+      "is_main": false,
+      "created": "2017-12-16T07:04:33.597Z",
+      "updated": "2017-12-16T07:04:33.597Z"
+   }
+},
+{
+   "model": "products.productimage",
+   "pk": 19,
+   "fields": {
+      "image": "products_images/hua2.webp",
+      "product": 4,
+      "is_active": true,
+      "is_main": false,
+      "created": "2017-12-16T07:08:09.716Z",
+      "updated": "2017-12-16T07:08:09.716Z"
+   }
+},
+{
+   "model": "products.productimage",
+   "pk": 20,
+   "fields": {
+      "image": "products_images/hua3.webp",
+      "product": 4,
+      "is_active": true,
+      "is_main": false,
+      "created": "2017-12-16T07:08:09.717Z",
+      "updated": "2017-12-16T07:08:09.717Z"
+   }
+},
+{
+   "model": "products.productimage",
+   "pk": 21,
+   "fields": {
+      "image": "products_images/sams2.webp",
+      "product": 3,
+      "is_active": true,
+      "is_main": false,
+      "created": "2017-12-16T07:08:43.295Z",
+      "updated": "2017-12-16T07:08:43.295Z"
+   }
+},
+{
+   "model": "products.productimage",
+   "pk": 22,
+   "fields": {
+      "image": "products_images/sams3.webp",
+      "product": 3,
+      "is_active": true,
+      "is_main": false,
+      "created": "2017-12-16T07:08:43.296Z",
+      "updated": "2017-12-16T07:08:43.296Z"
+   }
+},
+{
+   "model": "products.productimage",
+   "pk": 23,
+   "fields": {
+      "image": "products_images/len2.webp",
+      "product": 5,
+      "is_active": true,
+      "is_main": false,
+      "created": "2017-12-16T07:08:59.544Z",
+      "updated": "2017-12-16T07:08:59.544Z"
+   }
+},
+{
+   "model": "products.productimage",
+   "pk": 24,
+   "fields": {
+      "image": "products_images/len3.webp",
+      "product": 5,
+      "is_active": true,
+      "is_main": false,
+      "created": "2017-12-16T07:08:59.546Z",
+      "updated": "2017-12-16T07:08:59.546Z"
+   }
+},
+{
+   "model": "products.productimage",
+   "pk": 25,
+   "fields": {
+      "image": "products_images/mini.webp",
+      "product": 6,
+      "is_active": true,
+      "is_main": true,
+      "created": "2017-12-16T07:21:01.596Z",
+      "updated": "2017-12-16T07:21:01.596Z"
+   }
+},
+{
+   "model": "products.productimage",
+   "pk": 26,
+   "fields": {
+      "image": "products_images/mini2.webp",
+      "product": 6,
+      "is_active": true,
+      "is_main": false,
+      "created": "2017-12-16T07:21:01.596Z",
+      "updated": "2017-12-16T07:21:01.596Z"
+   }
+},
+{
+   "model": "products.productimage",
+   "pk": 27,
+   "fields": {
+      "image": "products_images/mini3.webp",
+      "product": 6,
+      "is_active": true,
+      "is_main": false,
+      "created": "2017-12-16T07:21:01.596Z",
+      "updated": "2017-12-16T07:21:01.597Z"
+   }
+},
+{
+   "model": "products.productimage",
+   "pk": 28,
+   "fields": {
+      "image": "products_images/aplc.webp",
+      "product": 7,
+      "is_active": true,
+      "is_main": true,
+      "created": "2017-12-16T07:22:53.199Z",
+      "updated": "2017-12-16T07:22:53.199Z"
+   }
+},
+{
+   "model": "products.productimage",
+   "pk": 29,
+   "fields": {
+      "image": "products_images/aplc2.webp",
+      "product": 7,
+      "is_active": true,
+      "is_main": false,
+      "created": "2017-12-16T07:22:53.200Z",
+      "updated": "2017-12-16T07:22:53.200Z"
+   }
+},
+{
+   "model": "products.productimage",
+   "pk": 30,
+   "fields": {
+      "image": "products_images/aplc3.webp",
+      "product": 7,
+      "is_active": true,
+      "is_main": false,
+      "created": "2017-12-16T07:22:53.201Z",
+      "updated": "2017-12-16T07:22:53.201Z"
+   }
+},
+{
+   "model": "products.productimage",
+   "pk": 31,
+   "fields": {
+      "image": "products_images/tab.webp",
+      "product": 8,
+      "is_active": true,
+      "is_main": true,
+      "created": "2017-12-16T07:24:47.152Z",
+      "updated": "2017-12-16T07:24:47.152Z"
+   }
+},
+{
+   "model": "products.productimage",
+   "pk": 32,
+   "fields": {
+      "image": "products_images/tab2.webp",
+      "product": 8,
+      "is_active": true,
+      "is_main": false,
+      "created": "2017-12-16T07:24:47.153Z",
+      "updated": "2017-12-16T07:24:47.153Z"
+   }
+},
+{
+   "model": "products.productimage",
+   "pk": 33,
+   "fields": {
+      "image": "products_images/tab3.webp",
+      "product": 8,
+      "is_active": true,
+      "is_main": false,
+      "created": "2017-12-16T07:24:47.153Z",
+      "updated": "2017-12-16T07:24:47.153Z"
+   }
+},
+{
+   "model": "products.productimage",
+   "pk": 34,
+   "fields": {
+      "image": "products_images/pro.webp",
+      "product": 9,
+      "is_active": true,
+      "is_main": true,
+      "created": "2017-12-16T07:27:30.720Z",
+      "updated": "2017-12-16T07:27:30.720Z"
+   }
+},
+{
+   "model": "products.productimage",
+   "pk": 35,
+   "fields": {
+      "image": "products_images/pro2.webp",
+      "product": 9,
+      "is_active": true,
+      "is_main": false,
+      "created": "2017-12-16T07:27:30.721Z",
+      "updated": "2017-12-16T07:27:30.721Z"
+   }
+},
+{
+   "model": "products.productimage",
+   "pk": 36,
+   "fields": {
+      "image": "products_images/pro3.webp",
+      "product": 9,
+      "is_active": true,
+      "is_main": false,
+      "created": "2017-12-16T07:27:30.721Z",
+      "updated": "2017-12-16T07:27:30.721Z"
+   }
+},
+{
+   "model": "orders.status",
+   "pk": 1,
+   "fields": {
+      "name": "\u0413\u043e\u0442\u043e\u0432\u0438\u0442\u0441\u044f",
+      "is_active": true,
+      "created": "2017-12-08T12:43:36.342Z",
+      "updated": "2017-12-08T12:43:36.342Z"
+   }
+},
+{
+   "model": "orders.status",
+   "pk": 2,
+   "fields": {
+      "name": "\u041e\u0442\u043f\u0440\u0430\u0432\u043b\u0435\u043d",
+      "is_active": true,
+      "created": "2017-12-16T06:37:20.283Z",
+      "updated": "2017-12-16T06:37:20.283Z"
+   }
+},
+{
+   "model": "orders.status",
+   "pk": 3,
+   "fields": {
+      "name": "\u0417\u0430\u0432\u0435\u0440\u0448\u0435\u043d",
+      "is_active": true,
+      "created": "2017-12-16T06:37:29.232Z",
+      "updated": "2017-12-16T06:37:29.232Z"
+   }
+},
+{
+   "model": "orders.productinorder",
+   "pk": 3,
+   "fields": {
+      "order": 8,
+      "product": 4,
+      "nmb": 1,
+      "price_per_item": "8799.00",
+      "total_price": "8799.00",
+      "is_active": true,
+      "created": "2018-01-08T10:33:17.286Z",
+      "updated": "2018-01-08T10:33:17.286Z"
+   }
+},
+{
+   "model": "orders.productinorder",
+   "pk": 4,
+   "fields": {
+      "order": 8,
+      "product": 7,
+      "nmb": 3,
+      "price_per_item": "32924.00",
+      "total_price": "98772.00",
+      "is_active": true,
+      "created": "2018-01-08T10:33:17.448Z",
+      "updated": "2018-01-08T10:33:17.448Z"
+   }
+},
+{
+   "model": "orders.productinorder",
+   "pk": 5,
+   "fields": {
+      "order": 9,
+      "product": 4,
+      "nmb": 2,
+      "price_per_item": "8799.00",
+      "total_price": "17598.00",
+      "is_active": true,
+      "created": "2018-01-08T10:33:19.526Z",
+      "updated": "2018-01-08T10:37:09.528Z"
+   }
+},
+{
+   "model": "orders.productinorder",
+   "pk": 6,
+   "fields": {
+      "order": 9,
+      "product": 7,
+      "nmb": 3,
+      "price_per_item": "32924.00",
+      "total_price": "98772.00",
+      "is_active": true,
+      "created": "2018-01-08T10:33:19.660Z",
+      "updated": "2018-01-08T10:33:19.661Z"
+   }
+},
+{
+   "model": "orders.productinorder",
+   "pk": 7,
+   "fields": {
+      "order": 10,
+      "product": 4,
+      "nmb": 1,
+      "price_per_item": "8799.00",
+      "total_price": "8799.00",
+      "is_active": true,
+      "created": "2018-01-08T10:59:37.899Z",
+      "updated": "2018-01-08T10:59:37.899Z"
+   }
+},
+{
+   "model": "orders.productinorder",
+   "pk": 8,
+   "fields": {
+      "order": 10,
+      "product": 7,
+      "nmb": 3,
+      "price_per_item": "32924.00",
+      "total_price": "98772.00",
+      "is_active": true,
+      "created": "2018-01-08T10:59:38.061Z",
+      "updated": "2018-01-08T10:59:38.061Z"
+   }
+},
+{
+   "model": "orders.productinorder",
+   "pk": 9,
+   "fields": {
+      "order": 11,
+      "product": 4,
+      "nmb": 1,
+      "price_per_item": "8799.00",
+      "total_price": "8799.00",
+      "is_active": true,
+      "created": "2018-01-08T11:02:25.249Z",
+      "updated": "2018-01-08T11:02:25.250Z"
+   }
+},
+{
+   "model": "orders.productinorder",
+   "pk": 10,
+   "fields": {
+      "order": 11,
+      "product": 7,
+      "nmb": 3,
+      "price_per_item": "32924.00",
+      "total_price": "98772.00",
+      "is_active": true,
+      "created": "2018-01-08T11:02:25.414Z",
+      "updated": "2018-01-08T11:02:25.414Z"
+   }
+},
+{
+   "model": "orders.productinorder",
+   "pk": 11,
+   "fields": {
+      "order": 12,
+      "product": 4,
+      "nmb": 1,
+      "price_per_item": "8799.00",
+      "total_price": "8799.00",
+      "is_active": true,
+      "created": "2018-01-08T11:02:48.384Z",
+      "updated": "2018-01-08T11:02:48.384Z"
+   }
+},
+{
+   "model": "orders.productinorder",
+   "pk": 12,
+   "fields": {
+      "order": 12,
+      "product": 7,
+      "nmb": 3,
+      "price_per_item": "32924.00",
+      "total_price": "98772.00",
+      "is_active": true,
+      "created": "2018-01-08T11:02:48.527Z",
+      "updated": "2018-01-08T11:02:48.527Z"
+   }
+},
+{
+   "model": "orders.productinorder",
+   "pk": 13,
+   "fields": {
+      "order": 14,
+      "product": 4,
+      "nmb": 1,
+      "price_per_item": "8799.00",
+      "total_price": "8799.00",
+      "is_active": true,
+      "created": "2018-01-08T18:57:06.848Z",
+      "updated": "2018-01-08T18:57:06.848Z"
+   }
+},
+{
+   "model": "orders.productinorder",
+   "pk": 14,
+   "fields": {
+      "order": 14,
+      "product": 5,
+      "nmb": 1,
+      "price_per_item": "11250.00",
+      "total_price": "11250.00",
+      "is_active": true,
+      "created": "2018-01-08T18:57:07.021Z",
+      "updated": "2018-01-08T18:57:07.022Z"
+   }
+},
+{
+   "model": "orders.productinorder",
+   "pk": 15,
+   "fields": {
+      "order": 14,
+      "product": 8,
+      "nmb": 1,
+      "price_per_item": "13690.00",
+      "total_price": "13690.00",
+      "is_active": true,
+      "created": "2018-01-08T18:57:07.187Z",
+      "updated": "2018-01-08T18:57:07.187Z"
+   }
+},
+{
+   "model": "orders.productinorder",
+   "pk": 16,
+   "fields": {
+      "order": 15,
+      "product": 4,
+      "nmb": 2,
+      "price_per_item": "8799.00",
+      "total_price": "17598.00",
+      "is_active": true,
+      "created": "2018-01-08T18:58:37.616Z",
+      "updated": "2018-01-08T18:58:37.616Z"
+   }
+},
+{
+   "model": "orders.productinorder",
+   "pk": 17,
+   "fields": {
+      "order": 15,
+      "product": 5,
+      "nmb": 1,
+      "price_per_item": "11250.00",
+      "total_price": "11250.00",
+      "is_active": true,
+      "created": "2018-01-08T18:58:37.789Z",
+      "updated": "2018-01-08T18:58:37.789Z"
+   }
+},
+{
+   "model": "orders.productinorder",
+   "pk": 18,
+   "fields": {
+      "order": 15,
+      "product": 8,
+      "nmb": 1,
+      "price_per_item": "13690.00",
+      "total_price": "13690.00",
+      "is_active": true,
+      "created": "2018-01-08T18:58:37.965Z",
+      "updated": "2018-01-08T18:58:37.966Z"
+   }
+},
+{
+   "model": "orders.productinorder",
+   "pk": 19,
+   "fields": {
+      "order": 15,
+      "product": 6,
+      "nmb": 1,
+      "price_per_item": "23880.00",
+      "total_price": "23880.00",
+      "is_active": true,
+      "created": "2018-01-08T18:58:38.132Z",
+      "updated": "2018-01-08T18:58:38.132Z"
+   }
+},
+{
+   "model": "orders.productinorder",
+   "pk": 20,
+   "fields": {
+      "order": 15,
+      "product": 7,
+      "nmb": 1,
+      "price_per_item": "32924.00",
+      "total_price": "32924.00",
+      "is_active": true,
+      "created": "2018-01-08T18:58:38.298Z",
+      "updated": "2018-01-08T18:58:38.298Z"
+   }
+},
+{
+   "model": "orders.productinorder",
+   "pk": 21,
+   "fields": {
+      "order": 16,
+      "product": 9,
+      "nmb": 1,
+      "price_per_item": "35690.00",
+      "total_price": "32121.00",
+      "is_active": true,
+      "created": "2018-01-08T19:11:55.251Z",
+      "updated": "2018-01-08T19:11:55.251Z"
+   }
+},
+{
+   "model": "orders.productinorder",
+   "pk": 22,
+   "fields": {
+      "order": 16,
+      "product": 7,
+      "nmb": 1,
+      "price_per_item": "32924.00",
+      "total_price": "32924.00",
+      "is_active": true,
+      "created": "2018-01-08T19:11:55.439Z",
+      "updated": "2018-01-08T19:11:55.439Z"
+   }
+},
+{
+   "model": "orders.productinorder",
+   "pk": 23,
+   "fields": {
+      "order": 16,
+      "product": 6,
+      "nmb": 1,
+      "price_per_item": "23880.00",
+      "total_price": "23880.00",
+      "is_active": true,
+      "created": "2018-01-08T19:11:55.615Z",
+      "updated": "2018-01-08T19:11:55.615Z"
+   }
+},
+{
+   "model": "orders.productinbasket",
+   "pk": 164,
+   "fields": {
+      "session_key": "ew1bdje90i74j236631yb68k7vl5qq0c",
+      "order": null,
+      "product": 4,
+      "nmb": 1,
+      "price_per_item": "8799.00",
+      "discount": 0,
+      "total_price": "8799.00",
+      "is_active": true,
+      "created": "2018-01-07T16:27:04.569Z",
+      "updated": "2018-01-08T08:09:41.266Z"
+   }
+},
+{
+   "model": "orders.productinbasket",
+   "pk": 167,
+   "fields": {
+      "session_key": "ew1bdje90i74j236631yb68k7vl5qq0c",
+      "order": null,
+      "product": 7,
+      "nmb": 3,
+      "price_per_item": "32924.00",
+      "discount": 0,
+      "total_price": "98772.00",
+      "is_active": true,
+      "created": "2018-01-08T08:10:21.327Z",
+      "updated": "2018-01-08T08:52:22.087Z"
+   }
+},
+{
+   "model": "orders.productinbasket",
+   "pk": 170,
+   "fields": {
+      "session_key": "vd169w1nyres4ndc2uxf8o98sdzvdotz",
+      "order": null,
+      "product": 4,
+      "nmb": 5,
+      "price_per_item": "8799.00",
+      "discount": 0,
+      "total_price": "43995.00",
+      "is_active": true,
+      "created": "2018-01-08T15:19:23.336Z",
+      "updated": "2018-01-08T18:14:13.420Z"
+   }
+},
+{
+   "model": "orders.productinbasket",
+   "pk": 189,
+   "fields": {
+      "session_key": "2f2fhdu6e3ie5rbxb09d2k0j4vvwze7o",
+      "order": null,
+      "product": 5,
+      "nmb": 1,
+      "price_per_item": "11250.00",
+      "discount": 0,
+      "total_price": "11250.00",
+      "is_active": true,
+      "created": "2018-01-11T13:07:35.926Z",
+      "updated": "2018-01-11T13:07:35.927Z"
+   }
+},
+{
+   "model": "orders.productinbasket",
+   "pk": 190,
+   "fields": {
+      "session_key": "2f2fhdu6e3ie5rbxb09d2k0j4vvwze7o",
+      "order": null,
+      "product": 8,
+      "nmb": 1,
+      "price_per_item": "13690.00",
+      "discount": 0,
+      "total_price": "13690.00",
+      "is_active": true,
+      "created": "2018-01-11T13:07:36.514Z",
+      "updated": "2018-01-11T13:07:36.514Z"
+   }
+},
+{
+   "model": "auth.permission",
+   "pk": 1,
+   "fields": {
+      "name": "Can add log entry",
+      "content_type": 1,
+      "codename": "add_logentry"
+   }
+},
+{
+   "model": "auth.permission",
+   "pk": 2,
+   "fields": {
+      "name": "Can change log entry",
+      "content_type": 1,
+      "codename": "change_logentry"
+   }
+},
+{
+   "model": "auth.permission",
+   "pk": 3,
+   "fields": {
+      "name": "Can delete log entry",
+      "content_type": 1,
+      "codename": "delete_logentry"
+   }
+},
+{
+   "model": "auth.permission",
+   "pk": 4,
+   "fields": {
+      "name": "Can add group",
+      "content_type": 2,
+      "codename": "add_group"
+   }
+},
+{
+   "model": "auth.permission",
+   "pk": 5,
+   "fields": {
+      "name": "Can change group",
+      "content_type": 2,
+      "codename": "change_group"
+   }
+},
+{
+   "model": "auth.permission",
+   "pk": 6,
+   "fields": {
+      "name": "Can delete group",
+      "content_type": 2,
+      "codename": "delete_group"
+   }
+},
+{
+   "model": "auth.permission",
+   "pk": 7,
+   "fields": {
+      "name": "Can add user",
+      "content_type": 3,
+      "codename": "add_user"
+   }
+},
+{
+   "model": "auth.permission",
+   "pk": 8,
+   "fields": {
+      "name": "Can change user",
+      "content_type": 3,
+      "codename": "change_user"
+   }
+},
+{
+   "model": "auth.permission",
+   "pk": 9,
+   "fields": {
+      "name": "Can delete user",
+      "content_type": 3,
+      "codename": "delete_user"
+   }
+},
+{
+   "model": "auth.permission",
+   "pk": 10,
+   "fields": {
+      "name": "Can add permission",
+      "content_type": 4,
+      "codename": "add_permission"
+   }
+},
+{
+   "model": "auth.permission",
+   "pk": 11,
+   "fields": {
+      "name": "Can change permission",
+      "content_type": 4,
+      "codename": "change_permission"
+   }
+},
+{
+   "model": "auth.permission",
+   "pk": 12,
+   "fields": {
+      "name": "Can delete permission",
+      "content_type": 4,
+      "codename": "delete_permission"
+   }
+},
+{
+   "model": "auth.permission",
+   "pk": 13,
+   "fields": {
+      "name": "Can add content type",
+      "content_type": 5,
+      "codename": "add_contenttype"
+   }
+},
+{
+   "model": "auth.permission",
+   "pk": 14,
+   "fields": {
+      "name": "Can change content type",
+      "content_type": 5,
+      "codename": "change_contenttype"
+   }
+},
+{
+   "model": "auth.permission",
+   "pk": 15,
+   "fields": {
+      "name": "Can delete content type",
+      "content_type": 5,
+      "codename": "delete_contenttype"
+   }
+},
+{
+   "model": "auth.permission",
+   "pk": 16,
+   "fields": {
+      "name": "Can add session",
+      "content_type": 6,
+      "codename": "add_session"
+   }
+},
+{
+   "model": "auth.permission",
+   "pk": 17,
+   "fields": {
+      "name": "Can change session",
+      "content_type": 6,
+      "codename": "change_session"
+   }
+},
+{
+   "model": "auth.permission",
+   "pk": 18,
+   "fields": {
+      "name": "Can delete session",
+      "content_type": 6,
+      "codename": "delete_session"
+   }
+},
+{
+   "model": "auth.permission",
+   "pk": 19,
+   "fields": {
+      "name": "Can add \u0424\u043e\u0442\u043e\u0433\u0440\u0430\u0444\u0438\u044f",
+      "content_type": 7,
+      "codename": "add_productimage"
+   }
+},
+{
+   "model": "auth.permission",
+   "pk": 20,
+   "fields": {
+      "name": "Can change \u0424\u043e\u0442\u043e\u0433\u0440\u0430\u0444\u0438\u044f",
+      "content_type": 7,
+      "codename": "change_productimage"
+   }
+},
+{
+   "model": "auth.permission",
+   "pk": 21,
+   "fields": {
+      "name": "Can delete \u0424\u043e\u0442\u043e\u0433\u0440\u0430\u0444\u0438\u044f",
+      "content_type": 7,
+      "codename": "delete_productimage"
+   }
+},
+{
+   "model": "auth.permission",
+   "pk": 22,
+   "fields": {
+      "name": "Can add \u0422\u043e\u0432\u0430\u0440",
+      "content_type": 8,
+      "codename": "add_product"
+   }
+},
+{
+   "model": "auth.permission",
+   "pk": 23,
+   "fields": {
+      "name": "Can change \u0422\u043e\u0432\u0430\u0440",
+      "content_type": 8,
+      "codename": "change_product"
+   }
+},
+{
+   "model": "auth.permission",
+   "pk": 24,
+   "fields": {
+      "name": "Can delete \u0422\u043e\u0432\u0430\u0440",
+      "content_type": 8,
+      "codename": "delete_product"
+   }
+},
+{
+   "model": "auth.permission",
+   "pk": 25,
+   "fields": {
+      "name": "Can add \u0417\u0430\u043a\u0430\u0437",
+      "content_type": 9,
+      "codename": "add_order"
+   }
+},
+{
+   "model": "auth.permission",
+   "pk": 26,
+   "fields": {
+      "name": "Can change \u0417\u0430\u043a\u0430\u0437",
+      "content_type": 9,
+      "codename": "change_order"
+   }
+},
+{
+   "model": "auth.permission",
+   "pk": 27,
+   "fields": {
+      "name": "Can delete \u0417\u0430\u043a\u0430\u0437",
+      "content_type": 9,
+      "codename": "delete_order"
+   }
+},
+{
+   "model": "auth.permission",
+   "pk": 28,
+   "fields": {
+      "name": "Can add \u0421\u0442\u0430\u0442\u0443\u0441",
+      "content_type": 10,
+      "codename": "add_status"
+   }
+},
+{
+   "model": "auth.permission",
+   "pk": 29,
+   "fields": {
+      "name": "Can change \u0421\u0442\u0430\u0442\u0443\u0441",
+      "content_type": 10,
+      "codename": "change_status"
+   }
+},
+{
+   "model": "auth.permission",
+   "pk": 30,
+   "fields": {
+      "name": "Can delete \u0421\u0442\u0430\u0442\u0443\u0441",
+      "content_type": 10,
+      "codename": "delete_status"
+   }
+},
+{
+   "model": "auth.permission",
+   "pk": 31,
+   "fields": {
+      "name": "Can add \u0422\u043e\u0432\u0430\u0440",
+      "content_type": 11,
+      "codename": "add_productinorder"
+   }
+},
+{
+   "model": "auth.permission",
+   "pk": 32,
+   "fields": {
+      "name": "Can change \u0422\u043e\u0432\u0430\u0440",
+      "content_type": 11,
+      "codename": "change_productinorder"
+   }
+},
+{
+   "model": "auth.permission",
+   "pk": 33,
+   "fields": {
+      "name": "Can delete \u0422\u043e\u0432\u0430\u0440",
+      "content_type": 11,
+      "codename": "delete_productinorder"
+   }
+},
+{
+   "model": "auth.permission",
+   "pk": 34,
+   "fields": {
+      "name": "Can add \u041e\u0421",
+      "content_type": 12,
+      "codename": "add_operational_system"
+   }
+},
+{
+   "model": "auth.permission",
+   "pk": 35,
+   "fields": {
+      "name": "Can change \u041e\u0421",
+      "content_type": 12,
+      "codename": "change_operational_system"
+   }
+},
+{
+   "model": "auth.permission",
+   "pk": 36,
+   "fields": {
+      "name": "Can delete \u041e\u0421",
+      "content_type": 12,
+      "codename": "delete_operational_system"
+   }
+},
+{
+   "model": "auth.permission",
+   "pk": 37,
+   "fields": {
+      "name": "Can add \u0422\u043e\u0432\u0430\u0440 \u0432 \u043a\u043e\u0440\u0437\u0438\u043d\u0435",
+      "content_type": 13,
+      "codename": "add_productinbasket"
+   }
+},
+{
+   "model": "auth.permission",
+   "pk": 38,
+   "fields": {
+      "name": "Can change \u0422\u043e\u0432\u0430\u0440 \u0432 \u043a\u043e\u0440\u0437\u0438\u043d\u0435",
+      "content_type": 13,
+      "codename": "change_productinbasket"
+   }
+},
+{
+   "model": "auth.permission",
+   "pk": 39,
+   "fields": {
+      "name": "Can delete \u0422\u043e\u0432\u0430\u0440 \u0432 \u043a\u043e\u0440\u0437\u0438\u043d\u0435",
+      "content_type": 13,
+      "codename": "delete_productinbasket"
+   }
+},
+{
+   "model": "auth.user",
+   "pk": 1,
+   "fields": {
+      "password": "pbkdf2_sha256$36000$fjtBfifI1FzV$6735IYwcbKDAFQcPeFKGlDpjw+5F33N+Tr1kxz2ru/U=",
+      "last_login": "2018-01-08T18:34:27.505Z",
+      "is_superuser": true,
+      "username": "admin",
+      "first_name": "",
+      "last_name": "",
+      "email": "m.nikolaev1@gmail.com",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2017-12-07T16:41:40.304Z",
+      "groups": [],
+      "user_permissions": []
+   }
+},
+{
+   "model": "auth.user",
+   "pk": 4,
+   "fields": {
+      "password": "",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "789987",
+      "first_name": "iv iv",
+      "last_name": "",
+      "email": "",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2018-01-08T10:21:14.546Z",
+      "groups": [],
+      "user_permissions": []
+   }
+},
+{
+   "model": "auth.user",
+   "pk": 5,
+   "fields": {
+      "password": "",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "798899",
+      "first_name": "iv2",
+      "last_name": "",
+      "email": "",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2018-01-08T11:02:48.142Z",
+      "groups": [],
+      "user_permissions": []
+   }
+},
+{
+   "model": "auth.user",
+   "pk": 6,
+   "fields": {
+      "password": "",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "555666",
+      "first_name": "Boris ",
+      "last_name": "",
+      "email": "",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2018-01-08T18:57:06.601Z",
+      "groups": [],
+      "user_permissions": []
+   }
+},
+{
+   "model": "auth.user",
+   "pk": 7,
+   "fields": {
+      "password": "",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "788778",
+      "first_name": "Nikola",
+      "last_name": "",
+      "email": "",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2018-01-08T18:58:37.340Z",
+      "groups": [],
+      "user_permissions": []
+   }
+},
+{
+   "model": "auth.user",
+   "pk": 8,
+   "fields": {
+      "password": "",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "223331",
+      "first_name": "John",
+      "last_name": "",
+      "email": "",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2018-01-08T19:11:54.978Z",
+      "groups": [],
+      "user_permissions": []
+   }
+},
+{
+   "model": "orders.order",
+   "pk": 7,
+   "fields": {
+      "user": 4,
+      "customer_name": "iv iv",
+      "customer_email": "iv@iv.ru",
+      "customer_phone": "789987",
+      "customer_address": null,
+      "comments": null,
+      "status": 1,
+      "total_price": "0.00",
+      "created": "2018-01-08T10:26:38.708Z",
+      "updated": "2018-01-08T10:26:38.708Z"
+   }
+},
+{
+   "model": "orders.order",
+   "pk": 8,
+   "fields": {
+      "user": 4,
+      "customer_name": "iv iv",
+      "customer_email": "iv@iv.ru",
+      "customer_phone": "789987",
+      "customer_address": null,
+      "comments": null,
+      "status": 1,
+      "total_price": "107571.00",
+      "created": "2018-01-08T10:33:17.194Z",
+      "updated": "2018-01-08T10:33:17.514Z"
+   }
+},
+{
+   "model": "orders.order",
+   "pk": 9,
+   "fields": {
+      "user": 4,
+      "customer_name": "iv iv",
+      "customer_email": "iv@iv.ru",
+      "customer_phone": "789987",
+      "customer_address": null,
+      "comments": "",
+      "status": 1,
+      "total_price": "116370.00",
+      "created": "2018-01-08T10:33:19.409Z",
+      "updated": "2018-01-08T10:37:09.530Z"
+   }
+},
+{
+   "model": "orders.order",
+   "pk": 10,
+   "fields": {
+      "user": 4,
+      "customer_name": "iv iv",
+      "customer_email": "sfaf@sdfsdf.ru",
+      "customer_phone": "789987",
+      "customer_address": null,
+      "comments": null,
+      "status": 1,
+      "total_price": "107571.00",
+      "created": "2018-01-08T10:59:37.792Z",
+      "updated": "2018-01-08T10:59:38.128Z"
+   }
+},
+{
+   "model": "orders.order",
+   "pk": 11,
+   "fields": {
+      "user": 4,
+      "customer_name": "iv iv",
+      "customer_email": "sfaf@sdfsdf.ru",
+      "customer_phone": "789987",
+      "customer_address": null,
+      "comments": null,
+      "status": 1,
+      "total_price": "107571.00",
+      "created": "2018-01-08T11:02:25.165Z",
+      "updated": "2018-01-08T11:02:25.479Z"
+   }
+},
+{
+   "model": "orders.order",
+   "pk": 12,
+   "fields": {
+      "user": 5,
+      "customer_name": "iv2",
+      "customer_email": "dfd@dfs.ru",
+      "customer_phone": "798899",
+      "customer_address": null,
+      "comments": null,
+      "status": 1,
+      "total_price": "107571.00",
+      "created": "2018-01-08T11:02:48.288Z",
+      "updated": "2018-01-08T11:02:48.592Z"
+   }
+},
+{
+   "model": "orders.order",
+   "pk": 13,
+   "fields": {
+      "user": 5,
+      "customer_name": "iv2",
+      "customer_email": "dfd@dfs.ru",
+      "customer_phone": "798899",
+      "customer_address": null,
+      "comments": null,
+      "status": 1,
+      "total_price": "0.00",
+      "created": "2018-01-08T15:15:08.604Z",
+      "updated": "2018-01-08T15:15:08.604Z"
+   }
+},
+{
+   "model": "orders.order",
+   "pk": 14,
+   "fields": {
+      "user": 6,
+      "customer_name": "Boris ",
+      "customer_email": "boris@boris.bor",
+      "customer_phone": "555666",
+      "customer_address": null,
+      "comments": null,
+      "status": 1,
+      "total_price": "33739.00",
+      "created": "2018-01-08T18:57:06.751Z",
+      "updated": "2018-01-08T18:57:07.267Z"
+   }
+},
+{
+   "model": "orders.order",
+   "pk": 15,
+   "fields": {
+      "user": 7,
+      "customer_name": "Nikola",
+      "customer_email": "nik@ola.ru",
+      "customer_phone": "788778",
+      "customer_address": null,
+      "comments": null,
+      "status": 1,
+      "total_price": "100.00",
+      "created": "2018-01-08T18:58:37.528Z",
+      "updated": "2018-01-08T18:58:38.387Z"
+   }
+},
+{
+   "model": "orders.order",
+   "pk": 16,
+   "fields": {
+      "user": 8,
+      "customer_name": "John",
+      "customer_email": "john@john.ru",
+      "customer_phone": "223331",
+      "customer_address": null,
+      "comments": null,
+      "status": 1,
+      "total_price": "88925.00",
+      "created": "2018-01-08T19:11:55.133Z",
+      "updated": "2018-01-08T19:11:55.696Z"
+   }
+},
+{
+   "model": "admin.logentry",
+   "pk": 1,
+   "fields": {
+      "action_time": "2017-12-07T16:52:06.895Z",
+      "user": 1,
+      "content_type": 8,
+      "object_id": "1",
+      "object_repr": "1",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+   }
+},
+{
+   "model": "admin.logentry",
+   "pk": 2,
+   "fields": {
+      "action_time": "2017-12-07T16:55:35.269Z",
+      "user": 1,
+      "content_type": 7,
+      "object_id": "1",
+      "object_repr": "1",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+   }
+},
+{
+   "model": "admin.logentry",
+   "pk": 3,
+   "fields": {
+      "action_time": "2017-12-07T17:25:08.732Z",
+      "user": 1,
+      "content_type": 7,
+      "object_id": "2",
+      "object_repr": "2",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+   }
+},
+{
+   "model": "admin.logentry",
+   "pk": 4,
+   "fields": {
+      "action_time": "2017-12-07T17:26:01.960Z",
+      "user": 1,
+      "content_type": 7,
+      "object_id": "3",
+      "object_repr": "3",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+   }
+},
+{
+   "model": "admin.logentry",
+   "pk": 5,
+   "fields": {
+      "action_time": "2017-12-07T17:26:41.659Z",
+      "user": 1,
+      "content_type": 7,
+      "object_id": "2",
+      "object_repr": "2",
+      "action_flag": 3,
+      "change_message": ""
+   }
+},
+{
+   "model": "admin.logentry",
+   "pk": 6,
+   "fields": {
+      "action_time": "2017-12-07T17:26:41.747Z",
+      "user": 1,
+      "content_type": 7,
+      "object_id": "1",
+      "object_repr": "1",
+      "action_flag": 3,
+      "change_message": ""
+   }
+},
+{
+   "model": "admin.logentry",
+   "pk": 7,
+   "fields": {
+      "action_time": "2017-12-08T12:43:36.342Z",
+      "user": 1,
+      "content_type": 10,
+      "object_id": "1",
+      "object_repr": "\u0421\u0442\u0430\u0442\u0443\u0441 \u0413\u043e\u0442\u043e\u0432\u0438\u0442\u0441\u044f",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+   }
+},
+{
+   "model": "admin.logentry",
+   "pk": 8,
+   "fields": {
+      "action_time": "2017-12-09T08:03:25.929Z",
+      "user": 1,
+      "content_type": 7,
+      "object_id": "4",
+      "object_repr": "4",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+   }
+},
+{
+   "model": "admin.logentry",
+   "pk": 9,
+   "fields": {
+      "action_time": "2017-12-09T08:04:21.273Z",
+      "user": 1,
+      "content_type": 7,
+      "object_id": "4",
+      "object_repr": "4",
+      "action_flag": 3,
+      "change_message": ""
+   }
+},
+{
+   "model": "admin.logentry",
+   "pk": 10,
+   "fields": {
+      "action_time": "2017-12-09T08:05:53.594Z",
+      "user": 1,
+      "content_type": 7,
+      "object_id": "5",
+      "object_repr": "5",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+   }
+},
+{
+   "model": "admin.logentry",
+   "pk": 11,
+   "fields": {
+      "action_time": "2017-12-09T08:06:28.682Z",
+      "user": 1,
+      "content_type": 7,
+      "object_id": "5",
+      "object_repr": "5",
+      "action_flag": 3,
+      "change_message": ""
+   }
+},
+{
+   "model": "admin.logentry",
+   "pk": 12,
+   "fields": {
+      "action_time": "2017-12-09T08:16:15.236Z",
+      "user": 1,
+      "content_type": 7,
+      "object_id": "6",
+      "object_repr": "6",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+   }
+},
+{
+   "model": "admin.logentry",
+   "pk": 13,
+   "fields": {
+      "action_time": "2017-12-09T08:17:03.550Z",
+      "user": 1,
+      "content_type": 7,
+      "object_id": "6",
+      "object_repr": "6",
+      "action_flag": 3,
+      "change_message": ""
+   }
+},
+{
+   "model": "admin.logentry",
+   "pk": 14,
+   "fields": {
+      "action_time": "2017-12-09T08:32:29.246Z",
+      "user": 1,
+      "content_type": 7,
+      "object_id": "7",
+      "object_repr": "7",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+   }
+},
+{
+   "model": "admin.logentry",
+   "pk": 15,
+   "fields": {
+      "action_time": "2017-12-09T08:33:26.843Z",
+      "user": 1,
+      "content_type": 7,
+      "object_id": "7",
+      "object_repr": "7",
+      "action_flag": 3,
+      "change_message": ""
+   }
+},
+{
+   "model": "admin.logentry",
+   "pk": 16,
+   "fields": {
+      "action_time": "2017-12-09T08:33:34.246Z",
+      "user": 1,
+      "content_type": 7,
+      "object_id": "8",
+      "object_repr": "8",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+   }
+},
+{
+   "model": "admin.logentry",
+   "pk": 17,
+   "fields": {
+      "action_time": "2017-12-09T08:34:55.680Z",
+      "user": 1,
+      "content_type": 7,
+      "object_id": "3",
+      "object_repr": "3",
+      "action_flag": 3,
+      "change_message": ""
+   }
+},
+{
+   "model": "admin.logentry",
+   "pk": 18,
+   "fields": {
+      "action_time": "2017-12-11T13:38:20.041Z",
+      "user": 1,
+      "content_type": 8,
+      "object_id": "2",
+      "object_repr": "0, Apple iPad 32Gb Wi-Fi 4.5",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+   }
+},
+{
+   "model": "admin.logentry",
+   "pk": 19,
+   "fields": {
+      "action_time": "2017-12-11T13:38:45.617Z",
+      "user": 1,
+      "content_type": 8,
+      "object_id": "2",
+      "object_repr": "23400, Apple iPad 32Gb Wi-Fi 4.5",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"price\", \"description\"]}}, {\"added\": {\"object\": \"9\", \"name\": \"\\u0424\\u043e\\u0442\\u043e\\u0433\\u0440\\u0430\\u0444\\u0438\\u044f\"}}]"
+   }
+},
+{
+   "model": "admin.logentry",
+   "pk": 20,
+   "fields": {
+      "action_time": "2017-12-11T13:39:17.655Z",
+      "user": 1,
+      "content_type": 8,
+      "object_id": "3",
+      "object_repr": "17370, Samsung Galaxy Tab A 10.1 SM-T585 16Gb",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}, {\"added\": {\"object\": \"10\", \"name\": \"\\u0424\\u043e\\u0442\\u043e\\u0433\\u0440\\u0430\\u0444\\u0438\\u044f\"}}]"
+   }
+},
+{
+   "model": "admin.logentry",
+   "pk": 21,
+   "fields": {
+      "action_time": "2017-12-11T13:39:41.058Z",
+      "user": 1,
+      "content_type": 8,
+      "object_id": "4",
+      "object_repr": "8799, Huawei Mediapad T3 8.0 16Gb LTE 4.5",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}, {\"added\": {\"object\": \"11\", \"name\": \"\\u0424\\u043e\\u0442\\u043e\\u0433\\u0440\\u0430\\u0444\\u0438\\u044f\"}}]"
+   }
+},
+{
+   "model": "admin.logentry",
+   "pk": 22,
+   "fields": {
+      "action_time": "2017-12-11T13:39:53.912Z",
+      "user": 1,
+      "content_type": 8,
+      "object_id": "1",
+      "object_repr": "0.00, \u041f\u043b\u0430\u043d\u0448\u0435\u0442\u043d\u044b\u0439 \u043a\u043e\u043c\u043f\u044c\u044e\u0442\u0435\u0440 Apple iPad New Wi-Fi 128GB Space Grey, MP2H",
+      "action_flag": 3,
+      "change_message": ""
+   }
+},
+{
+   "model": "admin.logentry",
+   "pk": 23,
+   "fields": {
+      "action_time": "2017-12-11T13:40:43.417Z",
+      "user": 1,
+      "content_type": 9,
+      "object_id": "1",
+      "object_repr": "\u0417\u0430\u043a\u0430\u0437 1 \u0413\u043e\u0442\u043e\u0432\u0438\u0442\u0441\u044f",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}, {\"added\": {\"object\": \"Apple iPad 32Gb Wi-Fi 4.5\", \"name\": \"\\u0422\\u043e\\u0432\\u0430\\u0440 \\u0432 \\u0437\\u0430\\u043a\\u0430\\u0437\\u0435\"}}, {\"added\": {\"object\": \"Huawei Mediapad T3 8.0 16Gb LTE 4.5\", \"name\": \"\\u0422\\u043e\\u0432\\u0430\\u0440 \\u0432 \\u0437\\u0430\\u043a\\u0430\\u0437\\u0435\"}}]"
+   }
+},
+{
+   "model": "admin.logentry",
+   "pk": 24,
+   "fields": {
+      "action_time": "2017-12-11T13:42:06.421Z",
+      "user": 1,
+      "content_type": 9,
+      "object_id": "1",
+      "object_repr": "\u0417\u0430\u043a\u0430\u0437 1 \u0413\u043e\u0442\u043e\u0432\u0438\u0442\u0441\u044f",
+      "action_flag": 2,
+      "change_message": "[]"
+   }
+},
+{
+   "model": "admin.logentry",
+   "pk": 25,
+   "fields": {
+      "action_time": "2017-12-11T13:42:59.168Z",
+      "user": 1,
+      "content_type": 9,
+      "object_id": "1",
+      "object_repr": "\u0417\u0430\u043a\u0430\u0437 1 \u0413\u043e\u0442\u043e\u0432\u0438\u0442\u0441\u044f",
+      "action_flag": 2,
+      "change_message": "[]"
+   }
+},
+{
+   "model": "admin.logentry",
+   "pk": 26,
+   "fields": {
+      "action_time": "2017-12-11T13:46:49.148Z",
+      "user": 1,
+      "content_type": 9,
+      "object_id": "1",
+      "object_repr": "\u0417\u0430\u043a\u0430\u0437 1 \u0413\u043e\u0442\u043e\u0432\u0438\u0442\u0441\u044f",
+      "action_flag": 2,
+      "change_message": "[]"
+   }
+},
+{
+   "model": "admin.logentry",
+   "pk": 27,
+   "fields": {
+      "action_time": "2017-12-11T13:51:55.140Z",
+      "user": 1,
+      "content_type": 9,
+      "object_id": "1",
+      "object_repr": "\u0417\u0430\u043a\u0430\u0437 1 \u0413\u043e\u0442\u043e\u0432\u0438\u0442\u0441\u044f",
+      "action_flag": 2,
+      "change_message": "[]"
+   }
+},
+{
+   "model": "admin.logentry",
+   "pk": 28,
+   "fields": {
+      "action_time": "2017-12-11T13:52:28.686Z",
+      "user": 1,
+      "content_type": 9,
+      "object_id": "1",
+      "object_repr": "\u0417\u0430\u043a\u0430\u0437 1 \u0413\u043e\u0442\u043e\u0432\u0438\u0442\u0441\u044f",
+      "action_flag": 2,
+      "change_message": "[]"
+   }
+},
+{
+   "model": "admin.logentry",
+   "pk": 29,
+   "fields": {
+      "action_time": "2017-12-11T13:53:37.062Z",
+      "user": 1,
+      "content_type": 9,
+      "object_id": "1",
+      "object_repr": "\u0417\u0430\u043a\u0430\u0437 1 \u0413\u043e\u0442\u043e\u0432\u0438\u0442\u0441\u044f",
+      "action_flag": 2,
+      "change_message": "[]"
+   }
+},
+{
+   "model": "admin.logentry",
+   "pk": 30,
+   "fields": {
+      "action_time": "2017-12-11T13:58:04.957Z",
+      "user": 1,
+      "content_type": 9,
+      "object_id": "1",
+      "object_repr": "\u0417\u0430\u043a\u0430\u0437 1 \u0413\u043e\u0442\u043e\u0432\u0438\u0442\u0441\u044f",
+      "action_flag": 2,
+      "change_message": "[]"
+   }
+},
+{
+   "model": "admin.logentry",
+   "pk": 31,
+   "fields": {
+      "action_time": "2017-12-11T13:58:13.086Z",
+      "user": 1,
+      "content_type": 9,
+      "object_id": "1",
+      "object_repr": "\u0417\u0430\u043a\u0430\u0437 1 \u0413\u043e\u0442\u043e\u0432\u0438\u0442\u0441\u044f",
+      "action_flag": 2,
+      "change_message": "[]"
+   }
+},
+{
+   "model": "admin.logentry",
+   "pk": 32,
+   "fields": {
+      "action_time": "2017-12-11T13:58:26.430Z",
+      "user": 1,
+      "content_type": 9,
+      "object_id": "1",
+      "object_repr": "\u0417\u0430\u043a\u0430\u0437 1 \u0413\u043e\u0442\u043e\u0432\u0438\u0442\u0441\u044f",
+      "action_flag": 2,
+      "change_message": "[]"
+   }
+},
+{
+   "model": "admin.logentry",
+   "pk": 33,
+   "fields": {
+      "action_time": "2017-12-11T13:58:35.032Z",
+      "user": 1,
+      "content_type": 9,
+      "object_id": "1",
+      "object_repr": "\u0417\u0430\u043a\u0430\u0437 1 \u0413\u043e\u0442\u043e\u0432\u0438\u0442\u0441\u044f",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"object\": \"Apple iPad 32Gb Wi-Fi 4.5\", \"name\": \"\\u0422\\u043e\\u0432\\u0430\\u0440 \\u0432 \\u0437\\u0430\\u043a\\u0430\\u0437\\u0435\", \"fields\": [\"nmb\"]}}]"
+   }
+},
+{
+   "model": "admin.logentry",
+   "pk": 34,
+   "fields": {
+      "action_time": "2017-12-11T13:58:42.740Z",
+      "user": 1,
+      "content_type": 9,
+      "object_id": "1",
+      "object_repr": "\u0417\u0430\u043a\u0430\u0437 1 \u0413\u043e\u0442\u043e\u0432\u0438\u0442\u0441\u044f",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"object\": \"Apple iPad 32Gb Wi-Fi 4.5\", \"name\": \"\\u0422\\u043e\\u0432\\u0430\\u0440 \\u0432 \\u0437\\u0430\\u043a\\u0430\\u0437\\u0435\", \"fields\": [\"nmb\"]}}]"
+   }
+},
+{
+   "model": "admin.logentry",
+   "pk": 35,
+   "fields": {
+      "action_time": "2017-12-12T14:05:38.272Z",
+      "user": 1,
+      "content_type": 7,
+      "object_id": "11",
+      "object_repr": "11",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"is_main\"]}}]"
+   }
+},
+{
+   "model": "admin.logentry",
+   "pk": 36,
+   "fields": {
+      "action_time": "2017-12-12T14:05:41.999Z",
+      "user": 1,
+      "content_type": 7,
+      "object_id": "10",
+      "object_repr": "10",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"is_main\"]}}]"
+   }
+},
+{
+   "model": "admin.logentry",
+   "pk": 37,
+   "fields": {
+      "action_time": "2017-12-12T14:05:46.486Z",
+      "user": 1,
+      "content_type": 7,
+      "object_id": "9",
+      "object_repr": "9",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"is_main\"]}}]"
+   }
+},
+{
+   "model": "admin.logentry",
+   "pk": 38,
+   "fields": {
+      "action_time": "2017-12-12T17:13:20.594Z",
+      "user": 1,
+      "content_type": 8,
+      "object_id": "5",
+      "object_repr": "11250, Lenovo Tab 4 TB-X304L 16Gb",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}, {\"added\": {\"object\": \"12\", \"name\": \"\\u0424\\u043e\\u0442\\u043e\\u0433\\u0440\\u0430\\u0444\\u0438\\u044f\"}}]"
+   }
+},
+{
+   "model": "admin.logentry",
+   "pk": 39,
+   "fields": {
+      "action_time": "2017-12-12T17:14:37.258Z",
+      "user": 1,
+      "content_type": 7,
+      "object_id": "12",
+      "object_repr": "12",
+      "action_flag": 3,
+      "change_message": ""
+   }
+},
+{
+   "model": "admin.logentry",
+   "pk": 40,
+   "fields": {
+      "action_time": "2017-12-12T17:14:53.461Z",
+      "user": 1,
+      "content_type": 8,
+      "object_id": "5",
+      "object_repr": "11250.00, Lenovo Tab 4 TB-X304L 16Gb",
+      "action_flag": 2,
+      "change_message": "[{\"added\": {\"object\": \"13\", \"name\": \"\\u0424\\u043e\\u0442\\u043e\\u0433\\u0440\\u0430\\u0444\\u0438\\u044f\"}}]"
+   }
+},
+{
+   "model": "admin.logentry",
+   "pk": 41,
+   "fields": {
+      "action_time": "2017-12-12T17:17:02.431Z",
+      "user": 1,
+      "content_type": 7,
+      "object_id": "13",
+      "object_repr": "13",
+      "action_flag": 3,
+      "change_message": ""
+   }
+},
+{
+   "model": "admin.logentry",
+   "pk": 42,
+   "fields": {
+      "action_time": "2017-12-12T17:17:16.531Z",
+      "user": 1,
+      "content_type": 8,
+      "object_id": "5",
+      "object_repr": "11250.00, Lenovo Tab 4 TB-X304L 16Gb",
+      "action_flag": 2,
+      "change_message": "[{\"added\": {\"name\": \"\\u0424\\u043e\\u0442\\u043e\\u0433\\u0440\\u0430\\u0444\\u0438\\u044f\", \"object\": \"14\"}}]"
+   }
+},
+{
+   "model": "admin.logentry",
+   "pk": 43,
+   "fields": {
+      "action_time": "2017-12-12T17:20:39.972Z",
+      "user": 1,
+      "content_type": 8,
+      "object_id": "5",
+      "object_repr": "11250.00, Lenovo Tab 4 TB-X304L 16Gb",
+      "action_flag": 2,
+      "change_message": "[{\"deleted\": {\"object\": \"None\", \"name\": \"\\u0424\\u043e\\u0442\\u043e\\u0433\\u0440\\u0430\\u0444\\u0438\\u044f\"}}]"
+   }
+},
+{
+   "model": "admin.logentry",
+   "pk": 44,
+   "fields": {
+      "action_time": "2017-12-12T17:20:51.005Z",
+      "user": 1,
+      "content_type": 8,
+      "object_id": "5",
+      "object_repr": "11250.00, Lenovo Tab 4 TB-X304L 16Gb",
+      "action_flag": 2,
+      "change_message": "[{\"added\": {\"object\": \"15\", \"name\": \"\\u0424\\u043e\\u0442\\u043e\\u0433\\u0440\\u0430\\u0444\\u0438\\u044f\"}}]"
+   }
+},
+{
+   "model": "admin.logentry",
+   "pk": 45,
+   "fields": {
+      "action_time": "2017-12-12T17:21:14.972Z",
+      "user": 1,
+      "content_type": 8,
+      "object_id": "5",
+      "object_repr": "11250.00, Lenovo Tab 4 TB-X304L 16Gb",
+      "action_flag": 2,
+      "change_message": "[{\"deleted\": {\"name\": \"\\u0424\\u043e\\u0442\\u043e\\u0433\\u0440\\u0430\\u0444\\u0438\\u044f\", \"object\": \"None\"}}]"
+   }
+},
+{
+   "model": "admin.logentry",
+   "pk": 46,
+   "fields": {
+      "action_time": "2017-12-12T17:24:56.999Z",
+      "user": 1,
+      "content_type": 8,
+      "object_id": "5",
+      "object_repr": "11250.00, Lenovo Tab 4 TB-X304L 16Gb",
+      "action_flag": 2,
+      "change_message": "[{\"added\": {\"object\": \"16\", \"name\": \"\\u0424\\u043e\\u0442\\u043e\\u0433\\u0440\\u0430\\u0444\\u0438\\u044f\"}}]"
+   }
+},
+{
+   "model": "admin.logentry",
+   "pk": 47,
+   "fields": {
+      "action_time": "2017-12-16T06:33:01.616Z",
+      "user": 1,
+      "content_type": 12,
+      "object_id": "1",
+      "object_repr": "\u041e\u0421 Android",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+   }
+},
+{
+   "model": "admin.logentry",
+   "pk": 48,
+   "fields": {
+      "action_time": "2017-12-16T06:33:08.602Z",
+      "user": 1,
+      "content_type": 12,
+      "object_id": "2",
+      "object_repr": "\u041e\u0421 iOS",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+   }
+},
+{
+   "model": "admin.logentry",
+   "pk": 49,
+   "fields": {
+      "action_time": "2017-12-16T06:33:12.824Z",
+      "user": 1,
+      "content_type": 12,
+      "object_id": "3",
+      "object_repr": "\u041e\u0421 Windows",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+   }
+},
+{
+   "model": "admin.logentry",
+   "pk": 50,
+   "fields": {
+      "action_time": "2017-12-16T06:34:07.058Z",
+      "user": 1,
+      "content_type": 8,
+      "object_id": "2",
+      "object_repr": "23400.00, Apple iPad 32Gb Wi-Fi 4.5",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"os\"]}}]"
+   }
+},
+{
+   "model": "admin.logentry",
+   "pk": 51,
+   "fields": {
+      "action_time": "2017-12-16T06:37:20.284Z",
+      "user": 1,
+      "content_type": 10,
+      "object_id": "2",
+      "object_repr": "\u041e\u0442\u043f\u0440\u0430\u0432\u043b\u0435\u043d",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+   }
+},
+{
+   "model": "admin.logentry",
+   "pk": 52,
+   "fields": {
+      "action_time": "2017-12-16T06:37:29.233Z",
+      "user": 1,
+      "content_type": 10,
+      "object_id": "3",
+      "object_repr": "\u0417\u0430\u0432\u0435\u0440\u0448\u0435\u043d",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+   }
+},
+{
+   "model": "admin.logentry",
+   "pk": 53,
+   "fields": {
+      "action_time": "2017-12-16T06:37:57.663Z",
+      "user": 1,
+      "content_type": 9,
+      "object_id": "1",
+      "object_repr": "\u0417\u0430\u043a\u0430\u0437 1 \u0413\u043e\u0442\u043e\u0432\u0438\u0442\u0441\u044f",
+      "action_flag": 2,
+      "change_message": "[]"
+   }
+},
+{
+   "model": "admin.logentry",
+   "pk": 54,
+   "fields": {
+      "action_time": "2017-12-16T06:40:32.117Z",
+      "user": 1,
+      "content_type": 8,
+      "object_id": "5",
+      "object_repr": "11250.00, Lenovo Tab 4 TB-X304L 16Gb",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"short_description\"]}}]"
+   }
+},
+{
+   "model": "admin.logentry",
+   "pk": 55,
+   "fields": {
+      "action_time": "2017-12-16T06:40:58.260Z",
+      "user": 1,
+      "content_type": 8,
+      "object_id": "4",
+      "object_repr": "8799.00, Huawei Mediapad T3 8.0 16Gb LTE 4.5",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"short_description\"]}}]"
+   }
+},
+{
+   "model": "admin.logentry",
+   "pk": 56,
+   "fields": {
+      "action_time": "2017-12-16T06:41:11.010Z",
+      "user": 1,
+      "content_type": 8,
+      "object_id": "5",
+      "object_repr": "11250.00, Lenovo Tab 4 TB-X304L 16Gb",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"short_description\"]}}]"
+   }
+},
+{
+   "model": "admin.logentry",
+   "pk": 57,
+   "fields": {
+      "action_time": "2017-12-16T06:42:11.764Z",
+      "user": 1,
+      "content_type": 8,
+      "object_id": "3",
+      "object_repr": "17370.00, Samsung Galaxy Tab A 10.1 SM-T585 16Gb",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"short_description\"]}}]"
+   }
+},
+{
+   "model": "admin.logentry",
+   "pk": 58,
+   "fields": {
+      "action_time": "2017-12-16T06:46:45.869Z",
+      "user": 1,
+      "content_type": 8,
+      "object_id": "2",
+      "object_repr": "23400.00, Apple iPad 32Gb Wi-Fi 4.5",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"short_description\"]}}]"
+   }
+},
+{
+   "model": "admin.logentry",
+   "pk": 59,
+   "fields": {
+      "action_time": "2017-12-16T06:48:57.897Z",
+      "user": 1,
+      "content_type": 8,
+      "object_id": "5",
+      "object_repr": "11250.00, Lenovo Tab 4 TB-X304L 16Gb",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"short_description\"]}}]"
+   }
+},
+{
+   "model": "admin.logentry",
+   "pk": 60,
+   "fields": {
+      "action_time": "2017-12-16T06:49:16.547Z",
+      "user": 1,
+      "content_type": 8,
+      "object_id": "2",
+      "object_repr": "23400.00, Apple iPad 32Gb Wi-Fi 4.5",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"short_description\"]}}]"
+   }
+},
+{
+   "model": "admin.logentry",
+   "pk": 61,
+   "fields": {
+      "action_time": "2017-12-16T07:04:33.598Z",
+      "user": 1,
+      "content_type": 8,
+      "object_id": "2",
+      "object_repr": "23500.00, Apple iPad 32Gb Wi-Fi 4.5",
+      "action_flag": 2,
+      "change_message": "[{\"added\": {\"name\": \"\\u0424\\u043e\\u0442\\u043e\\u0433\\u0440\\u0430\\u0444\\u0438\\u044f\", \"object\": \"17\"}}, {\"added\": {\"name\": \"\\u0424\\u043e\\u0442\\u043e\\u0433\\u0440\\u0430\\u0444\\u0438\\u044f\", \"object\": \"18\"}}]"
+   }
+},
+{
+   "model": "admin.logentry",
+   "pk": 62,
+   "fields": {
+      "action_time": "2017-12-16T07:08:09.717Z",
+      "user": 1,
+      "content_type": 8,
+      "object_id": "4",
+      "object_repr": "8799.00, Huawei Mediapad T3 8.0 16Gb LTE 4.5",
+      "action_flag": 2,
+      "change_message": "[{\"added\": {\"name\": \"\\u0424\\u043e\\u0442\\u043e\\u0433\\u0440\\u0430\\u0444\\u0438\\u044f\", \"object\": \"19\"}}, {\"added\": {\"name\": \"\\u0424\\u043e\\u0442\\u043e\\u0433\\u0440\\u0430\\u0444\\u0438\\u044f\", \"object\": \"20\"}}]"
+   }
+},
+{
+   "model": "admin.logentry",
+   "pk": 63,
+   "fields": {
+      "action_time": "2017-12-16T07:08:43.297Z",
+      "user": 1,
+      "content_type": 8,
+      "object_id": "3",
+      "object_repr": "17370.00, Samsung Galaxy Tab A 10.1 SM-T585 16Gb",
+      "action_flag": 2,
+      "change_message": "[{\"added\": {\"name\": \"\\u0424\\u043e\\u0442\\u043e\\u0433\\u0440\\u0430\\u0444\\u0438\\u044f\", \"object\": \"21\"}}, {\"added\": {\"name\": \"\\u0424\\u043e\\u0442\\u043e\\u0433\\u0440\\u0430\\u0444\\u0438\\u044f\", \"object\": \"22\"}}]"
+   }
+},
+{
+   "model": "admin.logentry",
+   "pk": 64,
+   "fields": {
+      "action_time": "2017-12-16T07:08:59.546Z",
+      "user": 1,
+      "content_type": 8,
+      "object_id": "5",
+      "object_repr": "11250.00, Lenovo Tab 4 TB-X304L 16Gb",
+      "action_flag": 2,
+      "change_message": "[{\"added\": {\"name\": \"\\u0424\\u043e\\u0442\\u043e\\u0433\\u0440\\u0430\\u0444\\u0438\\u044f\", \"object\": \"23\"}}, {\"added\": {\"name\": \"\\u0424\\u043e\\u0442\\u043e\\u0433\\u0440\\u0430\\u0444\\u0438\\u044f\", \"object\": \"24\"}}]"
+   }
+},
+{
+   "model": "admin.logentry",
+   "pk": 65,
+   "fields": {
+      "action_time": "2017-12-16T07:21:01.597Z",
+      "user": 1,
+      "content_type": 8,
+      "object_id": "6",
+      "object_repr": "23880, Apple iPad mini 4 128Gb Wi-Fi 4.0",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}, {\"added\": {\"name\": \"\\u0424\\u043e\\u0442\\u043e\\u0433\\u0440\\u0430\\u0444\\u0438\\u044f\", \"object\": \"25\"}}, {\"added\": {\"name\": \"\\u0424\\u043e\\u0442\\u043e\\u0433\\u0440\\u0430\\u0444\\u0438\\u044f\", \"object\": \"26\"}}, {\"added\": {\"name\": \"\\u0424\\u043e\\u0442\\u043e\\u0433\\u0440\\u0430\\u0444\\u0438\\u044f\", \"object\": \"27\"}}]"
+   }
+},
+{
+   "model": "admin.logentry",
+   "pk": 66,
+   "fields": {
+      "action_time": "2017-12-16T07:22:53.201Z",
+      "user": 1,
+      "content_type": 8,
+      "object_id": "7",
+      "object_repr": "32924, Apple iPad 32Gb Wi-Fi + Cellular",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}, {\"added\": {\"name\": \"\\u0424\\u043e\\u0442\\u043e\\u0433\\u0440\\u0430\\u0444\\u0438\\u044f\", \"object\": \"28\"}}, {\"added\": {\"name\": \"\\u0424\\u043e\\u0442\\u043e\\u0433\\u0440\\u0430\\u0444\\u0438\\u044f\", \"object\": \"29\"}}, {\"added\": {\"name\": \"\\u0424\\u043e\\u0442\\u043e\\u0433\\u0440\\u0430\\u0444\\u0438\\u044f\", \"object\": \"30\"}}]"
+   }
+},
+{
+   "model": "admin.logentry",
+   "pk": 67,
+   "fields": {
+      "action_time": "2017-12-16T07:24:47.154Z",
+      "user": 1,
+      "content_type": 8,
+      "object_id": "8",
+      "object_repr": "13690, Samsung Galaxy Tab A 8.0 SM-T385 16Gb",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}, {\"added\": {\"name\": \"\\u0424\\u043e\\u0442\\u043e\\u0433\\u0440\\u0430\\u0444\\u0438\\u044f\", \"object\": \"31\"}}, {\"added\": {\"name\": \"\\u0424\\u043e\\u0442\\u043e\\u0433\\u0440\\u0430\\u0444\\u0438\\u044f\", \"object\": \"32\"}}, {\"added\": {\"name\": \"\\u0424\\u043e\\u0442\\u043e\\u0433\\u0440\\u0430\\u0444\\u0438\\u044f\", \"object\": \"33\"}}]"
+   }
+},
+{
+   "model": "admin.logentry",
+   "pk": 68,
+   "fields": {
+      "action_time": "2017-12-16T07:27:30.721Z",
+      "user": 1,
+      "content_type": 8,
+      "object_id": "9",
+      "object_repr": "35690, Apple iPad Pro 10.5 64Gb Wi-Fi",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}, {\"added\": {\"name\": \"\\u0424\\u043e\\u0442\\u043e\\u0433\\u0440\\u0430\\u0444\\u0438\\u044f\", \"object\": \"34\"}}, {\"added\": {\"name\": \"\\u0424\\u043e\\u0442\\u043e\\u0433\\u0440\\u0430\\u0444\\u0438\\u044f\", \"object\": \"35\"}}, {\"added\": {\"name\": \"\\u0424\\u043e\\u0442\\u043e\\u0433\\u0440\\u0430\\u0444\\u0438\\u044f\", \"object\": \"36\"}}]"
+   }
+},
+{
+   "model": "admin.logentry",
+   "pk": 69,
+   "fields": {
+      "action_time": "2017-12-16T09:06:26.799Z",
+      "user": 1,
+      "content_type": 8,
+      "object_id": "8",
+      "object_repr": "13690.00, Samsung Galaxy Tab A 8.0 SM-T385 16Gb",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"short_description\"]}}]"
+   }
+},
+{
+   "model": "admin.logentry",
+   "pk": 70,
+   "fields": {
+      "action_time": "2017-12-16T09:09:29.547Z",
+      "user": 1,
+      "content_type": 8,
+      "object_id": "8",
+      "object_repr": "13690.00, Samsung Galaxy Tab A 8.0 SM-T385 16Gb",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"short_description\"]}}]"
+   }
+},
+{
+   "model": "admin.logentry",
+   "pk": 71,
+   "fields": {
+      "action_time": "2017-12-17T09:35:22.992Z",
+      "user": 1,
+      "content_type": 8,
+      "object_id": "9",
+      "object_repr": "35690.00, Apple iPad Pro 10.5 64Gb Wi-Fi",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"discount\"]}}]"
+   }
+},
+{
+   "model": "admin.logentry",
+   "pk": 72,
+   "fields": {
+      "action_time": "2017-12-25T14:50:49.160Z",
+      "user": 1,
+      "content_type": 13,
+      "object_id": "8",
+      "object_repr": "Lenovo Tab 4 TB-X304L 16Gb",
+      "action_flag": 3,
+      "change_message": ""
+   }
+},
+{
+   "model": "admin.logentry",
+   "pk": 73,
+   "fields": {
+      "action_time": "2017-12-25T14:50:49.264Z",
+      "user": 1,
+      "content_type": 13,
+      "object_id": "7",
+      "object_repr": "Lenovo Tab 4 TB-X304L 16Gb",
+      "action_flag": 3,
+      "change_message": ""
+   }
+},
+{
+   "model": "admin.logentry",
+   "pk": 74,
+   "fields": {
+      "action_time": "2017-12-25T14:50:49.351Z",
+      "user": 1,
+      "content_type": 13,
+      "object_id": "6",
+      "object_repr": "Lenovo Tab 4 TB-X304L 16Gb",
+      "action_flag": 3,
+      "change_message": ""
+   }
+},
+{
+   "model": "admin.logentry",
+   "pk": 75,
+   "fields": {
+      "action_time": "2017-12-25T14:50:49.431Z",
+      "user": 1,
+      "content_type": 13,
+      "object_id": "5",
+      "object_repr": "Lenovo Tab 4 TB-X304L 16Gb",
+      "action_flag": 3,
+      "change_message": ""
+   }
+},
+{
+   "model": "admin.logentry",
+   "pk": 76,
+   "fields": {
+      "action_time": "2017-12-25T14:50:49.509Z",
+      "user": 1,
+      "content_type": 13,
+      "object_id": "4",
+      "object_repr": "Lenovo Tab 4 TB-X304L 16Gb",
+      "action_flag": 3,
+      "change_message": ""
+   }
+},
+{
+   "model": "admin.logentry",
+   "pk": 77,
+   "fields": {
+      "action_time": "2017-12-25T14:50:49.587Z",
+      "user": 1,
+      "content_type": 13,
+      "object_id": "2",
+      "object_repr": "Lenovo Tab 4 TB-X304L 16Gb",
+      "action_flag": 3,
+      "change_message": ""
+   }
+},
+{
+   "model": "admin.logentry",
+   "pk": 78,
+   "fields": {
+      "action_time": "2017-12-26T14:45:17.592Z",
+      "user": 1,
+      "content_type": 13,
+      "object_id": "15",
+      "object_repr": "Apple iPad mini 4 128Gb Wi-Fi 4.0",
+      "action_flag": 3,
+      "change_message": ""
+   }
+},
+{
+   "model": "admin.logentry",
+   "pk": 79,
+   "fields": {
+      "action_time": "2017-12-26T14:45:17.690Z",
+      "user": 1,
+      "content_type": 13,
+      "object_id": "14",
+      "object_repr": "Samsung Galaxy Tab A 10.1 SM-T585 16Gb",
+      "action_flag": 3,
+      "change_message": ""
+   }
+},
+{
+   "model": "admin.logentry",
+   "pk": 80,
+   "fields": {
+      "action_time": "2017-12-26T14:45:17.768Z",
+      "user": 1,
+      "content_type": 13,
+      "object_id": "13",
+      "object_repr": "Apple iPad Pro 10.5 64Gb Wi-Fi",
+      "action_flag": 3,
+      "change_message": ""
+   }
+},
+{
+   "model": "admin.logentry",
+   "pk": 81,
+   "fields": {
+      "action_time": "2017-12-26T14:45:17.835Z",
+      "user": 1,
+      "content_type": 13,
+      "object_id": "12",
+      "object_repr": "Lenovo Tab 4 TB-X304L 16Gb",
+      "action_flag": 3,
+      "change_message": ""
+   }
+},
+{
+   "model": "admin.logentry",
+   "pk": 82,
+   "fields": {
+      "action_time": "2017-12-26T14:45:17.922Z",
+      "user": 1,
+      "content_type": 13,
+      "object_id": "11",
+      "object_repr": "Samsung Galaxy Tab A 8.0 SM-T385 16Gb",
+      "action_flag": 3,
+      "change_message": ""
+   }
+},
+{
+   "model": "admin.logentry",
+   "pk": 83,
+   "fields": {
+      "action_time": "2017-12-26T14:45:18.022Z",
+      "user": 1,
+      "content_type": 13,
+      "object_id": "10",
+      "object_repr": "Samsung Galaxy Tab A 8.0 SM-T385 16Gb",
+      "action_flag": 3,
+      "change_message": ""
+   }
+},
+{
+   "model": "admin.logentry",
+   "pk": 84,
+   "fields": {
+      "action_time": "2017-12-26T14:45:18.100Z",
+      "user": 1,
+      "content_type": 13,
+      "object_id": "9",
+      "object_repr": "Samsung Galaxy Tab A 8.0 SM-T385 16Gb",
+      "action_flag": 3,
+      "change_message": ""
+   }
+},
+{
+   "model": "admin.logentry",
+   "pk": 85,
+   "fields": {
+      "action_time": "2017-12-26T14:45:18.178Z",
+      "user": 1,
+      "content_type": 13,
+      "object_id": "3",
+      "object_repr": "Lenovo Tab 4 TB-X304L 16Gb",
+      "action_flag": 3,
+      "change_message": ""
+   }
+},
+{
+   "model": "admin.logentry",
+   "pk": 86,
+   "fields": {
+      "action_time": "2017-12-26T14:45:18.257Z",
+      "user": 1,
+      "content_type": 13,
+      "object_id": "1",
+      "object_repr": "Lenovo Tab 4 TB-X304L 16Gb",
+      "action_flag": 3,
+      "change_message": ""
+   }
+},
+{
+   "model": "admin.logentry",
+   "pk": 87,
+   "fields": {
+      "action_time": "2018-01-08T10:16:20.418Z",
+      "user": 1,
+      "content_type": 3,
+      "object_id": "3",
+      "object_repr": "789987",
+      "action_flag": 3,
+      "change_message": ""
+   }
+},
+{
+   "model": "admin.logentry",
+   "pk": 88,
+   "fields": {
+      "action_time": "2018-01-08T10:16:20.494Z",
+      "user": 1,
+      "content_type": 3,
+      "object_id": "2",
+      "object_repr": "80890898",
+      "action_flag": 3,
+      "change_message": ""
+   }
+},
+{
+   "model": "admin.logentry",
+   "pk": 89,
+   "fields": {
+      "action_time": "2018-01-08T10:23:43.458Z",
+      "user": 1,
+      "content_type": 9,
+      "object_id": "6",
+      "object_repr": "\u0417\u0430\u043a\u0430\u0437 6 \u0413\u043e\u0442\u043e\u0432\u0438\u0442\u0441\u044f",
+      "action_flag": 3,
+      "change_message": ""
+   }
+},
+{
+   "model": "admin.logentry",
+   "pk": 90,
+   "fields": {
+      "action_time": "2018-01-08T10:23:43.546Z",
+      "user": 1,
+      "content_type": 9,
+      "object_id": "5",
+      "object_repr": "\u0417\u0430\u043a\u0430\u0437 5 \u0413\u043e\u0442\u043e\u0432\u0438\u0442\u0441\u044f",
+      "action_flag": 3,
+      "change_message": ""
+   }
+},
+{
+   "model": "admin.logentry",
+   "pk": 91,
+   "fields": {
+      "action_time": "2018-01-08T10:23:43.757Z",
+      "user": 1,
+      "content_type": 9,
+      "object_id": "1",
+      "object_repr": "\u0417\u0430\u043a\u0430\u0437 1 \u0413\u043e\u0442\u043e\u0432\u0438\u0442\u0441\u044f",
+      "action_flag": 3,
+      "change_message": ""
+   }
+},
+{
+   "model": "admin.logentry",
+   "pk": 92,
+   "fields": {
+      "action_time": "2018-01-08T10:37:09.531Z",
+      "user": 1,
+      "content_type": 9,
+      "object_id": "9",
+      "object_repr": "\u0417\u0430\u043a\u0430\u0437 9 \u0413\u043e\u0442\u043e\u0432\u0438\u0442\u0441\u044f",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"name\": \"\\u0422\\u043e\\u0432\\u0430\\u0440 \\u0432 \\u0437\\u0430\\u043a\\u0430\\u0437\\u0435\", \"fields\": [\"nmb\"], \"object\": \"Huawei Mediapad T3 8.0 16Gb LTE 4.5\"}}]"
+   }
+},
+{
+   "model": "admin.logentry",
+   "pk": 93,
+   "fields": {
+      "action_time": "2018-01-11T12:16:54.072Z",
+      "user": 1,
+      "content_type": 8,
+      "object_id": "4",
+      "object_repr": "8799.00, Huawei Mediapad T3 8.0 16Gb LTE 4.5",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"discount\"]}}]"
+   }
+}
+]
+
+##[jetbrains/home/mihail/django-projects/emarket/initial_data.json
