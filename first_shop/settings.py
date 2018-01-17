@@ -141,10 +141,10 @@ STATICFILES_DIRS = (
 )
 
 
-#try:
-#    from .settings_prod import *
-#except:
-#    pass
+try:
+    from .settings_prod import *
+except:
+    pass
 
 
 db_from_env = dj_database_url.config()
