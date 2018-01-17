@@ -26,7 +26,7 @@ SECRET_KEY = '+lrqj9l&u%i18_&ow#9uj*m!t%(a=gq2hq@7c^m&bp06-(rj^!'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['']
 
 
 # Application definition
@@ -150,5 +150,5 @@ except:
 db_from_env = dj_database_url.config()
 DATABASES['default'].update(db_from_env)
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+#STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
