@@ -1,7 +1,7 @@
 $(document).ready(function () {
 
 
-    // Подсветка активного пункта меню
+    // Highlighting active menu
 
     var menus = [
         'main',
@@ -19,7 +19,7 @@ $(document).ready(function () {
 
 
 
-    // Обновление списка корзины через ajax и total_price на странице checkout
+    // Updating basket list
 
     function updateNavbarBasket(data) {
         if (data.products_total_nmb) {
@@ -61,20 +61,21 @@ $(document).ready(function () {
 
 
 
-    // Появление списка корзины при наведении на кнопку "Корзина"
+    // Appearance of basket list div when mouseover
 
-    $("#checkout").mouseover(function (e) {
-        $(".basket").removeClass('hidden');
+    $("#checkout").on({
+        mouseover: function () {
+            $(".basket").removeClass('hidden');
+        }
+        mouseout: function () {
+            $(".basket").addClass('hidden');
+        }
     });
-    $('#checkout').mouseout(function (e) {
-        $(".basket").addClass('hidden')
-    });
 
 
+    // Adding to basket list
 
-    // Добавление товара в список при нажатии кнопки "Добавить в корзину"
-
-        // На странице товара
+        // On product.html
     $('#form_buying_product').on('submit', function (e) {
         e.preventDefault();
 
@@ -82,7 +83,7 @@ $(document).ready(function () {
         var nmb = $('.num-products-input').val();
         var submit_btn = $('#submit-btn');
         var product_id = submit_btn.data('id');
-        var csrf_token = $('#form_buying_product [name="csrfmiddlewaretoken"]').val();
+        var csrf_token = form.find('[name="csrfmiddlewaretoken"]').val();
         var data = {};
 
         data.product_id = product_id;
@@ -92,7 +93,7 @@ $(document).ready(function () {
         updateBasketList('POST', data);
     });
 
-        // На главной странице
+        // On main page
     $('.add-to-cart-btn .btn-success').on('click', function (e) {
         e.preventDefault();
         var product_id = e.target.getAttribute('data-id');
@@ -102,7 +103,7 @@ $(document).ready(function () {
     });
 
 
-    // Удаление из списка корзины одновременно в навбаре и на странице checkout
+    // Deleting from basket list both on navbar and checkout page
 
     function removeFromNavbarBasketList (product_id) {
         var data = {};
@@ -132,7 +133,7 @@ $(document).ready(function () {
     });
 
 
-    // Пересчет суммы одного товара при изменении его количества в checkout
+    // Updating total_price when changing on checkout page
 
     $('.num-products-input.checkout').on('change', function (event) {
         var product_to_change = $(this).closest('tr');
@@ -140,7 +141,7 @@ $(document).ready(function () {
         var product_id = product_to_change.attr('data-id');
 
         var data = {};
-        data["csrfmiddlewaretoken"] =  $('#form_change_product [name="csrfmiddlewaretoken"]').val();
+        data["csrfmiddlewaretoken"] =  $('#form_change_product').find('[name="csrfmiddlewaretoken"]').val();
         data.nmb = nmb;
         data.product_id = product_id;
 
@@ -159,8 +160,6 @@ $(document).ready(function () {
         });
 
     });
-
-
 
 
 });

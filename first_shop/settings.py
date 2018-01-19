@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/1.11/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.11/ref/settings/
 """
-
+import socket
 import os
 import dj_database_url
 
@@ -141,11 +141,18 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
 
-
-try:
-    from .settings_prod import *
-except:
-    pass
+if not socket.gethostname() == 'mihail':
+    DEBUG = False
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'emarket_db',
+            'USER': 'emarket',
+            'PASSWORD': 'emarket1501',
+            'HOST': 'localhost',
+            'PORT': '',
+        }
+    }
 
 
 db_from_env = dj_database_url.config()
