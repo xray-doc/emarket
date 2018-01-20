@@ -78,6 +78,8 @@ def checkout(request):
         name = data["name"]
         phone = data["phone"]
         email = data["email"]
+        address = data["address"]
+        comments = data["comments"]
 
         user, created = User.objects.get_or_create(username=phone, defaults={"first_name": name})
         order = Order.objects.create(
@@ -85,6 +87,8 @@ def checkout(request):
             customer_name=name,
             customer_phone=phone,
             customer_email=email,
+            customer_address=address,
+            comments=comments,
             status_id=1
         )
 

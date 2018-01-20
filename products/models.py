@@ -33,6 +33,9 @@ class Product(models.Model):
     def get_main_img_url(self):
         return ProductImage.objects.get(product=self, is_main=True).image.url
 
+    def get_price_with_discount(self):
+        return self.price - (self.price / 100 * self.discount)
+
     def __str__(self):
         return "%s, %s" % (self.price, self.name)
 

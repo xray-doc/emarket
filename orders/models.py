@@ -63,11 +63,8 @@ class ProductInOrder(models.Model):
 
 
     def save(self, *args, **kwargs):
-        price_per_item = self.product.price
-        discount = self.product.discount
-        self.price_per_item = price_per_item
-        price_per_item -= price_per_item / 100 * discount
-        self.total_price = int(self.nmb) * price_per_item
+        self.price_per_item = self.product.price
+        self.total_price = int(self.nmb) * self.product.get_price_with_discount()
 
         super(ProductInOrder, self).save(*args, **kwargs)
 
@@ -119,10 +116,7 @@ class ProductInBasket(models.Model):
         verbose_name_plural = "Products in basket"
 
     def save(self, *args, **kwargs):
-        price_per_item = self.product.price
-        discount = self.product.discount
-        self.price_per_item = price_per_item
-        price_per_item -= price_per_item / 100 * discount
-        self.total_price = int(self.nmb) * price_per_item
+        self.price_per_item = self.product.price
+        self.total_price = int(self.nmb) * self.product.get_price_with_discount()
 
         super(ProductInBasket, self).save(*args, **kwargs)

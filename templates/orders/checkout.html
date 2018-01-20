@@ -33,14 +33,23 @@
                                                class="num-products-input checkout" min="1">
                                     </td>
                                     <td>
+                                        {% if not product_in_basket.product.discount %}
                                             <span class="product-price">
                                                 {{ product_in_basket.price_per_item }}
                                             </span>
+                                        {% else %}
+                                            <span class="product-price">
+                                                <s>{{ product_in_basket.price_per_item }}</s>
+                                            </span>
+                                            <span class="product-price discount-price">
+                                                {{ product_in_basket.product.get_price_with_discount }}
+                                            </span>
+                                        {% endif %}
                                     </td>
                                     <td>
-                                            <span class="total-product-price">
-                                                {{ product_in_basket.total_price }}
-                                            </span>
+                                        <span class="total-product-price">
+                                            {{ product_in_basket.total_price }}
+                                        </span>
                                     </td>
                                     <td>
                                         <button type="button" class="close checkout-delete-from-basket" aria-label="Close">
@@ -85,6 +94,23 @@
                        placeholder="name@example.com" value="{{ request.POST.email }}"
                 >
             </div>
+
+            <div class="form-group">
+                <label>Адрес</label>
+                <span class="form-error">{{ form.address.errors }}</span>
+                <input type="text" class="form-control" name="{{ form.address.html_name }}"
+                       placeholder="Ваш адрес" value="{{ request.POST.address }}"
+                >
+            </div>
+
+            <div class="form-group">
+                <label>Комментарий к заказу</label>
+                <span class="form-error">{{ form.comments.errors }}</span>
+                <textarea class="form-control" id="comments_text" name="{{ form.comments.html_name }}"
+                       placeholder="..."
+                >{{ request.POST.comments }}</textarea>
+            </div>
+
 
             <button type="submit" class="btn btn-primary">Заказать</button>
             <hr>
