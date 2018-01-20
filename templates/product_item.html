@@ -13,14 +13,16 @@
 
                 <h4>{{ product.name }}</h4>
         </a>
-        <p> {{ product.short_description }} </p>
-        <div class="price">
-            <h4>{{ product.price }} RUB </h4>
-        </div>
-        <div class="add-to-cart-btn">
-            <button class="btn btn-success" data-id="{{ product.id }}">
-                Добавить в корзину
-            </button>
+            <p> {{ product.short_description }} </p>
+        <div class="price_and_btn_div">
+            <div class="price">
+                <h4>{{ product.price }} RUB </h4>
+            </div>
+            <div class="add-to-cart-btn">
+                <button class="btn btn-success" data-id="{{ product.id }}">
+                    Добавить в корзину
+                </button>
+            </div>
         </div>
     </div>
 </div>

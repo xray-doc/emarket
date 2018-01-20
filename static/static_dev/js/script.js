@@ -63,15 +63,15 @@ $(document).ready(function () {
 
     // Appearance of basket list div when mouseover
 
-    $("#checkout").on({
-        mouseover: function () {
-            $(".basket").removeClass('hidden');
-        }
-        mouseout: function () {
-            $(".basket").addClass('hidden');
-        }
-    });
-
+     
+    $("#checkout")
+        .mouseover(function () {
+        $(".basket").removeClass('hidden');
+        })
+        .mouseout(function () {
+        $(".basket").addClass('hidden')
+        });
+    
 
     // Adding to basket list
 
@@ -100,6 +100,16 @@ $(document).ready(function () {
         var data = {};
         data.product_id = product_id;
         updateBasketList('GET', data);
+
+        // Changing button to checkout link
+        $(this)
+            .removeClass('btn-success')
+            .addClass('btn-warning')
+            .on('click', function () {
+               window.location.pathname = 'checkout/'
+            })
+            .html('Оформить заказ')
+
     });
 
 

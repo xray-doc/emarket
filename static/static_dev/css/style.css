@@ -49,12 +49,6 @@ Product_item styles
     text-align: center;
 }
 
-.add-to-cart-btn{
-    position: absolute;
-    bottom: 8px;
-    left: 54px;
-}
-
 .center-core{
     position: relative;
     width: auto;
@@ -63,14 +57,20 @@ Product_item styles
 }
 
 .center-core img{
-    position: absolute;
+    /*position: absolute;*/
     width: auto;
+    margin: auto;
     height: 100%;
+}
+
+.price_and_btn_div{
+    bottom: 7px;
+    position: absolute;
+    width: -webkit-fill-available;
 }
 
 .price{
     width: 100%;
-    position: absolute;
     bottom: 40px;
 }
 
