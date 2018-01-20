@@ -69,15 +69,12 @@ Product_item styles
     width: -webkit-fill-available;
 }
 
-.price{
-    width: 100%;
-    bottom: 40px;
-}
 
 .discount{
     position: absolute;
     top: 10%;
     background-color: rgba(36, 255, 124, 0.67);
+    color: black;
     width: 35%;
     left: 0;
     padding: 3px;
@@ -180,6 +177,15 @@ Checkout styles
 
 #form_client_data > div > input {
     width: 300px;
+}
+
+#comments_text{
+    width: 300px;
+    height: 100px;
+}
+
+.discount-price {
+    color: red;
 }
 
 

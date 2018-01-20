@@ -7,7 +7,7 @@
 
             {%  if product.discount  %}
                 <div class="discount">
-                    {{ product.discount }}%
+                    SALE {{ product.discount }}%
                 </div>
             {% endif %}
 
@@ -15,9 +15,18 @@
         </a>
             <p> {{ product.short_description }} </p>
         <div class="price_and_btn_div">
-            <div class="price">
-                <h4>{{ product.price }} RUB </h4>
-            </div>
+            {% if not product.discount %}
+                <span class="h4">
+                    {{ product.price }}
+                </span>
+            {% else %}
+                <span class="h4">
+                    <s>{{ product.price }}</s>
+                </span>  &nbsp
+                <span class="h4 discount-price">
+                    {{ product.get_price_with_discount }}
+                </span>
+            {% endif %}
             <div class="add-to-cart-btn">
                 <button class="btn btn-success" data-id="{{ product.id }}">
                     Добавить в корзину
