@@ -90,9 +90,16 @@ Product_item styles
 Basket button styles
 */
 
+#basket-in-navbar {
+    position: fixed;
+    top: 0;
+    background-color: #f8f8f8;
+}
+
 .basket{
     padding: 0;
-    position: absolute;
+    position: fixed;
+    top: 50px;
     height: auto;
     width: 200px;
     background: initial;

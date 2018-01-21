@@ -15,7 +15,7 @@
 
           <ul class="nav navbar-nav navbar-right">
             <li id="checkout">
-                <a href="{% url 'checkout' %}">Корзина <span id="basket_total_nmb">
+                <a id="basket-in-navbar" href="{% url 'checkout' %}">Корзина <span id="basket_total_nmb">
                     {% if products_total_nmb %}
                         ({{ products_total_nmb }})
                     {% endif %}
@@ -41,11 +41,11 @@
                         {% endif %}
                     </div>
                     <div class="total_price_div">
-                        Сумма: <span class="total_price">{{ get_basket_total_price }}</span> руб.
+                        Сумма: <span class="total_price h4">{{ get_basket_total_price }}</span> руб.
                     </div>
 
                     <form action="{% url 'checkout' %}">
-                         <button class="btn btn-success" id="btn_to_basket">В корзину</button>
+                        <button class="btn btn-warning" id="btn_to_basket"><span class="h4">Заказать</span></button>
                     </form>
                 </div>
 
