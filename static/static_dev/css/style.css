@@ -172,6 +172,12 @@ Delivery and contacts styles
     height: -webkit-fill-available;
 }
 
+.contacts hr {
+    margin: 10px 0;
+}   p {
+    margin-bottom: 40px;
+    }
+
 
 /*
 Checkout styles
