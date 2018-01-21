@@ -1,5 +1,6 @@
 from django.db import models
-
+from imagekit.models import ImageSpecField
+from imagekit.processors import ResizeToFill
 
 
 class Operational_system(models.Model):
@@ -53,9 +54,21 @@ class ProductImage(models.Model):
     created = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated = models.DateTimeField(auto_now_add=False, auto_now=True)
 
+    if is_main:
+        thumbnail = ImageSpecField(source='image',
+                                    processors=[ResizeToFill(100, 50)],
+                                    format='JPEG',
+                                    options={'quality': 60})
+    else:
+        thumbnail = None
+
+
     def __str__(self):
         return "%s" % self.id
 
     class Meta:
         verbose_name = "Photo"
         verbose_name_plural = "Photos"
+
+
+

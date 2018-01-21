@@ -4,6 +4,7 @@ from django.db.models.signals import post_save
 from django.contrib.auth.models import User
 
 from utils.main import disable_for_loaddata
+from products.models import *
 
 class Status(models.Model):
     name = models.CharField(max_length=64, blank=True, null=True, default=None)
@@ -107,6 +108,9 @@ class ProductInBasket(models.Model):
         for product in products_in_basket:
             basket_total_price += product.total_price
         return basket_total_price
+
+    def get_product_thumbnail_url(self):
+        return ProductImage.objects.get(product=self.product, is_main=True).thumbnail.url
 
     def __str__(self):
         return "%s" % self.product.name

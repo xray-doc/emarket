@@ -16,6 +16,7 @@
                         <table class="table text-left">
                             <thead>
                             <tr>
+                                <th>Изображение</th>
                                 <th>Название товара</th>
                                 <th>Количество</th>
                                 <th>Цена за единицу</th>
@@ -25,6 +26,9 @@
                             <tbody>
                             {% for product_in_basket in products_in_basket %}
                                 <tr data-id="{{ product_in_basket.id }}">
+                                    <td>
+                                        <img src="{{ product_in_basket.get_product_thumbnail_url }}">
+                                    </td>
                                     <td>
                                         {{ product_in_basket.product.name }}
                                     </td>

@@ -26,6 +26,7 @@
                         {% if products_in_basket %}
                             {% for product_in_basket in products_in_basket %}
                                 <div class="product-in-basket">
+                                    <img src="{{ product_in_basket.get_product_thumbnail_url }}">
                                     {{ product_in_basket.product.name }},
                                     <strong>{{ product_in_basket.nmb }} шт.</strong>
 
