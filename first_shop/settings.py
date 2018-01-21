@@ -160,3 +160,11 @@ DATABASES['default'].update(db_from_env)
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
+EMAIL_HOST = 'smtp.mail.ru'
+EMAIL_HOST_USER = 'm10040@mail.ru'
+EMAIL_HOST_PASSWORD = 'mstosorok14'
+EMAIL_PORT = 465
+EMAIL_USE_SSL = True
+DEFAULT_FROM_EMAIL = 'm10040@mail.ru'
+
+
