@@ -30,7 +30,9 @@
                                         <img src="{{ product_in_basket.get_product_thumbnail_url }}">
                                     </td>
                                     <td>
-                                        {{ product_in_basket.product.name }}
+                                        <a href="{% url 'product' product_in_basket.product.id %}">
+                                            {{ product_in_basket.product.name }}
+                                        </a>
                                     </td>
                                     <td>
                                         <input value="{{ product_in_basket.nmb }}" type="number"

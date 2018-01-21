@@ -46,6 +46,7 @@ def basket_list(request):
         product_dict["price_per_item"] = item.price_per_item
         product_dict["nmb"] = item.nmb
         product_dict["id"] = item.id
+        product_dict["img_url"] = item.get_product_thumbnail_url()
         return_dict["products"].append(product_dict)
 
     return JsonResponse(return_dict)

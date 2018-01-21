@@ -1,6 +1,6 @@
 from django.db import models
 from imagekit.models import ImageSpecField
-from imagekit.processors import ResizeToFill
+from imagekit.processors import ResizeToFit
 
 
 class Operational_system(models.Model):
@@ -56,7 +56,7 @@ class ProductImage(models.Model):
 
     if is_main:
         thumbnail = ImageSpecField(source='image',
-                                    processors=[ResizeToFill(100, 50)],
+                                    processors=[ResizeToFit(100, 50)],
                                     format='JPEG',
                                     options={'quality': 60})
     else:
