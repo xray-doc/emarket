@@ -21,27 +21,11 @@ $(document).ready(function () {
 
     // Updating basket list
 
-    function updateNavbarBasket(data) {
-        if (data.products_total_nmb) {
-            $('#basket_total_nmb').text("("+data.products_total_nmb+")");
-            $('.basket-products-list').html("");
-            $.each(data.products, function (k, v) {
-                $('.basket-products-list').append(
-                    '<div class="product-in-basket" >' +
-                        v.name+ ', <strong>(' + v.nmb + ' шт.)</strong>'+
-                        '<button type="button" class="close delete-from-basket"' +
-                        'data-id=' +v.id+ ' aria-label="Close">' +
-                        '<span aria-hidden="true">&times;</span> </button>' +
-                    '</div>'
-                );
-            });
-        } else {
-            $('#basket_total_nmb').text("");
-            $('.basket-products-list').html(
-                '<div class="product-in-basket" id="empty-basket"> Корзина пуста! </div>'
-            );
-        }
-        $('.total_price').text(data.products_total_price)
+    function updateNavbarBasket(html) {
+        $('.basket-products-list').html(html);
+        var hidden_data = $('#hidden_basket_data');
+        $('#basket_total_nmb').text('('+hidden_data.data('total-nmb')+')');
+        $('.total_price').text(hidden_data.data('total-price'));
     }
 
 
@@ -51,8 +35,8 @@ $(document).ready(function () {
             type: type,
             data: data,
             cache: true,
-            success: function (data) {
-                updateNavbarBasket(data);
+            success: function (html) {
+                updateNavbarBasket(html);
             },
             error: function () {
                 console.log("error")
@@ -60,6 +44,7 @@ $(document).ready(function () {
         });
     }
 
+    updateBasketList();
 
 
     // Appearance of basket list div when mouseover

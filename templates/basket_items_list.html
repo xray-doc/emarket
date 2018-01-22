@@ -1,0 +1,22 @@
+{% if products_in_basket %}
+    {% for product_in_basket in products_in_basket %}
+        <div class="product-in-basket">
+            <img src="{{ product_in_basket.get_product_thumbnail_url }}">
+            {{ product_in_basket.product.name }},
+            <strong>({{ product_in_basket.nmb }} шт.)</strong>
+
+            <button type="button" class="close delete-from-basket" data-id='{{ product_in_basket.id }}'
+                    aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    {% endfor %}
+{% else %}
+    <div class="product-in-basket" id="empty-basket">Корзина пуста!</div>
+{% endif %}
+
+<input id="hidden_basket_data"
+       type="hidden"
+       data-total-nmb="{{ products_total_nmb }}"
+       data-total-price="{{ products_total_price }}"
+>
