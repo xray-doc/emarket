@@ -19,6 +19,38 @@ $(document).ready(function () {
 
 
 
+    // Changing button in product_item div on main page according to
+    // presence product in basket
+    function updateAddToBasketButtons() {
+        var products_in_basket_ids = $('#hidden_basket_data').data('products-ids');
+        $('.changing-button').each(function (i, elem) {
+            if (products_in_basket_ids.indexOf(elem.getAttribute('data-id')) !== -1) {
+                $(elem)
+                    .removeClass('btn-success')
+                    .addClass('btn-warning')
+                    .html('В корзине! Заказать')
+                    .off('click')
+                    .on('click', function () {
+                        window.location.pathname = 'checkout/'
+                    })
+            } else {
+                $(elem)
+                    .removeClass('btn-warning')
+                    .addClass('btn-success')
+                    .html('Добавить в корзину')
+                    .off('click')
+                    .on('click', function (e) {
+                        e.preventDefault();
+                        var product_id = e.target.getAttribute('data-id');
+                        var data = {};
+                        data.product_id = product_id;
+                        updateBasketListAndAddToBasketButtons('GET', data);
+                    })
+            }
+        })
+    }
+
+
     // Updating basket list
 
     function updateNavbarBasket(html) {
@@ -29,7 +61,7 @@ $(document).ready(function () {
     }
 
 
-    function updateBasketList(type, data) {
+    function updateBasketListAndAddToBasketButtons(type, data) {
         $.ajax({
             url: "/basket_list/",
             type: type,
@@ -37,6 +69,7 @@ $(document).ready(function () {
             cache: true,
             success: function (html) {
                 updateNavbarBasket(html);
+                updateAddToBasketButtons();
             },
             error: function () {
                 console.log("error")
@@ -44,12 +77,10 @@ $(document).ready(function () {
         });
     }
 
-    updateBasketList();
+    updateBasketListAndAddToBasketButtons();
 
 
     // Appearance of basket list div when mouseover
-
-     
     $("#checkout")
         .mouseover(function () {
         $(".basket").removeClass('hidden');
@@ -59,9 +90,7 @@ $(document).ready(function () {
         });
     
 
-    // Adding to basket list
-
-        // On product.html
+    // Adding to basket list on product.html
     $('#form_buying_product').on('submit', function (e) {
         e.preventDefault();
 
@@ -76,36 +105,15 @@ $(document).ready(function () {
         data.nmb = nmb;
         data["csrfmiddlewaretoken"] = csrf_token;
 
-        updateBasketList('POST', data);
-    });
-
-        // On main page
-    $('.add-to-cart-btn .btn-success').on('click', function (e) {
-        e.preventDefault();
-        var product_id = e.target.getAttribute('data-id');
-        var data = {};
-        data.product_id = product_id;
-        updateBasketList('GET', data);
-
-        // Changing button to checkout link
-        $(this)
-            .removeClass('btn-success')
-            .addClass('btn-warning')
-            .off('click')
-            .on('click', function () {
-               window.location.pathname = 'checkout/'
-            })
-            .html('Оформить заказ')
-
+        updateBasketListAndAddToBasketButtons('POST', data);
     });
 
 
     // Deleting from basket list both on navbar and checkout page
-
     function removeFromNavbarBasketList (product_id) {
         var data = {};
         data.remove_product_id = product_id;
-        updateBasketList('GET', data);
+        updateBasketListAndAddToBasketButtons('GET', data);
     }
 
     function removeFromCheckoutBasketList (product_id) {
@@ -131,7 +139,6 @@ $(document).ready(function () {
 
 
     // Updating total_price when changing on checkout page
-
     $('.num-products-input.checkout').on('change', function (event) {
         var product_to_change = $(this).closest('tr');
         var nmb = $(this).val();
@@ -149,7 +156,7 @@ $(document).ready(function () {
             cache: true,
             success: function (data) {
                 product_to_change.find('.total-product-price').text(data.total_product_price);
-                updateBasketList();
+                updateBasketListAndAddToBasketButtons();
             },
             error: function () {
                 console.log("error")

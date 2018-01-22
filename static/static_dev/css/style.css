@@ -216,10 +216,11 @@ Footer
     background-color: #f8f8f8;
     height: 130px;
     width: 100%;
+    text-align: center;
 }
 
-.footer ul {
-    list-style-type: none;
+.footer h4 {
+    color: #020101c2;
 }
 
 .copyright{

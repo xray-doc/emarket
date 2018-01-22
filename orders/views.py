@@ -9,7 +9,6 @@ from .forms import *
 
 def basket_list(request):
     session_key = request.session.session_key
-    return_dict = {}
 
     if request.method == "POST":
         data = request.POST
@@ -35,21 +34,9 @@ def basket_list(request):
     products_in_basket = ProductInBasket.objects.filter(session_key=session_key, is_active=True)
     products_total_nmb = products_in_basket.count()
     products_total_price = ProductInBasket.get_basket_total_price(session_key)
-
-    # return_dict["products_total_nmb"] = products_total_nmb
-    # return_dict["products_total_price"] = products_total_price
-
-    # return_dict["products"] = []
-    # for item in products_in_basket:
-    #     product_dict = {}
-    #     product_dict["name"] = item.product.name
-    #     product_dict["price_per_item"] = item.price_per_item
-    #     product_dict["nmb"] = item.nmb
-    #     product_dict["id"] = item.id
-    #     product_dict["img_url"] = item.get_product_thumbnail_url()
-    #     return_dict["products"].append(product_dict)
-
-    # return JsonResponse(return_dict)
+    products_in_basket_ids = ''
+    for product_in_basket in products_in_basket:
+        products_in_basket_ids += str(product_in_basket.product.id) + ','
 
     return render(request, 'basket_items_list.html', locals())
 
