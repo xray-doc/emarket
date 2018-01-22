@@ -106,6 +106,7 @@ $(document).ready(function () {
         $(this)
             .removeClass('btn-success')
             .addClass('btn-warning')
+            .off('click')
             .on('click', function () {
                window.location.pathname = 'checkout/'
             })
