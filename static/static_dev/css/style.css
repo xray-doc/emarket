@@ -100,20 +100,24 @@ Basket button styles
     padding: 0;
     position: fixed;
     top: 50px;
+    right: 30px;
     height: auto;
-    width: 200px;
+    width: 400px;
     background: initial;
 }
 
 .basket-products-list{
-    max-height: 220px;
+    max-height: 600px;
     overflow: auto;
 }
 
 .product-in-basket{
-    margin: 5px 7px;
-    padding: 5px 5px 5px 10px;
+    /*margin: 5px 0;*/
+    /*padding: 5px 5px 5px 10px;*/
     background-color: lightskyblue;
+    padding: 5px;
+    border-style: groove;
+    text-align: center;
 }
 
 #empty-basket{

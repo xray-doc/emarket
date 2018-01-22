@@ -56,7 +56,7 @@ class ProductImage(models.Model):
 
     if is_main:
         thumbnail = ImageSpecField(source='image',
-                                    processors=[ResizeToFit(100, 50)],
+                                    processors=[ResizeToFit(200, 100)],
                                     format='JPEG',
                                     options={'quality': 60})
     else:
