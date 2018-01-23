@@ -119,6 +119,7 @@ Basket button styles
     padding: 5px;
     margin: 0;
     border-style: groove;
+    border-bottom-style: none;
     text-align: center;
 }
 

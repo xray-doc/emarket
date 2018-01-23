@@ -150,7 +150,7 @@ $(document).ready(function () {
 
             // If product nmb changed through navbar basket list while user on checkout page,
             // this command updates nmb value in checkout products table:
-            $('.num-products-input').val(nmb);
+            product_to_change.find('.num-products-input').val(nmb);
 
             var data = {};
             data["csrfmiddlewaretoken"] =  $('.form-change-product').find('[name="csrfmiddlewaretoken"]').val();
