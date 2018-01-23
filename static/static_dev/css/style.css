@@ -104,20 +104,49 @@ Basket button styles
     height: auto;
     width: 400px;
     background: initial;
+    text-align: center;
 }
 
 .basket-products-list{
     max-height: 600px;
-    overflow: auto;
+    /*overflow: auto;*/
 }
 
 .product-in-basket{
-    /*margin: 5px 0;*/
-    /*padding: 5px 5px 5px 10px;*/
-    background-color: lightskyblue;
+    position: relative;
+    height: 115px;
+    background-color: #f8f8f8;
     padding: 5px;
     border-style: groove;
     text-align: center;
+}
+
+.product-in-basket-info{
+    position: relative;
+    height: 100%;
+    text-align: left;
+}
+
+.product-in-basket-nmb-price{
+    position: absolute;
+    bottom: 5px;
+}
+
+.product-in-basket-nmb-price h4 {
+    margin: 0;
+}
+
+
+.product-in-basket-remove-btn{
+    position: relative;
+    right: 1px;
+    height: 100%;
+}
+
+.delete-from-basket {
+    position: absolute;
+    top: 33px;
+    right: 0;
 }
 
 #empty-basket{
@@ -128,14 +157,10 @@ Basket button styles
     color: midnightblue;
     text-align: center;
     padding: 5px;
-    background-color: lightcoral;
-    border: initial;
+    background-color: #f8f8f8;
+    border: groove;
 }
 
-#btn_to_basket{
-    width: 140px;
-    margin: 5px 0 5px 30px;
-}
 
 
 /*

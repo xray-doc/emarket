@@ -139,7 +139,7 @@ $(document).ready(function () {
 
 
     // Updating total_price when changing on checkout page
-    $('.num-products-input.checkout').on('change', function (event) {
+    $('.num-products-input').on('change', function (event) {
         var product_to_change = $(this).closest('tr');
         var nmb = $(this).val();
         var product_id = product_to_change.attr('data-id');
