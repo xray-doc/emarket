@@ -5,7 +5,7 @@
 
 
 {% if products_in_basket %}
-        <form id="form_change_product" method="post">
+        <form class="form-change-product" method="post">
             {% csrf_token %}
             <div class="container">
                 <div class="row">
@@ -36,7 +36,9 @@
                                     </td>
                                     <td>
                                         <input value="{{ product_in_basket.nmb }}" type="number"
-                                               class="num-products-input checkout" min="1">
+                                               class="num-products-input checkout" min="1"
+                                               data-id="{{ product_in_basket.id }}"
+                                        >
                                     </td>
                                     <td>
                                         {% if not product_in_basket.product.discount %}

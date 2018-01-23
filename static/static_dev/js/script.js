@@ -138,32 +138,39 @@ $(document).ready(function () {
     });
 
 
-    // Updating total_price when changing on checkout page
-    $('.num-products-input').on('change', function (event) {
-        var product_to_change = $(this).closest('tr');
-        var nmb = $(this).val();
-        var product_id = product_to_change.attr('data-id');
 
-        var data = {};
-        data["csrfmiddlewaretoken"] =  $('#form_change_product').find('[name="csrfmiddlewaretoken"]').val();
-        data.nmb = nmb;
-        data.product_id = product_id;
+    $(document).on('change', function (event) {
 
-        $.ajax({
-            url: "/changeBasket/",
-            type: "POST",
-            data: data,
-            cache: true,
-            success: function (data) {
-                product_to_change.find('.total-product-price').text(data.total_product_price);
-                updateBasketListAndAddToBasketButtons();
-            },
-            error: function () {
-                console.log("error")
-            }
-        });
+        // Can't just find through selector because basket list renewing through ajax
+        // and js couldn't find newly added selectors
+        if ($(event.target).hasClass('num-products-input')) {
+            var product_id = $(event.target).attr('data-id');
+            var product_to_change = $('tr[data-id=' +product_id + ']');
+            var nmb = $(event.target).val();
 
-    });
+            // If product nmb changed through navbar basket list while user on checkout page,
+            // this command updates nmb value in checkout products table:
+            $('.num-products-input').val(nmb);
 
+            var data = {};
+            data["csrfmiddlewaretoken"] =  $('.form-change-product').find('[name="csrfmiddlewaretoken"]').val();
+            data.nmb = nmb;
+            data.product_id = product_id;
+
+            $.ajax({
+                url: "/changeBasket/",
+                type: "POST",
+                data: data,
+                cache: true,
+                success: function (data) {
+                    product_to_change.find('.total-product-price').text(data.total_product_price);
+                    updateBasketListAndAddToBasketButtons();
+                },
+                error: function () {
+                    console.log("error")
+                }
+            });
+        }
+    })
 
 });

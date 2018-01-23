@@ -2,7 +2,7 @@
     {% for product_in_basket in products_in_basket %}
 
         <div class="product-in-basket row">
-            <div class="product-in-basket-img col-lg-5">
+            <div class="product-in-basket-img col-lg-4">
                 <img src="{{ product_in_basket.get_product_thumbnail_url }}">
             </div>
             <div class="product-in-basket-info col-lg-6">
@@ -10,9 +10,17 @@
                     <strong>{{ product_in_basket.product.name }}</strong>
                 </div>
                 <div class="product-in-basket-nmb-price">
-                    <h4>
-                        {{ product_in_basket.nmb }} x {{ product_in_basket.product.get_price_with_discount }} руб
-                    </h4>
+                    <form class="form-change-product" method="post">
+                        {% csrf_token %}
+                        <input value="{{ product_in_basket.nmb }}" type="number"
+                               class="num-products-input" min="1"
+                               data-id="{{ product_in_basket.id }}"
+                        > x <strong>{{ product_in_basket.product.get_price_with_discount }} руб </strong>
+                    </form>
+
+
+
+
                 </div>
             </div>
             <div class="product-in-basket-remove-btn col-lg-1">

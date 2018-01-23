@@ -25,13 +25,18 @@
                         <!-- Script.js puts html here -->
 
                     </div>
-                    <div class="total_price_div">
-                        Сумма: <span class="total_price h4"></span> руб.
+                    <div class="total-price-and-button row">
+                        <div class="total-price-col col-lg-6">
+                            <div class="total-price-div">
+                                Сумма: <span class="total_price h4"></span> руб.
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <form action="{% url 'checkout' %}">
+                                <button class="btn btn-warning" id="btn_to_basket"><span class="h5">Оформление заказа</span></button>
+                            </form>
+                        </div>
                     </div>
-
-                    <form action="{% url 'checkout' %}">
-                        <button class="btn btn-warning" id="btn_to_basket"><span class="h4">Оформление заказа</span></button>
-                    </form>
                 </div>
 
             </li>

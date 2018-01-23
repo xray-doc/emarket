@@ -117,6 +117,7 @@ Basket button styles
     height: 115px;
     background-color: #f8f8f8;
     padding: 5px;
+    margin: 0;
     border-style: groove;
     text-align: center;
 }
@@ -136,6 +137,10 @@ Basket button styles
     margin: 0;
 }
 
+.product-in-basket-img{
+    padding: 0;
+}
+
 
 .product-in-basket-remove-btn{
     position: relative;
@@ -153,12 +158,24 @@ Basket button styles
     text-align: center;
 }
 
-.total_price_div{
+.total-price-and-button{
     color: midnightblue;
     text-align: center;
     padding: 5px;
     background-color: #f8f8f8;
     border: groove;
+    margin: 0;
+    position: relative;
+    height: 50px;
+}
+
+.total-price-col{
+    height: 100%;
+}
+
+.total-price-div{
+    position: absolute;
+    bottom: 1px;
 }
 
 
@@ -175,7 +192,7 @@ Product.html styles
 }
 
 .num-products-input{
-    width: 50px;
+    width: 35px;
     padding-left: 7px;
 }
 
