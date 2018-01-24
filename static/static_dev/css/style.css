@@ -228,7 +228,8 @@ Delivery and contacts styles
     margin: 10px 0;
 }
 
-.contacts p {
+.contacts p,
+.delivery ul, ol {
     margin-bottom: 40px;
 }
 
