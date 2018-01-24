@@ -157,8 +157,9 @@ Basket button styles
     right: 0;
 }
 
-#empty-basket{
+.empty-basket{
     text-align: center;
+    margin: 40px;
 }
 
 .total-price-and-button{

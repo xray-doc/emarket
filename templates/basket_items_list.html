@@ -32,7 +32,9 @@
 
     {% endfor %}
 {% else %}
-    <div class="product-in-basket" id="empty-basket"><h4>Корзина пуста!</h4></div>
+    <div class="product-in-basket">
+        <div class="empty-basket"><h3>Корзина пуста!</h3></div>
+    </div>
 {% endif %}
 
 <input id="hidden_basket_data"

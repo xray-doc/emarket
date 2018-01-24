@@ -59,7 +59,7 @@ $(document).ready(function () {
         $('.basket').removeClass('hidden');
         setTimeout(function () {
             $('.basket').addClass('hidden');
-        }, 1500)
+        }, 1250)
     }
 
 
