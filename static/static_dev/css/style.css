@@ -22,7 +22,9 @@ html, body{
     padding-bottom: 130px;
 }
 
-
+.section-ios {
+    margin-bottom: 40px;
+}
 
 /*
 Navbar
@@ -216,15 +218,18 @@ Delivery and contacts styles
 .delivery .row,
 .contacts .row {
     background-color: white;
-    height: -webkit-fill-available;
+    height: 100%;
+    margin: 40px;
+    padding: 40px;
 }
 
 .contacts hr {
     margin: 10px 0;
-}   p {
-    margin-bottom: 40px;
-    }
+}
 
+.contacts p {
+    margin-bottom: 40px;
+}
 
 /*
 Checkout styles
