@@ -45,14 +45,25 @@ $(document).ready(function () {
                         var data = {};
                         data.product_id = product_id;
                         updateBasketListAndAddToBasketButtons('GET', data);
+                        navbarBasketAppearance();
                     })
             }
         })
     }
 
 
-    // Updating basket list
 
+    // Short appearance of basket when product added
+    function navbarBasketAppearance() {
+        console.log('infunction')
+        $('.basket').removeClass('hidden');
+        setTimeout(function () {
+            $('.basket').addClass('hidden');
+        }, 1500)
+    }
+
+
+    // Updating basket list
     function updateNavbarBasket(html) {
         $('.basket-products-list').html(html);
         var hidden_data = $('#hidden_basket_data');
@@ -106,6 +117,7 @@ $(document).ready(function () {
         data["csrfmiddlewaretoken"] = csrf_token;
 
         updateBasketListAndAddToBasketButtons('POST', data);
+        navbarBasketAppearance();
     });
 
 
