@@ -117,7 +117,6 @@ $(document).ready(function () {
         data["csrfmiddlewaretoken"] = csrf_token;
 
         updateBasketListAndAddToBasketButtons('POST', data);
-        navbarBasketAppearance();
     });
 
 
