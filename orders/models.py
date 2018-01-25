@@ -118,6 +118,7 @@ class ProductInBasket(models.Model):
     class Meta:
         verbose_name = "Product in basket"
         verbose_name_plural = "Products in basket"
+        ordering = ('created',)
 
     def save(self, *args, **kwargs):
         self.price_per_item = self.product.price
