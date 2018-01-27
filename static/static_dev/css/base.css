@@ -26,6 +26,9 @@ html, body{
     margin-bottom: 40px;
 }
 
+
+
+
 /*
 Navbar
  */
@@ -59,7 +62,6 @@ Product_item styles
 }
 
 .center-core img{
-    /*position: absolute;*/
     width: auto;
     margin: auto;
     height: 100%;
@@ -86,6 +88,7 @@ Product_item styles
 .add-to-cart-btn{
     margin: 5px;
 }
+
 
 
 /*
@@ -182,81 +185,11 @@ Basket button styles
     bottom: 1px;
 }
 
-
-
-/*
-Product.html styles
- */
-
-.component{
-    padding: 20px;
-    background-color: white;
-    border-radius: 7px;
-    margin: 20px
-}
-
 .num-products-input{
     width: 35px;
     padding-left: 7px;
 }
 
-.carousel{
-    height: 400px;
-    background-color: white;
-}
-
-.item > img{
-    max-height: 400px;
-    margin: auto;
-}
-
-
-
-/*
-Delivery and contacts styles
- */
-
-.delivery .row,
-.contacts .row {
-    background-color: white;
-    height: 100%;
-    margin: 40px;
-    padding: 40px;
-}
-
-.contacts hr {
-    margin: 10px 0;
-}
-
-.contacts p,
-.delivery ul, ol {
-    margin-bottom: 40px;
-}
-
-/*
-Checkout styles
- */
-
-.form-error{
-    color: red;
-}
-
-.total_price.checkout {
-    color: #337ab7;
-}
-
-#form_client_data > div > input {
-    width: 300px;
-}
-
-#comments_text{
-    width: 300px;
-    height: 100px;
-}
-
-.discount-price {
-    color: red;
-}
 
 
 /*

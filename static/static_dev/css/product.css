@@ -1,0 +1,21 @@
+/*
+Product.html styles
+ */
+
+.component{
+    padding: 20px;
+    background-color: white;
+    border-radius: 7px;
+    margin: 20px
+}
+
+.carousel{
+    height: 400px;
+    background-color: white;
+}
+
+.item > img{
+    max-height: 400px;
+    margin: auto;
+}
+

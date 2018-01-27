@@ -1,0 +1,20 @@
+/*
+Delivery and contacts styles
+ */
+
+.delivery .row,
+.contacts .row {
+    background-color: white;
+    height: 100%;
+    margin: 40px;
+    padding: 40px;
+}
+
+.contacts hr {
+    margin: 10px 0;
+}
+
+.contacts p,
+.delivery ul, ol {
+    margin-bottom: 40px;
+}

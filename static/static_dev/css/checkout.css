@@ -1,0 +1,26 @@
+/*
+Checkout styles
+ */
+
+.form-error{
+    color: red;
+}
+
+.total_price.checkout {
+    color: #337ab7;
+}
+
+#comments_text{
+    width: 300px;
+    height: 100px;
+}
+
+.discount-price {
+    color: red;
+}
+
+
+#form_client_data > div > input {
+    width: 300px;
+}
+
