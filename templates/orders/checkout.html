@@ -1,8 +1,12 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block content %}
+{% block title %}
+    Оформление заказа
+{% endblock title %}
 
+
+{% block content %}
 
 {% if products_in_basket %}
         <form class="form-change-product" method="post">
