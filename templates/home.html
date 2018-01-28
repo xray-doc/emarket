@@ -9,41 +9,71 @@
         <img src="{% static 'static_dev/img/slider0.jpg' %}" class="img-responsive">
     </div>
 
-
-{# Android section #}
-
-    <div class="section">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="text-center">
-                       Android
-                    </h1>
-                </div>
-                {% for product in android_devices %}
-                    {% include 'product_item.html' %}
-                {% endfor %}
-
-            </div>
-        </div>
+    <div class="col-lg-3 col-lg-offset-8">
+        <form method="POST" action="{% url 'main' %}" id="search_form">
+            {% csrf_token %}
+            <input type="text" value="..." name="search">
+            <button type="submit">Search</button>
+        </form>
     </div>
 
 
-{# iOS section #}
-
-    <div class="section section-ios">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="text-center">
-                       iOS
-                    </h1>
+    {% if search_result %}
+        <div class="section">
+            <div class="container">
+                <div class="row">
+                    {% if not queryset %}
+                        <div class="col-lg-12">
+                            <h2 class="text-center">
+                               Nothing matched
+                            </h2>
+                        </div>
+                    {% else %}
+                        <div class="col-lg-12">
+                            <h1 class="text-center">
+                               Search result
+                            </h1>
+                        </div>
+                        {% for product in queryset %}
+                            {% include 'product_item.html' %}
+                        {% endfor %}
+                    {% endif %}
                 </div>
-                {% for product in ios_devices %}
-                    {% include 'product_item.html' %}
-                {% endfor %}
             </div>
         </div>
-    </div>
 
+    {% else %}
+        {# Android section #}
+            <div class="section">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h1 class="text-center">
+                               Android
+                            </h1>
+                        </div>
+                        {% for product in android_devices %}
+                            {% include 'product_item.html' %}
+                        {% endfor %}
+
+                    </div>
+                </div>
+            </div>
+
+        {# iOS section #}
+            <div class="section section-ios">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h1 class="text-center">
+                               iOS
+                            </h1>
+                        </div>
+                        {% for product in ios_devices %}
+                            {% include 'product_item.html' %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+    {% endif %}
 {% endblock %}

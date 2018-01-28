@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.core.mail import send_mail, BadHeaderError
 from django.http import HttpResponse, HttpResponseRedirect
+from django.db.models import Q
 
 from products.models import *
 from .forms import *
@@ -9,8 +10,18 @@ from .forms import *
 
 
 def main(request):
-    ios_devices = Product.objects.filter(os__name='iOS')
-    android_devices = Product.objects.filter(os__name='Android')
+
+    if request.method == 'POST':
+        q = request.POST.get('search')
+        queryset = Product.objects.filter(
+            Q(name__icontains=q)|
+            Q(short_description__icontains=q)|
+            Q(description__icontains=q)
+        )
+        search_result = True
+    else:
+        ios_devices = Product.objects.filter(os__name='iOS')
+        android_devices = Product.objects.filter(os__name='Android')
 
     return render(request, 'home.html', locals())
 
