@@ -10,7 +10,6 @@ from .forms import *
 
 
 def main(request):
-
     if request.method == 'POST':
         q = request.POST.get('search')
         queryset = Product.objects.filter(
@@ -20,8 +19,8 @@ def main(request):
         )
         search_result = True
     else:
-        ios_devices = Product.objects.filter(os__name='iOS')
-        android_devices = Product.objects.filter(os__name='Android')
+        ios_devices = Product.objects.filter(os__icontains='ios')
+        android_devices = Product.objects.filter(os__icontains='android')
 
     return render(request, 'home.html', locals())
 

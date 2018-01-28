@@ -89,22 +89,22 @@ from imagekit.processors import ResizeToFit
 
 
 class Product(models.Model):
-    name = models.CharField(max_length=64, blank=True, null=True, default=None, verbose_name="Products")
-    price = models.DecimalField(max_digits=10, decimal_places=2, default=0, verbose_name="Price")
-    discount = models.IntegerField(null=True, blank=True, default=0)
-    short_description = models.TextField(max_length=100, blank=True, null=True, default=None)
+    name                    = models.CharField(max_length=64, blank=True, null=True, default=None, verbose_name="Products")
+    price                   = models.DecimalField(max_digits=10, decimal_places=2, default=0, verbose_name="Price")
+    discount                = models.IntegerField(null=True, blank=True, default=0, verbose_name="Discount (percent)")
+    short_description       = models.TextField(max_length=100, blank=True, null=True, default=None)
+    diagonal                = models.DecimalField(max_digits=5, decimal_places=1, null=True, blank=True, default=None, verbose_name="Diagonal (inches)")
+    built_in_memory         = models.IntegerField(null=True, blank=True, default=None, verbose_name="Built in memory (Gb)")
+    ram                     = models.IntegerField(null=True, blank=True, default=None, verbose_name="Ram (Gb)")
+    os                      = models.CharField(max_length=30, blank=True, null=True, default=None)
+    screen_resolution       = models.CharField(max_length=10, blank=True, null=True, default=None)
+    processor               = models.CharField(max_length=30, blank=True, null=True, default=None)
+    main_camera             = models.IntegerField(null=True, blank=True, default=None, verbose_name="Main camera (Mpx)")
+    other_specifications    = models.TextField(blank=True, null=True, default=None)
 
-    diagonal = models.IntegerField(null=True, blank=True, default=None)
-    built_in_memory = models.IntegerField(null=True, blank=True, default=None)
-    ram = models.IntegerField(null=True, blank=True, default=None)
-    os = models.CharField(max_length=30, blank=True, null=True, default=None)
-    screen_resolution = models.CharField(max_length=10, blank=True, null=True, default=None)
-    processor = models.CharField(max_length=30, blank=True, null=True, default=None)
-
-    description = models.TextField(blank=True, null=True, default=None)
-    is_active = models.BooleanField(default=True)
-    created = models.DateTimeField(auto_now_add=True, auto_now=False)
-    updated = models.DateTimeField(auto_now_add=False, auto_now=True)
+    is_active           = models.BooleanField(default=True)
+    created             = models.DateTimeField(auto_now_add=True, auto_now=False)
+    updated             = models.DateTimeField(auto_now_add=False, auto_now=True)
 
     def get_main_img_url(self):
         return ProductImage.objects.get(product=self, is_main=True).image.url
@@ -122,12 +122,12 @@ class Product(models.Model):
 
 
 class ProductImage(models.Model):
-    image = models.ImageField(upload_to='products_images/')
-    product = models.ForeignKey(Product, blank=True, null=True, default=None)
-    is_active = models.BooleanField(default=True)
-    is_main = models.BooleanField(default=False)
-    created = models.DateTimeField(auto_now_add=True, auto_now=False)
-    updated = models.DateTimeField(auto_now_add=False, auto_now=True)
+    image       = models.ImageField(upload_to='products_images/')
+    product     = models.ForeignKey(Product, blank=True, null=True, default=None)
+    is_active   = models.BooleanField(default=True)
+    is_main     = models.BooleanField(default=False)
+    created     = models.DateTimeField(auto_now_add=True, auto_now=False)
+    updated     = models.DateTimeField(auto_now_add=False, auto_now=True)
 
     if is_main:
         thumbnail = ImageSpecField(source='image',
