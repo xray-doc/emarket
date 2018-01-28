@@ -3,30 +3,105 @@ from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFit
 
 
-class Operational_system(models.Model):
-    name = models.CharField(max_length=64, blank=True, null=True, default=None)
-    is_active = models.BooleanField(default=True)
-
-    created = models.DateTimeField(auto_now_add=True, auto_now=False)
-    updated = models.DateTimeField(auto_now_add=False, auto_now=True)
-
-    def __str__(self):
-        return "%s" % self.name
-
-    class Meta:
-        verbose_name = "OS"
-        verbose_name_plural = "OS"
-
+# class Operational_system(models.Model):
+#     name = models.CharField(max_length=64, blank=True, null=True, default=None)
+#     is_active = models.BooleanField(default=True)
+#
+#     created = models.DateTimeField(auto_now_add=True, auto_now=False)
+#     updated = models.DateTimeField(auto_now_add=False, auto_now=True)
+#
+#     def __str__(self):
+#         return "%s" % self.name
+#
+#     class Meta:
+#         verbose_name = "OS"
+#         verbose_name_plural = "OS"
+#
+# class Diagonal(models.Model):
+#     name = models.DecimalField(max_digits=2, decimal_places=1, default=None)
+#     is_active = models.BooleanField(default=True)
+#
+#     created = models.DateTimeField(auto_now_add=True, auto_now=False)
+#     updated = models.DateTimeField(auto_now_add=False, auto_now=True)
+#
+#     def __str__(self):
+#         return "%s" % self.name
+#
+#     class Meta:
+#         verbose_name = "Diagonal"
+#         verbose_name_plural = "Diagonals"
+#
+# class ScreenResolution(models.Model):
+#     name = models.CharField(max_length=10, blank=True, null=True, default=None)
+#     is_active = models.BooleanField(default=True)
+#
+#     created = models.DateTimeField(auto_now_add=True, auto_now=False)
+#     updated = models.DateTimeField(auto_now_add=False, auto_now=True)
+#
+#     def __str__(self):
+#         return "%s" % self.name
+#
+#     class Meta:
+#         verbose_name = "Screen resolution"
+#         verbose_name_plural = "Screen resolutions"
+#
+# class BuiltInMemory(models.Model):
+#     name = models.IntegerField(null=True, blank=True, default=None)
+#     is_active = models.BooleanField(default=True)
+#
+#     created = models.DateTimeField(auto_now_add=True, auto_now=False)
+#     updated = models.DateTimeField(auto_now_add=False, auto_now=True)
+#
+#     def __str__(self):
+#         return "%s" % self.name
+#
+#     class Meta:
+#         verbose_name = "Built in memory"
+#         verbose_name_plural = "Built in memory"
+#
+# class Ram(models.Model):
+#     name = models.IntegerField(null=True, blank=True, default=None)
+#     is_active = models.BooleanField(default=True)
+#
+#     created = models.DateTimeField(auto_now_add=True, auto_now=False)
+#     updated = models.DateTimeField(auto_now_add=False, auto_now=True)
+#
+#     def __str__(self):
+#         return "%s" % self.name
+#
+#     class Meta:
+#         verbose_name = "RAM"
+#         verbose_name_plural = "RAM"
+#
+# class Processor(models.Model):
+#     name = models.CharField(max_length=40, blank=True, null=True, default=None)
+#     is_active = models.BooleanField(default=True)
+#
+#     created = models.DateTimeField(auto_now_add=True, auto_now=False)
+#     updated = models.DateTimeField(auto_now_add=False, auto_now=True)
+#
+#     def __str__(self):
+#         return "%s" % self.name
+#
+#     class Meta:
+#         verbose_name = "Processor"
+#         verbose_name_plural = "Processors"
 
 
 class Product(models.Model):
     name = models.CharField(max_length=64, blank=True, null=True, default=None, verbose_name="Products")
     price = models.DecimalField(max_digits=10, decimal_places=2, default=0, verbose_name="Price")
-    os = models.ForeignKey(Operational_system, verbose_name='OS')
-    short_description = models.CharField(max_length=100, blank=True, null=True, default=None)
-    description = models.TextField(blank=True, null=True, default=None)
     discount = models.IntegerField(null=True, blank=True, default=0)
+    short_description = models.TextField(max_length=100, blank=True, null=True, default=None)
 
+    diagonal = models.IntegerField(null=True, blank=True, default=None)
+    built_in_memory = models.IntegerField(null=True, blank=True, default=None)
+    ram = models.IntegerField(null=True, blank=True, default=None)
+    os = models.CharField(max_length=30, blank=True, null=True, default=None)
+    screen_resolution = models.CharField(max_length=10, blank=True, null=True, default=None)
+    processor = models.CharField(max_length=30, blank=True, null=True, default=None)
+
+    description = models.TextField(blank=True, null=True, default=None)
     is_active = models.BooleanField(default=True)
     created = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated = models.DateTimeField(auto_now_add=False, auto_now=True)
