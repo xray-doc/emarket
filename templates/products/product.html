@@ -13,7 +13,7 @@
     <br>
     <br>
     <div class="container product">
-        <div class="row">
+        <div class="row row-main">
 
             <!-- Карусель -->
             <div class="col-lg-6">
@@ -58,18 +58,18 @@
                 </h1>
                 </br>
                 </br>
-                <div>
-                    <p>
-                        <b>Цена:</b> {{ product.price }} руб.
-                    </p>
-                </div>
                 </br>
                 <div>
-                    {{ product.description }}
+                    {{ product.short_description }}
                 </div>
                 </br>
                 </br>
                 <div class="add-to-basket-form">
+                    <div>
+                        <h4>
+                            <b>Цена:</b> {{ product.price }} руб.
+                        </h4>
+                    </div>
                     <form method="post" id="form_buying_product" class="form-inline">
                         {% csrf_token %}
                         Количество:
@@ -82,6 +82,42 @@
                 </div>
             </div>
 
+        </div>
+        <div class="row">
+            <div class="col-lg-8">
+                <h3>Характеристики:</h3>
+                <br>
+                <table class="table">
+                    <tr>
+                        <td>Диагональ: </td>
+                        <td>{{ product.diagonal }}</td>
+                    </tr>
+                    <tr>
+                        <td>Разрешение экрана: </td>
+                        <td>{{ product.screen_resolution }}</td>
+                    </tr>
+                    <tr>
+                        <td>Встроенная память (Гб): </td>
+                        <td>{{ product.built_in_memory }}</td>
+                    </tr>
+                    <tr>
+                        <td>ОЗУ (Гб):</td>
+                        <td>{{ product.ram }}</td>
+                    </tr>
+                    <tr>
+                        <td>Процессор:</td>
+                        <td>{{ product.processor }}</td>
+                    </tr>
+                    <tr>
+                        <td>Основная камера (Mpx):</td>
+                        <td>{{ product.main_camera }}</td>
+                    </tr>
+                    <tr>
+                        <td>Остальные характеристики: </td>
+                        <td>{{ product.other_specifications }}</td>
+                    </tr>
+                </table>
+            </div>
         </div>
     </div>
 
