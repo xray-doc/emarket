@@ -19,8 +19,9 @@ def main(request):
         )
         search_result = True
     else:
-        ios_devices = Product.objects.filter(os__icontains='ios')
-        android_devices = Product.objects.filter(os__icontains='android')
+        # ios_devices = Product.objects.filter(os__icontains='ios')
+        queryset = Product.objects.all()
+    form = FilterProductForm(request.POST)
 
     return render(request, 'home.html', locals())
 

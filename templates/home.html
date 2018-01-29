@@ -18,62 +18,73 @@
     </div>
 
 
-    {% if search_result %}
-        <div class="section">
-            <div class="container">
-                <div class="row">
-                    {% if not queryset %}
-                        <div class="col-lg-12">
-                            <h2 class="text-center">
-                               Nothing matched
-                            </h2>
-                        </div>
-                    {% else %}
-                        <div class="col-lg-12">
-                            <h1 class="text-center">
-                               Search result
-                            </h1>
-                        </div>
-                        {% for product in queryset %}
-                            {% include 'product_item.html' %}
-                        {% endfor %}
-                    {% endif %}
-                </div>
-            </div>
-        </div>
-
-    {% else %}
+{#    {% if search_result %}#}
+{#        <div class="section">#}
+{#            <div class="container">#}
+{#                <div class="row">#}
+{#                    {% if not queryset %}#}
+{#                        <div class="col-lg-12">#}
+{#                            <h2 class="text-center">#}
+{#                               Nothing matched#}
+{#                            </h2>#}
+{#                        </div>#}
+{#                    {% else %}#}
+{#                        <div class="col-lg-12">#}
+{#                            <h1 class="text-center">#}
+{#                               Search result#}
+{#                            </h1>#}
+{#                        </div>#}
+{#                        {% for product in queryset %}#}
+{#                            {% include 'product_item.html' %}#}
+{#                        {% endfor %}#}
+{#                    {% endif %}#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{##}
+{#    {% else %}#}
         {# Android section #}
-            <div class="section">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <h1 class="text-center">
-                               Android
-                            </h1>
-                        </div>
-                        {% for product in android_devices %}
-                            {% include 'product_item.html' %}
-                        {% endfor %}
+{#            <div class="section">#}
+{#                <div class="container">#}
+{#                    <div class="row">#}
+{#                        <div class="col-lg-12">#}
+{#                            <h1 class="text-center">#}
+{#                               Android#}
+{#                            </h1>#}
+{#                        </div>#}
+{#                        {% for product in android_devices %}#}
+{#                            {% include 'product_item.html' %}#}
+{#                        {% endfor %}#}
+{##}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{##}
 
-                    </div>
-                </div>
-            </div>
 
-        {# iOS section #}
             <div class="section section-ios">
                 <div class="container">
                     <div class="row">
-                        <div class="col-lg-12">
-                            <h1 class="text-center">
-                               iOS
-                            </h1>
+{#                        <div class="col-lg-12">#}
+{#                            <h1 class="text-center">#}
+{#                               #}
+{#                            </h1>#}
+{#                        </div>#}
+                        <div class="col-lg-3 filter-div">
+                            <form>
+                                {{ form.os_select }}
+                            </form>
                         </div>
-                        {% for product in ios_devices %}
-                            {% include 'product_item.html' %}
-                        {% endfor %}
+                        <div class="col-lg-9">
+                            {% for product in queryset %}
+                                {% include 'product_item.html' %}
+                            {% endfor %}
+                        </div>
                     </div>
                 </div>
             </div>
-    {% endif %}
+
+
+
+{#    {% endif %}#}
 {% endblock %}
