@@ -14,4 +14,4 @@ class FilterProductForm(forms.Form):
         ('andr', 'Android')
     ), widget=forms.RadioSelect)
 
-    
+
