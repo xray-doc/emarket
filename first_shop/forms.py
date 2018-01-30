@@ -7,24 +7,24 @@ class ContactForm(forms.Form):
     message = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control'}))
     copy = forms.BooleanField(required=False)
 
-
-class FilterProductForm(forms.Form):
-    def get_choices_from_field(field):
-        distinct_qs = Product.objects.all().values_list(field).distinct()
-        choices = [(i[0], i[0]) for i in list(distinct_qs)]  # [(2,), (4,)] > [(2,2), (4.4)]
-        choices.sort()
-        return choices
-
-    os_select = forms.ChoiceField(choices=(
-        ('io', 'iOS'),
-        ('andr', 'Android')
-    ), widget=forms.RadioSelect)
-    ram_select = forms.ChoiceField(choices=get_choices_from_field('ram'),
-                                   widget=forms.RadioSelect
-                                   )
-    diagonal_select = forms.ChoiceField(choices=get_choices_from_field('diagonal'),
-                                        widget=forms.Select
-                                        )
-    processor_select = forms.ChoiceField(choices=get_choices_from_field('processor'))
+#
+# class FilterProductForm(forms.Form):
+#     def get_choices_from_field(field):
+#         distinct_qs = Product.objects.all().values_list(field).distinct()
+#         choices = [(i[0], i[0]) for i in list(distinct_qs)]  # [(2,), (4,)] > [(2,2), (4.4)]
+#         choices.sort()
+#         return choices
+#
+#     os_select = forms.ChoiceField(choices=(
+#         ('io', 'iOS'),
+#         ('andr', 'Android')
+#     ), widget=forms.CheckboxSelectMultiple)
+#     ram_select = forms.ChoiceField(choices=get_choices_from_field('ram'),
+#                                    widget=forms.CheckboxSelectMultiple
+#                                    )
+#     diagonal_select = forms.ChoiceField(choices=get_choices_from_field('diagonal'),
+#                                         widget=forms.CheckboxSelectMultiple
+#                                         )
+#     processor_select = forms.ChoiceField(choices=get_choices_from_field('processor'))
 
 

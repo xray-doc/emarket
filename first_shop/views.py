@@ -19,9 +19,21 @@ def main(request):
         )
         search_result = True
     else:
-        # ios_devices = Product.objects.filter(os__icontains='ios')
         queryset = Product.objects.all()
-    form = FilterProductForm(request.POST)
+    #form = FilterProductForm(request.POST)
+
+    def get_choices_from_field(field):
+            distinct_qs = Product.objects.all().values_list(field).distinct()
+            choices = [i[0] for i in list(distinct_qs)]  # [(2,), (4,)] > [(2,2), (4.4)]
+            choices.sort()
+            return choices
+
+    os_select               = get_choices_from_field('os')
+    diagonal_select         = get_choices_from_field('diagonal')
+    ram_select              = get_choices_from_field('ram')
+    processor_select        = get_choices_from_field('processor')
+    #built_in_memory_select  =
+
 
     return render(request, 'home.html', locals())
 
