@@ -71,8 +71,21 @@
 {#                            </h1>#}
 {#                        </div>#}
                         <div class="col-lg-3 filter-div">
-                            <form>
-                                {{ form.os_select }}
+                            <form id="filter-form" method="POST" action="/">
+                                <div>
+                                    <label>OS</label>
+                                    {{ form.os_select }}
+                                </div>
+
+                                <div>
+                                    <label>RAM</label>
+                                    {{ form.ram_select }}
+                                </div>
+                                <div>
+                                    <label>Diagonal</label>
+                                    <br>
+                                    {{ form.diagonal_select }}
+                                </div>
                             </form>
                         </div>
                         <div class="col-lg-9">
