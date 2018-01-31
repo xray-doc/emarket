@@ -10,30 +10,74 @@ from .forms import *
 
 
 def main(request):
+    qs = Product.objects.all()                   # queryset of all products
+
+
+    # Filtration
     if request.method == 'POST':
-        q = request.POST.get('search')
-        queryset = Product.objects.filter(
-            Q(name__icontains=q)|
-            Q(short_description__icontains=q)|
-            Q(description__icontains=q)
-        )
-        search_result = True
-    else:
-        queryset = Product.objects.all()
-    #form = FilterProductForm(request.POST)
+        for filter_key in request.POST.keys():
+            if filter_key == 'csrfmiddlewaretoken': continue
+            if filter_key == 'search':
+                q = request.POST.get(filter_key)
+                qs = qs.filter(
+                    Q(name__icontains=q)|
+                    Q(short_description__icontains=q)|
+                    Q(description__icontains=q)
+                )
+
+            key, val = filter_key.split('__')     # os__android > ['os', 'android'].
+                                                  # BUT! Some specifications comes like:
+            if key == 'os':                       # processor_select ['processor_name'],
+                qs = qs.filter(os=val)            # so we need to get value from request
+
+            if key == 'diagonal':
+                qs = qs.filter(diagonal=val)
+
+            if key == 'memory':
+                num = request.POST.get(filter_key)
+                if not num: continue
+                if val == 'min':
+                    qs = qs.filter(built_in_memory__gte=num)
+                if val == 'max':
+                    qs = qs.filter(built_in_memory__lte=num)
+
+            if key == 'ram':
+                qs = qs.filter(ram=val)
+
+            if key == 'pocessor':
+                processor_name = request.POST.get(filter_key)
+                qs = qs.filter(processor=processor_name)
+
+            if key == 'price':
+                num = request.POST.get(filter_key)
+                if not num: continue
+                if val == 'min':
+                    qs = qs.filter(price__gte=num)
+                if val == 'max':
+                    qs = qs.filter(price__lte=num)
 
     def get_choices_from_field(field):
-            distinct_qs = Product.objects.all().values_list(field).distinct()
-            choices = [i[0] for i in list(distinct_qs)]  # [(2,), (4,)] > [(2,2), (4.4)]
-            choices.sort()
-            return choices
+        """
+        Get distinct values from field in model.
+        Needs for creating choices for filter widgets.
+        :param field: field in model to create choices from.
+        :return: [{'field__val': 'val'},]
+        """
+        distinct_qs = Product.objects.all().values_list(field).distinct()
+        choices = []
+        for i in list(distinct_qs):
+            key = field + '__' + str(i[0])
+            val = i[0]
+            choices.append({'key': key, 'val': val})
 
-    os_select               = get_choices_from_field('os')
-    diagonal_select         = get_choices_from_field('diagonal')
-    ram_select              = get_choices_from_field('ram')
-    processor_select        = get_choices_from_field('processor')
-    #built_in_memory_select  =
+        # choices = [field + '__' + str(i[0]) for i in list(distinct_qs)]  # [(2,), (4,)] > [(2,2), (4.4)]
+        # choices.sort()
+        return choices
 
+    os_select         = get_choices_from_field('os')
+    diagonal_select   = get_choices_from_field('diagonal')
+    ram_select        = get_choices_from_field('ram')
+    processor_select  = get_choices_from_field('processor')
 
     return render(request, 'home.html', locals())
 

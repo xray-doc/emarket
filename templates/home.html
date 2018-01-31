@@ -24,64 +24,10 @@
                 <div class="col-lg-3 filter-div">
                     <h3>Filter</h3>
                     <hr>
-                    <form id="filter-form" method="POST" action="/">
-                        <div class="form-check form-check-inline">
-                            <label class="form-check-label">OS</label> <br>
-                                {% for os in os_select %}
-                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1"> {{ os }}
-                                {% endfor %}
-                        </div>
-                        <hr>
-                        <div class="form-check form-check-inline">
-                            <label class="form-check-label">Diagonal</label> <br>
-                                {% for diagonal in diagonal_select %}
-                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1"> {{ diagonal }}
-                                {% endfor %}
-                        </div>
-                        <hr>
-                        <label>Built in memory</label> <br>
-                        <div class="form-group row">
-                            <div class="col-lg-6">
-                                <input class="form-control" type="number" min="1" placeholder="min" example-number-input">
-                            </div>
-                            <div class="col-lg-6">
-                                <input class="form-control" type="number" min="1" placeholder="max" example-number-input">
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="form-check form-check-inline">
-                            <label class="form-check-label">RAM</label> <br>
-                                {% for ram in ram_select %}
-                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1"> {{ ram }}
-                                {% endfor %}
-                        </div>
-                        <hr>
-                        <label>Processor</label>
-                        <select class="form-control">
-                                <option>----</option>
-                            {% for processor in processor_select %}
-                                <option>{{ processor }}</option>
-                            {% endfor %}
-                        </select>
-                        <hr>
-                        <label>Price</label> <br>
-                        <div class="form-group row">
-                            <div class="col-lg-6">
-                                <input class="form-control" type="number" min="1" placeholder="min" example-number-input">
-                            </div>
-                            <div class="col-lg-6">
-                                <input class="form-control" type="number" min="1" placeholder="max" example-number-input">
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="btn-div">
-                                <button class="btn btn-info" type="submit">Filter</button>
-{#                            <input type="submit" class="btn btn-info" value="Filter"/>#}
-                        </div>
-                    </form>
+                    {% include 'filter_form.html' %}
                 </div>
                 <div class="col-lg-9">
-                    {% for product in queryset %}
+                    {% for product in qs %}
                         {% include 'product_item.html' %}
                     {% endfor %}
                 </div>

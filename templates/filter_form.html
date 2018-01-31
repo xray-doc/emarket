@@ -1,0 +1,60 @@
+<form id="filter-form" method="POST" action="{% url 'main' %}">{% csrf_token %}
+    <div class="form-check form-check-inline">
+        <label class="form-check-label">OS</label> <br>
+            {% for os in os_select %}
+                <input class="form-check-input" type="checkbox"
+                       id="inlineCheckbox1" name="{{ os.key }}"
+                > {{ os.val }}
+            {% endfor %}
+    </div>
+    <hr>
+    <div class="form-check form-check-inline">
+        <label class="form-check-label">Diagonal</label> <br>
+            {% for diagonal in diagonal_select %}
+                <input class="form-check-input" type="checkbox"
+                       id="inlineCheckbox1" name="{{ diagonal.key }}"
+                > {{ diagonal.val }}
+            {% endfor %}
+    </div>
+    <hr>
+    <label>Built in memory</label> <br>
+    <div class="form-group row">
+        <div class="col-lg-6">
+            <input class="form-control" type="number" name='memory__min' min="1" placeholder="min">
+        </div>
+        <div class="col-lg-6">
+            <input class="form-control" type="number" name="memory__max" min="1" placeholder="max">
+        </div>
+    </div>
+    <hr>
+    <div class="form-check form-check-inline">
+        <label class="form-check-label">RAM</label> <br>
+            {% for ram in ram_select %}
+                <input class="form-check-input" type="checkbox"
+                       id="inlineCheckbox1" name="{{ ram.key }}"
+                > {{ ram.val }}
+            {% endfor %}
+    </div>
+    <hr>
+    <label>Processor</label>
+    <select class="form-control" name="processor__select">
+            <option value="">----</option>
+        {% for processor in processor_select %}
+            <option value="{{ processor.val }}">{{ processor.val }}</option>
+        {% endfor %}
+    </select>
+    <hr>
+    <label>Price</label> <br>
+    <div class="form-group row">
+        <div class="col-lg-6">
+            <input class="form-control" type="number" min="1" placeholder="min" name="price__min">
+        </div>
+        <div class="col-lg-6">
+            <input class="form-control" type="number" min="1" placeholder="max" name="price__max">
+        </div>
+    </div>
+    <hr>
+    <div class="btn-div">
+        <button class="btn btn-info" type="submit">Filter</button>
+    </div>
+</form>
