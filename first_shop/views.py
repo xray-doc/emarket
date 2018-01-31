@@ -12,49 +12,63 @@ from .forms import *
 def main(request):
     qs = Product.objects.all()                   # queryset of all products
 
-
     # Filtration
     if request.method == 'POST':
+        filters = {}
         for filter_key in request.POST.keys():
             if filter_key == 'csrfmiddlewaretoken': continue
             if filter_key == 'search':
                 q = request.POST.get(filter_key)
-                qs = qs.filter(
-                    Q(name__icontains=q)|
-                    Q(short_description__icontains=q)|
-                    Q(description__icontains=q)
-                )
+                filters['search'] = Q(name__icontains=q)| \
+                                    Q(short_description__icontains=q)| \
+                                    Q(other_specifications__icontains=q)
+                continue
 
-            key, val = filter_key.split('__')     # os__android > ['os', 'android'].
-                                                  # BUT! Some specifications comes like:
-            if key == 'os':                       # processor_select ['processor_name'],
-                qs = qs.filter(os=val)            # so we need to get value from request
+            # Next:
+            # os__android > ['os', 'android'].
+            # BUT! Some specifications comes like:
+            # processor_select ['processor_name'],
+            # so we need to get value from request in those cases
+            key, val = filter_key.split('__')
 
-            if key == 'diagonal':
-                qs = qs.filter(diagonal=val)
-
-            if key == 'memory':
+            if key == 'os':
+                if not filters.get('os'):
+                    filters['os'] = Q(os=val)
+                else:
+                    # If more then one OS selected, we need all of them, not the only one.
+                    filters['os'] = filters['os'] | Q(os=val)
+            elif key == 'diagonal':
+                if not filters.get('diagonal'):
+                    filters['diagonal'] = Q(diagonal=val)
+                else:
+                    # If more then one diagonal selected, we need all of them, not the only one.
+                    filters['diagonal'] = filters['diagonal'] | Q(diagonal=val)
+            elif key == 'memory':
                 num = request.POST.get(filter_key)
                 if not num: continue
                 if val == 'min':
-                    qs = qs.filter(built_in_memory__gte=num)
+                    filters['memory_min'] = Q(built_in_memory__gte=num)
                 if val == 'max':
-                    qs = qs.filter(built_in_memory__lte=num)
-
-            if key == 'ram':
-                qs = qs.filter(ram=val)
-
-            if key == 'pocessor':
+                    filters['memory_max'] = Q(built_in_memory__lte=num)
+            elif key == 'ram':
+                if not filters.get('ram'):
+                    filters['ram'] = Q(ram=val)
+                else:
+                    # If more then one RAM selected, we need all of them, not the only one.
+                    filters['ram'] = filters['ram'] | Q(ram=val)
+            elif key == 'processor':
                 processor_name = request.POST.get(filter_key)
-                qs = qs.filter(processor=processor_name)
-
-            if key == 'price':
+                if not processor_name: continue
+                filters['processor'] = Q(processor=processor_name)
+            elif key == 'price':
                 num = request.POST.get(filter_key)
                 if not num: continue
                 if val == 'min':
-                    qs = qs.filter(price__gte=num)
+                    filters['price_min'] = Q(price__gte=num)
                 if val == 'max':
-                    qs = qs.filter(price__lte=num)
+                    filters['price_max'] = Q(price__lte=num)
+
+        qs = qs.filter(*filters.values())
 
     def get_choices_from_field(field):
         """
