@@ -2,7 +2,6 @@ $(document).ready(function () {
 
 
     // Highlighting active menu
-
     var menus = [
         'main',
         'delivery',
@@ -22,34 +21,40 @@ $(document).ready(function () {
     // Changing button in product_item div on main page according to
     // presence product in basket
     function updateAddToBasketButtons() {
+
+        // when django renders template of products in navbar basket,
+        // it includes hidden data with ids of all products in basket
         var products_in_basket_ids = $('#hidden_basket_data').data('products-ids');
+
+        // If product's id on product_item_div matches with one of those that is already in basket,
+        // its button in product_item div changes from "add to basket" to "go to checkout"
+        // else - "add to basket"
         $('.changing-button').each(function (i, elem) {
             if (products_in_basket_ids.indexOf(elem.getAttribute('data-id')) !== -1) {
                 $(elem)
-                    .removeClass('btn-success')
-                    .addClass('btn-warning')
+                    .removeClass('btn-success btn-add-to-basket')
+                    .addClass('btn-info btn-go-to-checkout')
                     .html('В корзине! Заказать')
-                    .off('click')
-                    .on('click', function () {
-                        window.location.pathname = 'checkout/'
-                    })
             } else {
                 $(elem)
-                    .removeClass('btn-warning')
-                    .addClass('btn-success')
+                    .removeClass('btn-info btn-go-to-checkout')
+                    .addClass('btn-success btn-add-to-basket')
                     .html('Добавить в корзину')
-                    .off('click')
-                    .on('click', function (e) {
-                        e.preventDefault();
-                        var product_id = e.target.getAttribute('data-id');
-                        var data = {};
-                        data.product_id = product_id;
-                        updateBasketListAndAddToBasketButtons('GET', data);
-                        navbarBasketAppearance();
-                    })
             }
         })
     }
+
+    $(document)
+        .on('click', '.btn-add-to-basket', function (e) {
+            var product_id = e.target.getAttribute('data-id');
+            var data = {};
+            data.product_id = product_id;
+            updateBasketListAndAddToBasketButtons('GET', data);
+            navbarBasketAppearance();
+        })
+        .on('click', '.btn-go-to-checkout', function (e) {
+            window.location.pathname = 'checkout/';
+        })
 
 
 
@@ -130,31 +135,22 @@ $(document).ready(function () {
         $("[data-id=" + product_id + "]").remove();
     }
 
-    $(document).on('click', '.delete-from-basket', function (e) {
-        e.preventDefault();
-        var product_id = $(this).attr('data-id');
-        removeFromNavbarBasketList(product_id);
-
-        if (window.location.href.indexOf('checkout') !== -1) {
+    $(document)
+        .on('click', '.delete-from-basket', function (e) {
+            var product_id = $(this).attr('data-id');
+            removeFromNavbarBasketList(product_id);
+            if (window.location.href.indexOf('checkout') !== -1) {
+                removeFromCheckoutBasketList(product_id);
+            }
+        })
+        .on('click', '.checkout-delete-from-basket', function (e) {
+            var product_id = $(this).closest('tr').attr('data-id');
+            removeFromNavbarBasketList(product_id);
             removeFromCheckoutBasketList(product_id);
-        }
-    });
-
-    $('.checkout-delete-from-basket').on('click', function (e) {
-        e.preventDefault();
-        var product_id = $(this).closest('tr').attr('data-id');
-        removeFromNavbarBasketList(product_id);
-        removeFromCheckoutBasketList(product_id);
-    });
-
-
-
-    $(document).on('change', function (event) {
-        // Can't just find through selector because basket list renewing through ajax
-        // and js couldn't find newly added selectors
-        if ($(event.target).hasClass('num-products-input')) {
+        })
+        .on('change', '.num-products-input', function (event) {
             var product_id = $(event.target).attr('data-id');
-            var product_to_change = $('tr[data-id=' +product_id + ']');
+            var product_to_change = $('tr[data-id=' +product_id + ']'); // product in table row on checkout page
             var nmb = $(event.target).val();
 
             // If product nmb changed through navbar basket list while user on checkout page,
@@ -165,7 +161,6 @@ $(document).ready(function () {
             data["csrfmiddlewaretoken"] =  $('.form-change-product').find('[name="csrfmiddlewaretoken"]').val();
             data.nmb = nmb;
             data.product_id = product_id;
-
             $.ajax({
                 url: "/changeBasket/",
                 type: "POST",
@@ -178,9 +173,8 @@ $(document).ready(function () {
                 error: function () {
                     console.log("error")
                 }
-            });
-        }
-    })
+            })
+        })
 
 
     // Filter logic:
