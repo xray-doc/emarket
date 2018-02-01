@@ -12,15 +12,47 @@ from .forms import *
 def main(request):
     qs = Product.objects.all()                   # queryset of all products
 
+    # Creating filter form
+    def get_choices_from_field(field):
+        """
+        Get distinct values from field in model.
+        Needs for creating choices for filter widgets.
+        :param field: field in model to create choices from.
+        :return: [{'field__val': 'val'},]
+        """
+        distinct_qs = Product.objects.all().values_list(field).distinct()
+        choices = []
+        for i in list(distinct_qs):
+            key = field + '__' + str(i[0])
+            val = i[0]
+            choices.append({'key': key, 'val': val})
+
+        # choices = [field + '__' + str(i[0]) for i in list(distinct_qs)]  # [(2,), (4,)] > [(2,2), (4.4)]
+        # choices.sort()
+        return choices
+
+    os_select         = get_choices_from_field('os')
+    diagonal_select   = get_choices_from_field('diagonal')
+    ram_select        = get_choices_from_field('ram')
+    processor_select  = get_choices_from_field('processor')
+
+    return render(request, 'home.html', locals())
+
+
+def filteredProducts(request):
+    qs = Product.objects.all()
     # Filtration
     if request.method == 'POST':
+
+        # all the Q filteration arguments collects in the filters dict and
+        # extracts to query at the end
         filters = {}
         for filter_key in request.POST.keys():
             if filter_key == 'csrfmiddlewaretoken': continue
             if filter_key == 'search':
                 q = request.POST.get(filter_key)
-                filters['search'] = Q(name__icontains=q)| \
-                                    Q(short_description__icontains=q)| \
+                filters['search'] = Q(name__icontains=q) | \
+                                    Q(short_description__icontains=q) | \
                                     Q(other_specifications__icontains=q)
                 continue
 
@@ -68,33 +100,8 @@ def main(request):
                 if val == 'max':
                     filters['price_max'] = Q(price__lte=num)
 
-        qs = qs.filter(*filters.values())
-
-    def get_choices_from_field(field):
-        """
-        Get distinct values from field in model.
-        Needs for creating choices for filter widgets.
-        :param field: field in model to create choices from.
-        :return: [{'field__val': 'val'},]
-        """
-        distinct_qs = Product.objects.all().values_list(field).distinct()
-        choices = []
-        for i in list(distinct_qs):
-            key = field + '__' + str(i[0])
-            val = i[0]
-            choices.append({'key': key, 'val': val})
-
-        # choices = [field + '__' + str(i[0]) for i in list(distinct_qs)]  # [(2,), (4,)] > [(2,2), (4.4)]
-        # choices.sort()
-        return choices
-
-    os_select         = get_choices_from_field('os')
-    diagonal_select   = get_choices_from_field('diagonal')
-    ram_select        = get_choices_from_field('ram')
-    processor_select  = get_choices_from_field('processor')
-
-    return render(request, 'home.html', locals())
-
+        qs = qs.filter(*filters.values())  # Final queryset of products to show
+    return render(request, 'products_on_main_page.html', {'qs': qs})
 
 
 def delivery(request):

@@ -1,4 +1,4 @@
-<form id="filter-form" method="POST" action="{% url 'main' %}">{% csrf_token %}
+<form class="filter-form" method="POST" action="{% url 'main' %}">{% csrf_token %}
     <div class="form-check form-check-inline">
         <label class="form-check-label">OS</label> <br>
             {% for os in os_select %}
@@ -72,6 +72,6 @@
     </div>
     <hr>
     <div class="btn-div">
-        <button class="btn btn-info" type="submit">Filter</button>
+        <a class="btn btn-info" href="{% url 'main' %}">Refresh</a>
     </div>
 </form>

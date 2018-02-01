@@ -31,6 +31,7 @@ urlpatterns = [
     url(r'^delivery/', views.delivery, name='delivery'),
     url(r'^contacts/', views.contacts, name='contacts'),
     url(r'^admin/', admin.site.urls),
+    url(r'^filtered_products/', views.filteredProducts, name='filteredProducts'),
     url(r'^', include('orders.urls')),
     url(r'^', include('products.urls')),
 ]

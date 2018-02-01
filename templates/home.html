@@ -9,13 +9,13 @@
         <img src="{% static 'static_dev/img/slider0.jpg' %}" class="img-responsive">
     </div>
 
-    <div class="col-lg-3 col-lg-offset-8">
-        <form method="POST" action="{% url 'main' %}" id="search_form">
-            {% csrf_token %}
-            <input type="text" value="{{ request.POST.search }}" placeholder="type here" name="search">
-            <button type="submit">Search</button>
-        </form>
-    </div>
+{#    <div class="col-lg-3 col-lg-offset-8">#}
+{#        <form method="POST" action="{% url 'main' %}" id="search_form" class="filter-form">#}
+{#            {% csrf_token %}#}
+{#            <input type="text" value="{{ request.POST.search }}" placeholder="type here" name="search">#}
+{#            <button type="submit">Search</button>#}
+{#        </form>#}
+{#    </div>#}
 
 
     <div class="section">
@@ -23,20 +23,40 @@
             <div class="row">
                 <div class="col-lg-3 filter-div">
                     <h3>Filter</h3>
-                    <div style="text-align: right"><a href="{% url 'main' %}">refresh filter</a></div>
                     <hr>
                     {% include 'filter_form.html' %}
                 </div>
                 <div class="col-lg-9">
-                    {% for product in qs %}
-                        {% include 'product_item.html' %}
-                    {% endfor %}
+                    <div id="product_items">
+                        {% include 'products_on_main_page.html' %}
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-
-
+    
 {#    {% endif %}#}
 {% endblock %}
+
+{% block script %}
+    <script>
+        $(document).ready(function () {
+            $('.filter-form').change(function (e) {
+                e.preventDefault()
+                var url_filteredProducts = "{% url 'filteredProducts' %}";
+                $.ajax({
+                    method: "POST",
+                    data: $(this).serialize(),
+                    url: url_filteredProducts,
+                    success: function(html){
+                      $("#product_items").html(html)
+                    },
+                    error: function(data){
+                        console.log('error')
+                    }
+                })
+            })
+        })
+    </script>
+{% endblock script %}

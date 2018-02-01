@@ -1,0 +1,39 @@
+{% for product in qs %}
+    <div class="col-lg-4">
+        <div class="product-item">
+            <a href="{% url 'product' product.id %}">
+                <div class="center-core">
+                        <img src="{{ product.get_main_img_url }}" class="img-responsive">
+                </div>
+
+                {%  if product.discount  %}
+                    <div class="discount">
+                        SALE {{ product.discount }}%
+                    </div>
+                {% endif %}
+
+                    <h4>{{ product.name }}</h4>
+            </a>
+                <p> {{ product.short_description }} </p>
+            <div class="price_and_btn_div">
+                {% if not product.discount %}
+                    <span class="h4">
+                        {{ product.price }}
+                    </span>
+                {% else %}
+                    <span class="h4">
+                        <s>{{ product.price }}</s>
+                    </span>  &nbsp
+                    <span class="h4 discount-price">
+                        {{ product.get_price_with_discount }}
+                    </span>
+                {% endif %}
+                <div class="add-to-cart-btn">
+                    <button class="btn btn-success changing-button" data-id="{{ product.id }}">
+                        Добавить в корзину
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}
