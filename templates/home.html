@@ -39,24 +39,3 @@
 {#    {% endif %}#}
 {% endblock %}
 
-{% block script %}
-    <script>
-        $(document).ready(function () {
-            $('.filter-form').change(function (e) {
-                e.preventDefault()
-                var url_filteredProducts = "{% url 'filteredProducts' %}";
-                $.ajax({
-                    method: "POST",
-                    data: $(this).serialize(),
-                    url: url_filteredProducts,
-                    success: function(html){
-                      $("#product_items").html(html)
-                    },
-                    error: function(data){
-                        console.log('error')
-                    }
-                })
-            })
-        })
-    </script>
-{% endblock script %}

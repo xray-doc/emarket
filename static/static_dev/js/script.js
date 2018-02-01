@@ -55,7 +55,6 @@ $(document).ready(function () {
 
     // Short appearance of basket when product added
     function navbarBasketAppearance() {
-        console.log('infunction')
         $('.basket').removeClass('hidden');
         setTimeout(function () {
             $('.basket').addClass('hidden');
@@ -151,7 +150,6 @@ $(document).ready(function () {
 
 
     $(document).on('change', function (event) {
-
         // Can't just find through selector because basket list renewing through ajax
         // and js couldn't find newly added selectors
         if ($(event.target).hasClass('num-products-input')) {
@@ -182,6 +180,26 @@ $(document).ready(function () {
                 }
             });
         }
+    })
+
+
+    // Filter logic:
+    // renewing product items on main page when filter used
+    $('.filter-form').change(function (e) {
+        e.preventDefault()
+        var url_filteredProducts = "/filtered_products/";
+        $.ajax({
+            method: "POST",
+            data: $(this).serialize(),
+            url: url_filteredProducts,
+            success: function(html){
+              $("#product_items").html(html);
+              updateAddToBasketButtons();
+            },
+            error: function(data){
+                console.log('error')
+            }
+        })
     })
 
 });
