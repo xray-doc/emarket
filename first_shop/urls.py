@@ -22,16 +22,20 @@ from django.conf import settings
 from django.views.generic.base import RedirectView
 
 from . import views
+from accounts.views import *
 
 
 
 urlpatterns = [
     url(r'^$', RedirectView.as_view(url='main/')),
     url(r'^main/', views.main, name='main'),
+    url(r'^filtered_products/', views.filteredProducts, name='filtered_products'),
     url(r'^delivery/', views.delivery, name='delivery'),
     url(r'^contacts/', views.contacts, name='contacts'),
     url(r'^admin/', admin.site.urls),
-    url(r'^filtered_products/', views.filteredProducts, name='filteredProducts'),
+    url(r'^register/', register_view, name='register'),
+    url(r'^login/', login_view, name='login'),
+    url(r'^logout/', logout_view, name='logout'),
     url(r'^', include('orders.urls')),
     url(r'^', include('products.urls')),
 ]

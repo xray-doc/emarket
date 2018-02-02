@@ -14,6 +14,12 @@
           </ul>
 
           <ul class="nav navbar-nav navbar-right">
+              <li>
+                  <a href="{% url 'login' %}">login</a>
+              </li>
+              <li>
+                  <a href="{% url 'register' %}">register</a>
+              </li>
             <li id="checkout">
                 <a id="basket-in-navbar" href="{% url 'checkout' %}">Корзина
                     <span id="basket_total_nmb"></span>
