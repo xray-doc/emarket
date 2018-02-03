@@ -188,13 +188,12 @@ $(document).ready(function () {
 
     // Filter logic:
     // renewing product items on main page when filter used
-    $('.filter-form').change(function (e) {
-        e.preventDefault()
-        var url_filteredProducts = "/filtered_products/";
+    function filterProduct (form) {
+        var filteredProductsUrl = "/filtered_products/";
         $.ajax({
             method: "POST",
-            data: $(this).serialize(),
-            url: url_filteredProducts,
+            data: form.serialize(),
+            url: filteredProductsUrl,
             success: function(html){
               $("#product_items").html(html);
               updateAddToBasketButtons();
@@ -203,6 +202,19 @@ $(document).ready(function () {
                 console.log('error')
             }
         })
+    }
+
+    $('.filter-form').change(function (e) {
+        e.preventDefault();
+        filterProduct($(this));
     })
+
+    // Here default submit action prevented when search button is clicked
+    // (because we use AJAX in filterProduct func)
+    $('#search_button').click(function (e) {
+        e.preventDefault();
+        filterProduct($(this));
+    })
+
 
 });
