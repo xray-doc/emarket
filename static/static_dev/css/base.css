@@ -69,12 +69,34 @@ Product_item styles
     height: 100%;
 }
 
-.price_and_btn_div{
+.product-info{
     bottom: 7px;
     position: absolute;
-    width: -webkit-fill-available;
 }
 
+.price_and_btn_div{
+    margin-top: 12px;
+    color: black;
+}
+
+.icon{
+    width: 20px;
+    height: 20px;
+}
+
+.specs{
+    font-size: medium;
+    color: black;
+}
+
+.specs td:nth-child(1){
+    padding: 3px 0px 3px 40px;
+    width: 155px;
+}
+
+.specs td{
+    text-align: left;
+}
 
 .discount{
     position: absolute;
@@ -104,7 +126,14 @@ Basket button styles
 #basket-in-navbar {
     position: fixed;
     top: 0;
-    background-color: #f8f8f8;
+    background-color: #71dc72;
+    font-size: large;
+    color: black;
+    border-radius: 22px;
+}
+
+.basket-icon{
+    width: 18px;
 }
 
 .basket{

@@ -1,4 +1,6 @@
- <!-- Static navbar -->
+{% load static %}
+
+<!-- Static navbar -->
     <nav class="navbar navbar-default navbar-static-top">
       <div class="container">
 
@@ -21,7 +23,8 @@
                     <a href="{% url 'register' %}">register</a>
                 </li>
                 <li id="checkout">
-                    <a id="basket-in-navbar" href="{% url 'checkout' %}">Корзина
+                    <a id="basket-in-navbar" href="{% url 'checkout' %}">Basket
+                        <img class="basket-icon" src="{% static 'static_dev/open-iconic-master/svg/cart.svg' %}">
                         <span id="basket_total_nmb"></span>
                     </a>
 
