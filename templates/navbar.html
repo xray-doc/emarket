@@ -14,38 +14,38 @@
           </ul>
 
           <ul class="nav navbar-nav navbar-right">
-              <li>
-                  <a href="{% url 'login' %}">login</a>
-              </li>
-              <li>
-                  <a href="{% url 'register' %}">register</a>
-              </li>
-            <li id="checkout">
-                <a id="basket-in-navbar" href="{% url 'checkout' %}">Корзина
-                    <span id="basket_total_nmb"></span>
-                </a>
+                <li id="login">
+                    <a href="{% url 'login' %}">login</a>
+                </li>
+                <li id="register">
+                    <a href="{% url 'register' %}">register</a>
+                </li>
+                <li id="checkout">
+                    <a id="basket-in-navbar" href="{% url 'checkout' %}">Корзина
+                        <span id="basket_total_nmb"></span>
+                    </a>
 
-                <div class="container basket hidden">
-                    <div class="basket-products-list">
+                    <div class="container basket hidden">
+                        <div class="basket-products-list">
 
-                        <!-- Script.js puts html here -->
+                            <!-- Script.js puts html here -->
 
-                    </div>
-                    <div class="total-price-and-button row">
-                        <div class="total-price-col col-lg-6">
-                            <div class="total-price-div">
-                                Сумма: <span class="total_price h4"></span> руб.
+                        </div>
+                        <div class="total-price-and-button row">
+                            <div class="total-price-col col-lg-6">
+                                <div class="total-price-div">
+                                    Сумма: <span class="total_price h4"></span> руб.
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <form action="{% url 'checkout' %}">
+                                    <button class="btn btn-info" id="btn_to_basket"><span class="h5">Оформление заказа</span></button>
+                                </form>
                             </div>
                         </div>
-                        <div class="col-lg-6">
-                            <form action="{% url 'checkout' %}">
-                                <button class="btn btn-info" id="btn_to_basket"><span class="h5">Оформление заказа</span></button>
-                            </form>
-                        </div>
                     </div>
-                </div>
+                </li>
 
-            </li>
           </ul>
 
         </div><!--/.nav-collapse -->

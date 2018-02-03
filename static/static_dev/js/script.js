@@ -6,7 +6,9 @@ $(document).ready(function () {
         'main',
         'delivery',
         'contacts',
-        'checkout'
+        'checkout',
+        'login',
+        'register'
     ];
 
     menus.forEach(function (menu) {
@@ -59,11 +61,13 @@ $(document).ready(function () {
 
 
     // Short appearance of basket when product added
+    var basket_appearance_timerId = 0;
     function navbarBasketAppearance() {
         $('.basket').removeClass('hidden');
-        setTimeout(function () {
+        basket_appearance_timerId = setTimeout(function () {
             $('.basket').addClass('hidden');
-        }, 1250)
+            basket_appearance_timerId = 0;
+        }, 2000)
     }
 
 
@@ -95,13 +99,18 @@ $(document).ready(function () {
     updateBasketListAndAddToBasketButtons();
 
 
-    // Appearance of basket list div when mouseover
+    // Appearance of navbar basket list when mouseover
     $("#checkout")
         .mouseover(function () {
-        $(".basket").removeClass('hidden');
+            if (basket_appearance_timerId != 0) {           // basket list could be already showing if user
+                clearTimeout(basket_appearance_timerId);    // added a product to basket recently.
+                basket_appearance_timerId = 0;              // In that case basket list appears and
+            } else {                                        // a timer started to hide basket list after a second.
+                $(".basket").removeClass('hidden');
+            }
         })
         .mouseout(function () {
-        $(".basket").addClass('hidden')
+            $(".basket").addClass('hidden')
         });
     
 
