@@ -1,7 +1,7 @@
 {% load static %}
 
 {% for product in qs %}
-    <div class="col-lg-4">
+    <div class="col-sm-4">
         <div class="product-item">
             <a href="{% url 'product' product.id %}">
                 <div class="center-core">
@@ -18,28 +18,7 @@
             </a>
                 <div class="product-info">
                     <div class="row">
-{#                        <div class="col-lg-6 specs">#}
-{#                            <img src="{% static 'static_dev/open-iconic-master/svg/cog.svg' %}"#}
-{#                             class="icon" alt="icon name"#}
-{#                            > {{ product.os }}#}
-{#                        </div>#}
-{#                        <div class="col-lg-6 specs">#}
-{#                            <img src="{% static 'static_dev/open-iconic-master/svg/hard-drive.svg' %}"#}
-{#                             class="icon" alt="icon name"#}
-{#                            > {{ product.built_in_memory }} Gb#}
-{#                        </div>#}
-{#                        <div class="col-lg-6 specs">#}
-{#                            <img src="{% static 'static_dev/open-iconic-master/svg/fullscreen-enter.svg' %}"#}
-{#                             class="icon" alt="icon name"#}
-{#                            > {{ product.diagonal }}"#}
-{#                        </div>#}
-{#                        <div class="col-lg-6 specs">#}
-{#                            <img src="{% static 'static_dev/open-iconic-master/svg/camera-slr.svg' %}"#}
-{#                             class="icon" alt="icon name"#}
-{#                            > {{ product.main_camera }} Mpx#}
-{#                        </div>#}
-
-                        <table class="col-lg-12 specs">
+                        <table class="col-sm-12 specs">
                             <tbody>
                                 <tr>
                                     <td>
@@ -68,11 +47,7 @@
                             </tbody>
                         </table>
 
-
-
-
-
-                        <div class="col-lg-12">
+                        <div class="col-sm-12">
                             <div class="price_and_btn_div">
                                 {% if not product.discount %}
                                     <span class="h4">

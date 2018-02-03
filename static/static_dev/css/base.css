@@ -14,7 +14,7 @@ html, body{
 }
 
 .section{
-    margin-top: 70px;
+    margin-top: 25px;
     margin-bottom: 70px;
 }
 
@@ -230,6 +230,10 @@ Basket button styles
 /*
 Filter
 */
+.search-div{
+    margin-bottom: 20px;
+    margin-right: 15px;
+}
 
 .filter-div {
     background-color: white;
