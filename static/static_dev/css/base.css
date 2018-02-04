@@ -40,6 +40,14 @@ Navbar
     border-bottom: none;
 }
 
+.navbar-nav>li>a{
+    font-size: larger;
+}
+
+.login-icons{
+    width: 13px;
+}
+
 
 
 /*

@@ -16,12 +16,32 @@
           </ul>
 
           <ul class="nav navbar-nav navbar-right">
-                <li id="login">
-                    <a href="{% url 'login' %}">login</a>
-                </li>
-                <li id="register">
-                    <a href="{% url 'register' %}">register</a>
-                </li>
+
+                {% if request.user.is_authenticated %}
+                    <li>
+                        <a href="#">Hello, {{ request.user }}</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'logout' %}">
+                            <img class="login-icons" src="{% static 'static_dev/open-iconic-master/svg/account-logout.svg' %}">
+                            logout
+                        </a>
+                    </li>
+                {% else %}
+                    <li id="login">
+                        <a href="{% url 'login' %}">
+                            <img class="login-icons" src="{% static 'static_dev/open-iconic-master/svg/account-login.svg' %}">
+                            login
+                        </a>
+                    </li>
+                    <li id="register">
+                        <a href="{% url 'register' %}">
+                            <img class="login-icons" src="{% static 'static_dev/open-iconic-master/svg/person.svg' %}">
+                            register
+                        </a>
+                    </li>
+                {% endif %}
+
                 <li id="checkout">
                     <a id="basket-in-navbar" href="{% url 'checkout' %}">Basket
                         <img class="basket-icon" src="{% static 'static_dev/open-iconic-master/svg/cart.svg' %}">
