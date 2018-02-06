@@ -7,7 +7,7 @@
 {% endblock style %}
 
 {% block title %}
-    Контакты
+    Contacts
 {% endblock title %}
 
 {% block content %}
@@ -15,28 +15,28 @@
     <div class="container contacts">
         <div class="row">
             <div class="col-lg-6">
-                <h3>Реквизиты</h3>
+                <h3>Requisites</h3>
                 <hr>
                 <p>
                     ООО "Emarket"<br>
                     ИНН 1238273410 ОГРН 3429814013
                 </p>
 
-                <h3>Адрес</h3>
+                <h3>Address</h3>
                 <hr>
                 <p>
                     г. Москва, ул. xxxxxxxxxxx, д. 2 <br>
                     Ближайшее метро - Рижская
                 </p>
 
-                <h3>Телефоны</h3>
+                <h3>Phone</h3>
                 <hr>
                 <p>
                     +7 985 111 22 33<br>
                     +7 985 111 33 44
                 </p>
 
-                <h3>Режим работы</h3>
+                <h3>Timetable</h3>
                 <hr>
                 <p>
                     Пн-Сб: 8.00-20.00 <br>
@@ -50,35 +50,35 @@
                 </p>
             </div>
             <div class="col-lg-6">
-                <h3>Напишите нам</h3>
+                <h3>Email us</h3>
                 <hr>
                 <form action="{% url 'contacts' %}" method="post">
                     {% csrf_token %}
                     {{ form.non_field_errors }}
                     <div>
-                      <label for="id_subject">Тема:</label>
+                      <label for="id_subject">Title:</label>
                       {{ form.subject.errors }}
                 	  {{ form.subject }}
                     </div>
                     &nbsp;
                     <div>
-                      <label for="id_sender">Ваш E-mail:</label>
+                      <label for="id_sender">Your E-mail:</label>
                       {{ form.sender.errors }}
                 	  {{ form.sender }}
                     </div>
                     &nbsp;
                     <div>
-                      <label for="id_message">Сообщение:</label>
+                      <label for="id_message">Message:</label>
                       {{ form.message.errors }}
                 	  {{ form.message }}
                     </div>
                     &nbsp;
                     <div>
                       {{ form.copy.errors }}
-                      <label for="id_copy">{{ form.copy }} Отправить копию себе </label>
+                      <label for="id_copy">{{ form.copy }} Copy to you </label>
                     </div>
                     <br>
-                    <input type="submit" class="btn btn-success" value="Отправить сообщение"/>
+                    <input type="submit" class="btn btn-success" value="Send"/>
                 </form>
             </div>
         </div>

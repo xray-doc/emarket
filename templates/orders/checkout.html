@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block title %}
-    Оформление заказа
+    Order
 {% endblock title %}
 
 
@@ -18,17 +18,17 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h3 class="text-center">Страница заказа</h3>
+                        <h3 class="text-center">Order</h3>
                         <hr>
 
                         <table class="table text-left">
                             <thead>
                             <tr>
-                                <th>Изображение</th>
-                                <th>Название товара</th>
-                                <th>Количество</th>
-                                <th>Цена за единицу</th>
-                                <th>Общая цена</th>
+                                <th>Image</th>
+                                <th>Product</th>
+                                <th>Number</th>
+                                <th>Price per item</th>
+                                <th>Price</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -82,13 +82,13 @@
         </form>
 
         <hr>
-        <h4 class="text-center"><b>Сумма заказа: </b> <span class="total_price checkout">{{ products_total_price }}</span> руб.</h4>
+        <h4 class="text-center"><b>Total price: </b> <span class="total_price checkout">{{ products_total_price }}</span> RUB</h4>
         <hr>
 
         <form id="form_client_data" class="form-block col-lg-4 col-lg-offset-5" method="post">
             {% csrf_token %}
             <div class="form-group">
-                <label>Ваше имя</label>
+                <label>Your name</label>
                 <span class="form-error">{{ form.name.errors }}</span>
                 <input type="text" class="form-control" name="{{ form.name.html_name }}"
                        placeholder="Иван Иванов" value="{{ request.POST.name }}"
@@ -96,7 +96,7 @@
             </div>
 
             <div class="form-group">
-                <label>Телефон</label>
+                <label>Phone</label>
                 <span class="form-error">{{ form.phone.errors }}</span>
                 <input type="text" class="form-control" name="{{ form.phone.html_name }}"
                        placeholder="+7 777 777 7777" value="{{ request.POST.phone }}"
@@ -112,7 +112,7 @@
             </div>
 
             <div class="form-group">
-                <label>Адрес</label>
+                <label>Address</label>
                 <span class="form-error">{{ form.address.errors }}</span>
                 <input type="text" class="form-control" name="{{ form.address.html_name }}"
                        placeholder="Ваш адрес" value="{{ request.POST.address }}"
@@ -120,7 +120,7 @@
             </div>
 
             <div class="form-group">
-                <label>Комментарий к заказу</label>
+                <label>Comment to order</label>
                 <span class="form-error">{{ form.comments.errors }}</span>
                 <textarea class="form-control" id="comments_text" name="{{ form.comments.html_name }}"
                        placeholder="..."
@@ -128,12 +128,12 @@
             </div>
 
 
-            <button type="submit" class="btn btn-primary">Заказать</button>
+            <button type="submit" class="btn btn-primary">Go!</button>
             <hr>
         </form>
     {% else %}
         <hr><hr>
-        <h2 class="text-center">Вы еще не выбрали ни одного товара</h2>
+        <h2 class="text-center">No products in basket yet</h2>
     {% endif %}
 
 {% endblock %}

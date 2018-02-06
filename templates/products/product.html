@@ -15,7 +15,7 @@
     <div class="container product">
         <div class="row row-main">
 
-            <!-- Карусель -->
+            <!-- Carousel -->
             <div class="col-lg-6">
                 <div id="carouselImages" class="carousel slide" data-ride="carousel">
                     <ol class="carousel-indicators">
@@ -51,7 +51,7 @@
                 </div>
             </div>
 
-            <!-- Описание товара -->
+            <!-- Product -->
             <div class="col-lg-6">
                 <h1 class="text-center">
                     {{ product.name }}
@@ -67,16 +67,16 @@
                 <div class="add-to-basket-form">
                     <div>
                         <h4>
-                            <b>Цена:</b> {{ product.price }} руб.
+                            <b>Price:</b> {{ product.price }} RUB
                         </h4>
                     </div>
                     <form method="post" id="form_buying_product" class="form-inline">
                         {% csrf_token %}
-                        Количество:
-                        <input type="number" size="1" value="1" min="1" class="product-nmb-form"> шт.
+                        Number:
+                        <input type="number" size="1" value="1" min="1" class="product-nmb-form">
                         <button type="submit" class="btn btn-success changing-button" id="submit-btn"
                             data-id="{{ product.id }}">
-                            Добавить в корзину
+                            Add to basket
                         </button>
                     </form>
                 </div>
@@ -85,35 +85,35 @@
         </div>
         <div class="row">
             <div class="col-lg-8">
-                <h3>Характеристики:</h3>
+                <h3>Specifications:</h3>
                 <br>
                 <table class="table">
                     <tr>
-                        <td>Диагональ: </td>
+                        <td>Diagonal: </td>
                         <td>{{ product.diagonal }}</td>
                     </tr>
                     <tr>
-                        <td>Разрешение экрана: </td>
+                        <td>Display resolution: </td>
                         <td>{{ product.screen_resolution }}</td>
                     </tr>
                     <tr>
-                        <td>Встроенная память (Гб): </td>
+                        <td>Built in memory (Gb): </td>
                         <td>{{ product.built_in_memory }}</td>
                     </tr>
                     <tr>
-                        <td>ОЗУ (Гб):</td>
+                        <td>RAM (Gb):</td>
                         <td>{{ product.ram }}</td>
                     </tr>
                     <tr>
-                        <td>Процессор:</td>
+                        <td>Processor:</td>
                         <td>{{ product.processor }}</td>
                     </tr>
                     <tr>
-                        <td>Основная камера (Mpx):</td>
+                        <td>Main camera (Mpx):</td>
                         <td>{{ product.main_camera }}</td>
                     </tr>
                     <tr>
-                        <td>Остальные характеристики: </td>
+                        <td>Other specifications: </td>
                         <td>{{ product.other_specifications }}</td>
                     </tr>
                 </table>

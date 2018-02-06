@@ -15,7 +15,7 @@
                         <input value="{{ product_in_basket.nmb }}" type="number"
                                class="num-products-input" min="1"
                                data-id="{{ product_in_basket.id }}"
-                        > x <strong>{{ product_in_basket.product.get_price_with_discount }} руб </strong>
+                        > x <strong>{{ product_in_basket.product.get_price_with_discount }} RUB </strong>
                     </form>
 
 
@@ -33,7 +33,7 @@
     {% endfor %}
 {% else %}
     <div class="product-in-basket">
-        <div class="empty-basket"><h3>Корзина пуста!</h3></div>
+        <div class="empty-basket"><h3>Basket is empty</h3></div>
     </div>
 {% endif %}
 

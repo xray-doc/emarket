@@ -10,9 +10,9 @@
 
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li id="main"><a href="{% url 'main' %}">Главная</a></li>
-            <li id="delivery"><a href="{% url 'delivery' %}">Оплата и доставка</a></li>
-            <li id="contacts"><a href="{% url 'contacts' %}">Контакты</a></li>
+            <li id="main"><a href="{% url 'main' %}">Main</a></li>
+            <li id="delivery"><a href="{% url 'delivery' %}">Payment and delivery</a></li>
+            <li id="contacts"><a href="{% url 'contacts' %}">Contacts</a></li>
           </ul>
 
           <ul class="nav navbar-nav navbar-right">
@@ -57,12 +57,12 @@
                         <div class="total-price-and-button row">
                             <div class="total-price-col col-lg-6">
                                 <div class="total-price-div">
-                                    Сумма: <span class="total_price h4"></span> руб.
+                                    Total: <span class="total_price h4"></span> RUB
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <form action="{% url 'checkout' %}">
-                                    <button class="btn btn-info" id="btn_to_basket"><span class="h5">Оформление заказа</span></button>
+                                    <button class="btn btn-info" id="btn_to_basket"><span class="h5">Checkout</span></button>
                                 </form>
                             </div>
                         </div>

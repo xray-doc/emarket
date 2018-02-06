@@ -36,12 +36,12 @@ $(document).ready(function () {
                 $(elem)
                     .removeClass('btn-success btn-add-to-basket')
                     .addClass('btn-info btn-go-to-checkout')
-                    .html('В корзине! Заказать')
+                    .html('Added! Checkout')
             } else {
                 $(elem)
                     .removeClass('btn-info btn-go-to-checkout')
                     .addClass('btn-success btn-add-to-basket')
-                    .html('Добавить в корзину')
+                    .html('Add to basket')
             }
         })
     }
