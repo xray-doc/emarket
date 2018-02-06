@@ -53,6 +53,10 @@ Product.html styles
     text-align: center;
 }
 
+.product-nmb-form{
+    width: 35px;
+    padding-left: 7px;
+}
 
 
 .product tr > td:first-child{

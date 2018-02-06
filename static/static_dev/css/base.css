@@ -153,6 +153,7 @@ Basket button styles
     width: 400px;
     background: initial;
     text-align: center;
+    display: none;
 }
 
 .basket-products-list{

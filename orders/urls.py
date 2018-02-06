@@ -18,7 +18,7 @@ from django.contrib import admin
 from . import views
 
 urlpatterns = [
-    url(r'^basket_list/$', views.basket_list, name="basket_list"),
+    url(r'^update_basket_list/$', views.update_basket_list, name="basket_list"),
     url(r'^checkout/$', views.checkout, name="checkout"),
     url(r'^changeBasket/$', views.changeProductInBasket, name="changeBasket"),
 ]

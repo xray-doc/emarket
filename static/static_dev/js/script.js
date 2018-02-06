@@ -48,10 +48,12 @@ $(document).ready(function () {
 
     $(document)
         .on('click', '.btn-add-to-basket', function (e) {
-            var product_id = e.target.getAttribute('data-id');
-            var data = {};
-            data.product_id = product_id;
-            updateBasketListAndAddToBasketButtons('GET', data);
+            if (e.target.getAttribute('id') != 'submit-btn') {         // because we don't need this logic
+                var product_id = e.target.getAttribute('data-id');     // when submit button in form clicked
+                var data = {};                                         // (on products.html)
+                data.product_id = product_id;
+                updateBasketList('GET', data);
+            }
             navbarBasketAppearance();
         })
         .on('click', '.btn-go-to-checkout', function (e) {
@@ -63,9 +65,9 @@ $(document).ready(function () {
     // Short appearance of basket when product added
     var basket_appearance_timerId = 0;
     function navbarBasketAppearance() {
-        $('.basket').removeClass('hidden');
+        $('.basket').show(duration=200);
         basket_appearance_timerId = setTimeout(function () {
-            $('.basket').addClass('hidden');
+            $('.basket').hide(duration=200);
             basket_appearance_timerId = 0;
         }, 2000)
     }
@@ -80,9 +82,9 @@ $(document).ready(function () {
     }
 
 
-    function updateBasketListAndAddToBasketButtons(type, data) {
+    function updateBasketList(type, data) {
         $.ajax({
-            url: "/basket_list/",
+            url: "/update_basket_list/",
             type: type,
             data: data,
             cache: true,
@@ -96,7 +98,7 @@ $(document).ready(function () {
         });
     }
 
-    updateBasketListAndAddToBasketButtons();
+    updateBasketList();
 
 
     // Appearance of navbar basket list when mouseover
@@ -106,11 +108,11 @@ $(document).ready(function () {
                 clearTimeout(basket_appearance_timerId);    // added a product to basket recently.
                 basket_appearance_timerId = 0;              // In that case basket list appears and
             } else {                                        // a timer started to hide basket list after a second.
-                $(".basket").removeClass('hidden');
+                $(".basket").show();
             }
         })
         .mouseout(function () {
-            $(".basket").addClass('hidden')
+            $(".basket").hide();
         });
     
 
@@ -119,7 +121,7 @@ $(document).ready(function () {
         e.preventDefault();
 
         var form = $('#form_buying_product');
-        var nmb = $('.num-products-input').val();
+        var nmb = $('.product-nmb-form').val();
         var submit_btn = $('#submit-btn');
         var product_id = submit_btn.data('id');
         var csrf_token = form.find('[name="csrfmiddlewaretoken"]').val();
@@ -129,7 +131,7 @@ $(document).ready(function () {
         data.nmb = nmb;
         data["csrfmiddlewaretoken"] = csrf_token;
 
-        updateBasketListAndAddToBasketButtons('POST', data);
+        updateBasketList('POST', data);
     });
 
 
@@ -137,7 +139,7 @@ $(document).ready(function () {
     function removeFromNavbarBasketList (product_id) {
         var data = {};
         data.remove_product_id = product_id;
-        updateBasketListAndAddToBasketButtons('GET', data);
+        updateBasketList('GET', data);
     }
 
     function removeFromCheckoutBasketList (product_id) {
@@ -177,7 +179,7 @@ $(document).ready(function () {
                 cache: true,
                 success: function (data) {
                     product_to_change.find('.total-product-price').text(data.total_product_price);
-                    updateBasketListAndAddToBasketButtons();
+                    updateBasketList();
                 },
                 error: function () {
                     console.log("error")

@@ -7,7 +7,7 @@ from .forms import *
 
 
 
-def basket_list(request):
+def update_basket_list(request):
     session_key = request.session.session_key
 
     if request.method == "POST":
