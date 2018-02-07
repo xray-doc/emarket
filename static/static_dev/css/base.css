@@ -29,7 +29,27 @@ html, body{
 }
 
 
+.home-image{
+    display:inline-block;
+    position:relative;
+}
 
+.home-image span{
+    display:inline-block;
+    position:absolute;
+    top: 41%;
+    left: 33%;
+    color: #969696;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 136px;
+    padding:10px 30px;
+}
+
+#signature{
+    top: 90%;
+    font-size: 37px;
+    left: 77%;
+}
 
 /*
 Navbar
