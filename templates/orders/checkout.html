@@ -28,7 +28,7 @@
                                 <th>Product</th>
                                 <th>Number</th>
                                 <th>Price per item</th>
-                                <th>Price</th>
+                                <th>Summ</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -91,7 +91,7 @@
                 <label>Your name</label>
                 <span class="form-error">{{ form.name.errors }}</span>
                 <input type="text" class="form-control" name="{{ form.name.html_name }}"
-                       placeholder="Иван Иванов" value="{{ request.POST.name }}"
+                       placeholder="Boris Ivanov" value="{{ request.POST.name }}"
                 >
             </div>
 
@@ -115,7 +115,7 @@
                 <label>Address</label>
                 <span class="form-error">{{ form.address.errors }}</span>
                 <input type="text" class="form-control" name="{{ form.address.html_name }}"
-                       placeholder="Ваш адрес" value="{{ request.POST.address }}"
+                       placeholder="Address" value="{{ request.POST.address }}"
                 >
             </div>
 

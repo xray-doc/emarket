@@ -65,9 +65,9 @@ $(document).ready(function () {
     // Short appearance of basket when product added
     var basket_appearance_timerId = 0;
     function navbarBasketAppearance() {
-        $('.basket').show(duration=200);
+        $('.basket').show(duration=300);
         basket_appearance_timerId = setTimeout(function () {
-            $('.basket').hide(duration=200);
+            $('.basket').hide(duration=300);
             basket_appearance_timerId = 0;
         }, 2000)
     }
@@ -134,6 +134,13 @@ $(document).ready(function () {
         updateBasketList('POST', data);
     });
 
+    
+    // Appearance of reply to comment form on prodcut page
+    $('.comment-reply-btn').click(function (e) {
+        e.preventDefault();
+        $('.comment-reply-form').fadeToggle();
+    })
+    
 
     // Deleting from basket list both on navbar and checkout page
     function removeFromNavbarBasketList (product_id) {

@@ -67,3 +67,7 @@ Product.html styles
 .product tr{
     white-space: pre;
 }
+
+.comment-reply-form{
+    display: none;
+}

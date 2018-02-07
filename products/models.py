@@ -1,6 +1,11 @@
 from django.db import models
 from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFit
+from django.contrib.contenttypes.models import ContentType
+from django.core.urlresolvers import reverse
+
+
+from comments.models import Comment
 
 
 
@@ -34,6 +39,22 @@ class Product(models.Model):
     class Meta:
         verbose_name = "Product"
         verbose_name_plural = "Products"
+
+    def get_absolute_url(self):
+        return reverse("product", kwargs={"product_id": self.id})
+
+
+    @property
+    def comments(self):
+        instance = self
+        qs = Comment.objects.filter_by_instance(instance)
+        return qs
+
+    @property
+    def get_content_type(self):
+        instance = self
+        content_type = ContentType.objects.get_for_model(instance.__class__)
+        return content_type
 
 
 

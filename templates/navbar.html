@@ -22,20 +22,20 @@
                         <a href="#">Hello, {{ request.user }}</a>
                     </li>
                     <li>
-                        <a href="{% url 'logout' %}">
+                        <a href="{% url 'accounts:logout' %}">
                             <img class="login-icons" src="{% static 'static_dev/open-iconic-master/svg/account-logout.svg' %}">
                             logout
                         </a>
                     </li>
                 {% else %}
                     <li id="login">
-                        <a href="{% url 'login' %}">
+                        <a href="{% url 'accounts:login' %}">
                             <img class="login-icons" src="{% static 'static_dev/open-iconic-master/svg/account-login.svg' %}">
                             login
                         </a>
                     </li>
                     <li id="register">
-                        <a href="{% url 'register' %}">
+                        <a href="{% url 'accounts:register' %}">
                             <img class="login-icons" src="{% static 'static_dev/open-iconic-master/svg/person.svg' %}">
                             register
                         </a>
@@ -60,7 +60,7 @@
                                     Total: <span class="total_price h4"></span> RUB
                                 </div>
                             </div>
-                            <div class="col-lg-6">
+                            <div class="col-lg-6 btn-to-basket-form">
                                 <form action="{% url 'checkout' %}">
                                     <button class="btn btn-info" id="btn_to_basket"><span class="h5">Checkout</span></button>
                                 </form>
