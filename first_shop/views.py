@@ -138,77 +138,77 @@ def contacts(request):
 
 # This view used like a script for generating comments to
 # products
-def forging_comments(request):
-    import random
-    from django.contrib.contenttypes.models import ContentType
-    from comments.models import Comment
-    from django.contrib.auth import (
-        authenticate,
-        get_user_model,
-        login,
-        logout,
-    )
-    User = get_user_model()
-
-    def create_users():
-        users_objects = []
-        users_data = [
-            ('Andrey', 'andrey', 'andr@andr.ru'),
-            ('Pavel', 'pavel', 'pav@pav.ru'),
-            ('Dmitriy', 'dima', 'dim@dim.ru'),
-            ('Alex', 'alex', 'alex@alex.ru')
-        ]
-
-        for user_data in users_data:
-            new_user = User(username=user_data[0], password=user_data[1], email=user_data[2])
-            try:
-                new_user.save()
-            except:
-                pass
-            users_objects.append(new_user)
-        return users_objects
-    new_users = create_users()
-
-    comments = [
-        'Great gadget',
-        "I've used it for a long time and can recommend it",
-        "That's a good tablet",
-        'I prefere that one',
-        "It's my comment"
-    ]
-
-    replies = [
-        'Agree with you',
-        "I don't think so",
-        '+1',
-        "you're right"
-    ]
-
-    product_content_type = ContentType.objects.get(model='product')
-    for product in Product.objects.all():
-        first_comment, created = Comment.objects.get_or_create(
-            user=random.choice(new_users),
-            content_type=product_content_type,
-            object_id=product.id,
-            content=random.choice(comments),
-            parent=None,
-        )
-
-        second_comment, created = Comment.objects.get_or_create(
-            user=random.choice(new_users),
-            content_type=product_content_type,
-            object_id=product.id,
-            content=random.choice(comments),
-            parent=None,
-        )
-
-        reply, created = Comment.objects.get_or_create(
-            user=random.choice(new_users),
-            content_type=product_content_type,
-            object_id=product.id,
-            content=random.choice(comments),
-            parent=second_comment,
-        )
-
-
-    return HttpResponse('brrrt')
+# def forging_comments(request):
+#     import random
+#     from django.contrib.contenttypes.models import ContentType
+#     from comments.models import Comment
+#     from django.contrib.auth import (
+#         authenticate,
+#         get_user_model,
+#         login,
+#         logout,
+#     )
+#     User = get_user_model()
+#
+#     def create_users():
+#         users_objects = []
+#         users_data = [
+#             ('Andrey', 'andrey', 'andr@andr.ru'),
+#             ('Pavel', 'pavel', 'pav@pav.ru'),
+#             ('Dmitriy', 'dima', 'dim@dim.ru'),
+#             ('Alex', 'alex', 'alex@alex.ru')
+#         ]
+#
+#         for user_data in users_data:
+#             new_user = User(username=user_data[0], password=user_data[1], email=user_data[2])
+#             try:
+#                 new_user.save()
+#             except:
+#                 pass
+#             users_objects.append(new_user)
+#         return users_objects
+#     new_users = create_users()
+#
+#     comments = [
+#         'Great gadget',
+#         "I've used it for a long time and can recommend it",
+#         "That's a good tablet",
+#         'I prefere that one',
+#         "It's my comment"
+#     ]
+#
+#     replies = [
+#         'Agree with you',
+#         "I don't think so",
+#         '+1',
+#         "you're right"
+#     ]
+#
+#     product_content_type = ContentType.objects.get(model='product')
+#     for product in Product.objects.all():
+#         first_comment, created = Comment.objects.get_or_create(
+#             user=random.choice(new_users),
+#             content_type=product_content_type,
+#             object_id=product.id,
+#             content=random.choice(comments),
+#             parent=None,
+#         )
+#
+#         second_comment, created = Comment.objects.get_or_create(
+#             user=random.choice(new_users),
+#             content_type=product_content_type,
+#             object_id=product.id,
+#             content=random.choice(comments),
+#             parent=None,
+#         )
+#
+#         reply, created = Comment.objects.get_or_create(
+#             user=random.choice(new_users),
+#             content_type=product_content_type,
+#             object_id=product.id,
+#             content=random.choice(comments),
+#             parent=second_comment,
+#         )
+#
+#
+#     return HttpResponse('brrrt')

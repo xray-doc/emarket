@@ -31,7 +31,7 @@ urlpatterns = [
     url(r'^filtered_products/', views.filteredProducts, name='filtered_products'),
     url(r'^delivery/', views.delivery, name='delivery'),
     url(r'^contacts/', views.contacts, name='contacts'),
-    url(r'^forging_comments/', views.forging_comments, name='forging_comments'),
+    # url(r'^forging_comments/', views.forging_comments, name='forging_comments'),
     # url(r'^comments/', include("comments.urls", namespace='comments')),
     url(r'^accounts/', include("accounts.urls", namespace='accounts')),
     url(r'^', include('orders.urls')),
