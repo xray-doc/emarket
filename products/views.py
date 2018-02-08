@@ -49,6 +49,5 @@ def product(request, product_id):
         "comments": comments,
         "comment_form": form,
     }
-    # return render(request, "post_detail.html", context)
 
     return render(request, 'products/product.html', context)
