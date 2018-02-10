@@ -140,6 +140,7 @@
                     </footer>
 
                     <div class='comment-reply'>
+                        {% if comment.children %}<br>{% endif %}
                         {% for child_comment in comment.children reversed %}
                             <blockquote>
                                 <p>{{ child_comment.content }}</p>
@@ -147,7 +148,9 @@
                             </blockquote>
                         {% endfor %}
                     <div class="comment-reply-form">
+                        <br>
                         {% if request.user.is_authenticated %}
+                            <span class="h5">Reply to {{ comment.user }}:</span>
                             <form method="POST" action="."> {% csrf_token %}
                                 {{ comment_form|crispy }}
                                 <input type='hidden' name='parent_id' value='{{ comment.id }}'>
