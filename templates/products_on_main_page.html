@@ -51,7 +51,7 @@
                             <div class="price_and_btn_div">
                                 {% if not product.discount %}
                                     <span class="h4">
-                                        {{ product.price }}
+                                        {{ product.price }} RUB
                                     </span>
                                 {% else %}
                                     <span class="h4">
@@ -59,7 +59,7 @@
                                     </span>  &nbsp
                                     <span class="h4 discount-price">
                                         {{ product.get_price_with_discount }}
-                                    </span>
+                                    </span> <span class="h4">RUB</span>
                                 {% endif %}
                                 <div class="add-to-cart-btn">
                                     <button class="btn btn-success changing-button" data-id="{{ product.id }}">

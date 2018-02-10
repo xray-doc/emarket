@@ -139,7 +139,9 @@ $(document).ready(function () {
     // Appearance of reply to comment form on prodcut page
     $('.comment-reply-btn').click(function (e) {
         e.preventDefault();
-        $('.comment-reply-form').fadeToggle();
+        var parent = $(e.target).closest('blockquote');
+        var comment_form = $(parent).find('.comment-reply-form')
+        comment_form.fadeToggle();
     })
     
 
