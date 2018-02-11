@@ -117,13 +117,22 @@ $(document).ready(function () {
         });
     
 
-    // Adding to basket list on product.html
+    // Adding to basket list on product_detail.html
     $('#form_buying_product').on('submit', function (e) {
         e.preventDefault();
 
-        var form = $('#form_buying_product');
-        var nmb = $('.product-nmb-form').val();
         var submit_btn = $('#submit-btn');
+        if (submit_btn.hasClass('btn-go-to-checkout')){
+            // Because if product is already in basket
+            // and button class have changed to "btn-go-to-basket",
+            // we don't need to add this product to basket
+            // again, we only need to redirect to checkout.
+            // so the function should stop.
+            return false;
+        }
+
+        var form = $(this);
+        var nmb = $('.product-nmb-form').val();
         var product_id = submit_btn.data('id');
         var csrf_token = form.find('[name="csrfmiddlewaretoken"]').val();
         var data = {};

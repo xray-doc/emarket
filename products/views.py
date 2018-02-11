@@ -50,4 +50,4 @@ def product(request, product_id):
         "comment_form": form,
     }
 
-    return render(request, 'products/product.html', context)
+    return render(request, 'products/product_detail.html', context)
