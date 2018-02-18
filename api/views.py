@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from rest_framework import generics
+from django.db.models import Q
+
 
 from products.models import Product
 from .permissions import IsAdminOrReadOnly
@@ -8,9 +10,15 @@ from .serializers import ProductSerializer
 
 
 class ProductAPIView(generics.ListAPIView):
-    queryset = Product.objects.all()
     serializer_class = ProductSerializer
     permission_classes = [IsAdminOrReadOnly]
+
+    def get_queryset(self):
+        qs = Product.objects.all()
+        query = self.request.GET.get("q")
+        if query is not None:
+            qs = qs.filter(name__icontains=query)
+        return qs
 
 
 class ProductRudView(generics.RetrieveUpdateDestroyAPIView): # DetailView CreateView FormView
