@@ -10,7 +10,16 @@ class ProductSerializer(serializers.ModelSerializer):
         fields = [
             'name',
             'price',
-            'os'
+            'discount',
+            'short_description',
+            'diagonal',
+            'built_in_memory',
+            'ram',
+            'os',
+            'screen_resolution',
+            'processor',
+            'main_camera',
+            'other_specifications'
         ]
 
     # def get_url(self, obj):
