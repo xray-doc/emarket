@@ -20,8 +20,10 @@ from django.contrib.staticfiles import *
 from django.conf.urls.static import static
 from django.conf import settings
 from django.views.generic.base import RedirectView
+from rest_framework_jwt.views import obtain_jwt_token
 
 from . import views
+import api
 
 
 urlpatterns = [
@@ -34,10 +36,10 @@ urlpatterns = [
     # url(r'^forging_comments/', views.forging_comments, name='forging_comments'),
     # url(r'^comments/', include("comments.urls", namespace='comments')),
     url(r'^accounts/', include("accounts.urls", namespace='accounts')),
-    url(r'^', include('orders.urls')),
-    url(r'^', include('products.urls')),
-
-
+    url(r'^orders/', include('orders.urls', namespace='orders')),
+    url(r'^products/', include('products.urls', namespace='products')),
+    url(r'^api/auth/login/$', obtain_jwt_token, name='api-login'),
+    url(r'^api/', include('api.urls', namespace='api')),
 ]
 
 

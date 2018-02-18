@@ -41,7 +41,7 @@ class Product(models.Model):
         verbose_name_plural = "Products"
 
     def get_absolute_url(self):
-        return reverse("product", kwargs={"product_id": self.id})
+        return reverse("products:product", kwargs={"product_id": self.id})
 
 
     @property

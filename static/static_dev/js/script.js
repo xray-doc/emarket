@@ -57,7 +57,7 @@ $(document).ready(function () {
             navbarBasketAppearance();
         })
         .on('click', '.btn-go-to-checkout', function (e) {
-            window.location.pathname = 'checkout/';
+            window.location.pathname = 'orders/checkout/';
         })
 
 
@@ -85,7 +85,7 @@ $(document).ready(function () {
 
     function updateBasketList(type, data) {
         $.ajax({
-            url: "/update_basket_list/",
+            url: "/orders/update_basket_list/",
             type: type,
             data: data,
             cache: true,
@@ -196,7 +196,7 @@ $(document).ready(function () {
             data.nmb = nmb;
             data.product_id = product_id;
             $.ajax({
-                url: "/changeBasket/",
+                url: "/orders/changeProduct/",
                 type: "POST",
                 data: data,
                 cache: true,

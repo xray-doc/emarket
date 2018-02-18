@@ -14,11 +14,10 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from django.conf.urls import url
-from django.contrib import admin
 from . import views
 
 urlpatterns = [
     url(r'^update_basket_list/$', views.update_basket_list, name="basket_list"),
     url(r'^checkout/$', views.checkout, name="checkout"),
-    url(r'^changeBasket/$', views.changeProductInBasket, name="changeBasket"),
+    url(r'^changeProduct/$', views.changeProductInBasket, name="changeProduct"),
 ]

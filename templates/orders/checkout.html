@@ -38,7 +38,7 @@
                                         <img src="{{ product_in_basket.get_product_thumbnail_url }}">
                                     </td>
                                     <td>
-                                        <a href="{% url 'product' product_in_basket.product.id %}">
+                                        <a href="{% url 'products:product' product_in_basket.product.id %}">
                                             {{ product_in_basket.product.name }}
                                         </a>
                                     </td>

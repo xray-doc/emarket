@@ -43,7 +43,7 @@
                 {% endif %}
 
                 <li id="checkout">
-                    <a id="basket-in-navbar" href="{% url 'checkout' %}">Basket
+                    <a id="basket-in-navbar" href="{% url 'orders:checkout' %}">Basket
                         <img class="basket-icon" src="{% static 'static_dev/open-iconic-master/svg/cart.svg' %}">
                         <span id="basket_total_nmb"></span>
                     </a>
@@ -61,7 +61,7 @@
                                 </div>
                             </div>
                             <div class="col-lg-6 btn-to-basket-form">
-                                <form action="{% url 'checkout' %}">
+                                <form action="{% url 'orders:checkout' %}">
                                     <button class="btn btn-info" id="btn_to_basket"><span class="h5">Checkout</span></button>
                                 </form>
                             </div>
