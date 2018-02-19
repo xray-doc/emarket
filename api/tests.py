@@ -64,7 +64,7 @@ class ProductAPITestCase(APITestCase):
         token_rsp = encode_handler(payload)
         self.client.credentials(HTTP_AUTHORIZATION='JWT ' + token_rsp)  # JWT <token>
         response = self.client.put(url, data, format='json')
-        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN) # Because is_staff == False
 
     def test_update_product_with_staff_user(self):
         product = Product.objects.first()
