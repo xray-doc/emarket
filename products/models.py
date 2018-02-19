@@ -3,6 +3,7 @@ from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFit
 from django.contrib.contenttypes.models import ContentType
 from django.core.urlresolvers import reverse
+from rest_framework.reverse import reverse as api_reverse
 
 
 from comments.models import Comment
@@ -43,6 +44,8 @@ class Product(models.Model):
     def get_absolute_url(self):
         return reverse("products:product", kwargs={"product_id": self.id})
 
+    def get_api_url(self, request=None):
+        return api_reverse("api:product-rud", kwargs={'pk': self.pk}, request=request)
 
     @property
     def comments(self):
