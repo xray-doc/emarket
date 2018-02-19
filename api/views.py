@@ -4,14 +4,14 @@ from django.db.models import Q
 
 
 from products.models import Product
-from .permissions import IsAdminOrReadOnly
+from .permissions import IsStaffOrReadOnly
 from .serializers import ProductSerializer
 
 
 
 class ProductAPIView(generics.ListAPIView):
     serializer_class = ProductSerializer
-    permission_classes = [IsAdminOrReadOnly]
+    permission_classes = [IsStaffOrReadOnly]
 
     def get_queryset(self):
         qs = Product.objects.all()
@@ -23,7 +23,7 @@ class ProductAPIView(generics.ListAPIView):
 
 class ProductRudView(generics.RetrieveUpdateDestroyAPIView): # DetailView CreateView FormView
     serializer_class        = ProductSerializer
-    permission_classes      = [IsAdminOrReadOnly]
+    permission_classes      = [IsStaffOrReadOnly]
     #queryset                = BlogPost.objects.all()
 
     def get_queryset(self):

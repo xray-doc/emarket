@@ -1,7 +1,7 @@
 from rest_framework import permissions
 
 
-class IsAdminOrReadOnly(permissions.BasePermission):
+class IsStaffOrReadOnly(permissions.BasePermission):
     """
     Object-level permission to only allow admin to edit product.
     """
@@ -11,5 +11,4 @@ class IsAdminOrReadOnly(permissions.BasePermission):
         # so we'll always allow GET, HEAD or OPTIONS requests.
         if request.method in permissions.SAFE_METHODS:
             return True
-
-        return str(request.user) == 'admin'
+        return request.user.is_staff
