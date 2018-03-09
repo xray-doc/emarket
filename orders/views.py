@@ -8,6 +8,9 @@ from .forms import *
 
 
 def update_basket_list(request):
+    """
+    Renders navbar basket list HTML
+    """
     session_key = request.session.session_key
 
     if request.method == "POST":
@@ -57,6 +60,9 @@ def changeProductInBasket(request):
 
 
 def checkout(request):
+    """
+    Creating order
+    """
     session_key = request.session.session_key
     products_in_basket = ProductInBasket.objects.filter(session_key=session_key)
     products_total_price = ProductInBasket.get_basket_total_price(session_key)

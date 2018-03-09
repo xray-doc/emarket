@@ -6,7 +6,11 @@ from django.contrib.auth.models import User
 from utils.main import disable_for_loaddata
 from products.models import *
 
+
 class Status(models.Model):
+    """
+    Status of order
+    """
     name = models.CharField(max_length=64, blank=True, null=True, default=None)
     is_active = models.BooleanField(default=True)
 
@@ -19,8 +23,6 @@ class Status(models.Model):
     class Meta:
         verbose_name = "Status"
         verbose_name_plural = "Order status"
-
-
 
 
 class Order(models.Model):
@@ -73,6 +75,9 @@ class ProductInOrder(models.Model):
 
 @disable_for_loaddata
 def product_in_order_post_save(sender, instance, created, **kwargs):
+    """
+    Calculates order total price after saving (prices with discount)
+    """
     order = instance.order
     all_products_in_order = ProductInOrder.objects.filter(order=order, is_active=True)
 
@@ -103,6 +108,9 @@ class ProductInBasket(models.Model):
     updated = models.DateTimeField(auto_now_add=False, auto_now=True)
 
     def get_basket_total_price(session_key):
+        """
+        Returns summ of all products in basket (prices with discount)
+        """
         basket_total_price = 0
         products_in_basket = ProductInBasket.objects.filter(session_key=session_key, is_active=True)
         for product in products_in_basket:
@@ -110,6 +118,9 @@ class ProductInBasket(models.Model):
         return basket_total_price
 
     def get_product_thumbnail_url(self):
+        """
+        URL for thumbnail of Product main image
+        """
         return ProductImage.objects.get(product=self.product, is_main=True).thumbnail.url
 
     def __str__(self):

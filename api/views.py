@@ -24,10 +24,7 @@ class ProductAPIView(generics.ListAPIView):
 class ProductRudView(generics.RetrieveUpdateDestroyAPIView): # DetailView CreateView FormView
     serializer_class        = ProductSerializer
     permission_classes      = [IsStaffOrReadOnly]
-    #queryset                = BlogPost.objects.all()
 
     def get_queryset(self):
         return Product.objects.all()
 
-    # def get_serializer_context(self, *args, **kwargs):
-    #     return {"request": self.request}

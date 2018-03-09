@@ -29,9 +29,15 @@ class Product(models.Model):
     updated             = models.DateTimeField(auto_now_add=False, auto_now=True)
 
     def get_main_img_url(self):
+        """
+        Returns main image of Product
+        """
         return ProductImage.objects.get(product=self, is_main=True).image.url
 
     def get_price_with_discount(self):
+        """
+        Product price with discount (if it has discount)
+        """
         return self.price - (self.price / 100 * self.discount)
 
     def __str__(self):
@@ -49,6 +55,9 @@ class Product(models.Model):
 
     @property
     def comments(self):
+        """
+        Comments of product
+        """
         instance = self
         qs = Comment.objects.filter_by_instance(instance)
         return qs
