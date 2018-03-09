@@ -1,10 +1,12 @@
 from django.db import models
 from products.models import Product
 from django.db.models.signals import post_save
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 
 from utils.main import disable_for_loaddata
 from products.models import *
+
+User = get_user_model()
 
 
 class Status(models.Model):
@@ -94,8 +96,8 @@ post_save.connect(product_in_order_post_save, sender=ProductInOrder)
 
 
 
-
 class ProductInBasket(models.Model):
+    user = models.ForeignKey(User, blank=True, null=True, default=None)
     session_key = models.CharField(max_length=128, blank=True, null=True, default=True)
     order = models.ForeignKey(Order, blank=True, null=True, default=None)
     product = models.ForeignKey(Product, blank=True, null=True, default=None)
@@ -107,12 +109,17 @@ class ProductInBasket(models.Model):
     created = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated = models.DateTimeField(auto_now_add=False, auto_now=True)
 
-    def get_basket_total_price(session_key):
+    def get_basket_total_price(session_key=None, user=None):
         """
         Returns summ of all products in basket (prices with discount)
+        for particular user or session if user is not authenticated
         """
         basket_total_price = 0
-        products_in_basket = ProductInBasket.objects.filter(session_key=session_key, is_active=True)
+        if user:
+            products_in_basket = ProductInBasket.objects.filter(user=user, is_active=True)
+        else:
+            products_in_basket = ProductInBasket.objects.filter(session_key=session_key, is_active=True)
+
         for product in products_in_basket:
             basket_total_price += product.total_price
         return basket_total_price
