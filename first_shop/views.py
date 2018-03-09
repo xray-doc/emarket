@@ -13,17 +13,17 @@ def main(request):
     qs = Product.objects.all()                   # queryset of all products
 
     # Creating filter form
-    def get_choices_from_field(field):
+    def get_choices_from_column(column):
         """
-        Get distinct values from field in model.
-        Needs for creating choices for filter widgets.
-        :param field: field in model to create choices from.
-        :return: [{'field__val': 'val'},]
+        Get distinct values of column in model.
+        Is used for creating choices for filter widgets.
+        :param column: column in model to create choices from.
+        :return: [{'column__val': 'val'},]
         """
-        distinct_qs = Product.objects.all().values_list(field).distinct()
+        distinct_qs = Product.objects.all().values_list(column).distinct()
         choices = []
         for i in list(distinct_qs):
-            key = field + '__' + str(i[0])
+            key = column + '__' + str(i[0])
             val = i[0]
             choices.append({'key': key, 'val': val})
 
@@ -31,10 +31,10 @@ def main(request):
         # choices.sort()
         return choices
 
-    os_select         = get_choices_from_field('os')
-    diagonal_select   = get_choices_from_field('diagonal')
-    ram_select        = get_choices_from_field('ram')
-    processor_select  = get_choices_from_field('processor')
+    os_select         = get_choices_from_column('os')
+    diagonal_select   = get_choices_from_column('diagonal')
+    ram_select        = get_choices_from_column('ram')
+    processor_select  = get_choices_from_column('processor')
 
     return render(request, 'home.html', locals())
 
@@ -106,7 +106,6 @@ def filteredProducts(request):
 
 def delivery(request):
     return render(request, 'delivery.html', locals())
-
 
 
 def contacts(request):

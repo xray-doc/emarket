@@ -11,6 +11,9 @@ from .models import *
 
 
 def product(request, product_id):
+    """
+    Product_detail
+    """
     product = get_object_or_404(Product, pk=product_id)
 
     initial_data = {

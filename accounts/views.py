@@ -3,11 +3,11 @@ from django.contrib.auth import (
     get_user_model,
     login,
     logout,
-
     )
 from django.shortcuts import render, redirect
 
 from .forms import UserLoginForm, UserRegisterForm
+
 
 def login_view(request):
     title = "Login"
