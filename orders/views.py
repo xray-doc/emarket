@@ -87,8 +87,14 @@ def checkout(request):
     Creating order
     """
     session_key = request.session.session_key
-    products_in_basket = ProductInBasket.objects.filter(session_key=session_key)
-    products_total_price = ProductInBasket.get_basket_total_price(session_key)
+    user = request.user
+
+    if user.is_authenticated():
+        products_in_basket = ProductInBasket.objects.filter(user=user)
+        products_total_price = ProductInBasket.get_basket_total_price(user=user)
+    else:
+        products_in_basket = ProductInBasket.objects.filter(session_key=session_key)
+        products_total_price = ProductInBasket.get_basket_total_price(session_key=session_key)
 
     form = CheckoutContactForm(request.POST or None)
     if request.POST and form.is_valid():
@@ -99,9 +105,9 @@ def checkout(request):
         address = data["address"]
         comments = data["comments"]
 
-        user, created = User.objects.get_or_create(username=phone, defaults={"first_name": name})
+        #user, created = User.objects.get_or_create(username=phone, defaults={"first_name": name})
         order = Order.objects.create(
-            user=user,
+            #user=user,
             customer_name=name,
             customer_phone=phone,
             customer_email=email,
@@ -109,6 +115,9 @@ def checkout(request):
             comments=comments,
             status_id=1
         )
+
+        if user.is_authenticated():
+            order.user = user
 
         for product_in_basket in products_in_basket:
             ProductInOrder.objects.create(
@@ -121,3 +130,5 @@ def checkout(request):
         return render(request, 'orders/done.html', locals())
 
     return render(request, 'orders/checkout.html', locals())
+
+#TODO: checkout form takes data from profile

@@ -6,6 +6,8 @@ from django.contrib.auth import (
     logout,
 )
 
+from .models import Profile
+
 User = get_user_model()
 
 
@@ -44,3 +46,11 @@ class UserRegisterForm(forms.ModelForm):
         if email_qs.exists():
             raise forms.ValidationError("This email has already been registered")
         return email
+
+
+class EditProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        exclude = ['user']
+
+    # TODO: check for cool avatar widget
