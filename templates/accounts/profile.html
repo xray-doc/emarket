@@ -1,29 +1,71 @@
 {% extends "base.html" %}
 {% load static %}
+{% load avatar_tags %}
 
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'static_dev/css/delivery_and_contacts.css' %}">
+{% endblock style %}
+
+{% block title %}
+    Profile
+{% endblock title %}
 
 
 {% block content %}
-<div class="container">
+<div class="container contacts">
     <div class="row">
-        <div class='col-sm-6 col-sm-offset-3'>
+        <div class="col-sm-4 col-sm-offset-2">
+            <h2>Avatar</h2>
+            {% avatar user 200 %} <br> <br>
+            <a href="{% url 'avatar_change' %}">Change your avatar</a>
+        </div>
+        <div class='col-sm-4'>
             <h2>Profile</h2>
-            <p>
-                <strong>First name:</strong> {{ profile.first_name }}
-            </p>
-            <p>
-                <strong>Second name:</strong> {{ profile.second_name }}
-            </p>
-            <p>
-                <strong>Gender:</strong> {{ profile.gender }}
-            </p>
-            <p>
-                <strong>Phone:</strong> {{ profile.phone }}
-            </p>
-            <p>
-                <strong>Address:</strong> {{ profile.address }}
-            </p>
+                <table class="table">
+                    <tr>
+                        <th>First_name: </th>
+                        <td>{{ profile.first_name }}</td>
+                    </tr>
+                    <tr>
+                        <th>Second name: </th>
+                        <td>{{ profile.second_name }}</td>
+                    </tr>
+                    <tr>
+                        <th>Gender: </th>
+                        <td>{{ profile.gender }}</td>
+                    </tr>
+                    <tr>
+                        <th>Phone:</th>
+                        <td>{{ profile.phone }}</td>
+                    </tr>
+                    <tr>
+                        <th>Address:</th>
+                        <td>{{ profile.address }}</td>
+                    <br>
+                </table>
             <a href="{% url 'accounts:edit-profile' %}">Edit profile</a>
+
+
+
+{#            <h2>Profile</h2>#}
+{#            <div>#}
+{#                <strong>First name:</strong> {{ profile.first_name }}#}
+{#            </div>#}
+{#            <div>#}
+{#                <strong>Second name:</strong> {{ profile.second_name }}#}
+{#            </div>#}
+{#            <div>#}
+{#                <strong>Gender:</strong> {{ profile.gender }}#}
+{#            </div>#}
+{#            <div>#}
+{#                <strong>Phone:</strong> {{ profile.phone }}#}
+{#            </div>#}
+{#            <div>#}
+{#                <strong>Address:</strong> {{ profile.address }}#}
+{#            </div>#}
+{#            <br>#}
+{#            <a href="{% url 'accounts:edit-profile' %}">Edit profile</a>#}
         </div>
     </div>
 </div>

@@ -28,18 +28,19 @@ import api
 
 urlpatterns = [
     url(r'^$', RedirectView.as_view(url='main/')),
-    url(r'^admin/', admin.site.urls),
-    url(r'^main/', views.main, name='main'),
-    url(r'^filtered_products/', views.filteredProducts, name='filtered_products'),
-    url(r'^delivery/', views.delivery, name='delivery'),
-    url(r'^contacts/', views.contacts, name='contacts'),
-    # url(r'^forging_comments/', views.forging_comments, name='forging_comments'),
-    # url(r'^comments/', include("comments.urls", namespace='comments')),
     url(r'^accounts/', include("accounts.urls", namespace='accounts')),
+    url(r'^admin/', admin.site.urls),
+    url(r'^api/', include('api.urls', namespace='api')),
+    url(r'^api/auth/login/$', obtain_jwt_token, name='api-login'),
+    url(r'^avatar/', include('avatar.urls')),
+    url(r'^contacts/', views.contacts, name='contacts'),
+    url(r'^delivery/', views.delivery, name='delivery'),
+    url(r'^main/', views.main, name='main'),
     url(r'^orders/', include('orders.urls', namespace='orders')),
     url(r'^products/', include('products.urls', namespace='products')),
-    url(r'^api/auth/login/$', obtain_jwt_token, name='api-login'),
-    url(r'^api/', include('api.urls', namespace='api')),
+    url(r'^filtered_products/', views.filteredProducts, name='filtered_products'),
+    # url(r'^forging_comments/', views.forging_comments, name='forging_comments'),
+    # url(r'^comments/', include("comments.urls", namespace='comments')),
 ]
 
 

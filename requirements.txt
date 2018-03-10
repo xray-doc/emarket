@@ -1,6 +1,7 @@
 dj-database-url==0.4.2
 Django==1.11.5
 django-appconf==1.0.2
+django-avatar==4.1.0
 django-crispy-forms==1.7.0
 django-imagekit==4.0.2
 djangorestframework==3.7.7
@@ -8,6 +9,7 @@ djangorestframework-jwt==1.11.0
 gunicorn==19.7.1
 pilkit==2.0
 Pillow==5.0.0
+pkg-resources==0.0.0
 psycopg2==2.7.3.2
 PyJWT==1.5.3
 pytz==2017.3

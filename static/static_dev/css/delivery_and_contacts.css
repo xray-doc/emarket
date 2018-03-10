@@ -6,6 +6,7 @@ Delivery and contacts styles
 .contacts .row {
     background-color: white;
     height: 100%;
+    min-height: 720px;
     margin: 40px;
     padding: 40px;
 }
