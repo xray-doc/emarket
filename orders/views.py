@@ -130,5 +130,3 @@ def checkout(request):
         return render(request, 'orders/done.html', locals())
 
     return render(request, 'orders/checkout.html', locals())
-
-#TODO: checkout form takes data from profile
