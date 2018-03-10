@@ -11,4 +11,4 @@ class Profile(models.Model):
     second_name = models.CharField(max_length=64, blank=True, null=True, default=None)
     phone = models.CharField(blank=True, null=True, default=None, max_length=48)
     address = models.CharField(blank=True, null=True, default=None, max_length=128)
-
+    #TODO: gender choices

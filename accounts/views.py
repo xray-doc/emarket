@@ -6,8 +6,10 @@ from django.contrib.auth import (
     )
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from django.core.urlresolvers import reverse
 
 from .forms import UserLoginForm, UserRegisterForm, EditProfileForm
+from .models import Profile
 
 
 def login_view(request):
@@ -27,7 +29,6 @@ def login_view(request):
 
 def register_view(request):
     title = "Register"
-    next = request.GET.get('next')
     form = UserRegisterForm(request.POST or None)
     if form.is_valid():
         user = form.save(commit=False)
@@ -36,9 +37,8 @@ def register_view(request):
         user.save()
         new_user = authenticate(username=user.username, password=password)
         login(request, new_user)
-        if next:
-            return redirect(next)
-        return redirect("/") # TODO: redirect to edit profile page
+
+        return redirect(reverse("accounts:edit-profile"))
 
     context = {
         "form": form,
@@ -54,12 +54,22 @@ def logout_view(request):
 
 @login_required(login_url='/accounts/login/')
 def edit_profile_view(request):
+    user = request.user
     title = "Edit profile"
-    next = request.GET.get('next')
-    form = EditProfileForm(request.POST or None)
-    if form.is_valid():
-        profile = form.save(commit=False)
-        return redirect("/") # TODO: redirect to profile page
+    profile = Profile.objects.filter(user=user).first()
+
+    if profile:
+        form = EditProfileForm(instance=profile)
+    else:
+        form = EditProfileForm(request.POST or None)
+
+    if request.method == 'POST':
+        form = EditProfileForm(request.POST, instance=profile)
+        if form.is_valid():
+            profile = form.save(commit=False)
+            profile.user = user
+            profile.save()
+            return redirect(reverse("accounts:profile"))
 
     context = {
         "form": form,
@@ -67,4 +77,10 @@ def edit_profile_view(request):
     }
     return render(request, "accounts/form.html", context)
 
-#TODO: create profile page
+
+@login_required(login_url='/accounts/login/')
+def profile_view(request):
+    user = request.user
+    profile = Profile.objects.filter(user=user).first()
+
+    return render(request, "accounts/profile.html", locals())

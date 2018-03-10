@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class='col-sm-6 col-sm-offset-3'>
+            <h2>Profile</h2>
+            <p>
+                <strong>First name:</strong> {{ profile.first_name }}
+            </p>
+            <p>
+                <strong>Second name:</strong> {{ profile.second_name }}
+            </p>
+            <p>
+                <strong>Phone:</strong> {{ profile.phone }}
+            </p>
+            <p>
+                <strong>Address:</strong> {{ profile.address }}
+            </p>
+            <a href="{% url 'accounts:edit-profile' %}">Edit profile</a>
+        </div>
+    </div>
+</div>
+{% endblock content %}

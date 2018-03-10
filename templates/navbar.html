@@ -19,7 +19,7 @@
 
                 {% if request.user.is_authenticated %}
                     <li>
-                        <a href="#">Hello, {{ request.user }}</a>
+                        <a href="{% url 'accounts:profile' %}">Hello, {{ request.user }}</a>
                     </li>
                     <li>
                         <a href="{% url 'accounts:logout' %}">
