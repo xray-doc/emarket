@@ -14,7 +14,7 @@ class Profile(models.Model):
     profile_pic = models.ImageField(upload_to='profile_pics/', blank=True, default=None)
     first_name = models.CharField(max_length=64, blank=True, null=True, default=None)
     second_name = models.CharField(max_length=64, blank=True, null=True, default=None)
-    gender = models.CharField(max_length=1, choices=GENDER_CHOICES, default='M')
+    gender = models.CharField(max_length=10, choices=GENDER_CHOICES, default='M')
     phone = models.CharField(blank=True, null=True, default=None, max_length=48)
     address = models.CharField(blank=True, null=True, default=None, max_length=128)
 

@@ -175,7 +175,7 @@ EMAIL_HOST_PASSWORD = 'mstosorok14'
 EMAIL_PORT = 465
 EMAIL_USE_SSL = True
 DEFAULT_FROM_EMAIL = 'm10040@mail.ru'
-
+ADMINS = ('Mikhail', 'm.nikolaev1@gmail.com')
 
 # REST settings
 REST_FRAMEWORK = {
@@ -190,9 +190,43 @@ REST_FRAMEWORK = {
 }
 
 
-# django-avatar settings
 
-#AVATAR_ADD_TEMPLATE = 'templates/avatar/add.html'
-
-#AVATAR_RESIZE_METHOD = 'Image.ANTIALIAS'
-#AVATAR_MAX_AVATARS_PER_USER = 5
+# LOGGING = {
+#     'version': 1,
+#     'disable_existing_loggers': False,
+#     'handlers': {
+#         # Include the default Django email handler for errors
+#         # This is what you'd get without configuring logging at all.
+#         'mail_admins': {
+#             'class': 'django.utils.log.AdminEmailHandler',
+#             'level': 'ERROR',
+#              # But the emails are plain text by default - HTML is nicer
+#             'include_html': True,
+#         },
+#         # Log to a text file that can be rotated by logrotate
+#         'logfile': {
+#             'class': 'logging.handlers.WatchedFileHandler',
+#             'filename': 'emarket.log'
+#         },
+#     },
+#     'loggers': {
+#         # Again, default Django configuration to email unhandled exceptions
+#         'django.request': {
+#             'handlers': ['mail_admins'],
+#             'level': 'ERROR',
+#             'propagate': True,
+#         },
+#         # Might as well log any errors anywhere else in Django
+#         'django': {
+#             'handlers': ['logfile'],
+#             'level': 'ERROR',
+#             'propagate': False,
+#         },
+#         # Your own app - this assumes all your logger names start with "myapp."
+#         'myapp': {
+#             'handlers': ['logfile'],
+#             'level': 'WARNING', # Or maybe INFO or DEBUG
+#             'propagate': False
+#         },
+#     },
+# }
