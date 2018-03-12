@@ -1,5 +1,5 @@
 /*
-Product.html styles
+Product_detail.html styles
  */
 
 .component{
@@ -68,6 +68,15 @@ Product.html styles
     white-space: pre;
 }
 
+
+/*
+Comments
+ */
 .comment-reply-form{
     display: none;
+}
+
+.comment-body > img{
+    float: left;
+    margin-right: 20px;
 }

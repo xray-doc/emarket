@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load i18n avatar_tags %}
+{% load static %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'static_dev/css/delivery_and_contacts.css' %}">
+{% endblock style %}
+
+{% block title %}
+    Change avatar
+{% endblock title %}
+
+
+{% block content %}
+    <div class="container contacts">
+        <div class="row">
+            <div class="col-sm-6 col-sm-offset-3">
+                <p>{% trans "Your current avatar: " %}</p>
+                {% avatar user %}
+                {% if not avatars %}
+                    <p>{% trans "You haven't uploaded an avatar yet. Please upload one now." %}</p>
+                {% else %}
+                    <form method="POST" action="{% url 'avatar_change' %}">
+                        <ul>
+                            {{ primary_avatar_form.as_ul }}
+                        </ul>
+                        <p>{% csrf_token %}<input type="submit" value="{% trans "Choose new Default" %}" /></p>
+                    </form>
+                {% endif %}
+                <form enctype="multipart/form-data" method="POST" action="{% url 'avatar_add' %}">
+                    {{ upload_avatar_form.as_p }}
+                    <p>{% csrf_token %}<input type="submit" value="{% trans "Upload New Image" %}" /></p>
+                </form>
+                <div><a href="{% url 'accounts:profile' %}">Return to profile page</a> </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
