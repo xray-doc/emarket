@@ -19,3 +19,11 @@ Delivery and contacts styles
 .delivery ul, ol {
     margin-bottom: 40px;
 }
+
+.table-profile tr:first-child{
+    border-top: hidden;
+}
+
+.avatar-div{
+    margin-top: 30px;
+}

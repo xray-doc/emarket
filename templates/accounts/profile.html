@@ -15,14 +15,17 @@
 {% block content %}
 <div class="container contacts">
     <div class="row">
+        <div class="col-sm-12" align="center"><h2>Profile</h2></div>
         <div class="col-sm-4 col-sm-offset-2">
-            <h2>Avatar</h2>
-            {% avatar user 200 %} <br> <br>
-            <a href="{% url 'avatar_change' %}">Change your avatar</a>
+            <div class="avatar-div">{% avatar user 200 %}</div>
+            <br> <br>
+            <a href="{% url 'avatar_change' %}">Change avatar</a>
+            <br> <br>
+            <div><strong>Registration date:</strong> {{ user.date_joined|date }}</div>
+            <div><strong>Last visit:</strong> {{ user.last_login|timesince }} ago</div>
         </div>
         <div class='col-sm-4'>
-            <h2>Profile</h2>
-                <table class="table">
+                <table class="table table-profile">
                     <tr>
                         <th>First_name: </th>
                         <td>{{ profile.first_name }}</td>
@@ -34,6 +37,10 @@
                     <tr>
                         <th>Gender: </th>
                         <td>{{ profile.gender }}</td>
+                    </tr>
+                    <tr>
+                        <th>Birth date: </th>
+                        <td>{{ profile.birth_date }}</td>
                     </tr>
                     <tr>
                         <th>Phone:</th>
