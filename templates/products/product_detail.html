@@ -70,7 +70,14 @@
                 <div class="add-to-basket-form">
                     <div>
                         <h4>
-                            <b>Price:</b> {{ product.price }} RUB
+                            <b>Price:</b>
+                            {% if not product.discount %}
+                                {{ product.price }}
+                            {% else %}
+                                <s>{{ product.price }}</s>
+                                <span class="discount-price">{{ product.get_price_with_discount }}</span>
+                            {% endif %}
+                            RUB
                         </h4>
                     </div>
                     <form method="post" id="form_buying_product" class="form-inline">

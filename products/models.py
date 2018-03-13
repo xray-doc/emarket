@@ -12,17 +12,17 @@ from comments.models import Comment
 
 class Product(models.Model):
     name                    = models.CharField(max_length=64, blank=True, null=True, default=None, verbose_name="Products")
-    price                   = models.DecimalField(max_digits=10, decimal_places=2, default=0, verbose_name="Price")
-    discount                = models.IntegerField(null=True, blank=True, default=0, verbose_name="Discount (percent)")
-    short_description       = models.TextField(max_length=100, blank=True, null=True, default=None)
-    diagonal                = models.DecimalField(max_digits=5, decimal_places=1, null=True, blank=True, default=None, verbose_name="Diagonal (inches)")
-    built_in_memory         = models.IntegerField(null=True, blank=True, default=None, verbose_name="Built in memory (Gb)")
-    ram                     = models.IntegerField(null=True, blank=True, default=None, verbose_name="Ram (Gb)")
-    os                      = models.CharField(max_length=30, blank=True, null=True, default=None)
-    screen_resolution       = models.CharField(max_length=10, blank=True, null=True, default=None)
-    processor               = models.CharField(max_length=30, blank=True, null=True, default=None)
-    main_camera             = models.IntegerField(null=True, blank=True, default=None, verbose_name="Main camera (Mpx)")
-    other_specifications    = models.TextField(blank=True, null=True, default=None)
+    price                   = models.IntegerField(default=0, verbose_name="Price")
+    discount                = models.IntegerField(default=0, verbose_name="Discount (percent)")
+    short_description       = models.TextField(max_length=100, blank=True, default=None)
+    diagonal                = models.DecimalField(max_digits=5, decimal_places=1, blank=True, default=None, verbose_name="Diagonal (inches)")
+    built_in_memory         = models.IntegerField(blank=True, default=None, verbose_name="Built in memory (Gb)")
+    ram                     = models.IntegerField(blank=True, default=None, verbose_name="Ram (Gb)")
+    os                      = models.CharField(max_length=30, blank=True, default=None)
+    screen_resolution       = models.CharField(max_length=10, blank=True, default=None)
+    processor               = models.CharField(max_length=30, blank=True, default=None)
+    main_camera             = models.IntegerField(blank=True, default=None, verbose_name="Main camera (Mpx)")
+    other_specifications    = models.TextField(blank=True, default=None)
 
     is_active           = models.BooleanField(default=True)
     created             = models.DateTimeField(auto_now_add=True, auto_now=False)
@@ -38,7 +38,8 @@ class Product(models.Model):
         """
         Product price with discount (if it has discount)
         """
-        return self.price - (self.price / 100 * self.discount)
+        discount_price = self.price - (self.price / 100 * self.discount)
+        return int(discount_price)
 
     def __str__(self):
         return "%s, %s" % (self.price, self.name)
