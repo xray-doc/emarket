@@ -19,7 +19,9 @@
         <div class="col-sm-4 col-sm-offset-2">
             <div class="avatar-div">{% avatar user 200 %}</div>
             <br> <br>
-            <a href="{% url 'avatar_change' %}">Change avatar</a>
+            {% if request.user == user %}
+                <a href="{% url 'avatar_change' %}">Change avatar</a>
+            {% endif %}
             <br> <br>
             <div><strong>Registration date:</strong> {{ user.date_joined|date }}</div>
             <div><strong>Last visit:</strong> {{ user.last_login|timesince }} ago</div>
@@ -51,28 +53,11 @@
                         <td>{{ profile.address }}</td>
                     <br>
                 </table>
-            <a href="{% url 'accounts:edit-profile' %}">Edit profile</a>
 
+            {% if request.user == user %}
+                <a href="{% url 'accounts:edit-profile' %}">Edit profile</a>
+            {% endif %}
 
-
-{#            <h2>Profile</h2>#}
-{#            <div>#}
-{#                <strong>First name:</strong> {{ profile.first_name }}#}
-{#            </div>#}
-{#            <div>#}
-{#                <strong>Second name:</strong> {{ profile.second_name }}#}
-{#            </div>#}
-{#            <div>#}
-{#                <strong>Gender:</strong> {{ profile.gender }}#}
-{#            </div>#}
-{#            <div>#}
-{#                <strong>Phone:</strong> {{ profile.phone }}#}
-{#            </div>#}
-{#            <div>#}
-{#                <strong>Address:</strong> {{ profile.address }}#}
-{#            </div>#}
-{#            <br>#}
-{#            <a href="{% url 'accounts:edit-profile' %}">Edit profile</a>#}
         </div>
     </div>
 </div>

@@ -11,6 +11,8 @@ from django.core.urlresolvers import reverse
 from .forms import UserLoginForm, UserRegisterForm, EditProfileForm
 from .models import Profile
 
+User = get_user_model()
+
 
 def login_view(request):
     title = "Login"
@@ -78,9 +80,14 @@ def edit_profile_view(request):
     return render(request, "accounts/form.html", context)
 
 
-@login_required(login_url='/accounts/login/')
-def profile_view(request):
-    user = request.user
+#@login_required(login_url='/accounts/login/')
+def profile_view(request, username=None):
+    print(username)
+    if username:
+        user = User.objects.get(username__iexact=username)
+    else:
+        user = request.user
+
     profile = Profile.objects.filter(user=user).first()
 
     return render(request, "accounts/profile.html", locals())

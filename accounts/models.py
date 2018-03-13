@@ -11,7 +11,6 @@ GENDER_CHOICES = (
 
 class Profile(models.Model):
     user = models.ForeignKey(User)
-    profile_pic = models.ImageField(upload_to='profile_pics/', blank=True, default=None) #TODO: eclude
     first_name = models.CharField(max_length=64, blank=True, null=True, default=None)
     second_name = models.CharField(max_length=64, blank=True, null=True, default=None)
     gender = models.CharField(max_length=10, choices=GENDER_CHOICES, default='M')
