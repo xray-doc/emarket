@@ -47,6 +47,9 @@ class Order(models.Model):
         verbose_name = "Order"
         verbose_name_plural = "Orders"
 
+    def get_products_in_order(self):
+        return ProductInOrder.objects.filter(order=self)
+
 
 
 class ProductInOrder(models.Model):

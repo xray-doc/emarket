@@ -2,18 +2,13 @@
 {% load static %}
 {% load avatar_tags %}
 
-
-{% block style %}
-    <link rel="stylesheet" href="{% static 'static_dev/css/delivery_and_contacts.css' %}">
-{% endblock style %}
-
 {% block title %}
     Profile
 {% endblock title %}
 
 
 {% block content %}
-<div class="container contacts">
+<div class="container profile">
     <div class="row">
         <div class="col-sm-12" align="center"><h2>Profile</h2></div>
         <div class="col-sm-4 col-sm-offset-2">
@@ -59,6 +54,19 @@
             {% endif %}
 
         </div>
+        {% if orders %}
+            <div class="col-sm-12" id="orders_header" align="center"><h3>Your orders:</h3></div>
+            {% for order in orders %}
+                <div class="col-sm-4">
+                    <h3>{{ order.created }}</h3>
+                    <ul>
+                        {% for product_in_order in order.get_products_in_order %}
+                            <li>{{ product_in_order.product.name }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endfor %}
+        {% endif %}
     </div>
 </div>
 {% endblock content %}
