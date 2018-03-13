@@ -3,7 +3,7 @@
 {% for product in qs %}
     <div class="col-sm-4">
         <div class="product-item">
-            <a href="{% url 'products:product' product.id %}">
+            <a href="{{ product.get_absolute_url }}">
                 <div class="center-core">
                         <img src="{{ product.get_main_img_url }}" class="img-responsive">
                 </div>

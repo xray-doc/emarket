@@ -10,7 +10,7 @@ from comments.models import Comment
 from .models import *
 
 
-def product(request, product_id):
+def product_detail(request, product_id):
     """
     Product_detail
     """

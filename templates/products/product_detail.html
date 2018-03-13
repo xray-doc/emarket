@@ -141,7 +141,8 @@
                             <p>{{ comment.content }}</p>
                         </div>
                         <footer>
-                            via {{ comment.user }} | {{ comment.timestamp|timesince }} ago |
+                            via <a href="{% url 'accounts:profile' comment.user.username %}">{{ comment.user }}</a> |
+                            {{ comment.timestamp|timesince }} ago |
                             <a class='comment-reply-btn' href='#'>Reply</a>
                         </footer>
 
@@ -153,7 +154,10 @@
                                         {% avatar comment.user 40 %}
                                         <p>{{ child_comment.content }}</p>
                                     </div>
-                                    <footer>via {{ child_comment.user }} | {{ child_comment.timestamp|timesince }} ago</footer>
+                                    <footer>
+                                        <a href="{% url 'accounts:profile' comment.user.username %}">{{ comment.user }}</a> |
+                                        {{ child_comment.timestamp|timesince }} ago
+                                    </footer>
                                 </blockquote>
                             {% endfor %}
                             <div class="comment-reply-form">
