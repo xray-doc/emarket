@@ -10,7 +10,10 @@
 {% block content %}
 <div class="container profile">
     <div class="row">
-        <div class="col-sm-12" align="center"><h2>Profile</h2></div>
+        <div class="col-sm-12" align="center">
+            <h2>Profile</h2>
+            <hr>
+        </div>
         <div class="col-sm-4 col-sm-offset-2">
             <div class="avatar-div">{% avatar user 200 %}</div>
             <br> <br>
@@ -21,6 +24,7 @@
             <div><strong>Registration date:</strong> {{ user.date_joined|date }}</div>
             <div><strong>Last visit:</strong> {{ user.last_login|timesince }} ago</div>
         </div>
+
         <div class='col-sm-4'>
                 <table class="table table-profile">
                     <tr>
@@ -54,19 +58,49 @@
             {% endif %}
 
         </div>
-        {% if orders %}
-            <div class="col-sm-12" id="orders_header" align="center"><h3>Your orders:</h3></div>
-            {% for order in orders %}
-                <div class="col-sm-4">
-                    <h3>{{ order.created }}</h3>
-                    <ul>
-                        {% for product_in_order in order.get_products_in_order %}
-                            <li>{{ product_in_order.product.name }}</li>
-                        {% endfor %}
-                    </ul>
+
+        {% if request.user == user %}
+            <div class="col-sm-12" id="orders_header" align="center">
+                <h3>Your orders:</h3>
+                <hr>
+            </div>
+            {% if orders %}
+                {% for order in orders %}
+                    <div class="col-sm-6">
+                        <h4><strong>Created:</strong> {{ order.created }}</h4>
+                        <h4><strong>Order id:</strong> {{ order.id }}</h4>
+                        <h4><strong>Status:</strong> {{ order.status }}</h4>
+                        <table class="table-profile-order">
+                            <tr>
+                                <th>Name</th>
+                                <th>Nmb</th>
+                                <th>Price (RUB)</th>
+                            </tr>
+                            {% for product_in_order in order.get_products_in_order %}
+                                <tr>
+                                    <td>{{ product_in_order.product.name }}</td>
+                                    <td>{{ product_in_order.nmb }}</td>
+                                    <td>{{ product_in_order.total_price }}</td>
+                                </tr>
+                            {% endfor %}
+                            <tr>
+                                <th colspan="2"> Total price: </th>
+                                <th>{{ order.total_price }}</th>
+                            </tr>
+                        </table>
+                    </div>
+                {% endfor %}
+                <div class="col-sm-12">
+                    <br>
+                    <a href="{% url 'contacts' %}">Contact us</a> to change or call off the order.
                 </div>
-            {% endfor %}
+            {% else %}
+                <div class="col-sm-4">
+                    <span class="h4">You haven't got any orders yet.</span>
+                 </div>
+            {% endif %}
         {% endif %}
+
     </div>
 </div>
 {% endblock content %}

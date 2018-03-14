@@ -81,10 +81,8 @@ def edit_profile_view(request):
     return render(request, "accounts/form.html", context)
 
 
-#@login_required(login_url='/accounts/login/')
 def profile_view(request, username=None):
-    print(username)
-    if username:
+    if username and username != request.user.username:
         user = User.objects.get(username__iexact=username)
     else:
         user = request.user

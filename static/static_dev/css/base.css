@@ -289,7 +289,7 @@ Filter
 
 
 /*
-Delivery and contacts styles
+Delivery, contacts, profile
  */
 
 .delivery .row,
@@ -321,6 +321,13 @@ Delivery and contacts styles
 
 .avatar-div{
     margin-top: 30px;
+}
+
+.table-profile-order th,
+.table-profile-order td{
+    border: 1px solid orange;
+    padding: 10px;
+    text-align: left;
 }
 
 
