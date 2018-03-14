@@ -91,7 +91,10 @@
                 <label>Your name</label>
                 <span class="form-error">{{ form.name.errors }}</span>
                 <input type="text" class="form-control" name="{{ form.name.html_name }}"
-                       placeholder="Boris Ivanov" value="{{ request.POST.name }}"
+                       placeholder="Boris Ivanov"
+                       {% if name %}
+                        value="{{ name }}"
+                       {% endif %}
                 >
             </div>
 
@@ -99,7 +102,10 @@
                 <label>Phone</label>
                 <span class="form-error">{{ form.phone.errors }}</span>
                 <input type="text" class="form-control" name="{{ form.phone.html_name }}"
-                       placeholder="+7 777 777 7777" value="{{ request.POST.phone }}"
+                       placeholder="+7 777 777 7777"
+                       {% if phone %}
+                        value="{{ phone }}"
+                       {% endif %}
                 >
             </div>
 
@@ -107,7 +113,10 @@
                 <label>Email</label>
                 <span class="form-error">{{ form.email.errors }}</span>
                 <input type="email" class="form-control" name="{{ form.email.html_name }}"
-                       placeholder="name@example.com" value="{{ request.POST.email }}"
+                       placeholder="name@example.com"
+                       {% if email %}
+                        value="{{ email }}"
+                       {% endif %}
                 >
             </div>
 
@@ -115,7 +124,10 @@
                 <label>Address</label>
                 <span class="form-error">{{ form.address.errors }}</span>
                 <input type="text" class="form-control" name="{{ form.address.html_name }}"
-                       placeholder="Address" value="{{ request.POST.address }}"
+                       placeholder="Address"
+                       {% if address %}
+                        value="{{ address }}"
+                       {% endif %}
                 >
             </div>
 

@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 
 from .models import *
 from .forms import *
+from accounts.models import Profile
 
 
 
@@ -107,7 +108,6 @@ def checkout(request):
 
         #user, created = User.objects.get_or_create(username=phone, defaults={"first_name": name})
         order = Order.objects.create(
-            #user=user,
             customer_name=name,
             customer_phone=phone,
             customer_email=email,
@@ -128,5 +128,21 @@ def checkout(request):
             )
 
         return render(request, 'orders/done.html', locals())
+
+    profile = None
+    if user.is_authenticated():
+        profile = Profile.objects.filter(user=user).first()
+
+    if profile is not None:
+        name = profile.get_full_name()
+        phone = profile.phone
+        email = user.email
+        address = profile.address
+    else:
+        name = request.POST.get('name', None)
+        phone = request.POST.get('phone', None)
+        email = request.POST.get('email', None)
+        address = request.POST.get('address', None)
+
 
     return render(request, 'orders/checkout.html', locals())
