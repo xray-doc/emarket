@@ -13,7 +13,7 @@
     <hr>
     <div class="form-check form-check-inline">
         <label class="form-check-label">Diagonal</label> <br>
-            {% for diagonal in diagonal_select %}
+            {% for diagonal in diagonal_select|dictsort:"val" %}
                 <input class="form-check-input" type="checkbox"
                        id="inlineCheckbox1" name="{{ diagonal.key }}"
                        {% if diagonal.key in request.POST %}
