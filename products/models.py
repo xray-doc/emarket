@@ -1,16 +1,18 @@
 from django.db import models
-from imagekit.models import ImageSpecField
-from imagekit.processors import ResizeToFit
+from django.db.models.signals import pre_save
 from django.contrib.contenttypes.models import ContentType
 from django.core.urlresolvers import reverse
+
 from rest_framework.reverse import reverse as api_reverse
+from imagekit.models import ImageSpecField
+from imagekit.processors import ResizeToFit
 
-
+from .utils import unique_slug_generator
 from comments.models import Comment
 
 
-
 class Product(models.Model):
+    slug                    = models.SlugField(default=None, null=True)
     name                    = models.CharField(max_length=64, blank=True, null=True, default=None, verbose_name="Products")
     price                   = models.IntegerField(null=True, default=0, verbose_name="Price")
     discount                = models.IntegerField(null=True, default=0, verbose_name="Discount (percent)")
@@ -49,7 +51,7 @@ class Product(models.Model):
         verbose_name_plural = "Products"
 
     def get_absolute_url(self):
-        return reverse("products:product", kwargs={"product_id": self.id})
+        return reverse("products:product", kwargs={"slug": self.slug})
 
     def get_api_url(self, request=None):
         return api_reverse("api:product-rud", kwargs={'pk': self.pk}, request=request)
@@ -69,6 +71,13 @@ class Product(models.Model):
         content_type = ContentType.objects.get_for_model(instance.__class__)
         return content_type
 
+
+def pre_save_product_receiver(sender, instance, *args, **kwargs):
+    if not instance.slug:
+        # instance.slug = create_slug(instance)
+        instance.slug = unique_slug_generator(instance)
+
+pre_save.connect(pre_save_product_receiver, sender=Product)
 
 
 class ProductImage(models.Model):
@@ -94,6 +103,7 @@ class ProductImage(models.Model):
     class Meta:
         verbose_name = "Photo"
         verbose_name_plural = "Photos"
+
 
 
 

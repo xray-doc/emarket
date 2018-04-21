@@ -10,11 +10,11 @@ from comments.models import Comment
 from .models import *
 
 
-def product_detail(request, product_id):
+def product_detail(request, slug):
     """
     Product_detail
     """
-    product = get_object_or_404(Product, pk=product_id)
+    product = get_object_or_404(Product, slug=slug)
 
     initial_data = {
         "content_type": product.get_content_type,
