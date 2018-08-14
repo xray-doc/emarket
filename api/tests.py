@@ -20,7 +20,7 @@ class ProductAPITestCase(APITestCase):
         user_obj.save()
         product = Product.objects.create(
                 name='ZTE',
-                price=22000.50
+                price=22000
                 )
 
 
@@ -49,7 +49,7 @@ class ProductAPITestCase(APITestCase):
     def test_update_product(self):
         product = Product.objects.first()
         url = product.get_api_url()
-        data = {"name": "Huawei", "price": 10000.20}
+        data = {"name": "Huawei", "price": 22000}
         response = self.client.post(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
         response = self.client.put(url, data, format='json')
@@ -58,8 +58,10 @@ class ProductAPITestCase(APITestCase):
     def test_update_product_with_user(self):
         product = Product.objects.first()
         url = product.get_api_url()
-        data = {"name": "Huawei", "price": 10000.20}
+        data = {"name": "Huawei", "price": 22000}
+
         user_obj = User.objects.first()
+
         payload = payload_handler(user_obj)
         token_rsp = encode_handler(payload)
         self.client.credentials(HTTP_AUTHORIZATION='JWT ' + token_rsp)  # JWT <token>
@@ -69,7 +71,7 @@ class ProductAPITestCase(APITestCase):
     def test_update_product_with_staff_user(self):
         product = Product.objects.first()
         url = product.get_api_url()
-        data = {"name": "Huawei", "price": 10000.20}
+        data = {"name": "Huawei", 'price': 22000}
 
         staff_user = User(username='staffuser', email='staff_user@test.com')
         staff_user.set_password("somestaffpass")

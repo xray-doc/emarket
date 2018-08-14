@@ -91,4 +91,3 @@ def profile_view(request, username=None):
     profile = Profile.objects.filter(user=user).first()
 
     return render(request, "accounts/profile.html", locals())
-    #TODO: in checkout form shoud contain loginned user data
