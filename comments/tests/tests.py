@@ -4,7 +4,7 @@ from django.contrib.contenttypes.models import ContentType
 
 
 from products.models import Product 
-from .models import Comment
+from ..models import Comment
 
 User = get_user_model()
 
@@ -43,6 +43,15 @@ class CommentTestCase(TestCase):
             parent=parent_comment
             )
         self.child_comment = child_comment
+
+    def test_comment_object_all(self):
+        comments = Comment.objects.all()
+        count = comments.count()
+        self.assertEqual(count, 1, msg='all() should return only parents')
+
+    def test_comment_owner_name(self):
+        com = Comment.objects.first()
+        self.assertEqual(str(com), 'testuser')
 
     def test_single_user(self):
         user_count = User.objects.count()
