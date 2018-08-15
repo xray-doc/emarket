@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.test import TestCase
 from django.contrib.auth import get_user_model
 from django.contrib.contenttypes.models import ContentType
@@ -45,9 +46,13 @@ class CommentTestCase(TestCase):
         self.child_comment = child_comment
 
     def test_comment_object_all(self):
-        comments = Comment.objects.all()
-        count = comments.count()
-        self.assertEqual(count, 1, msg='all() should return only parents')
+        comments_qs = Comment.objects.all()
+
+        # Next we filter comments_qs
+        # to see if it includes comments with parents
+        comments_qs = comments_qs.filter(~Q(parent=None))
+        count = comments_qs.count()
+        self.assertEqual(count, 0, msg="all() shouldn't return child comments")
 
     def test_comment_owner_name(self):
         com = Comment.objects.first()
