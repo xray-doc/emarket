@@ -54,7 +54,7 @@ class CommentTestCase(TestCase):
         count = comments_qs.count()
         self.assertEqual(count, 0, msg="all() shouldn't return child comments")
 
-    def test_comment_owner_name(self):
+    def test_comment_str(self):
         com = Comment.objects.first()
         self.assertEqual(str(com), 'testuser')
 
