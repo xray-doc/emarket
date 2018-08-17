@@ -7,8 +7,8 @@ from django.contrib.auth import (
 )
 from django.forms.extras.widgets import SelectDateWidget
 
-from .models import Profile
 
+from .models import Profile
 User = get_user_model()
 
 
@@ -24,8 +24,6 @@ class UserLoginForm(forms.Form):
             user = authenticate(username=username, password=password)
             if not user:
                 raise forms.ValidationError("Incorrect login or password")
-            if not user.is_active:
-                raise forms.ValidationError("This user is not longer active.")
         return super(UserLoginForm, self).clean(*args, **kwargs)
 
 
