@@ -196,4 +196,4 @@ venv.bak/
 # mypy
 .mypy_cache/
 
-coverage_html
+coverage_html_report

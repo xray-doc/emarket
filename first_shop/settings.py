@@ -168,6 +168,8 @@ db_from_env = dj_database_url.config()
 DATABASES['default'].update(db_from_env)
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
+
 
 EMAIL_HOST = 'smtp.mail.ru'
 EMAIL_HOST_USER = 'm10040@mail.ru'
