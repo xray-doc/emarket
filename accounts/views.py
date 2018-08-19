@@ -71,6 +71,7 @@ def edit_profile_view(request):
         if form.is_valid():
             profile = form.save(commit=False)
             profile.user = user
+            profile.birth_date = form.cleaned_data['birth_date']
             profile.save()
             return redirect(reverse("accounts:profile"))
 
