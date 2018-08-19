@@ -4,8 +4,11 @@ from django.contrib.auth import (
     login,
     logout,
     )
+from django.views.generic.edit import FormView, UpdateView
+from django.views.generic.base import RedirectView, TemplateView
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.urlresolvers import reverse
 
 from .forms import UserLoginForm, UserRegisterForm, EditProfileForm
@@ -15,80 +18,94 @@ from orders.models import Order
 User = get_user_model()
 
 
-def login_view(request):
-    title = "Login"
-    next = request.GET.get('next')
-    form = UserLoginForm(request.POST or None)
-    if form.is_valid():
-        username = form.cleaned_data.get("username")
-        password = form.cleaned_data.get('password')
-        user = authenticate(username=username, password=password)
-        login(request, user)
-        if next:
-            return redirect(next)
-        return redirect("/")
-    return render(request, "accounts/form.html", {"form":form, "title": title})
+#TODO: mixin for views with template name and title
 
 
-def register_view(request):
-    title = "Register"
-    form = UserRegisterForm(request.POST or None)
-    if form.is_valid():
+class LoginView(FormView):
+
+    template_name = 'accounts/form.html'
+    form_class = UserLoginForm
+
+    def form_valid(self, form):
+        user = authenticate(**form.cleaned_data)
+        login(self.request, user)
+        try:
+            self.success_url = self.request.GET['next']
+        except:
+            self.success_url = '/'
+        return super().form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Login'
+        return context
+
+
+class RegisterView(FormView):
+
+    template_name = 'accounts/form.html'
+    form_class = UserRegisterForm
+
+    def form_valid(self, form):
         user = form.save(commit=False)
         password = form.cleaned_data.get('password')
         user.set_password(password)
         user.save()
         new_user = authenticate(username=user.username, password=password)
-        login(request, new_user)
+        login(self.request, new_user)
+        self.success_url = reverse("accounts:edit-profile")
+        return super().form_valid(form)
 
-        return redirect(reverse("accounts:edit-profile"))
-
-    context = {
-        "form": form,
-        "title": title
-    }
-    return render(request, "accounts/form.html", context)
-
-
-def logout_view(request):
-    logout(request)
-    return redirect("/")
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Register'
+        return context
 
 
-@login_required(login_url='/accounts/login/')
-def edit_profile_view(request):
-    user = request.user
-    title = "Edit profile"
-    profile = Profile.objects.filter(user=user).first()
+class LogoutView(RedirectView):
 
-    if profile:
-        form = EditProfileForm(instance=profile)
-    else:
-        form = EditProfileForm(request.POST or None)
-
-    if request.method == 'POST':
-        form = EditProfileForm(request.POST, instance=profile)
-        if form.is_valid():
-            profile = form.save(commit=False)
-            profile.user = user
-            profile.birth_date = form.cleaned_data['birth_date']
-            profile.save()
-            return redirect(reverse("accounts:profile"))
-
-    context = {
-        "form": form,
-        "title": title
-    }
-    return render(request, "accounts/form.html", context)
+    def get_redirect_url(self, *args, **kwargs):
+        logout(self.request)
+        return '/'
 
 
-def profile_view(request, username=None):
-    if username and username != request.user.username:
-        user = User.objects.get(username__iexact=username)
-    else:
-        user = request.user
-        orders = Order.objects.filter(user=user)
+class EditProfileView(LoginRequiredMixin, UpdateView):
 
-    profile = Profile.objects.filter(user=user).first()
+    model = Profile
+    login_url = '/accounts/login/'
+    template_name = 'accounts/form.html'
+    form_class = EditProfileForm
 
-    return render(request, "accounts/profile.html", locals())
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Edit profile'
+        return context
+
+    def get_object(self, queryset=None):
+        user = self.request.user
+        obj, created = Profile.objects.get_or_create(user=user)
+        return obj
+
+
+class ProfileView(TemplateView):
+
+    template_name = "accounts/profile.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        if self.user == self.request.user:
+            # If you look at your own profile page
+            # you can also see your orders,
+            # but you can't see other's people orders on their pages
+            context['orders'] = Order.objects.filter(user=self.user)
+        context['profile'] = Profile.objects.get(user=self.user)
+        context['user'] = self.user
+        return context
+
+    def get(self, request, *args, **kwargs):
+        self.user = self.request.user
+        if kwargs['username']:
+            self.user = User.objects.get(username__iexact=kwargs['username'])
+        if not self.user.is_authenticated():
+            return redirect(reverse('main'))
+        return super().get(request, *args, **kwargs)

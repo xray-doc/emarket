@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth import get_user_model
+from django.core.urlresolvers import reverse
 
 User = get_user_model()
 
@@ -8,6 +9,7 @@ GENDER_CHOICES = (
     ('F', 'Female'),
 )
 
+#TODO: make fields in Profile necessary
 
 class Profile(models.Model):
     user = models.ForeignKey(User)
@@ -20,6 +22,9 @@ class Profile(models.Model):
 
     def get_full_name(self):
         return "%s %s" % (self.first_name, self.second_name)
+
+    def get_absolute_url(self):
+        return reverse("accounts:profile", kwargs={"username": self.user.username})
 
     def __str__(self):
         return "%s profile" % self.user.username
