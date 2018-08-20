@@ -23,7 +23,6 @@ class ProductAPITestCase(APITestCase):
                 price=22000
                 )
 
-
     def test_single_user(self):
         user_count = User.objects.count()
         self.assertEqual(user_count, 1)
@@ -45,6 +44,26 @@ class ProductAPITestCase(APITestCase):
         url = api_reverse("api:product-rud", kwargs=({'pk':1}))
         response = self.client.get(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_get_product_list_with_query(self):
+        product2 = Product.objects.create(
+            name='Iphone X',
+        )
+
+        # without query at first
+        data = {}
+        url = api_reverse("api:products-list")
+        response = self.client.get(url, data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(len(response.data), 2)
+
+        # with query - seaching iphones
+        data = {'q': 'iphone'}
+        url = api_reverse("api:products-list")
+        response = self.client.get(url, data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(len(response.data), 1)
+        self.assertEqual(response.data[0]['name'], 'Iphone X')
 
     def test_update_product(self):
         product = Product.objects.first()

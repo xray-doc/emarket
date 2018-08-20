@@ -15,10 +15,8 @@ def main(request):
     # Creating filter form
     def get_choices_from_column(column):
         """
-        Get distinct values of column in model.
-        Is used for creating choices for filter widgets.
-        :param column: column in model to create choices from.
-        :return: [{'column__val': 'val'},]
+        Get distinct values of a column from model
+        in order to create choices for filter widgets.
         """
         distinct_qs = Product.objects.all().values_list(column).distinct()
         choices = []
@@ -26,9 +24,6 @@ def main(request):
             key = column + '__' + str(i[0])
             val = i[0]
             choices.append({'key': key, 'val': val})
-
-        # choices = [field + '__' + str(i[0]) for i in list(distinct_qs)]  # [(2,), (4,)] > [(2,2), (4.4)]
-        # choices.sort()
         return choices
 
     os_select         = get_choices_from_column('os')
@@ -41,6 +36,7 @@ def main(request):
 
 def filteredProducts(request):
     qs = Product.objects.all()
+
     # Filtration
     if request.method == 'POST':
 
@@ -115,7 +111,7 @@ def contacts(request):
             subject = form.cleaned_data['subject']
             sender = form.cleaned_data['sender']
             message = form.cleaned_data['message']
-            message = "<-------контакты EMARKET------->\n\n" + message
+            message = "<-------contacts EMARKET------->\n\n" + message
             copy = form.cleaned_data['copy']
 
             recepients = ['m.nikolaev1@gmail.com']
@@ -133,7 +129,7 @@ def contacts(request):
 
 
 
-
+#TODO: make comments with mixer. At first, start with new commit and do it locally.
 
 # This view used like a script for generating comments to
 # products
