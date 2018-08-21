@@ -1,52 +1,60 @@
-from django.shortcuts import render
 from django.core.mail import send_mail, BadHeaderError
-from django.http import HttpResponse, HttpResponseRedirect
 from django.db.models import Q
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render
+from django.views.generic.list import ListView
+from django.views.generic.base import TemplateView
+from django.views.generic.edit import FormView
+from django.urls import reverse
 
 from products.models import *
 from .forms import *
 
 
+class MainView(ListView):
+
+    model = Product
+    template_name = 'home.html'
+    fields = [
+        'os',
+        'diagonal',
+        'ram',
+        'processor'
+    ]
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        # Here we get distinct values of columns from Product model
+        # in order to create choices for filter widgets.
+        for field in self.fields:
+            # TODO: release next method in model:
+            distinct_qs = Product.objects.all().values_list(field).distinct()
+            choices = []
+            for i in list(distinct_qs):
+                key = field + '__' + str(i[0])
+                val = i[0]
+                choices.append({'key': key, 'val': val})
+            key = field + '_select'
+            context[key] = choices
+        return context
 
 
-def main(request):
-    qs = Product.objects.all()                   # queryset of all products
+class FilteredProductsView(ListView):
 
-    # Creating filter form
-    def get_choices_from_column(column):
-        """
-        Get distinct values of a column from model
-        in order to create choices for filter widgets.
-        """
-        distinct_qs = Product.objects.all().values_list(column).distinct()
-        choices = []
-        for i in list(distinct_qs):
-            key = column + '__' + str(i[0])
-            val = i[0]
-            choices.append({'key': key, 'val': val})
-        return choices
+    model = Product
+    template_name = 'products_on_main_page.html'
 
-    os_select         = get_choices_from_column('os')
-    diagonal_select   = get_choices_from_column('diagonal')
-    ram_select        = get_choices_from_column('ram')
-    processor_select  = get_choices_from_column('processor')
-
-    return render(request, 'home.html', locals())
-
-
-def filteredProducts(request):
-    qs = Product.objects.all()
-
-    # Filtration
-    if request.method == 'POST':
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
 
         # all the Q filteration arguments collects in the filters dict and
         # extracts to query at the end
         filters = {}
-        for filter_key in request.POST.keys():
+        for filter_key in self.request.GET.keys():
             if filter_key == 'csrfmiddlewaretoken': continue
             if filter_key == 'search':
-                q = request.POST.get(filter_key)
+                q = self.request.GET.get(filter_key)
                 filters['search'] = Q(name__icontains=q) | \
                                     Q(short_description__icontains=q) | \
                                     Q(other_specifications__icontains=q)
@@ -54,9 +62,9 @@ def filteredProducts(request):
 
             # Next:
             # os__android > ['os', 'android'].
-            # BUT! Some specifications comes like:
+            # BUT! Some specifications are like:
             # processor_select ['processor_name'],
-            # so we need to get value from request in those cases
+            # so we need to get value from self.request in those cases
             key, val = filter_key.split('__')
 
             if key == 'os':
@@ -65,67 +73,76 @@ def filteredProducts(request):
                 else:
                     # If more then one OS selected, we need all of them, not the only one.
                     filters['os'] = filters['os'] | Q(os=val)
+
             elif key == 'diagonal':
                 if not filters.get('diagonal'):
                     filters['diagonal'] = Q(diagonal=val)
                 else:
                     # If more then one diagonal selected, we need all of them, not the only one.
                     filters['diagonal'] = filters['diagonal'] | Q(diagonal=val)
+
             elif key == 'memory':
-                num = request.POST.get(filter_key)
+                num = self.request.GET.get(filter_key)
                 if not num: continue
                 if val == 'min':
                     filters['memory_min'] = Q(built_in_memory__gte=num)
                 if val == 'max':
                     filters['memory_max'] = Q(built_in_memory__lte=num)
+
             elif key == 'ram':
                 if not filters.get('ram'):
                     filters['ram'] = Q(ram=val)
                 else:
                     # If more then one RAM selected, we need all of them, not the only one.
                     filters['ram'] = filters['ram'] | Q(ram=val)
+
             elif key == 'processor':
-                processor_name = request.POST.get(filter_key)
+                processor_name = self.request.GET.get(filter_key)
                 if not processor_name: continue
                 filters['processor'] = Q(processor=processor_name)
+
             elif key == 'price':
-                num = request.POST.get(filter_key)
+                num = self.request.GET.get(filter_key)
                 if not num: continue
                 if val == 'min':
                     filters['price_min'] = Q(price__gte=num)
                 if val == 'max':
                     filters['price_max'] = Q(price__lte=num)
 
-        qs = qs.filter(*filters.values())  # Final queryset of products to show
-    return render(request, 'products_on_main_page.html', {'qs': qs})
+        context['product_list'] = context['product_list'].filter(*filters.values())  # Final queryset of products to show
+        return context
 
 
-def delivery(request):
-    return render(request, 'delivery.html', locals())
+class DeliveryView(TemplateView):
+
+    template_name = 'delivery.html'
 
 
-def contacts(request):
-    if request.method == 'POST':
-        form = ContactForm(request.POST)
-        if form.is_valid():
-            subject = form.cleaned_data['subject']
-            sender = form.cleaned_data['sender']
-            message = form.cleaned_data['message']
-            message = "<-------contacts EMARKET------->\n\n" + message
-            copy = form.cleaned_data['copy']
+class ContactsView(FormView):
 
-            recepients = ['m.nikolaev1@gmail.com']
-            if copy:
-                recepients.append(sender)
-            try:
-                send_mail(subject, message, 'm10040@mail.ru', recepients)
-            except BadHeaderError:
-                return HttpResponse('Invalid header found')
-            return render(request, 'orders/done.html', locals())
+    template_name = 'contacts.html'
+    form_class = ContactForm
+    # TODO: implement success page to redirect
 
-    else:
-        form = ContactForm()
-    return render(request, 'contacts.html', {'form': form})
+    def get_success_url(self):
+        return reverse('main')
+
+    def form_valid(self, form):
+        subject = form.cleaned_data['subject']
+        sender = form.cleaned_data['sender']
+        message = form.cleaned_data['message']
+        message = "<-------contacts EMARKET------->\n\n" + message
+        copy = form.cleaned_data['copy']
+
+        recepients = ['m.nikolaev1@gmail.com']
+        if copy:
+            recepients.append(sender)
+        try:
+            send_mail(subject, message, 'm10040@mail.ru', recepients)
+        except BadHeaderError:
+            return HttpResponse('Invalid header found')
+        return super().form_valid(form)
+
 
 
 

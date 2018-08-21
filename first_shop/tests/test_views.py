@@ -61,7 +61,7 @@ class MainTestCase(TestCase):
         self.assertEqual(response.context['diagonal_select'], context['diagonal'])
         self.assertEqual(response.context['ram_select'], context['ram'])
         self.assertEqual(response.context['processor_select'], context['processor'])
-        self.assertEqual(response.context['qs'].count(), self.num_of_devices)
+        self.assertEqual(response.context['product_list'].count(), self.num_of_devices)
 
 
 class FilteredProductsTestCase(TestCase):
@@ -100,7 +100,7 @@ class FilteredProductsTestCase(TestCase):
 
     def test_context(self):
         response = self.client.get(reverse('filtered_products'))
-        self.assertTrue('qs' in response.context)
+        self.assertTrue('product_list' in response.context)
 
     def test_filter(self):
         self.assertTrue('it is too hard to test this filter thoroughly')
@@ -109,10 +109,10 @@ class FilteredProductsTestCase(TestCase):
             'memory__max': 5555,
             'memory__min': 2700,
         }
-        response = self.client.post(reverse('filtered_products'), data=data)
-        qs = response.context['qs']
+        response = self.client.get(reverse('filtered_products'), data=data)
+        product_list = response.context['product_list']
 
-        for product in qs:
+        for product in product_list:
             memory = product.built_in_memory
             self.assertGreaterEqual(memory, data['memory__min'])
             self.assertLessEqual(memory, data['memory__max'])
@@ -163,7 +163,8 @@ class ContactsTestCase(TestCase):
 
         self.assertEqual(len(mail.outbox), 0)
         response = self.client.post(reverse('contacts'), data=data)
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, reverse('main'))
         self.assertTemplateUsed('orders/done.hrml')
 
         self.assertEqual(len(mail.outbox), 1)
@@ -182,6 +183,7 @@ class ContactsTestCase(TestCase):
         }
 
         response = self.client.post(reverse('contacts'), data=data)
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, reverse('main'))
         m = mail.outbox[0]
         self.assertEqual(m.to, ['m.nikolaev1@gmail.com'])

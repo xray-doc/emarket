@@ -216,7 +216,7 @@ $(document).ready(function () {
     function filterProduct (form) {
         var filteredProductsUrl = "/filtered_products/";
         $.ajax({
-            method: "POST",
+            method: "GET",
             data: form.serialize(),
             url: filteredProductsUrl,
             success: function(html){

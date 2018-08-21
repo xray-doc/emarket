@@ -18,13 +18,11 @@ from orders.models import Order
 User = get_user_model()
 
 
-#TODO: mixin for views with template name and title
-
-
 class LoginView(FormView):
 
     template_name = 'accounts/form.html'
     form_class = UserLoginForm
+    title = 'Login'
 
     def form_valid(self, form):
         user = authenticate(**form.cleaned_data)
@@ -37,7 +35,7 @@ class LoginView(FormView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Login'
+        context['title'] = self.title
         return context
 
 
@@ -45,6 +43,7 @@ class RegisterView(FormView):
 
     template_name = 'accounts/form.html'
     form_class = UserRegisterForm
+    title = 'Register'
 
     def form_valid(self, form):
         user = form.save(commit=False)
@@ -58,7 +57,7 @@ class RegisterView(FormView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Register'
+        context['title'] = self.title
         return context
 
 
@@ -75,10 +74,11 @@ class EditProfileView(LoginRequiredMixin, UpdateView):
     login_url = '/accounts/login/'
     template_name = 'accounts/form.html'
     form_class = EditProfileForm
+    title = 'Edit profile'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Edit profile'
+        context['title'] = self.title
         return context
 
     def get_object(self, queryset=None):

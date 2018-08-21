@@ -1,6 +1,6 @@
 {% load static %}
 
-{% for product in qs %}
+{% for product in product_list %}
     <div class="col-sm-4">
         <div class="product-item">
             <a href="{{ product.get_absolute_url }}">
