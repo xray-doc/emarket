@@ -164,7 +164,7 @@ class ContactsTestCase(TestCase):
         self.assertEqual(len(mail.outbox), 0)
         response = self.client.post(reverse('contacts'), data=data)
         self.assertEqual(response.status_code, 302)
-        self.assertRedirects(response, reverse('main'))
+        self.assertRedirects(response, reverse('success'))
         self.assertTemplateUsed('orders/done.hrml')
 
         self.assertEqual(len(mail.outbox), 1)
@@ -184,6 +184,6 @@ class ContactsTestCase(TestCase):
 
         response = self.client.post(reverse('contacts'), data=data)
         self.assertEqual(response.status_code, 302)
-        self.assertRedirects(response, reverse('main'))
+        self.assertRedirects(response, reverse('success'))
         m = mail.outbox[0]
         self.assertEqual(m.to, ['m.nikolaev1@gmail.com'])

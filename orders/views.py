@@ -127,6 +127,7 @@ def checkout(request):
                 price_per_item = product_in_basket.price_per_item,
             )
 
+        #TODO: change to success page
         return render(request, 'orders/done.html', locals())
 
     profile = None
