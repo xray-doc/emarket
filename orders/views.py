@@ -40,6 +40,7 @@ def update_basket_list(request):
             new_product.save(force_update=True)
 
     # Removing product from basket
+    # TODO: it should be post query
     if data.get("remove_product_id"):
         ProductInBasket.objects.get(id=request.GET.get("remove_product_id")).delete()
 
