@@ -43,18 +43,15 @@ class Product(models.Model):
         discount_price = self.price - (self.price / 100 * self.discount)
         return int(discount_price)
 
-    def __str__(self):
-        return "%s, %s" % (self.price, self.name)
-
-    class Meta:
-        verbose_name = "Product"
-        verbose_name_plural = "Products"
-
     def get_absolute_url(self):
         return reverse("products:product", kwargs={"slug": self.slug})
 
     def get_api_url(self, request=None):
         return api_reverse("api:product-rud", kwargs={'pk': self.pk}, request=request)
+
+    @classmethod
+    def get_distinct_values_from_field(cls, field):
+        return cls.objects.all().values_list(field).distinct()
 
     @property
     def comments(self):
@@ -70,6 +67,13 @@ class Product(models.Model):
         instance = self
         content_type = ContentType.objects.get_for_model(instance.__class__)
         return content_type
+
+    def __str__(self):
+        return "%s, %s" % (self.price, self.name)
+
+    class Meta:
+        verbose_name = "Product"
+        verbose_name_plural = "Products"
 
 
 def pre_save_product_receiver(sender, instance, *args, **kwargs):
@@ -104,6 +108,7 @@ class ProductImage(models.Model):
         verbose_name = "Photo"
         verbose_name_plural = "Photos"
 
-
+    # TODO: post save: if is_main, disable it in other instances and create
+    # thumbnail properly.
 
 

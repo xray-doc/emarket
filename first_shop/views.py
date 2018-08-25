@@ -28,8 +28,7 @@ class MainView(ListView):
         # Here we get distinct values of columns from Product model
         # in order to create choices for filter widgets.
         for field in self.fields:
-            # TODO: release next method in model:
-            distinct_qs = Product.objects.all().values_list(field).distinct()
+            distinct_qs = Product.get_distinct_values_from_field(field)
             choices = []
             for i in list(distinct_qs):
                 key = field + '__' + str(i[0])

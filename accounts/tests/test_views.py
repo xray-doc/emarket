@@ -12,7 +12,7 @@ from ..models import Profile
 User = get_user_model()
 
 
-class login_viewTestCase(TestCase):
+class LoginViewTestCase(TestCase):
 
     def setUp(self):
         test_user = User.objects.create_user(username='testuser', password='somepass')
@@ -65,7 +65,7 @@ class login_viewTestCase(TestCase):
         self.assertTemplateUsed(response, 'accounts/form.html')
 
 
-class register_viewTestCase(TestCase):
+class RegisterViewTestCase(TestCase):
 
     def test_view_url_exists_at_desired_location(self):
         response = self.client.get('/accounts/register/')
@@ -109,7 +109,7 @@ class register_viewTestCase(TestCase):
         self.assertTemplateUsed(response, 'accounts/form.html')
 
 
-class logout_viewTestCase(TestCase):
+class LogoutViewTestCase(TestCase):
 
     def test_view_url_exists_at_desired_location(self):
         response = self.client.get('/accounts/logout/')
@@ -134,7 +134,7 @@ class logout_viewTestCase(TestCase):
         self.assertRedirects(response, '/', status_code=302, target_status_code=302)
 
 
-class edit_profile_viewTestCase(TestCase):
+class EditProfileViewTestCase(TestCase):
 
     def setUp(self):
         test_user = User.objects.create_user(username='testuser', password='somep')
@@ -195,7 +195,7 @@ class edit_profile_viewTestCase(TestCase):
         self.assertEqual(response.context['form'].cleaned_data['first_name'], 'Dan')
 
 
-class profile_viewTestCase(TestCase):
+class ProfileViewTestCase(TestCase):
 
     def setUp(self):
         test_user = User.objects.create_user(username='testuser', password='somep')
@@ -244,5 +244,3 @@ class profile_viewTestCase(TestCase):
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, reverse("main"))
 
-
-#TODO: rename test's name

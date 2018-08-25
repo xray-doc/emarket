@@ -9,13 +9,12 @@ GENDER_CHOICES = (
     ('F', 'Female'),
 )
 
-#TODO: make fields in Profile necessary
 
 class Profile(models.Model):
     user = models.ForeignKey(User)
-    first_name = models.CharField(max_length=64, blank=True, null=True, default=None)
-    second_name = models.CharField(max_length=64, blank=True, null=True, default=None)
-    gender = models.CharField(max_length=10, choices=GENDER_CHOICES, default='M')
+    first_name = models.CharField(max_length=64, null=True, default=None)
+    second_name = models.CharField(max_length=64, null=True, default=None)
+    gender = models.CharField(max_length=10, choices=GENDER_CHOICES, blank=True, default='M')
     birth_date = models.DateField(blank=True, null=True, default=None)
     phone = models.CharField(blank=True, null=True, default=None, max_length=48)
     address = models.CharField(blank=True, null=True, default=None, max_length=128)
