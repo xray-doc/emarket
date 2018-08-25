@@ -107,8 +107,3 @@ class ProductImage(models.Model):
     class Meta:
         verbose_name = "Photo"
         verbose_name_plural = "Photos"
-
-    # TODO: post save: if is_main, disable it in other instances and create
-    # thumbnail properly.
-
-

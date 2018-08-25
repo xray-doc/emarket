@@ -1,6 +1,7 @@
 from django.db import models
 from products.models import Product
 from django.db.models.signals import post_save
+from django.db.models import Sum
 from django.contrib.auth import get_user_model
 
 from utils.main import disable_for_loaddata
@@ -84,11 +85,9 @@ def product_in_order_post_save(sender, instance, created, **kwargs):
     Calculates order total price after saving (prices with discount)
     """
     order = instance.order
-    all_products_in_order = ProductInOrder.objects.filter(order=order, is_active=True)
 
-    order_total_price = 0
-    for item in all_products_in_order:
-        order_total_price += item.total_price
+    all_products_in_order = ProductInOrder.objects.filter(order=order, is_active=True)
+    order_total_price = all_products_in_order.aggregate(s=Sum('total_price'))['s']
 
     instance.order.total_price = order_total_price
     instance.order.save(force_update=True)

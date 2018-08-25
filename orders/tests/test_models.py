@@ -37,10 +37,27 @@ class OrderTestCase(TestCase):
         ids2 = ProductInOrder.objects.values_list('id', flat=True).order_by('id')
         self.assertEqual(list(ids1), list(ids2))
 
+
+class ProductInOrderTestCase(TestCase):
+
     def test_product_in_order___str__(self):
         product = mixer.blend(Product, name='Nokia')
         pr_in_order = ProductInOrder(product=product)
         self.assertEqual(str(pr_in_order), 'Nokia')
+
+    def test_product_in_order_save(self):
+        order = mixer.blend(Order)
+        product_without_discount = mixer.blend(Product, price=12000)
+        pr_in_order = mixer.blend(ProductInOrder, product=product_without_discount, order=order, nmb=3)
+        estimated_price = 12000 * 3
+        self.assertEqual(pr_in_order.total_price, estimated_price)
+
+        product_with_discount = mixer.blend(Product, price=9000, discount=30)
+        pr_in_order2 = mixer.blend(ProductInOrder, product=product_with_discount, order=order, nmb=2)
+        estimated_price2 = 6300 * 2
+        self.assertEqual(pr_in_order2.total_price, estimated_price2)
+
+        self.assertEqual(order.total_price, estimated_price + estimated_price2)
 
 
 class ProductInBasketTestCase(TestCase):
