@@ -5,6 +5,7 @@ from mixer.backend.django import mixer
 import json
 
 from ..models import Order, Status, ProductInOrder, ProductInBasket
+from accounts.models import Profile
 from products.models import Product
 
 User = get_user_model()
@@ -115,6 +116,17 @@ class UpdateBasketListViewTestCase(TestCase):
                       + self.pr3.price * 3
         self.assertEqual(response.context['products_total_price'], total_price)
 
+    def test_update_product_in_basket(self):
+        self.client.login(username='testuser1', password='somep')
+        response = self.client.get(reverse('orders:basket_list'))
+        self.assertEqual(response.context['products_total_nmb'], 2)
+
+        pr_id = self.pr1.id
+        nmb1 = ProductInBasket.objects.get(user=self.user1, product_id=pr_id).nmb
+        response = self.client.post(reverse('orders:basket_list'), data={'product_id': pr_id, 'nmb': 3})
+        nmb2 = ProductInBasket.objects.get(user=self.user1, product_id=pr_id).nmb
+        self.assertEqual(nmb2, nmb1 + 3)
+
     def test_delete_product_from_basket(self):
         self.client.login(username='testuser1', password='somep')
         response = self.client.get(reverse('orders:basket_list'))
@@ -174,6 +186,27 @@ class ChangeProductInBasketViewTestCase(TestCase):
 
 class CheckoutViewTestCase(TestCase):
 
+    def setUp(self):
+        self.user1 = User.objects.create_user(
+            username='testuser1',
+            password='somep',
+            email='test@testmail.com'
+        )
+        self.pr1 = mixer.blend(Product)
+        self.pr2 = mixer.blend(Product)
+
+        self.pr_in_basket1 = mixer.blend(
+            ProductInBasket,
+            user=self.user1,
+            product=self.pr1,
+            # order = self.order1
+        )
+        self.pr_in_basket2 = mixer.blend(
+            ProductInBasket,
+            user=self.user1,
+            product=self.pr2,
+        )
+
     def test_view_url_exists_and_accessible(self):
         response = self.client.get('/orders/checkout/')
         self.assertEqual(response.status_code, 200)
@@ -188,3 +221,106 @@ class CheckoutViewTestCase(TestCase):
 
     def test_view_context_keys(self):
         response = self.client.get(reverse('orders:checkout'))
+        expected_context_keys = [
+            'products_in_basket',
+            'products_total_price',
+            'form',
+            'name',
+            'phone',
+            'email',
+            'address'
+        ]
+
+        for key in expected_context_keys:
+            self.assertIn(key, response.context)
+            if key in ['name', 'phone', 'email', 'address']:
+                self.assertIsNone(response.context[key])
+
+    def test_view_with_valid_data(self):
+        self.assertEqual(Order.objects.count(), 0)
+        self.assertEqual(ProductInOrder.objects.count(), 0)
+
+        data = {
+            'name': 'tester',
+            'phone': 11112232,
+            'email': 'test@test.com',
+            'address': 'Moskva, Liteynaya',
+            'comments': 'I am ok'
+        }
+        self.client.login(username='testuser1', password='somep')
+        response = self.client.post(reverse('orders:checkout'), data)
+        self.assertEqual(Order.objects.count(), 1)
+        self.assertEqual(ProductInOrder.objects.count(), 2)
+        self.assertEqual(Order.objects.first().comments, 'I am ok')
+        self.assertEqual(Order.objects.first().user, self.user1)
+        self.assertTemplateNotUsed(response, 'orders/checkout.html')
+        #TODO: test redirecting to success page
+
+    def test_view_with_valid_data_and_anonimous_user(self):
+        self.assertEqual(Order.objects.count(), 0)
+        self.assertEqual(ProductInOrder.objects.count(), 0)
+
+        data = {
+            'name': 'tester',
+            'phone': 11112232,
+            'email': 'test@test.com',
+            'address': 'Moskva, Liteynaya',
+            'comments': 'I am ok'
+        }
+        response = self.client.post(reverse('orders:checkout'), data)
+        self.assertEqual(Order.objects.count(), 1)
+        self.assertEqual(ProductInOrder.objects.count(), 0)
+        self.assertEqual(Order.objects.first().customer_name, 'tester')
+        self.assertIsNone(Order.objects.first().user)
+        self.assertTemplateNotUsed(response, 'orders/checkout.html')
+        #TODO: test redirecting to success page
+
+    def test_view_with_invalid_data(self):
+        self.assertEqual(Order.objects.count(), 0)
+        self.assertEqual(ProductInOrder.objects.count(), 0)
+
+        # Invalid phone
+        data = {
+            'name': 'tester',
+            'phone': '',
+            'email': 'test@test.com',
+            'address': 'Moskva, Liteynaya',
+            'comments': 'I am ok'
+        }
+        self.client.login(username='testuser1', password='somep')
+        response = self.client.post(reverse('orders:checkout'), data)
+        self.assertEqual(Order.objects.count(), 0)
+        self.assertEqual(ProductInOrder.objects.count(), 0)
+
+        # Invalid email
+        data = {
+            'name': 'tester',
+            'phone': 1231231231,
+            'email': 'test@test',
+            'address': 'Moskva, Liteynaya',
+            'comments': 'I am ok'
+        }
+        self.client.login(username='testuser1', password='somep')
+        response = self.client.post(reverse('orders:checkout'), data)
+        self.assertEqual(Order.objects.count(), 0)
+        self.assertEqual(ProductInOrder.objects.count(), 0)
+
+    def test_prefill_form_data(self):
+        profile = mixer.blend(
+            Profile,
+            user=self.user1,
+            first_name=mixer.FAKE,
+            second_name=mixer.FAKE,
+            address=mixer.FAKE,
+            phone=mixer.FAKE
+        )
+
+        self.client.login(username='testuser1', password='somep')
+        response = self.client.get(reverse('orders:checkout'))
+        self.assertEqual(response.context['address'], profile.address)
+        self.assertEqual(response.context['email'], self.user1.email)
+        self.assertEqual(response.context['phone'], profile.phone)
+
+
+
+
