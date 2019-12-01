@@ -1,11 +1,82 @@
 from django.http import JsonResponse
 from django.shortcuts import render
 from django.contrib.auth.models import User
+from django.views.generic.base import TemplateView, View
 
 from .models import *
 from .forms import *
 from accounts.models import Profile
 
+
+#This class-based view should substitute the function below.
+#It is not used yet.
+class UpdateBasketList(TemplateView):
+
+    template_name = 'basket_items_list.html'
+
+    def post(self, request, *args, **kwargs):
+        data = request.POST
+
+        if data.get("product_id"):
+            request = self.request
+            session_key = request.session.session_key
+            user = request.user
+
+            product_id = data.get("product_id")
+            nmb = data.get("nmb") or 1
+
+            if user.is_authenticated():
+                # if user is authenticated product in basket binds to user object,
+                # else to session_key
+                new_product, created = ProductInBasket.objects.get_or_create(user=user,
+                                                                             product_id=product_id,
+                                                                             defaults={"nmb": nmb})
+            else:
+                new_product, created = ProductInBasket.objects.get_or_create(session_key=session_key,
+                                                                             product_id=product_id,
+                                                                             defaults={"nmb": nmb})
+            if not created:
+                new_product.nmb += int(nmb)
+                new_product.save(force_update=True)
+
+        return super().post(request, *args, **kwargs)
+
+    def get(self, request, *args, **kwargs):
+        data = request.GET
+
+        if data.get("remove_product_id"):
+            ProductInBasket.objects.get(id=request.GET.get("remove_product_id")).delete()
+
+        return super().get(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        request = self.request
+        session_key = request.session.session_key
+        user = request.user
+        context = {}
+
+        if user.is_authenticated():
+            current_user_or_session_key = {'user': user}
+        else:
+            current_user_or_session_key = {'session_key': session_key}
+
+        products_in_basket = ProductInBasket.objects.filter(is_active=True, **current_user_or_session_key)
+        products_total_price = ProductInBasket.get_basket_total_price(**current_user_or_session_key)
+
+        products_total_nmb = products_in_basket.count()
+        products_in_basket_ids = ''
+        for product_in_basket in products_in_basket:
+            products_in_basket_ids += str(product_in_basket.product.id) + ','
+
+        context = {
+            'user': user,
+            'products_in_basket': products_in_basket,
+            'products_total_price': products_total_price,
+            'products_total_nmb': products_total_nmb,
+            'products_in_basket_ids': products_in_basket_ids
+        }
+
+        return context
 
 
 def update_basket_list(request):
@@ -44,15 +115,13 @@ def update_basket_list(request):
     if data.get("remove_product_id"):
         ProductInBasket.objects.get(id=request.GET.get("remove_product_id")).delete()
 
-    # Getting basket list
     if user.is_authenticated():
-        # if user is authenticated product in basket binds to user object,
-        # else to session_key
-        products_in_basket = ProductInBasket.objects.filter(user=user, is_active=True)
-        products_total_price = ProductInBasket.get_basket_total_price(user=user)
+        current_user_or_session_key = {'user': user}
     else:
-        products_in_basket = ProductInBasket.objects.filter(session_key=session_key, is_active=True)
-        products_total_price = ProductInBasket.get_basket_total_price(session_key=session_key)
+        current_user_or_session_key = {'session_key': session_key}
+
+    products_in_basket = ProductInBasket.objects.filter(is_active=True, **current_user_or_session_key)
+    products_total_price = ProductInBasket.get_basket_total_price(**current_user_or_session_key)
 
     products_total_nmb = products_in_basket.count()
     products_in_basket_ids = ''

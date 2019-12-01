@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataSource name="Django default">
-  <database-model serializer="dbm" rdbms="SQLITE" format-version="4.11">
+  <database-model serializer="dbm" dbms="SQLITE" family-id="SQLITE" format-version="4.17">
     <root id="1">
       <ServerVersion>3.20.1</ServerVersion>
     </root>
     <schema id="2" parent="1" name="main">
       <Current>1</Current>
-      <Visible>1</Visible>
     </schema>
     <collation id="3" parent="1" name="BINARY"/>
     <collation id="4" parent="1" name="NOCASE"/>
@@ -74,7 +73,6 @@
     </column>
     <index id="35" parent="6" name="accounts_profile_user_id_49a85d32">
       <ColNames>user_id</ColNames>
-      <ColumnCollations></ColumnCollations>
     </index>
     <key id="36" parent="6">
       <ColNames>id</ColNames>
@@ -99,7 +97,6 @@
     <index id="40" parent="7" name="sqlite_autoindex_auth_group_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>name</ColNames>
-      <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
     <key id="41" parent="7">
@@ -129,16 +126,13 @@
     <index id="46" parent="8" name="auth_group_permissions_group_id_permission_id_0cd325b0_uniq">
       <ColNames>group_id
 permission_id</ColNames>
-      <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
     <index id="47" parent="8" name="auth_group_permissions_group_id_b120cbf9">
       <ColNames>group_id</ColNames>
-      <ColumnCollations></ColumnCollations>
     </index>
     <index id="48" parent="8" name="auth_group_permissions_permission_id_84c5c92e">
       <ColNames>permission_id</ColNames>
-      <ColumnCollations></ColumnCollations>
     </index>
     <key id="49" parent="8">
       <ColNames>id</ColNames>
@@ -178,12 +172,10 @@ permission_id</ColNames>
     <index id="56" parent="9" name="auth_permission_content_type_id_codename_01ab375a_uniq">
       <ColNames>content_type_id
 codename</ColNames>
-      <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
     <index id="57" parent="9" name="auth_permission_content_type_id_2f476e4b">
       <ColNames>content_type_id</ColNames>
-      <ColumnCollations></ColumnCollations>
     </index>
     <key id="58" parent="9">
       <ColNames>id</ColNames>
@@ -252,7 +244,6 @@ codename</ColNames>
     <index id="71" parent="10" name="sqlite_autoindex_auth_user_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>username</ColNames>
-      <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
     <key id="72" parent="10">
@@ -282,16 +273,13 @@ codename</ColNames>
     <index id="77" parent="11" name="auth_user_groups_user_id_group_id_94350c0c_uniq">
       <ColNames>user_id
 group_id</ColNames>
-      <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
     <index id="78" parent="11" name="auth_user_groups_user_id_6a12ed8b">
       <ColNames>user_id</ColNames>
-      <ColumnCollations></ColumnCollations>
     </index>
     <index id="79" parent="11" name="auth_user_groups_group_id_97559544">
       <ColNames>group_id</ColNames>
-      <ColumnCollations></ColumnCollations>
     </index>
     <key id="80" parent="11">
       <ColNames>id</ColNames>
@@ -326,16 +314,13 @@ group_id</ColNames>
     <index id="86" parent="12" name="auth_user_user_permissions_user_id_permission_id_14a6b632_uniq">
       <ColNames>user_id
 permission_id</ColNames>
-      <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
     <index id="87" parent="12" name="auth_user_user_permissions_user_id_a95ead1b">
       <ColNames>user_id</ColNames>
-      <ColumnCollations></ColumnCollations>
     </index>
     <index id="88" parent="12" name="auth_user_user_permissions_permission_id_1fbb5f2c">
       <ColNames>permission_id</ColNames>
-      <ColumnCollations></ColumnCollations>
     </index>
     <key id="89" parent="12">
       <ColNames>id</ColNames>
@@ -379,7 +364,6 @@ permission_id</ColNames>
     </column>
     <index id="97" parent="13" name="avatar_avatar_user_id_ae13b50b">
       <ColNames>user_id</ColNames>
-      <ColumnCollations></ColumnCollations>
     </index>
     <key id="98" parent="13">
       <ColNames>id</ColNames>
@@ -427,15 +411,12 @@ permission_id</ColNames>
     </column>
     <index id="107" parent="14" name="comments_comment_content_type_id_72fd5dbe">
       <ColNames>content_type_id</ColNames>
-      <ColumnCollations></ColumnCollations>
     </index>
     <index id="108" parent="14" name="comments_comment_parent_id_3e0802fb">
       <ColNames>parent_id</ColNames>
-      <ColumnCollations></ColumnCollations>
     </index>
     <index id="109" parent="14" name="comments_comment_user_id_a1db4881">
       <ColNames>user_id</ColNames>
-      <ColumnCollations></ColumnCollations>
     </index>
     <key id="110" parent="14">
       <ColNames>id</ColNames>
@@ -497,11 +478,9 @@ permission_id</ColNames>
     </column>
     <index id="122" parent="15" name="django_admin_log_content_type_id_c4bce8eb">
       <ColNames>content_type_id</ColNames>
-      <ColumnCollations></ColumnCollations>
     </index>
     <index id="123" parent="15" name="django_admin_log_user_id_c564eba6">
       <ColNames>user_id</ColNames>
-      <ColumnCollations></ColumnCollations>
     </index>
     <key id="124" parent="15">
       <ColNames>id</ColNames>
@@ -536,7 +515,6 @@ permission_id</ColNames>
     <index id="130" parent="16" name="django_content_type_app_label_model_76bd3d3b_uniq">
       <ColNames>app_label
 model</ColNames>
-      <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
     <key id="131" parent="16">
@@ -586,12 +564,10 @@ model</ColNames>
     <index id="140" parent="18" name="sqlite_autoindex_django_session_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>session_key</ColNames>
-      <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
     <index id="141" parent="18" name="django_session_expire_date_a5c62663">
       <ColNames>expire_date</ColNames>
-      <ColumnCollations></ColumnCollations>
     </index>
     <key id="142" parent="18">
       <ColNames>session_key</ColNames>
@@ -650,11 +626,9 @@ model</ColNames>
     </column>
     <index id="154" parent="19" name="orders_order_status_id_d80abc38">
       <ColNames>status_id</ColNames>
-      <ColumnCollations></ColumnCollations>
     </index>
     <index id="155" parent="19" name="orders_order_user_id_e9b59eb1">
       <ColNames>user_id</ColNames>
-      <ColumnCollations></ColumnCollations>
     </index>
     <key id="156" parent="19">
       <ColNames>id</ColNames>
@@ -728,15 +702,12 @@ model</ColNames>
     </column>
     <index id="171" parent="20" name="orders_productinbasket_order_id_9e1296b2">
       <ColNames>order_id</ColNames>
-      <ColumnCollations></ColumnCollations>
     </index>
     <index id="172" parent="20" name="orders_productinbasket_product_id_5757fd66">
       <ColNames>product_id</ColNames>
-      <ColumnCollations></ColumnCollations>
     </index>
     <index id="173" parent="20" name="orders_productinbasket_user_id_b8b9ab61">
       <ColNames>user_id</ColNames>
-      <ColumnCollations></ColumnCollations>
     </index>
     <key id="174" parent="20">
       <ColNames>id</ColNames>
@@ -803,11 +774,9 @@ model</ColNames>
     </column>
     <index id="187" parent="21" name="orders_productinorder_order_id_12dc2f52">
       <ColNames>order_id</ColNames>
-      <ColumnCollations></ColumnCollations>
     </index>
     <index id="188" parent="21" name="orders_productinorder_product_id_43664b5a">
       <ColNames>product_id</ColNames>
-      <ColumnCollations></ColumnCollations>
     </index>
     <key id="189" parent="21">
       <ColNames>id</ColNames>
@@ -927,7 +896,6 @@ model</ColNames>
     </column>
     <index id="215" parent="23" name="products_product_slug_70d3148d">
       <ColNames>slug</ColNames>
-      <ColumnCollations></ColumnCollations>
     </index>
     <key id="216" parent="23">
       <ColNames>id</ColNames>
@@ -970,7 +938,6 @@ model</ColNames>
     </column>
     <index id="224" parent="24" name="products_productimage_product_id_e747596a">
       <ColNames>product_id</ColNames>
-      <ColumnCollations></ColumnCollations>
     </index>
     <key id="225" parent="24">
       <ColNames>id</ColNames>

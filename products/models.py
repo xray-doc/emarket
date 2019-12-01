@@ -40,7 +40,10 @@ class Product(models.Model):
         """
         Product price with discount (if it has discount)
         """
-        discount_price = self.price - (self.price / 100 * self.discount)
+        try:
+            discount_price = self.price - (self.price / 100 * self.discount)
+        except:
+            discount_price = self.price
         return int(discount_price)
 
     def get_absolute_url(self):
