@@ -170,7 +170,11 @@ DATABASES['default'].update(db_from_env)
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 
+# Avatar
+AVATAR_AUTO_GENERATE_SIZES = (80, 200)
 
+
+# Email settings
 EMAIL_HOST = 'smtp.mail.ru'
 EMAIL_HOST_USER = 'm10040@mail.ru'
 EMAIL_HOST_PASSWORD = 'mstosorok14'
