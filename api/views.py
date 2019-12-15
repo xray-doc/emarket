@@ -15,8 +15,14 @@ class ProductAPIView(generics.ListAPIView):
 
     def get_queryset(self):
         qs = Product.objects.all()
+
+        # Request may contain query with parameters that client interested in.
+        # For instance: only name, ram and processor.
+        # Params shoud be a string with * between them, like: name*ram*processor
         query = self.request.GET.get("q")
         if query is not None:
+            queryset = query.split('*')
+
             qs = qs.filter(name__icontains=query)
         return qs
 
