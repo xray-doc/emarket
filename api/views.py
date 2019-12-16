@@ -1,30 +1,29 @@
 from django.shortcuts import render
 from rest_framework import generics
+from rest_framework.response import Response
 from django.db.models import Q
-
-
 from products.models import Product
 from .permissions import IsStaffOrReadOnly
 from .serializers import ProductSerializer
 
 
-
 class ProductAPIView(generics.ListAPIView):
-    serializer_class = ProductSerializer
     permission_classes = [IsStaffOrReadOnly]
 
-    def get_queryset(self):
-        qs = Product.objects.all()
+    def get(self, request):
+        products = Product.objects.all()
 
-        # Request may contain query with parameters that client interested in.
-        # For instance: only name, ram and processor.
-        # Params shoud be a string with * between them, like: name*ram*processor
-        query = self.request.GET.get("q")
+        # In his request, client may specify fields (tablet characteristics) to show.
+        # For example: name, price, processor etc.
+        query = request.GET.get("q")
         if query is not None:
-            queryset = query.split('*')
+            fields = query.split('*')
+        else:
+            fields = ['name']
 
-            qs = qs.filter(name__icontains=query)
-        return qs
+        serialized_products = [ProductSerializer(p, fields=fields).data for p in products]
+
+        return Response(serialized_products)
 
 
 class ProductRudView(generics.RetrieveUpdateDestroyAPIView): # DetailView CreateView FormView
