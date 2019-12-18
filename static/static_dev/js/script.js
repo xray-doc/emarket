@@ -215,6 +215,9 @@ $(document).ready(function () {
     // renewing product items on main page when filter used
     function filterProduct (form) {
         var filteredProductsUrl = "/filtered_products/";
+        if (form.serialize().length == 0) {
+            return False;
+        }
         $.ajax({
             method: "GET",
             data: form.serialize(),
