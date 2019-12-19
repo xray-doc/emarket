@@ -9,21 +9,24 @@ from .serializers import ProductSerializer
 
 class ProductAPIView(generics.ListAPIView):
     permission_classes = [IsStaffOrReadOnly]
+    serializer_class = ProductSerializer
 
-    def get(self, request):
-        products = Product.objects.all()
+    def get_queryset(self):
 
         # In his request, client may specify fields (tablet characteristics) to show.
-        # For example: name, price, processor etc.
-        query = request.GET.get("q")
+        # For example: name, price, proc etc. The request looks like: q=name*price*processor.
+        query = self.request.GET.get("q")
         if query is not None:
             fields = query.split('*')
         else:
             fields = ['name']
 
-        serialized_products = [ProductSerializer(p, fields=fields).data for p in products]
+        # Here we say serializer what fields to show.
+        self.serializer_class.Meta.fields = fields
 
-        return Response(serialized_products)
+        qs = Product.objects.all()
+
+        return qs
 
 
 class ProductRudView(generics.RetrieveUpdateDestroyAPIView): # DetailView CreateView FormView
