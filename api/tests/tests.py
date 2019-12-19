@@ -45,8 +45,48 @@ class ProductAPITestCase(APITestCase):
         response = self.client.get(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
+    def test_get_product_list_with_query(self):
+        url = api_reverse('api:products-list')
+        Product.objects.create(
+            name='Sams',
+            os='android',
+            ram=5,
+            diagonal=20.2,
+            price=12000,
+            main_camera=12
+        )
+        Product.objects.create(
+            name='Xiaomi',
+            os='android',
+            ram=6,
+            diagonal=4,
+            price=22000,
+            main_camera=8
+        )
+
+        keys = ['name', 'diagonal', 'ram', 'price']
+        query = {'q': '*'.join(keys)}
+        response = self.client.get(url, query, format='json')
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        l = list(response.json()[1].keys())
+        self.assertEqual(l, keys)
+
+        keys.append('main_camera')
+        self.assertNotEqual(l, keys)
+
+        keys = ['name', 'diagonal', 'ram', 'price', 'main_camera']
+        query = {'q': '*'.join(keys)}
+        response = self.client.get(url, query, format='json')
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        l = list(response.json()[1].keys())
+        l2 = list(response.json()[2].keys())
+        self.assertEqual(l, l2)
+        self.assertEqual(l, keys)
 
     # def test_get_product_list_with_query(self):
+
     #     product2 = Product.objects.create(
     #         name='Iphone X',
     #     )
