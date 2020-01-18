@@ -7,7 +7,7 @@ class ProductSerializer(serializers.ModelSerializer):
     #url         = serializers.SerializerMethodField(read_only=True)
     class Meta:
         model = Product
-        fields = [
+        fields = (
             'name',
             'price',
             'discount',
@@ -20,7 +20,7 @@ class ProductSerializer(serializers.ModelSerializer):
             'processor',
             'main_camera',
             'other_specifications'
-        ]
+        )
 
     # def get_url(self, obj):
     #     # request

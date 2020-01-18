@@ -65,8 +65,8 @@ class ProductAPITestCase(APITestCase):
         )
 
         keys = ['name', 'diagonal', 'ram', 'price']
-        query = {'q': '*'.join(keys)}
-        response = self.client.get(url, query, format='json')
+        query = {'q': keys}
+        response = self.client.post(url, data=query, format='json')
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         l = list(response.json()[1].keys())
@@ -76,8 +76,8 @@ class ProductAPITestCase(APITestCase):
         self.assertNotEqual(l, keys)
 
         keys = ['name', 'diagonal', 'ram', 'price', 'main_camera']
-        query = {'q': '*'.join(keys)}
-        response = self.client.get(url, query, format='json')
+        query = {'q': keys}
+        response = self.client.post(url, data=query, format='json')
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         l = list(response.json()[1].keys())
