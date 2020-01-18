@@ -33,7 +33,7 @@
                             </thead>
                             <tbody>
                             {% for product_in_basket in products_in_basket %}
-                                <tr data-id="{{ product_in_basket.id }}">
+                                <tr data-id="{{ product_in_basket.product.id }}">
                                     <td>
                                         <img src="{{ product_in_basket.get_product_thumbnail_url }}">
                                     </td>
@@ -45,7 +45,7 @@
                                     <td>
                                         <input value="{{ product_in_basket.nmb }}" type="number"
                                                class="num-products-input checkout" min="1"
-                                               data-id="{{ product_in_basket.id }}"
+                                               data-id="{{ product_in_basket.product.id }}"
                                         >
                                     </td>
                                     <td>

@@ -14,7 +14,7 @@
                         {% csrf_token %}
                         <input value="{{ product_in_basket.nmb }}" type="number"
                                class="num-products-input" min="1"
-                               data-id="{{ product_in_basket.id }}"
+                               data-id="{{ product_in_basket.product.id }}"
                         > x <strong>{{ product_in_basket.product.get_price_with_discount }} RUB </strong>
                     </form>
 
@@ -24,7 +24,7 @@
                 </div>
             </div>
             <div class="product-in-basket-remove-btn col-lg-1">
-                <button type="button" class="btn btn-danger delete-from-basket" data-id='{{ product_in_basket.id }}'>
+                <button type="button" class="btn btn-danger delete-from-basket" data-id='{{ product_in_basket.product.id }}'>
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>

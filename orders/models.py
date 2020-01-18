@@ -14,11 +14,11 @@ class Status(models.Model):
     """
     Status of order
     """
-    name = models.CharField(max_length=64, blank=True, null=True, default=None)
+    name      = models.CharField(max_length=64, blank=True, null=True, default=None)
     is_active = models.BooleanField(default=True)
 
-    created = models.DateTimeField(auto_now_add=True, auto_now=False)
-    updated = models.DateTimeField(auto_now_add=False, auto_now=True)
+    created   = models.DateTimeField(auto_now_add=True, auto_now=False)
+    updated   = models.DateTimeField(auto_now_add=False, auto_now=True)
 
     def __str__(self):
         return "%s" % self.name
@@ -29,17 +29,18 @@ class Status(models.Model):
 
 
 class Order(models.Model):
-    user = models.ForeignKey(User, blank=True, null=True, default=None)
-    customer_name = models.CharField(max_length=64, blank=True, null=True, default=None)
-    customer_email = models.EmailField(blank=True, null=True, default=None)
-    customer_phone = models.CharField(blank=True, null=True, default=None, max_length=48)
-    customer_address = models.CharField(blank=True, null=True, default=None, max_length=128)
-    comments = models.TextField(blank=True, null=True, default=None)
-    status = models.ForeignKey(Status)
-    total_price = models.IntegerField(default=0)
 
-    created = models.DateTimeField(auto_now_add=True, auto_now=False)
-    updated = models.DateTimeField(auto_now_add=False, auto_now=True)
+    user            = models.ForeignKey(User, blank=True, null=True, default=None)
+    customer_name   = models.CharField(max_length=64, blank=True, null=True, default=None)
+    customer_email  = models.EmailField(blank=True, null=True, default=None)
+    customer_phone  = models.CharField(blank=True, null=True, default=None, max_length=48)
+    customer_address = models.CharField(blank=True, null=True, default=None, max_length=128)
+    comments        = models.TextField(blank=True, null=True, default=None)
+    status          = models.ForeignKey(Status)
+    total_price     = models.IntegerField(default=0)
+
+    created         = models.DateTimeField(auto_now_add=True, auto_now=False)
+    updated         = models.DateTimeField(auto_now_add=False, auto_now=True)
 
     def __str__(self):
         return "Order %s %s" % (self.id, self.status.name)
@@ -49,19 +50,23 @@ class Order(models.Model):
         verbose_name_plural = "Orders"
 
     def get_products_in_order(self):
+        """
+        Returns products included in this order
+        """
         return ProductInOrder.objects.filter(order=self)
 
 
 
 class ProductInOrder(models.Model):
-    order = models.ForeignKey(Order, blank=True, null=True, default=None)
-    product = models.ForeignKey(Product, blank=True, null=True, default=None)
-    nmb = models.IntegerField(default=1)
-    price_per_item = models.IntegerField(default=0, verbose_name="Price")
-    total_price = models.IntegerField(default=0, verbose_name="Price")
-    is_active = models.BooleanField(default=True)
-    created = models.DateTimeField(auto_now_add=True, auto_now=False)
-    updated = models.DateTimeField(auto_now_add=False, auto_now=True)
+
+    order           = models.ForeignKey(Order, blank=True, null=True, default=None)
+    product         = models.ForeignKey(Product, blank=True, null=True, default=None)
+    nmb             = models.IntegerField(default=1)
+    price_per_item  = models.IntegerField(default=0, verbose_name="Price")
+    total_price     = models.IntegerField(default=0, verbose_name="Price")
+    is_active       = models.BooleanField(default=True)
+    created         = models.DateTimeField(auto_now_add=True, auto_now=False)
+    updated         = models.DateTimeField(auto_now_add=False, auto_now=True)
 
     def __str__(self):
         return "%s" % self.product.name
@@ -97,17 +102,53 @@ post_save.connect(product_in_order_post_save, sender=ProductInOrder)
 
 
 class ProductInBasket(models.Model):
-    user = models.ForeignKey(User, blank=True, null=True, default=None)
-    session_key = models.CharField(max_length=128, blank=True, null=True, default=True)
-    order = models.ForeignKey(Order, blank=True, null=True, default=None)
-    product = models.ForeignKey(Product, blank=True, null=True, default=None)
-    nmb = models.IntegerField(default=1)
-    price_per_item = models.IntegerField(default=0, verbose_name="Price")
-    discount = models.IntegerField(null=True, blank=True, default=0)
-    total_price = models.IntegerField(default=0, verbose_name="Price")
-    is_active = models.BooleanField(default=True)
-    created = models.DateTimeField(auto_now_add=True, auto_now=False)
-    updated = models.DateTimeField(auto_now_add=False, auto_now=True)
+
+    user            = models.ForeignKey(User, blank=True, null=True, default=None)
+    session_key     = models.CharField(max_length=128, blank=True, null=True, default=True)
+    order           = models.ForeignKey(Order, blank=True, null=True, default=None)
+    product         = models.ForeignKey(Product, blank=True, null=True, default=None)
+    nmb             = models.IntegerField(default=1)
+    price_per_item  = models.IntegerField(default=0, verbose_name="Price")
+    discount        = models.IntegerField(null=True, blank=True, default=0)
+    total_price     = models.IntegerField(default=0, verbose_name="Price")
+    is_active       = models.BooleanField(default=True)
+    created         = models.DateTimeField(auto_now_add=True, auto_now=False)
+    updated         = models.DateTimeField(auto_now_add=False, auto_now=True)
+
+    def add_product_to_basket(product_id, session_key=None, user=None,  nmb=1):
+        """
+        Adds product to a basket and assigns it to either user or, if
+        user is not authenticated, to session key.
+        """
+
+        if user:
+            obj = {'user': user}
+        elif session_key:
+            obj = {'session_key': session_key}
+        else:
+            raise KeyError('User of session key should be spicified')
+
+        new_product, created = ProductInBasket.objects.get_or_create(**obj,
+                                                                     product_id=product_id,
+                                                                     defaults={"nmb": nmb})
+
+        if not created:
+            new_product.nmb += int(nmb)
+            new_product.save(force_update=True)
+
+    def remove_product_from_basket(rm_product_id, session_key=None, user=None):
+        """
+        Removes product from basket.
+        """
+
+        if user:
+            obj = {'user': user}
+        elif session_key:
+            obj = {'session_key': session_key}
+        else:
+            raise KeyError('User of session key should be spicified')
+
+        ProductInBasket.objects.get(**obj, product=rm_product_id).delete()
 
     def get_basket_total_price(session_key=None, user=None):
         """
@@ -120,8 +161,7 @@ class ProductInBasket(models.Model):
         else:
             products_in_basket = ProductInBasket.objects.filter(session_key=session_key, is_active=True)
 
-        for product in products_in_basket:
-            basket_total_price += product.total_price
+        basket_total_price = products_in_basket.aggregate(s=Sum('total_price'))['s'] or 0
         return basket_total_price
 
     def get_product_thumbnail_url(self):

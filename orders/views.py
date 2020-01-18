@@ -8,52 +8,42 @@ from .forms import *
 from accounts.models import Profile
 
 
-#This class-based view should substitute the function below.
-#It is not used yet.
 class UpdateBasketList(TemplateView):
 
     template_name = 'basket_items_list.html'
 
     def post(self, request, *args, **kwargs):
         data = request.POST
+        session_key = request.session.session_key
+        user = request.user
 
-        if data.get("product_id"):
-            request = self.request
-            session_key = request.session.session_key
-            user = request.user
-
-            product_id = data.get("product_id")
+        # Adding product to basket by product id
+        product_id = data.get("product_id")
+        if product_id:
             nmb = data.get("nmb") or 1
 
             if user.is_authenticated():
-                # if user is authenticated product in basket binds to user object,
+                # if user is authenticated, then product in basket assigns to user object,
                 # else to session_key
-                new_product, created = ProductInBasket.objects.get_or_create(user=user,
-                                                                             product_id=product_id,
-                                                                             defaults={"nmb": nmb})
+                ProductInBasket.add_product_to_basket(user=user, product_id=product_id, nmb=nmb)
             else:
-                new_product, created = ProductInBasket.objects.get_or_create(session_key=session_key,
-                                                                             product_id=product_id,
-                                                                             defaults={"nmb": nmb})
-            if not created:
-                new_product.nmb += int(nmb)
-                new_product.save(force_update=True)
+                ProductInBasket.add_product_to_basket(session_key=session_key, product_id=product_id, nmb=nmb)
 
-        return super().post(request, *args, **kwargs)
-
-    def get(self, request, *args, **kwargs):
-        data = request.GET
-
-        if data.get("remove_product_id"):
-            ProductInBasket.objects.get(id=request.GET.get("remove_product_id")).delete()
+        # Removing product from basket
+        rm_product_id = data.get('remove_product_id')
+        if rm_product_id:
+            if user.is_authenticated():
+                ProductInBasket.remove_product_from_basket(user=user, rm_product_id=rm_product_id)
+            else:
+                ProductInBasket.remove_product_from_basket(session_key=session_key, rm_product_id=rm_product_id)
 
         return super().get(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
         request = self.request
         session_key = request.session.session_key
         user = request.user
-        context = {}
 
         if user.is_authenticated():
             current_user_or_session_key = {'user': user}
@@ -79,59 +69,60 @@ class UpdateBasketList(TemplateView):
         return context
 
 
-def update_basket_list(request):
-    """
-    Renders navbar basket list HTML
-    """
-    session_key = request.session.session_key
-    user = request.user
+# Previous implementation of update basket view.
 
-    if request.method == "POST":
-        data = request.POST
-    else:
-        data = request.GET
+# def update_basket_list(request):
+#     """
+#     Renders navbar basket list HTML
+#     """
+#     session_key = request.session.session_key
+#     user = request.user
+#
+#     if request.method == "POST":
+#         data = request.POST
+#     else:
+#         data = request.GET
+#
+#     # Adding product to basket
+#     if data.get("product_id"):
+#         product_id = data.get("product_id")
+#         nmb = data.get("nmb") or 1
+#
+#         if user.is_authenticated():
+#             # if user is authenticated product in basket binds to user object,
+#             # else to session_key
+#             new_product, created = ProductInBasket.objects.get_or_create(user=user,
+#                                                                          product_id=product_id,
+#                                                                          defaults={"nmb": nmb})
+#         else:
+#             new_product, created = ProductInBasket.objects.get_or_create(session_key=session_key,
+#                                                                          product_id=product_id,
+#                                                                          defaults={"nmb": nmb})
+#         if not created:
+#             new_product.nmb += int(nmb)
+#             new_product.save(force_update=True)
+#
+#     # Removing product from basket
+#     if data.get("remove_product_id"):
+#         ProductInBasket.objects.get(id=request.GET.get("remove_product_id")).delete()
+#
+#     if user.is_authenticated():
+#         current_user_or_session_key = {'user': user}
+#     else:
+#         current_user_or_session_key = {'session_key': session_key}
+#
+#     products_in_basket = ProductInBasket.objects.filter(is_active=True, **current_user_or_session_key)
+#     products_total_price = ProductInBasket.get_basket_total_price(**current_user_or_session_key)
+#
+#     products_total_nmb = products_in_basket.count()
+#     products_in_basket_ids = ''
+#     for product_in_basket in products_in_basket:
+#         products_in_basket_ids += str(product_in_basket.product.id) + ','
+#
+#     return render(request, 'basket_items_list.html', locals())
 
-    # Adding product to basket
-    if data.get("product_id"):
-        product_id = data.get("product_id")
-        nmb = data.get("nmb") or 1
 
-        if user.is_authenticated():
-            # if user is authenticated product in basket binds to user object,
-            # else to session_key
-            new_product, created = ProductInBasket.objects.get_or_create(user=user,
-                                                                         product_id=product_id,
-                                                                         defaults={"nmb": nmb})
-        else:
-            new_product, created = ProductInBasket.objects.get_or_create(session_key=session_key,
-                                                                         product_id=product_id,
-                                                                         defaults={"nmb": nmb})
-        if not created:
-            new_product.nmb += int(nmb)
-            new_product.save(force_update=True)
-
-    # Removing product from basket
-    # TODO: it should be post query
-    if data.get("remove_product_id"):
-        ProductInBasket.objects.get(id=request.GET.get("remove_product_id")).delete()
-
-    if user.is_authenticated():
-        current_user_or_session_key = {'user': user}
-    else:
-        current_user_or_session_key = {'session_key': session_key}
-
-    products_in_basket = ProductInBasket.objects.filter(is_active=True, **current_user_or_session_key)
-    products_total_price = ProductInBasket.get_basket_total_price(**current_user_or_session_key)
-
-    products_total_nmb = products_in_basket.count()
-    products_in_basket_ids = ''
-    for product_in_basket in products_in_basket:
-        products_in_basket_ids += str(product_in_basket.product.id) + ','
-
-    return render(request, 'basket_items_list.html', locals())
-
-
-def changeProductInBasket(request):
+def changeProductInBasketQuantity(request):
     session_key = request.session.session_key
     user = request.user
 
@@ -141,9 +132,9 @@ def changeProductInBasket(request):
     nmb = data.get("nmb")
 
     if user.is_authenticated():
-        product = ProductInBasket.objects.get(user=user, id=product_id)
+        product = ProductInBasket.objects.get(user=user, product=product_id)
     else:
-        product = ProductInBasket.objects.get(session_key=session_key, id=product_id)
+        product = ProductInBasket.objects.get(session_key=session_key, product=product_id)
 
     product.nmb = int(nmb)
     product.save(force_update=True)
@@ -197,7 +188,6 @@ def checkout(request):
                 price_per_item = product_in_basket.price_per_item,
             )
 
-        #TODO: change to success page
         return render(request, 'orders/done.html', locals())
 
     profile = None

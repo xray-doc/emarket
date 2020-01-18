@@ -52,7 +52,8 @@ $(document).ready(function () {
                 var product_id = e.target.getAttribute('data-id');     // when submit button in form clicked
                 var data = {};                                         // (on products.html)
                 data.product_id = product_id;
-                updateBasketList('GET', data);
+                data.csrfmiddlewaretoken = document.querySelector('[name="csrfmiddlewaretoken"]').value
+                updateBasketList('POST', data);
             }
             navbarBasketAppearance();
         })
@@ -158,7 +159,8 @@ $(document).ready(function () {
     function removeFromNavbarBasketList (product_id) {
         var data = {};
         data.remove_product_id = product_id;
-        updateBasketList('GET', data);
+        data.csrfmiddlewaretoken = document.querySelector('[name="csrfmiddlewaretoken"]').value
+        updateBasketList('POST', data);
     }
 
     function removeFromCheckoutBasketList (product_id) {
@@ -196,7 +198,7 @@ $(document).ready(function () {
             data.nmb = nmb;
             data.product_id = product_id;
             $.ajax({
-                url: "/orders/changeProduct/",
+                url: "/orders/change_product_quantity/",
                 type: "POST",
                 data: data,
                 cache: true,

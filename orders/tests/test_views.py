@@ -98,7 +98,7 @@ class UpdateBasketListViewTestCase(TestCase):
         total_price = self.pr_in_basket3.total_price
         self.assertEqual(response.context['products_total_price'], total_price)
 
-    def test_add_product_to_basket(self):
+    def test_add_product_to_basket_with_login(self):
         self.client.login(username='testuser1', password='somep')
         response = self.client.get(reverse('orders:basket_list'))
         self.assertEqual(response.status_code, 200)
@@ -115,6 +115,20 @@ class UpdateBasketListViewTestCase(TestCase):
                       + self.pr_in_basket2.total_price \
                       + self.pr3.price * 3
         self.assertEqual(response.context['products_total_price'], total_price)
+
+    def test_add_and_remove_product_from_basket_without_login(self):
+        response = self.client.get(reverse('orders:basket_list'))
+        self.assertEqual(response.status_code, 200)
+
+        pr_id = self.pr3.id
+        pr2_id = self.pr2.id
+        response = self.client.post(reverse('orders:basket_list'), data={'product_id': pr_id})
+        response = self.client.post(reverse('orders:basket_list'), data={'product_id': pr2_id})
+        self.assertEqual(response.context['products_total_nmb'], 2)
+
+
+        response= self.client.post(reverse('orders:basket_list'), data={'remove_product_id': pr_id})
+        self.assertEqual(response.context['products_total_nmb'], 1)
 
     def test_update_product_in_basket(self):
         self.client.login(username='testuser1', password='somep')
@@ -133,7 +147,7 @@ class UpdateBasketListViewTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
 
         pr_id = self.pr_in_basket1.id
-        response = self.client.get(reverse('orders:basket_list'), data={'remove_product_id': pr_id})
+        response = self.client.post(reverse('orders:basket_list'), data={'remove_product_id': pr_id})
         self.assertEqual(response.context['products_total_nmb'], 1)
 
         ids = str(self.pr_in_basket2.product.id) + ','
@@ -177,7 +191,7 @@ class ChangeProductInBasketViewTestCase(TestCase):
         data = {'product_id': self.pr1.id, 'nmb': 11}
 
         self.client.login(username='testuser1', password='somep')
-        response = self.client.post(reverse('orders:changeProduct'), data=data)
+        response = self.client.post(reverse('orders:changeProductQuantity'), data=data)
 
         resp = json.loads(response.content)
         self.assertTrue('total_product_price' in resp)
@@ -254,7 +268,6 @@ class CheckoutViewTestCase(TestCase):
         self.assertEqual(Order.objects.first().comments, 'I am ok')
         self.assertEqual(Order.objects.first().user, self.user1)
         self.assertTemplateNotUsed(response, 'orders/checkout.html')
-        #TODO: test redirecting to success page
 
     def test_view_with_valid_data_and_anonimous_user(self):
         self.assertEqual(Order.objects.count(), 0)
@@ -273,7 +286,6 @@ class CheckoutViewTestCase(TestCase):
         self.assertEqual(Order.objects.first().customer_name, 'tester')
         self.assertIsNone(Order.objects.first().user)
         self.assertTemplateNotUsed(response, 'orders/checkout.html')
-        #TODO: test redirecting to success page
 
     def test_view_with_invalid_data(self):
         self.assertEqual(Order.objects.count(), 0)
