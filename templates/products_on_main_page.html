@@ -1,7 +1,7 @@
 {% load static %}
 
 {% for product in product_list %}
-    <div class="col-sm-4">
+    <div class="product-item-col col-md-4">
         <div class="product-item">
             <a href="{{ product.get_absolute_url }}">
                 <div class="center-core">
@@ -13,11 +13,13 @@
                         SALE {{ product.discount }}%
                     </div>
                 {% endif %}
-
+                <div class="product-item-name">
                     <h4>{{ product.name }}</h4>
+                </div>
             </a>
                 <div class="product-info">
                     <div class="row">
+                       <div class="specs-div">
                         <table class="col-sm-12 specs">
                             <tbody>
                                 <tr>
@@ -47,6 +49,7 @@
                             </tbody>
                         </table>
 
+                        </div>
                         <div class="col-sm-12">
                             <div class="price_and_btn_div">
                                 {% if not product.discount %}

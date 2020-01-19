@@ -75,6 +75,10 @@ Navbar
 Product_item styles
 */
 
+.product-item-col{
+    min-width: 275px;
+}
+
 .product-item{
     height: 400px;
     margin-bottom: 10px;
@@ -83,6 +87,10 @@ Product_item styles
     position: relative;
     padding: 8px;
     text-align: center;
+}
+
+.product-item-name{
+    min-height: 38px;
 }
 
 .center-core{
@@ -100,7 +108,7 @@ Product_item styles
 
 .product-info{
     bottom: 7px;
-    position: absolute;
+    position: relative;
 }
 
 .price_and_btn_div{
@@ -113,6 +121,9 @@ Product_item styles
     height: 20px;
 }
 
+.specs-div{
+    display: -webkit-inline-box;
+}
 .specs{
     font-size: medium;
     color: black;
