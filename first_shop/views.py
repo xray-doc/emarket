@@ -67,6 +67,7 @@ class FilteredProductsView(ListView):
             key, val = filter_key.split('__')
 
             if key == 'os':
+
                 if not filters.get('os'):
                     filters['os'] = Q(os=val)
                 else:

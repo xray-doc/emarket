@@ -21,6 +21,7 @@ def product_detail(request, slug):
         "object_id": product.id
     }
     form = CommentForm(request.POST or None, initial=initial_data)
+
     if form.is_valid() and request.user.is_authenticated():
         c_type = form.cleaned_data.get("content_type").lower()
         content_type = ContentType.objects.get(model=c_type)

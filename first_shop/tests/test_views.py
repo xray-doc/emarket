@@ -2,31 +2,57 @@ from django.core import mail
 from django.test import TestCase
 from django.urls import reverse
 from mixer.backend.django import mixer
+import random
 
 from products.models import Product
 from ..forms import ContactForm
 
+
+def generate_devices(self):
+    """
+    Creates products for test database. Some parametes of a product
+    are faked and some randomly choiced from a list.
+    """
+    self.num_of_devices = 70
+    fields = [                    # These fields we want to be FAKED by mixer
+        'short_description',
+        'screen_resolution',
+        'main_camera',
+        'other_specifications',
+    ]
+
+    kwargs = {field: mixer.FAKE for field in fields}
+    mixer.cycle(self.num_of_devices).blend(Product,
+                                           name=lambda: random.choice([
+                                              'apple iphone',
+                                               'iphone',
+                                              'samsung',
+                                              'samsung note'
+                                              'huawei',
+                                              'oneplus',
+                                              'zte'
+                                           ]),
+                                           processor=lambda: random.choice([
+                                               'A5',
+                                               'A2',
+                                               'Intel',
+                                               'Snapdragon',
+                                               'AMD'
+                                           ]),
+                                           os=lambda: random.choice(['ios', 'android', 'newos']),
+                                           ram=lambda: random.choice([2, 3, 4, 6]),
+                                           price=lambda: random.randrange(5000, 30000),
+                                           diagonal=lambda: random.randint(3, 6),
+                                           discount=lambda: random.randint(0, 100),
+                                           built_in_memory=lambda: random.randrange(16, 400, 4),
+                                           **kwargs
+                                           )
+
+
 class MainTestCase(TestCase):
 
     def setUp(self):
-        self.num_of_devices = 5
-        fields = [                   # These fields we want to be FAKED
-            'name',                  # by mixer
-            'price',
-            'discount',
-            'short_description',
-            'diagonal',
-            'built_in_memory',
-            'ram',
-            'os',
-            'screen_resolution',
-            'processor',
-            'main_camera',
-            'other_specifications',
-        ]
-
-        kwargs = {field: mixer.FAKE for field in fields}
-        mixer.cycle(self.num_of_devices).blend(Product, **kwargs)
+        generate_devices(self)
 
     def test_view_url_exists_and_accessible(self):
         response = self.client.get('/main/')
@@ -67,24 +93,7 @@ class MainTestCase(TestCase):
 class FilteredProductsTestCase(TestCase):
 
     def setUp(self):
-        self.num_of_devices = 10
-        fields = [                   # These fields we want to be FAKED
-            'name',                  # by mixer
-            'price',
-            'discount',
-            'short_description',
-            'diagonal',
-            'built_in_memory',
-            'ram',
-            'os',
-            'screen_resolution',
-            'processor',
-            'main_camera',
-            'other_specifications',
-        ]
-
-        kwargs = {field: mixer.FAKE for field in fields}
-        mixer.cycle(self.num_of_devices).blend(Product, **kwargs)
+        generate_devices(self)
 
     def test_view_url_exists_and_accessible(self):
         response = self.client.get('/filtered_products/')
@@ -102,20 +111,61 @@ class FilteredProductsTestCase(TestCase):
         response = self.client.get(reverse('filtered_products'))
         self.assertTrue('product_list' in response.context)
 
-    def test_filter(self):
-        self.assertTrue('it is too hard to test this filter thoroughly')
-
+    def test_filter_fields(self):
         data = {
-            'memory__max': 5555,
-            'memory__min': 2700,
-        }
+            'os__android': 0,
+            'memory__max': 308,
+            'memory__min': 64,
+            'ram__4': 0,
+            'ram__2': 0,
+                }
+
         response = self.client.get(reverse('filtered_products'), data=data)
         product_list = response.context['product_list']
+        for pr in product_list:
+            self.assertEqual(pr.os, 'android')
+            self.assertNotEqual(pr.os, 'ios')
+            self.assertGreaterEqual(pr.built_in_memory, data['memory__min'])
+            self.assertLessEqual(pr.built_in_memory, data['memory__max'])
+            self.assertIn(pr.ram, [4,2])
+            self.assertNotIn(pr.ram, [3,6])
 
-        for product in product_list:
-            memory = product.built_in_memory
-            self.assertGreaterEqual(memory, data['memory__min'])
-            self.assertLessEqual(memory, data['memory__max'])
+        data = {'processor__AMD': 0, 'price__max': 18000, 'price__min': 12000}
+        response = self.client.get(reverse('filtered_products'), data=data)
+        product_list = response.context['product_list']
+        for pr in product_list:
+            self.assertEqual(pr.processor, 'AMD')
+            self.assertNotEqual(pr.processor, 'A5')
+            self.assertGreaterEqual(pr.price, data['price__min'])
+            self.assertLessEqual(pr.price, data['price__max'])
+
+        # Here we test multiple os and diagonal choices, when user wants to
+        # see phones with different oses an diagonals
+        data ={'os__android': 0, 'os__ios': 0, 'diagonal__3': 0, 'diagonal__5': 0}
+        response = self.client.get(reverse('filtered_products'), data=data)
+        product_list = response.context['product_list']
+        for pr in product_list:
+            self.assertIn(pr.os, ['android', 'ios'])
+            self.assertNotIn(pr.os, ['newos'])
+            self.assertIn(pr.diagonal, [3, 5])
+            self.assertNotIn(pr.diagonal, [2, 4, 6])
+
+    def test_search(self):
+        data = {'search': 'iphone'}
+        response = self.client.get(reverse('filtered_products'), data=data)
+        product_list = response.context['product_list']
+        for pr in product_list:
+            self.assertIn('iphone', pr.name)
+            self.assertNotIn('samsung', pr.name)
+            self.assertNotIn('zte', pr.name)
+
+        data = {'search': 'samsung'}
+        response = self.client.get(reverse('filtered_products'), data=data)
+        product_list = response.context['product_list']
+        for pr in product_list:
+            self.assertIn('samsung', pr.name)
+            self.assertNotIn('iphone', pr.name)
+            self.assertNotIn('zte', pr.name)
 
 
 class DeliveryTestCase(TestCase):
