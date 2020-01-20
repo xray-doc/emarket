@@ -2,10 +2,10 @@
     {% for product_in_basket in products_in_basket %}
 
         <div class="product-in-basket row">
-            <div class="product-in-basket-img col-lg-4">
+            <div class="product-in-basket-img col-xs-4">
                 <img src="{{ product_in_basket.get_product_thumbnail_url }}">
             </div>
-            <div class="product-in-basket-info col-lg-6">
+            <div class="product-in-basket-info col-xs-6">
                 <div class="product-in-basket-name">
                     <strong>{{ product_in_basket.product.name }}</strong>
                 </div>
@@ -23,7 +23,7 @@
 
                 </div>
             </div>
-            <div class="product-in-basket-remove-btn col-lg-1">
+            <div class="product-in-basket-remove-btn col-xs-1">
                 <button type="button" class="btn btn-danger delete-from-basket" data-id='{{ product_in_basket.product.id }}'>
                     <span aria-hidden="true">&times;</span>
                 </button>
