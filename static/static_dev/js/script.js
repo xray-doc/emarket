@@ -62,6 +62,20 @@ $(document).ready(function () {
         })
 
 
+    // MOBILE DEVICES. Showing and hiding menu.
+    $('#menu-btn').click(function () {
+        $(this).toggleClass('btn-secondary btn-danger');
+        var display = $('#navbar li:not(#checkout)').css('display');
+        var newdisplay = (display == 'none') ? 'block' : 'none';
+        $('#navbar li:not(#checkout)').css('display', newdisplay);
+
+        if (newdisplay == 'block') {
+            $('.navbar-collapse').css('height', 'auto');
+        } else {
+            $('.navbar-collapse').css('height', '0');
+        }
+    })
+
 
     // Short appearance of basket when product added
     var basket_appearance_timerId = 0;
