@@ -243,7 +243,7 @@ $(document).ready(function () {
               updateAddToBasketButtons();
             },
             error: function(data){
-                console.log('error')
+                console.log('Fail to receive filtered products from server')
             }
         })
     }

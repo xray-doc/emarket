@@ -101,7 +101,7 @@ Basket button styles
     padding: 0;
     position: fixed;
     top: 50px;
-    right: 30px;
+    right: 71px;
     height: auto;
     width: 400px;
     background: initial;
@@ -211,12 +211,12 @@ Basket button styles
         display: inline-block;
     }
 
+    .basket{
+        right: 0;
+        top: 40px;
+    }
+
 }
-
-
-
-
-
 
 
 /*
@@ -225,6 +225,7 @@ Product_item styles
 
 .product-item-col{
     min-width: 275px;
+    max-width: 300px;
 }
 
 .product-item{
@@ -305,8 +306,6 @@ Product_item styles
 .discount-price {
     color: red;
 }
-
-
 
 
 
