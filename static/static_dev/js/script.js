@@ -235,7 +235,7 @@ $(document).ready(function () {
             return False;
         }
         $.ajax({
-            method: "GET",
+            method: "POST",
             data: form.serialize(),
             url: filteredProductsUrl,
             success: function(html){
@@ -251,6 +251,10 @@ $(document).ready(function () {
     $('.filter-form').change(function (e) {
         e.preventDefault();
         filterProduct($(this));
+    })
+
+    $('#reset_btn').click(function (e) {
+        $('.filter-form').change();
     })
 
     // Here default submit action prevented when search button is clicked

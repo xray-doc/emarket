@@ -1,6 +1,5 @@
 from django.core.mail import send_mail, BadHeaderError
-from django.db.models import Q
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse
 from django.shortcuts import render
 from django.views.generic.list import ListView
 from django.views.generic.base import TemplateView
@@ -8,109 +7,70 @@ from django.views.generic.edit import FormView
 from django.urls import reverse
 
 from products.models import *
-from .forms import *
+from .forms import ContactForm, FilterForm
 
 
 class MainView(ListView):
 
     model = Product
     template_name = 'home.html'
-    fields = [
-        'os',
-        'diagonal',
-        'ram',
-        'processor'
-    ]
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-
-        # Here we get distinct values of columns from Product model
-        # in order to create choices for filter widgets.
-        for field in self.fields:
-            distinct_qs = Product.get_distinct_values_from_field(field)
-            choices = []
-            for i in list(distinct_qs):
-                key = field + '__' + str(i[0])
-                val = i[0]
-                choices.append({'key': key, 'val': val})
-            key = field + '_select'
-            context[key] = choices
+        context['form'] = FilterForm
         return context
 
 
-class FilteredProductsView(ListView):
+class FilteredProductsView(FormView):
+
+#TODO search field
 
     model = Product
     template_name = 'products_on_main_page.html'
+    form_class = FilterForm
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
+    def form_valid(self, form, *args, **kwargs):
+        prs = Product.objects.all()
 
-        # all the Q filteration arguments collects in the filters dict and
-        # extracts to query at the end
-        filters = {}
-        for filter_key in self.request.GET.keys():
-            if filter_key == 'csrfmiddlewaretoken': continue
-            if filter_key == 'search':
-                q = self.request.GET.get(filter_key)
-                filters['search'] = Q(name__icontains=q) | \
-                                    Q(short_description__icontains=q) | \
-                                    Q(other_specifications__icontains=q)
-                continue
+        oses = form.cleaned_data['os']
+        if oses:
+            prs = prs.filter(os__in=oses)
 
-            # Next:
-            # os__android > ['os', 'android'].
-            # BUT! Some specifications are like:
-            # processor_select ['processor_name'],
-            # so we need to get value from self.request in those cases
-            key, val = filter_key.split('__')
+        diagonals = form.cleaned_data['diagonal']
+        if diagonals:
+            prs = prs.filter(diagonal__in=diagonals)
 
-            if key == 'os':
+        processors = form.cleaned_data['processor']
+        if processors:
+            prs = prs.filter(processor__in=processors)
 
-                if not filters.get('os'):
-                    filters['os'] = Q(os=val)
-                else:
-                    # If more then one OS selected, we need all of them, not the only one.
-                    filters['os'] = filters['os'] | Q(os=val)
+        rams = form.cleaned_data['ram']
+        if rams:
+            prs = prs.filter(ram__in=rams)
 
-            elif key == 'diagonal':
-                if not filters.get('diagonal'):
-                    filters['diagonal'] = Q(diagonal=val)
-                else:
-                    # If more then one diagonal selected, we need all of them, not the only one.
-                    filters['diagonal'] = filters['diagonal'] | Q(diagonal=val)
+        mmin = form.cleaned_data['memory_min']
+        if mmin:
+            prs = prs.filter(built_in_memory__gte=mmin)
 
-            elif key == 'memory':
-                num = self.request.GET.get(filter_key)
-                if not num: continue
-                if val == 'min':
-                    filters['memory_min'] = Q(built_in_memory__gte=num)
-                if val == 'max':
-                    filters['memory_max'] = Q(built_in_memory__lte=num)
+        mmax = form.cleaned_data['memory_max']
+        if mmax:
+            prs = prs.filter(built_in_memory__lte=mmax)
 
-            elif key == 'ram':
-                if not filters.get('ram'):
-                    filters['ram'] = Q(ram=val)
-                else:
-                    # If more then one RAM selected, we need all of them, not the only one.
-                    filters['ram'] = filters['ram'] | Q(ram=val)
+        minprice = form.cleaned_data['min_price']
+        if minprice and minprice > 0:
+            prs = prs.filter(price__gte=minprice)
 
-            elif key == 'processor':
-                processor_name = self.request.GET.get(filter_key)
-                if not processor_name: continue
-                filters['processor'] = Q(processor=processor_name)
+        maxprice = form.cleaned_data['max_price']
+        if maxprice and maxprice > 0:
+            prs = prs.filter(price__lte=maxprice)
 
-            elif key == 'price':
-                num = self.request.GET.get(filter_key)
-                if not num: continue
-                if val == 'min':
-                    filters['price_min'] = Q(price__gte=num)
-                if val == 'max':
-                    filters['price_max'] = Q(price__lte=num)
+        context = {'product_list': prs}
+        return render(self.request, self.template_name, context=context)
 
-        context['product_list'] = context['product_list'].filter(*filters.values())  # Final queryset of products to show
-        return context
+    def form_invalid(self, form):
+        context = {'product_list': Product.objects.all()}
+
+        return render(self.request, self.template_name, context=context)
 
 
 class DeliveryView(TemplateView):

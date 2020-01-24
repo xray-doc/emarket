@@ -336,6 +336,13 @@ Filter
     text-align: center;
 }
 
+.filter-div ul {
+    padding: 0;
+}
+
+.filter-div li {
+    display: inline;
+}
 
 /*
 Delivery, contacts, profile

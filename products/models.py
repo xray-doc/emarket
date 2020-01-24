@@ -54,7 +54,7 @@ class Product(models.Model):
 
     @classmethod
     def get_distinct_values_from_field(cls, field):
-        values = list(cls.objects.all().values_list(field).distinct())
+        values = list(cls.objects.all().values_list(field).order_by(field).distinct())
         if (None,) in values:
             values.remove((None,))
         return values
