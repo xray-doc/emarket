@@ -1,8 +1,9 @@
 {% load static %}
 
 {% for product in product_list %}
-    <div class="product-item-col col-md-4 col-xs-4 col-sm-offset-0 col-xs-offset-3">
+    <div class="product-item-col col-md-4 col-xs-12">
         <div class="product-item">
+        <div class="product-img">
             <a href="{{ product.get_absolute_url }}">
                 <div class="center-core">
                         <img src="{{ product.get_main_img_url }}" class="img-responsive">
@@ -17,41 +18,37 @@
                     <h4>{{ product.name }}</h4>
                 </div>
             </a>
-                <div class="product-info">
-                    <div class="row">
-                       <div class="specs-div">
-                        <table class="col-sm-12 specs">
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <img src="{% static 'static_dev/open-iconic-master/svg/cog.svg' %}"
-                                         class="icon" alt="icon name"
-                                        > {{ product.os }}
-                                    </td>
-                                    <td>
-                                        <img src="{% static 'static_dev/open-iconic-master/svg/hard-drive.svg' %}"
-                                         class="icon" alt="icon name"
-                                        > {{ product.built_in_memory }} Gb
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <img src="{% static 'static_dev/open-iconic-master/svg/fullscreen-enter.svg' %}"
-                                         class="icon" alt="icon name"
-                                        > {{ product.diagonal }}"
-                                    </td>
-                                    <td>
-                                        <img src="{% static 'static_dev/open-iconic-master/svg/camera-slr.svg' %}"
-                                         class="icon" alt="icon name"
-                                        > {{ product.main_camera }} Mpx
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-
+        </div>
+            <div class="product-info">
+                        <div class="specs">
+                            <div>
+                            <div >
+                                    <img src="{% static 'static_dev/open-iconic-master/svg/cog.svg' %}"
+                                     class="icon" alt="icon name"
+                                    > {{ product.os }}
+                            </div>
+                            <div>
+                                <img src="{% static 'static_dev/open-iconic-master/svg/hard-drive.svg' %}"
+                                 class="icon" alt="icon name"
+                                > {{ product.built_in_memory }} Gb
+                            </div>
+                            </div>
+                            <div>
+                            <div>
+                                <img src="{% static 'static_dev/open-iconic-master/svg/fullscreen-enter.svg' %}"
+                                 class="icon" alt="icon name"
+                                > {{ product.diagonal }}"
+                            </div>
+                            <div>
+                                <img src="{% static 'static_dev/open-iconic-master/svg/camera-slr.svg' %}"
+                                 class="icon" alt="icon name"
+                                > {{ product.main_camera }} Mpx
+                            </div>
+                            </div>
                         </div>
-                        <div class="col-sm-12">
-                            <div class="price_and_btn_div">
+
+                    <div class="price-and-btn-div">
+                            <div class="price-div">
                                 {% if not product.discount %}
                                     <span class="h4">
                                         {{ product.price }} RUB
@@ -62,17 +59,16 @@
                                     </span>  &nbsp
                                     <span class="h4 discount-price">
                                         {{ product.get_price_with_discount }}
-                                    </span> <span class="h4">RUB</span>
+                                    </span> <span class="h4">&nbspRUB</span>
                                 {% endif %}
-                                <div class="add-to-cart-btn">
-                                    <button class="btn btn-success changing-button" data-id="{{ product.id }}">
-                                        Add to basket
-                                    </button>
-                                </div>
                             </div>
-                        </div>
+                            <div class="add-to-cart-btn">
+                                <button class="btn btn-success changing-button" data-id="{{ product.id }}">
+                                    Add to basket
+                                </button>
+                            </div>
                     </div>
-                </div>
+            </div>
         </div>
     </div>
 {% endfor %}

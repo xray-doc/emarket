@@ -11,12 +11,20 @@ Checkout styles
 }
 
 #comments_text{
-    width: 300px;
     height: 100px;
 }
 
-
-#form_client_data > div > input {
+#form_client_data{
+    margin: 0;
     width: 300px;
 }
 
+.client-data-div{
+    display: flex;
+    justify-content: center;
+}
+
+.make-order-btn-div{
+    display: flex;
+    justify-content: flex-end;
+}

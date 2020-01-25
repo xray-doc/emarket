@@ -194,6 +194,8 @@ Basket button styles
 
 
 @media screen and (max-width: 992px){
+
+    /* Navbar hides and become accessible by 'menu' button  */
     #navbar li:not(#checkout){
         display: none;
     }
@@ -211,11 +213,47 @@ Basket button styles
         display: inline-block;
     }
 
+    /* Stick basket btn to top right on mobile */
     .basket{
         right: 0;
         top: 40px;
     }
 
+    /*  We need to save space on checkout page */
+    .total-price-td{
+        display: none;
+    }
+
+    .product-item{
+        height: auto !important;
+        flex-direction: row !important;
+    }
+
+    .product-item-name{
+        min-height: unset;
+    }
+
+    .specs{
+        margin-bottom: unset !important;
+        font-size: large !important;
+    }
+
+    .specs > div > div{
+        margin: 6px !important;
+        margin-top: 15px !important;
+    }
+
+    .price-and-btn-div{
+        margin-top: unset;
+    }
+
+    .product-info{
+        width: 50%;
+    }
+
+    .product-img{
+        width: 50%;
+    }
 }
 
 
@@ -225,7 +263,6 @@ Product_item styles
 
 .product-item-col{
     min-width: 275px;
-    max-width: 300px;
 }
 
 .product-item{
@@ -235,34 +272,57 @@ Product_item styles
     border: 1px solid lightgrey;
     position: relative;
     padding: 8px;
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+
+}
+
+.product-info{
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: space-evenly;
+    /*width: 50%;*/
+}
+
+.product-img{
+    /*width: 50%;*/
 }
 
 .product-item-name{
+    text-align: center;
     min-height: 38px;
 }
 
 .center-core{
-    position: relative;
-    width: auto;
     height: 200px;
-    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .center-core img{
-    width: auto;
-    margin: auto;
-    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
 }
 
-.product-info{
-    bottom: 7px;
-    position: relative;
-}
-
-.price_and_btn_div{
+.price-and-btn-div{
     margin-top: 12px;
     color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.price-div{
+    display: flex;
+    align-items: center;
+}
+
+.price-div > h4{
+    margin-bottom: 0;
 }
 
 .icon{
@@ -270,21 +330,22 @@ Product_item styles
     height: 20px;
 }
 
-.specs-div{
-    display: -webkit-inline-box;
-}
 .specs{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: stretch;
     font-size: medium;
     color: black;
+    margin-bottom: 15px;
 }
 
-.specs td:nth-child(1){
-    padding: 3px 0px 3px 40px;
-    width: 155px;
+.specs > div {
+    margin-left: 15px;
 }
 
-.specs td{
-    text-align: left;
+.specs > div > div {
+    margin: 3px;
+    min-width: 90px;
 }
 
 .discount{

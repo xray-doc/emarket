@@ -46,6 +46,7 @@ $(document).ready(function () {
         })
     }
 
+    // Adding product to basket on home page
     $(document)
         .on('click', '.btn-add-to-basket', function (e) {
             if (e.target.getAttribute('id') != 'submit-btn') {         // because we don't need this logic
@@ -55,7 +56,9 @@ $(document).ready(function () {
                 data.csrfmiddlewaretoken = document.querySelector('[name="csrfmiddlewaretoken"]').value
                 updateBasketList('POST', data);
             }
-            navbarBasketAppearance();
+            if (window.innerWidth > 800) {
+                navbarBasketAppearance();
+            }
         })
         .on('click', '.btn-go-to-checkout', function (e) {
             window.location.pathname = 'orders/checkout/';
@@ -97,7 +100,6 @@ $(document).ready(function () {
         $('.total_price').text(hidden_data.data('total-price'));
     }
 
-
     function updateBasketList(type, data) {
         $.ajax({
             url: "/orders/update_basket_list/",
@@ -120,12 +122,17 @@ $(document).ready(function () {
     // Appearance of navbar basket list when mouseover
     $("#checkout")
         .mouseover(function () {
-            if (basket_appearance_timerId != 0) {           // basket list could be already showing if user
-                clearTimeout(basket_appearance_timerId);    // added a product to basket recently.
+
+            if (window.innerWidth < 800) {                // We don't need this on mobile
+                return;
+            };
+
+            if (basket_appearance_timerId != 0) {           // Basket list might be already showed if user
+                clearTimeout(basket_appearance_timerId);    // added a product to basket a moment before.
                 basket_appearance_timerId = 0;              // In that case basket list appears and
             } else {                                        // a timer started to hide basket list after a second.
                 $(".basket").show();
-            }
+            };
         })
         .mouseout(function () {
             $(".basket").hide();

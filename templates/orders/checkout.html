@@ -28,7 +28,7 @@
                                 <th>Product</th>
                                 <th>Number</th>
                                 <th>Price per item</th>
-                                <th>Summ</th>
+                                <th class="total-price-td">Summ</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -62,7 +62,7 @@
                                             </span>
                                         {% endif %}
                                     </td>
-                                    <td>
+                                    <td class="total-price-td">
                                         <span class="total-product-price">
                                             {{ product_in_basket.total_price }}
                                         </span>
@@ -85,6 +85,7 @@
         <h4 class="text-center"><b>Total price: </b> <span class="total_price checkout">{{ products_total_price }}</span> RUB</h4>
         <hr>
 
+        <div class="client-data-div">
         <form id="form_client_data" class="form-block col-lg-4 col-lg-offset-5" method="post">
             {% csrf_token %}
             <div class="form-group">
@@ -139,10 +140,12 @@
                 >{{ request.POST.comments }}</textarea>
             </div>
 
-
-            <button type="submit" class="btn btn-primary">Buy</button>
+            <div class="make-order-btn-div">
+                <button type="submit" class="btn btn-primary">Order</button>
+            </div>
             <hr>
         </form>
+        </div>
     {% else %}
         <hr><hr>
         <h2 class="text-center">No products in basket yet</h2>
