@@ -3,71 +3,71 @@
 {% for product in product_list %}
     <div class="product-item-col col-md-4 col-xs-12">
         <div class="product-item">
-        <div class="product-img">
-            <a href="{{ product.get_absolute_url }}">
-                <div class="center-core">
-                        <img src="{{ product.get_main_img_url }}" class="img-responsive">
-                </div>
-
-                {%  if product.discount  %}
-                    <div class="discount">
-                        SALE {{ product.discount }}%
+            <div class="product-img">
+{#                <a href="{{ product.get_absolute_url }}">#}
+                    <div class="center-core">
+                            <img src="{{ product.get_main_img_url }}" class="img-responsive">
                     </div>
-                {% endif %}
-                <div class="product-item-name">
-                    <h4>{{ product.name }}</h4>
-                </div>
-            </a>
-        </div>
-            <div class="product-info">
-                        <div class="specs">
-                            <div>
-                            <div >
-                                    <img src="{% static 'static_dev/open-iconic-master/svg/cog.svg' %}"
-                                     class="icon" alt="icon name"
-                                    > {{ product.os }}
-                            </div>
-                            <div>
-                                <img src="{% static 'static_dev/open-iconic-master/svg/hard-drive.svg' %}"
-                                 class="icon" alt="icon name"
-                                > {{ product.built_in_memory }} Gb
-                            </div>
-                            </div>
-                            <div>
-                            <div>
-                                <img src="{% static 'static_dev/open-iconic-master/svg/fullscreen-enter.svg' %}"
-                                 class="icon" alt="icon name"
-                                > {{ product.diagonal }}"
-                            </div>
-                            <div>
-                                <img src="{% static 'static_dev/open-iconic-master/svg/camera-slr.svg' %}"
-                                 class="icon" alt="icon name"
-                                > {{ product.main_camera }} Mpx
-                            </div>
-                            </div>
+
+                    {%  if product.discount  %}
+                        <div class="discount">
+                            SALE {{ product.discount }}%
                         </div>
-
-                    <div class="price-and-btn-div">
-                            <div class="price-div">
-                                {% if not product.discount %}
-                                    <span class="h4">
-                                        {{ product.price }} RUB
-                                    </span>
-                                {% else %}
-                                    <span class="h4">
-                                        <s>{{ product.price }}</s>
-                                    </span>  &nbsp
-                                    <span class="h4 discount-price">
-                                        {{ product.get_price_with_discount }}
-                                    </span> <span class="h4">&nbspRUB</span>
-                                {% endif %}
-                            </div>
-                            <div class="add-to-cart-btn">
-                                <button class="btn btn-success changing-button" data-id="{{ product.id }}">
-                                    Add to basket
-                                </button>
-                            </div>
+                    {% endif %}
+                    <div class="product-item-name">
+                        <h4>{{ product.name }}</h4>
                     </div>
+{#                </a>#}
+            </div>
+            <div class="product-info">
+                <div class="specs">
+                    <div>
+                        <div>
+                            <img src="{% static 'static_dev/open-iconic-master/svg/cog.svg' %}"
+                             class="icon" alt="icon name"
+                            > {{ product.os }}
+                        </div>
+                        <div>
+                            <img src="{% static 'static_dev/open-iconic-master/svg/hard-drive.svg' %}"
+                             class="icon" alt="icon name"
+                            > {{ product.built_in_memory }} Gb
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            <img src="{% static 'static_dev/open-iconic-master/svg/fullscreen-enter.svg' %}"
+                             class="icon" alt="icon name"
+                            > {{ product.diagonal }}"
+                        </div>
+                        <div>
+                            <img src="{% static 'static_dev/open-iconic-master/svg/camera-slr.svg' %}"
+                             class="icon" alt="icon name"
+                            > {{ product.main_camera }} Mpx
+                        </div>
+                    </div>
+                </div>
+
+                <div class="price-and-btn-div">
+                    <div class="price-div">
+                        {% if not product.discount %}
+                            <span class="h4">
+                                {{ product.price }} RUB
+                            </span>
+                        {% else %}
+                            <span class="h4">
+                                <s>{{ product.price }}</s>
+                            </span>  &nbsp
+                            <span class="h4 discount-price">
+                                {{ product.get_price_with_discount }}
+                            </span> <span class="h4">&nbspRUB</span>
+                        {% endif %}
+                    </div>
+                    <div class="add-to-cart-btn">
+                        <button class="btn btn-success changing-button" data-id="{{ product.id }}">
+                            Add to basket
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
