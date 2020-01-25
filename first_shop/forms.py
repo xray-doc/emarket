@@ -71,3 +71,8 @@ class FilterForm(forms.Form):
                                                                    'id': 'maxprice',
                                                                    'max': maxprice,
                                                                    'oninput': 'printprice("maxprice")'}))
+
+    search = forms.CharField(required=False,
+                             max_length=200,
+                             widget=forms.HiddenInput())
+

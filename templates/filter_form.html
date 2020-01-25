@@ -1,6 +1,6 @@
 <form class="filter-form" method="POST" action="{% url 'main' %}">{% csrf_token %}
 
-    {% for field in form %}
+    {% for field in form.visible_fields %}
         {{ field.label_tag }}
         {{ field }}
         <hr>

@@ -254,12 +254,14 @@ $(document).ready(function () {
     })
 
     $('#reset_btn').click(function (e) {
+        $('.filter-form').trigger('reset');
         $('.filter-form').change();
     })
 
     // Here default submit action prevented when search button is clicked
     // (because we use AJAX in filterProduct func)
     $('#search_button').click(function (e) {
+        // $('.filter-form').change();
         e.preventDefault();
         filterProduct($(this));
     })

@@ -21,55 +21,54 @@ class MainView(ListView):
         return context
 
 
-class FilteredProductsView(FormView):
-
-#TODO search field
+class FilteredProductsView(ListView):
 
     model = Product
     template_name = 'products_on_main_page.html'
     form_class = FilterForm
 
-    def form_valid(self, form, *args, **kwargs):
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST)
         prs = Product.objects.all()
 
-        oses = form.cleaned_data['os']
-        if oses:
-            prs = prs.filter(os__in=oses)
+        if form.is_valid():
+            oses = form.cleaned_data['os']
+            if oses:
+                prs = prs.filter(os__in=oses)
 
-        diagonals = form.cleaned_data['diagonal']
-        if diagonals:
-            prs = prs.filter(diagonal__in=diagonals)
+            diagonals = form.cleaned_data['diagonal']
+            if diagonals:
+                prs = prs.filter(diagonal__in=diagonals)
 
-        processors = form.cleaned_data['processor']
-        if processors:
-            prs = prs.filter(processor__in=processors)
+            processors = form.cleaned_data['processor']
+            if processors:
+                prs = prs.filter(processor__in=processors)
 
-        rams = form.cleaned_data['ram']
-        if rams:
-            prs = prs.filter(ram__in=rams)
+            rams = form.cleaned_data['ram']
+            if rams:
+                prs = prs.filter(ram__in=rams)
 
-        mmin = form.cleaned_data['memory_min']
-        if mmin:
-            prs = prs.filter(built_in_memory__gte=mmin)
+            mmin = form.cleaned_data['memory_min']
+            if mmin:
+                prs = prs.filter(built_in_memory__gte=mmin)
 
-        mmax = form.cleaned_data['memory_max']
-        if mmax:
-            prs = prs.filter(built_in_memory__lte=mmax)
+            mmax = form.cleaned_data['memory_max']
+            if mmax:
+                prs = prs.filter(built_in_memory__lte=mmax)
 
-        minprice = form.cleaned_data['min_price']
-        if minprice and minprice > 0:
-            prs = prs.filter(price__gte=minprice)
+            minprice = form.cleaned_data['min_price']
+            if minprice and minprice > 0:
+                prs = prs.filter(price__gte=minprice)
 
-        maxprice = form.cleaned_data['max_price']
-        if maxprice and maxprice > 0:
-            prs = prs.filter(price__lte=maxprice)
+            maxprice = form.cleaned_data['max_price']
+            if maxprice and maxprice > 0:
+                prs = prs.filter(price__lte=maxprice)
+
+            search = form.cleaned_data['search']
+            if search:
+                prs = prs.filter(name__icontains=search)
 
         context = {'product_list': prs}
-        return render(self.request, self.template_name, context=context)
-
-    def form_invalid(self, form):
-        context = {'product_list': Product.objects.all()}
-
         return render(self.request, self.template_name, context=context)
 
 
