@@ -111,6 +111,7 @@ Basket button styles
 
 .basket-products-list{
     max-height: 600px;
+    overflow: hidden;
 }
 
 .product-in-basket{
@@ -119,7 +120,8 @@ Basket button styles
     background-color: #f8f8f8;
     padding: 5px;
     margin: 0;
-    border-style: groove;
+    border-style: outset;
+    border-width: 2px;
     border-bottom-style: none;
     text-align: center;
 }
@@ -166,7 +168,8 @@ Basket button styles
     text-align: center;
     padding: 5px;
     background-color: #f8f8f8;
-    border: groove;
+    border: outset;
+    border-width: 2px;
     margin: 0;
     position: relative;
     height: 50px;
@@ -220,6 +223,10 @@ SMALL SCREENS
         top: 40px;
     }
 
+    #basket-text{
+        display: none;
+    }
+
     /*  We need to save space on checkout page */
     .total-price-td{
         display: none;
@@ -229,6 +236,10 @@ SMALL SCREENS
     .product-item{
         height: auto !important;
         flex-direction: row !important;
+    }
+
+    .product-item-col:first-child{
+        margin-top: 10px;
     }
 
     .product-item-name{
@@ -324,8 +335,8 @@ Product_item styles
 .product-img{
     display: flex !important;
     flex-direction: column !important;
-    align-items: center !important;
-    justify-content: center !important;
+    /*align-items: center !important;*/
+    /*justify-content: center !important;*/
 }
 
 .product-item-name{
@@ -342,7 +353,8 @@ Product_item styles
 
 .center-core img{
     max-width: 100%;
-    max-height: 90%;
+    max-height: 85%;
+    margin: auto;
 }
 
 .price-and-btn-div{
@@ -513,7 +525,7 @@ Footer
 }
 
 .copyright{
-    margin-bottom: 10px;
+    min-height: 30px;
 }
 
 

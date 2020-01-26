@@ -6,7 +6,9 @@
 
         <div class="navbar-header">
           <a class="navbar-brand" href="{% url 'main' %}">Emarket</a>
-            <button id="menu-btn" class="btn btn-secondary navbar-btn">Menu</button>
+            <button id="menu-btn" class="btn navbar-btn">
+                  <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
+            </button>
         </div>
 
         <div id="navbar" class="navbar-collapse">
@@ -38,7 +40,7 @@
                     <li id="register">
                         <a href="{% url 'accounts:register' %}">
                             <img class="login-icons" src="{% static 'static_dev/open-iconic-master/svg/person.svg' %}">
-                            register
+                            sign up
                         </a>
                     </li>
                 {% endif %}
@@ -46,7 +48,7 @@
 
                 <!-- navbar basket -->
                 <li id="checkout">
-                    <a id="basket-in-navbar" href="{% url 'orders:checkout' %}">Basket
+                    <a id="basket-in-navbar" href="{% url 'orders:checkout' %}"><span id="basket-text">Basket</span>
                         <img class="basket-icon" src="{% static 'static_dev/open-iconic-master/svg/cart.svg' %}">
                         <span id="basket_total_nmb"></span>
                     </a>

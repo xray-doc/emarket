@@ -67,7 +67,8 @@ $(document).ready(function () {
 
     // MOBILE DEVICES. Showing and hiding menu.
     $('#menu-btn').click(function () {
-        $(this).toggleClass('btn-secondary btn-danger');
+        $('#menu-btn > span').toggleClass('glyphicon-menu-hamburger glyphicon-remove')
+        // $(this).toggleClass('btn-secondary btn-danger');
         var display = $('#navbar li:not(#checkout)').css('display');
         var newdisplay = (display == 'none') ? 'block' : 'none';
         $('#navbar li:not(#checkout)').css('display', newdisplay);
@@ -239,7 +240,7 @@ $(document).ready(function () {
     function filterProduct (form) {
         var filteredProductsUrl = "/filtered_products/";
         if (form.serialize().length == 0) {
-            return False;
+            return;
         }
         $.ajax({
             method: "POST",
