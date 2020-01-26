@@ -40,7 +40,6 @@ Product_detail.html styles
 
 .add-to-basket-form{
     position: relative;
-    bottom: -3vw;
     width: 100%;
     text-align: center;
 }
@@ -71,4 +70,34 @@ Comments
 .comment-body > img{
     float: left;
     margin-right: 20px;
+}
+
+
+@media screen and (max-width: 992px){
+    .product .row {
+        margin: 0 !important;
+        margin-bottom: 10px !important;
+        padding: 0 !important;
+    }
+
+    .add-to-basket-form{
+        bottom: 5px !important;
+    }
+
+    blockquote{
+        margin: 0 !important;
+        border-left: unset !important;
+    }
+
+    .comment-reply blockquote{
+        border-left: 5px solid #eee !important;
+    }
+
+    h3 {
+        text-align: center;
+    }
+
+    .carousel{
+        margin-top: 10px;
+    }
 }

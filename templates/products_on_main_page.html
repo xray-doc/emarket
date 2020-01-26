@@ -3,21 +3,20 @@
 {% for product in product_list %}
     <div class="product-item-col col-md-4 col-xs-12">
         <div class="product-item">
-            <div class="product-img">
-{#                <a href="{{ product.get_absolute_url }}">#}
-                    <div class="center-core">
-                            <img src="{{ product.get_main_img_url }}" class="img-responsive">
+            <div class="product-img" >
+                <div class="center-core">
+                    <img src="{{ product.get_main_img_url }}" class="img-responsive">
+                </div>
+                {%  if product.discount  %}
+                    <div class="discount">
+                        SALE {{ product.discount }}%
                     </div>
-
-                    {%  if product.discount  %}
-                        <div class="discount">
-                            SALE {{ product.discount }}%
-                        </div>
-                    {% endif %}
-                    <div class="product-item-name">
+                {% endif %}
+                <div class="product-item-name">
+                    <a href="{{ product.get_absolute_url }}">
                         <h4>{{ product.name }}</h4>
-                    </div>
-{#                </a>#}
+                    </a>
+                </div>
             </div>
             <div class="product-info">
                 <div class="specs">

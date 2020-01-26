@@ -111,7 +111,6 @@ Basket button styles
 
 .basket-products-list{
     max-height: 600px;
-    /*overflow: auto;*/
 }
 
 .product-in-basket{
@@ -287,17 +286,11 @@ SMALL SCREENS
         min-width: unset !important;
     }
 
-    .product-img{
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
-        justify-content: center !important;
-    }
-
     .product-item-name{
         min-height: unset !important;
     }
 }
+
 
 /*
 Product_item styles
@@ -329,7 +322,10 @@ Product_item styles
 }
 
 .product-img{
-    /*width: 50%;*/
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
 }
 
 .product-item-name{
@@ -338,7 +334,7 @@ Product_item styles
 }
 
 .center-core{
-    height: 200px;
+    height: 230px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -346,7 +342,7 @@ Product_item styles
 
 .center-core img{
     max-width: 100%;
-    max-height: 100%;
+    max-height: 90%;
 }
 
 .price-and-btn-div{
@@ -457,6 +453,16 @@ Delivery, contacts, profile
     min-height: 720px;
     margin: 40px;
     padding: 40px;
+}
+
+
+@media screen and (max-width: 992px){
+    .delivery .row,
+    .contacts .row,
+    .profile .row{
+        margin: 5px;
+        padding: 0;
+    }
 }
 
 #orders_header{

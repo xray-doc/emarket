@@ -42,11 +42,11 @@
                       {% endfor %}
                   </div>
                   <a class="left carousel-control" href="#carouselImages" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
                     <span class="sr-only">Previous</span>
                   </a>
                   <a class="right carousel-control" href="#carouselImages" role="button" data-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
                     <span class="sr-only">Next</span>
                   </a>
 
@@ -95,7 +95,7 @@
         </div>
         <div class="row">
             <div class="col-lg-8">
-                <p class='lead'>Specifications</p>
+                <p class='lead'><h3>Specifications</h3></p>
                 <br>
                 <table class="table">
                     <tr>
@@ -131,14 +131,14 @@
         </div>
         <div class="product-comments">
             <div class="row">
-                <p class='lead'>Comments</p>
+                <p class='lead'><h3>Comments</h3></p>
                 {% if request.user.is_authenticated %}
                     <form method="POST" action="."> {% csrf_token %}
                         {{ comment_form|crispy }}
                         <input type='submit' value='Post comment' class='btn btn-default'>
                     </form>
                 {% else %}
-                    <p>You must login to comment </p>
+                    <p>&nbsp; You must login to comment </p>
                 {% endif %}
                 <hr/>
                 {% for comment in comments %}
