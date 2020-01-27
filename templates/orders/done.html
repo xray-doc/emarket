@@ -6,6 +6,11 @@
 
     <hr><hr><hr>
     <h2 class="text-center">Done! Wi will contact you.</h2>
+    {% if user_profile_url %}
+        <h3 style="text-align: center">You can check your order on your
+            <a href="{{ user_profile_url }}">profile page</a> now.
+        </h3>
+    {% endif %}
 
 
 {% endblock %}

@@ -69,59 +69,6 @@ class UpdateBasketList(TemplateView):
         return context
 
 
-# Previous implementation of update basket view.
-
-# def update_basket_list(request):
-#     """
-#     Renders navbar basket list HTML
-#     """
-#     session_key = request.session.session_key
-#     user = request.user
-#
-#     if request.method == "POST":
-#         data = request.POST
-#     else:
-#         data = request.GET
-#
-#     # Adding product to basket
-#     if data.get("product_id"):
-#         product_id = data.get("product_id")
-#         nmb = data.get("nmb") or 1
-#
-#         if user.is_authenticated():
-#             # if user is authenticated product in basket binds to user object,
-#             # else to session_key
-#             new_product, created = ProductInBasket.objects.get_or_create(user=user,
-#                                                                          product_id=product_id,
-#                                                                          defaults={"nmb": nmb})
-#         else:
-#             new_product, created = ProductInBasket.objects.get_or_create(session_key=session_key,
-#                                                                          product_id=product_id,
-#                                                                          defaults={"nmb": nmb})
-#         if not created:
-#             new_product.nmb += int(nmb)
-#             new_product.save(force_update=True)
-#
-#     # Removing product from basket
-#     if data.get("remove_product_id"):
-#         ProductInBasket.objects.get(id=request.GET.get("remove_product_id")).delete()
-#
-#     if user.is_authenticated():
-#         current_user_or_session_key = {'user': user}
-#     else:
-#         current_user_or_session_key = {'session_key': session_key}
-#
-#     products_in_basket = ProductInBasket.objects.filter(is_active=True, **current_user_or_session_key)
-#     products_total_price = ProductInBasket.get_basket_total_price(**current_user_or_session_key)
-#
-#     products_total_nmb = products_in_basket.count()
-#     products_in_basket_ids = ''
-#     for product_in_basket in products_in_basket:
-#         products_in_basket_ids += str(product_in_basket.product.id) + ','
-#
-#     return render(request, 'basket_items_list.html', locals())
-
-
 def changeProductInBasketQuantity(request):
     session_key = request.session.session_key
     user = request.user
@@ -141,7 +88,6 @@ def changeProductInBasketQuantity(request):
     return_dict["total_product_price"] = product.total_price
 
     return JsonResponse(return_dict)
-
 
 
 def checkout(request):
@@ -177,8 +123,10 @@ def checkout(request):
             status_id=1
         )
 
+        context = dict()
         if user.is_authenticated():
             order.user = user
+            context['user_profile_url'] = user.profile_set.first().get_absolute_url()
 
         for product_in_basket in products_in_basket:
             ProductInOrder.objects.create(
@@ -188,7 +136,7 @@ def checkout(request):
                 price_per_item = product_in_basket.price_per_item,
             )
 
-        return render(request, 'orders/done.html', locals())
+        return render(request, 'orders/done.html', context)
 
     profile = None
     if user.is_authenticated():

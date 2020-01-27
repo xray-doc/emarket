@@ -93,22 +93,27 @@ class ProfileView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        if self.user == self.request.user:
+        if self.user == self.request.user: # self.user is requested user, not the authenticated one.
             # If you look at your own profile page
             # you can also see your orders,
             # but you can't see other's people orders on their pages
-            context['orders'] = Order.objects.filter(user=self.user)
+            context['orders'] = self.user.order_set.all() #Order.objects.filter(user=self.user)
         try:
-            context['profile'] = Profile.objects.get(user=self.user)
+            context['profile'] = self.user.profile_set.first() #Profile.objects.get(user=self.user)
         except:
             pass
         context['user'] = self.user
         return context
 
     def get(self, request, *args, **kwargs):
-        self.user = self.request.user
         if kwargs['username']:
-            self.user = User.objects.get(username__iexact=kwargs['username'])
+            try:
+                self.user = User.objects.get(username__iexact=kwargs['username'])
+            except:
+                pass
+        else:
+            self.user = self.request.user
+
         if not self.user.is_authenticated():
             return redirect(reverse('main'))
         return super().get(request, *args, **kwargs)

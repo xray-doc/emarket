@@ -3,22 +3,17 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.views.generic.list import ListView
 from django.views.generic.base import TemplateView
-from django.views.generic.edit import FormView
+from django.views.generic.edit import FormView, FormMixin
 from django.urls import reverse
 
 from products.models import *
 from .forms import ContactForm, FilterForm
 
 
-class MainView(ListView):
-
+class MainView(ListView, FormMixin):
     model = Product
     template_name = 'home.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['form'] = FilterForm
-        return context
+    form_class = FilterForm
 
 
 class FilteredProductsView(ListView):

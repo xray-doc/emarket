@@ -1,5 +1,6 @@
 from django.db import models
 from django.db.models.signals import pre_save
+from django.db.models import Max, Min
 from django.contrib.contenttypes.models import ContentType
 from django.core.urlresolvers import reverse
 
@@ -12,6 +13,11 @@ from comments.models import Comment
 
 
 class Product(models.Model):
+
+    class Meta:
+        verbose_name = "Product"
+        verbose_name_plural = "Products"
+
     slug                    = models.SlugField(default=None, null=True)
     name                    = models.CharField(max_length=64, blank=True, null=True, default=None, verbose_name="Products")
     price                   = models.IntegerField(null=True, default=0, verbose_name="Price")
@@ -29,6 +35,9 @@ class Product(models.Model):
     is_active           = models.BooleanField(default=True)
     created             = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated             = models.DateTimeField(auto_now_add=False, auto_now=True)
+
+    def __str__(self):
+        return "%s, %s" % (self.price, self.name)
 
     def get_main_img_url(self):
         """
@@ -74,12 +83,21 @@ class Product(models.Model):
         content_type = ContentType.objects.get_for_model(instance.__class__)
         return content_type
 
-    def __str__(self):
-        return "%s, %s" % (self.price, self.name)
+    @classmethod
+    def get_max_price(cls):
+        return cls.objects.aggregate(max=Max('price'))['max']
 
-    class Meta:
-        verbose_name = "Product"
-        verbose_name_plural = "Products"
+    @classmethod
+    def get_min_price(cls):
+        return cls.objects.aggregate(min=Min('price'))['min']
+
+    @classmethod
+    def get_max_memory(cls):
+        return cls.objects.aggregate(max=Max('built_in_memory'))['max']
+
+    @classmethod
+    def get_min_memory(cls):
+        return cls.objects.aggregate(min=Min('built_in_memory'))['min']
 
 
 def pre_save_product_receiver(sender, instance, *args, **kwargs):

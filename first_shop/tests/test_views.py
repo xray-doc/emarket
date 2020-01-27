@@ -33,10 +33,10 @@ def generate_devices(self):
                                               'zte'
                                            ]),
                                            processor=lambda: random.choice([
-                                               'A5',
-                                               'A2',
-                                               'Intel',
-                                               'Snapdragon',
+                                               'A8',
+                                               'A9',
+                                               'Qualcomm 1400 Mgz',
+                                               'A10X',
                                                'AMD'
                                            ]),
                                            os=lambda: random.choice(['ios', 'android', 'newos']),
@@ -70,25 +70,6 @@ class MainTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'home.html')
 
-    def test_view_context(self):
-        response = self.client.get(reverse('main'))
-
-        context = {}
-        for column in ['os', 'ram', 'diagonal', 'processor']:
-            distinct_qs = Product.objects.all().values_list(column).distinct()
-            choices = []
-            for i in list(distinct_qs):
-                key = column + '__' + str(i[0])
-                val = i[0]
-                choices.append({'key': key, 'val': val})
-            context[column] = choices
-
-        self.assertEqual(response.context['os_select'], context['os'])
-        self.assertEqual(response.context['diagonal_select'], context['diagonal'])
-        self.assertEqual(response.context['ram_select'], context['ram'])
-        self.assertEqual(response.context['processor_select'], context['processor'])
-        self.assertEqual(response.context['product_list'].count(), self.num_of_devices)
-
 
 class FilteredProductsTestCase(TestCase):
 
@@ -113,46 +94,55 @@ class FilteredProductsTestCase(TestCase):
 
     def test_filter_fields(self):
         data = {
-            'os__android': 0,
-            'memory__max': 308,
-            'memory__min': 64,
-            'ram__4': 0,
-            'ram__2': 0,
-                }
+            'os': 'android',
+            'memory_max': 100,
+            'memory_min': 20,
+            'ram': [2,4]
+        }
 
-        response = self.client.get(reverse('filtered_products'), data=data)
+        response = self.client.post(reverse('filtered_products'), data=data)
         product_list = response.context['product_list']
         for pr in product_list:
             self.assertEqual(pr.os, 'android')
             self.assertNotEqual(pr.os, 'ios')
-            self.assertGreaterEqual(pr.built_in_memory, data['memory__min'])
-            self.assertLessEqual(pr.built_in_memory, data['memory__max'])
+            self.assertGreaterEqual(pr.built_in_memory, data['memory_min'])
+            self.assertLessEqual(pr.built_in_memory, data['memory_max'])
             self.assertIn(pr.ram, [4,2])
             self.assertNotIn(pr.ram, [3,6])
 
-        data = {'processor__AMD': 0, 'price__max': 18000, 'price__min': 12000}
-        response = self.client.get(reverse('filtered_products'), data=data)
+        data = {
+            'processor': 'Qualcomm 1400 Mgz',
+            'max_price': 18000,
+            'min_price': 12000
+        }
+        response = self.client.post(reverse('filtered_products'), data=data)
         product_list = response.context['product_list']
         for pr in product_list:
-            self.assertEqual(pr.processor, 'AMD')
+            self.assertEqual(pr.processor, 'Qualcomm 1400 Mgz')
             self.assertNotEqual(pr.processor, 'A5')
-            self.assertGreaterEqual(pr.price, data['price__min'])
-            self.assertLessEqual(pr.price, data['price__max'])
+            self.assertGreaterEqual(pr.price, data['min_price'])
+            self.assertLessEqual(pr.price, data['max_price'])
 
         # Here we test multiple os and diagonal choices, when user wants to
         # see phones with different oses an diagonals
-        data ={'os__android': 0, 'os__ios': 0, 'diagonal__3': 0, 'diagonal__5': 0}
-        response = self.client.get(reverse('filtered_products'), data=data)
+        data ={
+            'os': ['android', 'newos'],
+            'diagonal': [5.0, 6.0],
+            'processor': 'AMD'
+        }
+        response = self.client.post(reverse('filtered_products'), data=data)
         product_list = response.context['product_list']
+
         for pr in product_list:
-            self.assertIn(pr.os, ['android', 'ios'])
-            self.assertNotIn(pr.os, ['newos'])
-            self.assertIn(pr.diagonal, [3, 5])
-            self.assertNotIn(pr.diagonal, [2, 4, 6])
+            self.assertIn(pr.os, ['android', 'newos'])
+            self.assertNotIn(pr.os, ['ios'])
+            self.assertIn(pr.diagonal, [5, 6])
+            self.assertNotIn(pr.diagonal, [2, 4, 3])
+            self.assertEqual(pr.processor, 'AMD')
 
     def test_search(self):
         data = {'search': 'iphone'}
-        response = self.client.get(reverse('filtered_products'), data=data)
+        response = self.client.post(reverse('filtered_products'), data=data)
         product_list = response.context['product_list']
         for pr in product_list:
             self.assertIn('iphone', pr.name)
@@ -160,7 +150,7 @@ class FilteredProductsTestCase(TestCase):
             self.assertNotIn('zte', pr.name)
 
         data = {'search': 'samsung'}
-        response = self.client.get(reverse('filtered_products'), data=data)
+        response = self.client.post(reverse('filtered_products'), data=data)
         product_list = response.context['product_list']
         for pr in product_list:
             self.assertIn('samsung', pr.name)
