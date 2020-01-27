@@ -300,6 +300,12 @@ SMALL SCREENS
     .product-item-name{
         min-height: unset !important;
     }
+
+    .center-core img{
+        height: 100%;
+        max-height: 135px !important;
+        display: block !important;
+    }
 }
 
 
