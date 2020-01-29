@@ -88,58 +88,7 @@
         <div class="client-data-div">
         <form id="form_client_data" class="form-block col-lg-4 col-lg-offset-5" method="post">
             {% csrf_token %}
-            <div class="form-group">
-                <label>Your name</label>
-                <span class="form-error">{{ form.name.errors }}</span>
-                <input type="text" class="form-control" name="{{ form.name.html_name }}"
-                       placeholder="Boris Ivanov"
-                       {% if name %}
-                        value="{{ name }}"
-                       {% endif %}
-                >
-            </div>
-
-            <div class="form-group">
-                <label>Phone</label>
-                <span class="form-error">{{ form.phone.errors }}</span>
-                <input type="text" class="form-control" name="{{ form.phone.html_name }}"
-                       placeholder="+7 777 777 7777"
-                       {% if phone %}
-                        value="{{ phone }}"
-                       {% endif %}
-                >
-            </div>
-
-            <div class="form-group">
-                <label>Email</label>
-                <span class="form-error">{{ form.email.errors }}</span>
-                <input type="email" class="form-control" name="{{ form.email.html_name }}"
-                       placeholder="name@example.com"
-                       {% if email %}
-                        value="{{ email }}"
-                       {% endif %}
-                >
-            </div>
-
-            <div class="form-group">
-                <label>Address</label>
-                <span class="form-error">{{ form.address.errors }}</span>
-                <input type="text" class="form-control" name="{{ form.address.html_name }}"
-                       placeholder="Address"
-                       {% if address %}
-                        value="{{ address }}"
-                       {% endif %}
-                >
-            </div>
-
-            <div class="form-group">
-                <label>Comment to order</label>
-                <span class="form-error">{{ form.comments.errors }}</span>
-                <textarea class="form-control" id="comments_text" name="{{ form.comments.html_name }}"
-                       placeholder="..."
-                >{{ request.POST.comments }}</textarea>
-            </div>
-
+            {{ form }}
             <div class="make-order-btn-div">
                 <button type="submit" class="btn btn-primary">Order</button>
             </div>

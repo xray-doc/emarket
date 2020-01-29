@@ -1,10 +1,23 @@
 from django import forms
+from orders.models import Order
 
 
-class CheckoutContactForm(forms.Form):
-    name = forms.CharField(required=True)
-    phone = forms.CharField(required=True)
-    email = forms.EmailField(required=False)
-    address = forms.CharField(required=False)
-    comments = forms.CharField(required=False)
+class OrderForm(forms.ModelForm):
 
+    class Meta:
+        model = Order
+        fields = [
+            'customer_name',
+            'customer_phone',
+            'customer_email',
+            'customer_address',
+            'comments'
+        ]
+
+        widgets = {
+            'customer_name': forms.TextInput(attrs=({'class': 'form-control'})),
+            'customer_phone': forms.TextInput(attrs=({'class': 'form-control', 'type': 'tel'})),
+            'customer_email': forms.TextInput(attrs=({'class': 'form-control'})),
+            'customer_address': forms.TextInput(attrs=({'class': 'form-control'})),
+            'comments': forms.Textarea(attrs=({'class': 'form-control'}))
+        }

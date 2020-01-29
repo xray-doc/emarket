@@ -12,7 +12,7 @@ class OrderTestCase(TestCase):
 
     def setUp(self):
         status = mixer.blend(Status, name='checking')
-        order = mixer.blend(Order, status=status)
+        order = mixer.blend(Order, customer_name='Derek', comments='Ok', status=status)
         product = mixer.blend(Product, price=10000)
 
     def test_status_str(self):
@@ -46,7 +46,7 @@ class ProductInOrderTestCase(TestCase):
         self.assertEqual(str(pr_in_order), 'Nokia')
 
     def test_product_in_order_save(self):
-        order = mixer.blend(Order)
+        order = mixer.blend(Order, customer_name='Derek', comments='Ok')
         product_without_discount = mixer.blend(Product, price=12000)
         pr_in_order = mixer.blend(ProductInOrder, product=product_without_discount, order=order, nmb=3)
         estimated_price = 12000 * 3

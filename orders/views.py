@@ -1,14 +1,21 @@
+from django.contrib.auth.models import User
 from django.http import JsonResponse
 from django.shortcuts import render
-from django.contrib.auth.models import User
-from django.views.generic.base import TemplateView, View
+from django.views.generic.base import TemplateView
+from django.views.generic.edit import FormView, CreateView
+from django.urls import reverse
 
-from .models import *
-from .forms import *
 from accounts.models import Profile
+from .models import Status, Order, ProductInBasket, ProductInOrder
+from .forms import OrderForm
 
 
 class UpdateBasketList(TemplateView):
+    """
+    This view accepts post request with product_id and nmb of products to add to basket
+    or remove_product_id to remove from basket.
+    Returns html response for inserting into basket list in navbar.
+    """
 
     template_name = 'basket_items_list.html'
 
@@ -21,21 +28,21 @@ class UpdateBasketList(TemplateView):
         product_id = data.get("product_id")
         if product_id:
             nmb = data.get("nmb") or 1
-
-            if user.is_authenticated():
-                # if user is authenticated, then product in basket assigns to user object,
-                # else to session_key
-                ProductInBasket.add_product_to_basket(user=user, product_id=product_id, nmb=nmb)
-            else:
-                ProductInBasket.add_product_to_basket(session_key=session_key, product_id=product_id, nmb=nmb)
+            ProductInBasket.add_product_to_basket(
+                user=user,
+                session_key=session_key,
+                product_id=product_id,
+                nmb=nmb
+            )
 
         # Removing product from basket
         rm_product_id = data.get('remove_product_id')
         if rm_product_id:
-            if user.is_authenticated():
-                ProductInBasket.remove_product_from_basket(user=user, rm_product_id=rm_product_id)
-            else:
-                ProductInBasket.remove_product_from_basket(session_key=session_key, rm_product_id=rm_product_id)
+            ProductInBasket.remove_product_from_basket(
+                user=user,
+                session_key=session_key,
+                rm_product_id=rm_product_id
+            )
 
         return super().get(request, *args, **kwargs)
 
@@ -45,113 +52,134 @@ class UpdateBasketList(TemplateView):
         session_key = request.session.session_key
         user = request.user
 
-        if user.is_authenticated():
-            current_user_or_session_key = {'user': user}
-        else:
-            current_user_or_session_key = {'session_key': session_key}
-
-        products_in_basket = ProductInBasket.objects.filter(is_active=True, **current_user_or_session_key)
-        products_total_price = ProductInBasket.get_basket_total_price(**current_user_or_session_key)
-
+        products_in_basket = ProductInBasket.get_for_user_or_session_key(
+            user=user,
+            session_key=session_key
+        )
+        products_total_price = ProductInBasket.get_basket_total_price(
+            user=user,
+            session_key=session_key
+        )
         products_total_nmb = products_in_basket.count()
-        products_in_basket_ids = ''
-        for product_in_basket in products_in_basket:
-            products_in_basket_ids += str(product_in_basket.product.id) + ','
+
+        # List of all product ids in basket. Should look like: 4,12,22 etc.
+        ids_list = list(products_in_basket.values_list('product_id', flat=True))
+        ids_str = ','.join([str(id) for id in ids_list])
 
         context = {
             'user': user,
             'products_in_basket': products_in_basket,
             'products_total_price': products_total_price,
             'products_total_nmb': products_total_nmb,
-            'products_in_basket_ids': products_in_basket_ids
+            'products_in_basket_ids': ids_str
         }
 
         return context
 
 
 def changeProductInBasketQuantity(request):
+    """
+    Updates quantity of a product in basket.
+    Accepts post request with product_id and qty (nmb) of product.
+    """
     session_key = request.session.session_key
     user = request.user
-
-    return_dict = {}
     data = request.POST
     product_id = data.get("product_id")
     nmb = data.get("nmb")
 
-    if user.is_authenticated():
-        product = ProductInBasket.objects.get(user=user, product=product_id)
-    else:
-        product = ProductInBasket.objects.get(session_key=session_key, product=product_id)
+    product = ProductInBasket.get_for_user_or_session_key(
+        user=user,
+        session_key=session_key,
+        product_id=product_id
+    ).first()
 
     product.nmb = int(nmb)
     product.save(force_update=True)
-    return_dict["total_product_price"] = product.total_price
 
+    return_dict = {}
+    return_dict["total_product_price"] = product.total_price
     return JsonResponse(return_dict)
 
 
-def checkout(request):
+class CheckoutView(CreateView):
     """
-    Creating order
+    Creating order with products previously added to basket.
+    Order could be assigned to authenticated user as well as to a not authenticated one.
     """
-    session_key = request.session.session_key
-    user = request.user
+    # TODO: test this shit out
 
-    if user.is_authenticated():
-        products_in_basket = ProductInBasket.objects.filter(user=user)
-        products_total_price = ProductInBasket.get_basket_total_price(user=user)
-    else:
-        products_in_basket = ProductInBasket.objects.filter(session_key=session_key)
-        products_total_price = ProductInBasket.get_basket_total_price(session_key=session_key)
+    title           = 'Order'
+    model           = Order
+    form_class      = OrderForm
+    template_name   = 'orders/checkout.html'
 
-    form = CheckoutContactForm(request.POST or None)
-    if request.POST and form.is_valid():
-        data = request.POST
-        name = data["name"]
-        phone = data["phone"]
-        email = data["email"]
-        address = data["address"]
-        comments = data["comments"]
+    def get_initial(self):
+        """
+        If user has a profile with name, email etc
+        we fetch it and insert into the form as inintial data
+        """
+        initial = super().get_initial()
+        try:
+            profile = self.request.user.profile_set.get()
+        except:
+            return initial
 
-        #user, created = User.objects.get_or_create(username=phone, defaults={"first_name": name})
-        order = Order.objects.create(
-            customer_name=name,
-            customer_phone=phone,
-            customer_email=email,
-            customer_address=address,
-            comments=comments,
-            status_id=1
-        )
+        initial['customer_name']    = profile.get_full_name()
+        initial['customer_phone']   = profile.phone
+        initial['customer_email']   = self.request.user.email
+        initial['customer_address'] = profile.address
+        return initial
 
-        context = dict()
+    def get_context_data(self, **kwargs):
+        """
+        Adding products in basket to context to render them in checkout template.
+        """
+        context = super().get_context_data(**kwargs)
+        user = self.request.user
+        session_key = self.request.session.session_key
+
+        products_in_basket = ProductInBasket.get_for_user_or_session_key(user=user, session_key=session_key)
+        products_total_price = ProductInBasket.get_basket_total_price(user=user, session_key=session_key)
+        context['products_in_basket'] = products_in_basket
+        context['products_total_price'] = products_total_price
+        return context
+
+    def form_valid(self, form, *args, **kwargs):
+        user = self.request.user
         if user.is_authenticated():
-            order.user = user
-            context['user_profile_url'] = user.profile_set.first().get_absolute_url()
+            form.instance.user = self.request.user  # If user is authenticated we assign the order to him.
+        form.instance.status_id = 1        # Assigning a status "1" (Waiting for paimment) to order.
+        response = super().form_valid(form)         # With this line Order instance is created
+        order = self.object
 
+        # Taking products from basket and creating a ProductInOrder objects linked to order.
+        session_key = self.request.session.session_key
+        products_in_basket = ProductInBasket.get_for_user_or_session_key(user=user, session_key=session_key)
         for product_in_basket in products_in_basket:
             ProductInOrder.objects.create(
-                order = order,
-                product = product_in_basket.product,
-                nmb = product_in_basket.nmb,
-                price_per_item = product_in_basket.price_per_item,
+                order=order,
+                product=product_in_basket.product,
+                nmb=product_in_basket.nmb,
+                price_per_item=product_in_basket.price_per_item,
             )
+            product_in_basket.delete() # After creating an order we remove the product from basket.
 
-        return render(request, 'orders/done.html', context)
+        return response
 
-    profile = None
-    if user.is_authenticated():
-        profile = Profile.objects.filter(user=user).first()
-
-    if profile is not None:
-        name = profile.get_full_name()
-        phone = profile.phone
-        email = user.email
-        address = profile.address
-    else:
-        name = request.POST.get('name', None)
-        phone = request.POST.get('phone', None)
-        email = request.POST.get('email', None)
-        address = request.POST.get('address', None)
+    def get_success_url(self):
+        return reverse('orders:success') # TODO: should be DONE page with link to profile
 
 
-    return render(request, 'orders/checkout.html', locals())
+class SuccessView(TemplateView):
+    template_name = 'orders/success.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        try:
+            user_profile_url = self.request.user.profile_set.first().get_absolute_url()
+        except:
+            user_profile_url = None
+
+        context['user_profile_url'] = user_profile_url
+        return context

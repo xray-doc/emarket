@@ -200,7 +200,7 @@ class ProfileViewTestCase(TestCase):
     def setUp(self):
         test_user = User.objects.create_user(username='testuser', password='somep')
         profile = mixer.blend(Profile, user=test_user)
-        order = mixer.blend(Order, user=test_user)
+        order = mixer.blend(Order, user=test_user, customer_name='Ivan', comments='Yeah')
         self.client.login(username='testuser', password='somep')
 
         test_user2 = User.objects.create_user(username='testuser2', password='somep2')
