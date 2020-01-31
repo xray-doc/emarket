@@ -312,7 +312,7 @@ class CheckoutViewTestCase(TestCase):
         self.assertEqual(Order.objects.count(), 0)
         self.assertEqual(ProductInOrder.objects.count(), 0)
 
-    def test_prefill_form_data(self):
+    def test_prefill_form_data_with_user(self):
         profile = mixer.blend(
             Profile,
             user=self.user1,

@@ -1,7 +1,7 @@
 <form class="filter-form" method="POST" action="{% url 'main' %}">{% csrf_token %}
 
     {% for field in form.visible_fields %}
-        {{ field.label_tag }}
+        <h4>{{ field.label_tag }}</h4>
         {{ field }}
         <hr>
     {% endfor %}

@@ -26,7 +26,7 @@ $(document).ready(function () {
 
         // when django renders template of products in navbar basket,
         // it includes hidden data with ids of all products in basket
-        var products_in_basket_ids = $('#hidden_basket_data').data('products-ids');
+        var products_in_basket_ids = String($('#hidden_basket_data').data('products-ids'));
 
         // If product's id on product_item_div matches with one of those that is already in basket,
         // its button in product_item div changes from "add to basket" to "go to checkout"

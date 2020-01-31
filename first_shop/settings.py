@@ -27,6 +27,7 @@ SECRET_KEY = '+lrqj9l&u%i18_&ow#9uj*m!t%(a=gq2hq@7c^m&bp06-(rj^!'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+ADMINS = [('Mikhail', 'm.nikolaev1@gmail.com'),]
 
 ALLOWED_HOSTS = ['*']
 

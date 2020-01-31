@@ -82,7 +82,7 @@
                     </div>
                     <form method="post" id="form_buying_product" class="form-inline">
                         {% csrf_token %}
-                        Number:
+                        Qty:
                         <input type="number" size="1" value="1" min="1" class="product-nmb-form">
                         <button type="submit" class="btn btn-success changing-button" id="submit-btn"
                             data-id="{{ product.id }}">

@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load crispy_forms_tags %}
 
 {% block style %}
     <link rel="stylesheet" href="{% static 'static_dev/css/checkout.css' %}">
@@ -88,7 +89,7 @@
         <div class="client-data-div">
         <form id="form_client_data" class="form-block col-lg-4 col-lg-offset-5" method="post">
             {% csrf_token %}
-            {{ form }}
+            {{ form|crispy }}
             <div class="make-order-btn-div">
                 <button type="submit" class="btn btn-primary">Order</button>
             </div>

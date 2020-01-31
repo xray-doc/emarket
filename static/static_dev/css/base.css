@@ -233,13 +233,17 @@ SMALL SCREENS
     }
 
     /* Layout of product card on home page */
+    .product-item-col:first-child{
+        margin-top: 10px;
+    }
+
     .product-item{
         height: auto !important;
         flex-direction: row !important;
     }
 
-    .product-item-col:first-child{
-        margin-top: 10px;
+    .discount {
+        width: 19% !important;
     }
 
     .product-item-name{
@@ -413,6 +417,7 @@ Product_item styles
     left: 0;
     padding: 3px;
     border-radius: 2px 5px 5px 2px;
+    text-align: center;
 }
 
 .add-to-cart-btn{
@@ -458,6 +463,7 @@ Filter
 .filter-div li {
     display: inline;
 }
+
 
 /*
 Delivery, contacts, profile

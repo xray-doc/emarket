@@ -107,7 +107,6 @@ class CheckoutView(CreateView):
     Creating order with products previously added to basket.
     Order could be assigned to authenticated user as well as to a not authenticated one.
     """
-    # TODO: test this shit out
 
     title           = 'Order'
     model           = Order
@@ -117,7 +116,7 @@ class CheckoutView(CreateView):
     def get_initial(self):
         """
         If user has a profile with name, email etc
-        we fetch it and insert into the form as inintial data
+        it's fetched and inserted into the form as inintial data
         """
         initial = super().get_initial()
         try:
@@ -133,7 +132,7 @@ class CheckoutView(CreateView):
 
     def get_context_data(self, **kwargs):
         """
-        Adding products in basket to context to render them in checkout template.
+        Adding products in basket to template context
         """
         context = super().get_context_data(**kwargs)
         user = self.request.user
@@ -148,7 +147,7 @@ class CheckoutView(CreateView):
     def form_valid(self, form, *args, **kwargs):
         user = self.request.user
         if user.is_authenticated():
-            form.instance.user = self.request.user  # If user is authenticated we assign the order to him.
+            form.instance.user = self.request.user
         form.instance.status_id = 1        # Assigning a status "1" (Waiting for paimment) to order.
         response = super().form_valid(form)         # With this line Order instance is created
         order = self.object
@@ -168,7 +167,7 @@ class CheckoutView(CreateView):
         return response
 
     def get_success_url(self):
-        return reverse('orders:success') # TODO: should be DONE page with link to profile
+        return reverse('orders:success')
 
 
 class SuccessView(TemplateView):
