@@ -27,7 +27,6 @@ SECRET_KEY = '+lrqj9l&u%i18_&ow#9uj*m!t%(a=gq2hq@7c^m&bp06-(rj^!'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-ADMINS = [('Mikhail', 'm.nikolaev1@gmail.com'),]
 
 ALLOWED_HOSTS = ['*']
 
@@ -179,10 +178,13 @@ AVATAR_AUTO_GENERATE_SIZES = (80, 200)
 EMAIL_HOST = 'smtp.mail.ru'
 EMAIL_HOST_USER = 'm10040@mail.ru'
 EMAIL_HOST_PASSWORD = 'mstosorok14'
-EMAIL_PORT = 465
-EMAIL_USE_SSL = True
+EMAIL_PORT = 2525
+EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'm10040@mail.ru'
-ADMINS = ('Mikhail', 'm.nikolaev1@gmail.com')
+SERVER_EMAIL = EMAIL_HOST_USER
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+ADMINS = [('Mikhail', 'm.nikolaev1@gmail.com'),]
 
 # REST settings
 REST_FRAMEWORK = {

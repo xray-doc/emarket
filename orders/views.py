@@ -119,6 +119,7 @@ class CheckoutView(CreateView):
         it's fetched and inserted into the form as inintial data
         """
         initial = super().get_initial()
+        assert 3 == 4
         try:
             profile = self.request.user.profile_set.get()
         except:

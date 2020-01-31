@@ -6,7 +6,7 @@ from django.views.generic.base import TemplateView
 from django.views.generic.edit import FormView, FormMixin
 from django.urls import reverse
 
-from products.models import *
+from products.models import *  #TODO specify it
 from .forms import ContactForm, FilterForm
 
 
