@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User
+from django.core.mail import mail_admins
 from django.http import JsonResponse
 from django.shortcuts import render
 from django.views.generic.base import TemplateView
@@ -149,8 +150,11 @@ class CheckoutView(CreateView):
         user = self.request.user
         if user.is_authenticated():
             form.instance.user = self.request.user
-        form.instance.status_id = 1        # Assigning a status "1" (Waiting for paimment) to order.
-        response = super().form_valid(form)         # With this line Order instance is created
+
+        # Assigning a status "1" (Waiting for paimment) to order.
+        form.instance.status_id = 1
+        # With this line Order instance is created
+        response = super().form_valid(form)
         order = self.object
 
         # Taking products from basket and creating a ProductInOrder objects linked to order.
@@ -163,8 +167,11 @@ class CheckoutView(CreateView):
                 nmb=product_in_basket.nmb,
                 price_per_item=product_in_basket.price_per_item,
             )
-            product_in_basket.delete() # After creating an order we remove the product from basket.
+            # When an order is created, products are removed from the basket
+            product_in_basket.delete()
 
+        # Sending email with order details to admins
+        notify_admins_about_order(order)
         return response
 
     def get_success_url(self):
@@ -183,3 +190,23 @@ class SuccessView(TemplateView):
 
         context['user_profile_url'] = user_profile_url
         return context
+
+
+def notify_admins_about_order(order):
+    """
+    The function sends email to ADMINS (specified in settings.py)
+    with details about the created order.
+    """
+    text = f'''
+{order.customer_name} made an order for {order.total_price} RUB 
+Datetime: ({order.created.strftime("%Y-%m-%d %H.%M.%S")})
+Phone: {order.customer_phone}
+Email: {order.customer_email}
+Address: {order.customer_address}
+Comments: {order.comments}
+Products:
+'''
+    for p_in_o in order.get_products_in_order():
+        text += f'- {(p_in_o).product.name}, ({p_in_o.nmb})\n'
+
+    mail_admins('Order', text)

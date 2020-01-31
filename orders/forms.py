@@ -18,7 +18,7 @@ class OrderForm(forms.ModelForm):
                                                      'placeholder': 'Ivan Ivanov'})),
             'customer_phone': forms.TextInput(attrs=({'class': 'form-control',
                                                       'type': 'tel',
-                                                      'placeholder': '+7 (777) 777 77 77'})),
+                                                      'placeholder': '+7 777 777 77 77'})),
             'customer_email': forms.TextInput(attrs=({'class': 'form-control',
                                                       'placeholder': 'emailaddress@site.ru'})),
             'customer_address': forms.TextInput(attrs=({'class': 'form-control',
