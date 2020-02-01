@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from django.core.mail import mail_admins
+from django.core import mail
 from django.http import JsonResponse
 from django.shortcuts import render
 from django.views.generic.base import TemplateView
@@ -171,7 +171,10 @@ class CheckoutView(CreateView):
             product_in_basket.delete()
 
         # Sending email with order details to admins
-        notify_admins_about_order(order)
+        try:
+            notify_admins_about_order(order)
+        except:
+            pass
         return response
 
     def get_success_url(self):
@@ -207,6 +210,6 @@ Comments: {order.comments}
 Products:
 '''
     for p_in_o in order.get_products_in_order():
-        text += f'- {(p_in_o).product.name}, ({p_in_o.nmb})\n'
+        text += f'- {p_in_o.product.name}, ({p_in_o.nmb})\n'
 
-    mail_admins('Order', text)
+    mail.mail_admins('Order', text)

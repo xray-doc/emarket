@@ -193,7 +193,6 @@ class ContactsTestCase(TestCase):
         self.assertEqual(response.context['form'].__class__, ContactForm)
 
     def test_send_mail(self):
-        start_string = '<-------contacts EMARKET------->\n\n'
         data = {
             'subject': 'Hello emarket',
             'sender': 'test@test.com',
@@ -205,14 +204,13 @@ class ContactsTestCase(TestCase):
         response = self.client.post(reverse('contacts'), data=data)
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, reverse('success'))
-        self.assertTemplateUsed('orders/done.hrml')
 
         self.assertEqual(len(mail.outbox), 1)
         m = mail.outbox[0]
         self.assertEqual(m.to, ['m.nikolaev1@gmail.com', 'test@test.com'])
-        self.assertEqual(m.subject, data['subject'])
-        self.assertNotEqual(m.body, data['message'])
-        self.assertEqual(m.body, start_string + data['message'])
+        self.assertIn(data['subject'], m.subject)
+        self.assertIn(data['message'], m.body)
+        self.assertIn(data['sender'], m.body)
 
     def test_send_mail_without_copy(self):
         data = {

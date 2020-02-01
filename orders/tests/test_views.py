@@ -1,5 +1,7 @@
 from django.test import TestCase
 from django.contrib.auth import get_user_model
+from django.core import mail
+from django.conf import settings
 from django.urls import reverse
 from mixer.backend.django import mixer
 import json
@@ -206,8 +208,8 @@ class CheckoutViewTestCase(TestCase):
             password='somep',
             email='test@testmail.com'
         )
-        self.pr1 = mixer.blend(Product)
-        self.pr2 = mixer.blend(Product)
+        self.pr1 = mixer.blend(Product, name='Huawei 999')
+        self.pr2 = mixer.blend(Product, name='New Iphone')
 
         self.pr_in_basket1 = mixer.blend(
             ProductInBasket,
@@ -263,6 +265,19 @@ class CheckoutViewTestCase(TestCase):
         self.assertEqual(Order.objects.first().user, self.user1)
         self.assertTemplateNotUsed(response, 'orders/checkout.html')
         self.assertRedirects(response, reverse('orders:success'))
+
+        # Email notifications to ADMINS
+        self.assertEqual(len(mail.outbox), 1)
+        msg = mail.outbox[0]
+        for admin in settings.ADMINS:
+            self.assertIn(admin[1], msg.recipients())
+
+        msg_text = msg.body
+        for val in data.values():
+            self.assertIn(str(val), msg_text)
+        self.assertIn(self.pr1.name, msg_text)
+        self.assertIn(self.pr2.name, msg_text)
+
 
     def test_view_with_valid_data_and_anonimous_user(self):
         self.assertEqual(Order.objects.count(), 0)

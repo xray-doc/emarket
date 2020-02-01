@@ -1,4 +1,5 @@
 from django.core.mail import send_mail, BadHeaderError
+from django.conf import settings
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.views.generic.list import ListView
@@ -6,7 +7,7 @@ from django.views.generic.base import TemplateView
 from django.views.generic.edit import FormView, FormMixin
 from django.urls import reverse
 
-from products.models import *  #TODO specify it
+from products.models import Product
 from .forms import ContactForm, FilterForm
 
 
@@ -89,14 +90,20 @@ class ContactsView(FormView):
         subject = form.cleaned_data['subject']
         sender = form.cleaned_data['sender']
         message = form.cleaned_data['message']
-        message = "<-------contacts EMARKET------->\n\n" + message
+
+        message = f'''
+Message from: {sender} 
+
+{message} 
+'''
+        subject = '[Django Contacts] ' + subject
         copy = form.cleaned_data['copy']
 
-        recepients = ['m.nikolaev1@gmail.com']
+        recepients = [settings.ADMINS[0][1]]
         if copy:
             recepients.append(sender)
         try:
-            send_mail(subject, message, 'm10040@mail.ru', recepients)
+            send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, recepients)
         except BadHeaderError:
             return HttpResponse('Invalid header found')
         return super().form_valid(form)
