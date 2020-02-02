@@ -77,19 +77,19 @@ class FilteredProductsTestCase(TestCase):
         generate_devices(self)
 
     def test_view_url_exists_and_accessible(self):
-        response = self.client.get('/filtered_products/')
+        response = self.client.post('/filtered_products/')
         self.assertEqual(response.status_code, 200)
 
-        response = self.client.get(reverse('filtered_products'))
+        response = self.client.post(reverse('filtered_products'))
         self.assertEqual(response.status_code, 200)
 
     def test_view_uses_correct_template(self):
-        response = self.client.get(reverse('filtered_products'))
+        response = self.client.post(reverse('filtered_products'))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'products_on_main_page.html')
 
     def test_context(self):
-        response = self.client.get(reverse('filtered_products'))
+        response = self.client.post(reverse('filtered_products'))
         self.assertTrue('product_list' in response.context)
 
     def test_filter_fields(self):
