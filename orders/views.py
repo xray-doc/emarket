@@ -82,6 +82,7 @@ def changeProductInBasketQuantity(request):
     """
     Updates quantity of a product in basket.
     Accepts post request with product_id and qty (nmb) of product.
+    Returns JsonResponse with total_product_price
     """
     session_key = request.session.session_key
     user = request.user

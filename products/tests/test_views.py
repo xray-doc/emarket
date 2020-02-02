@@ -95,8 +95,43 @@ class CommentTestCase(TestCase):
             'parent_id': parent_comment.id
         })
 
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'products/product_detail.html')
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, reverse('accounts:login'))
+        number_of_comments = Comment.objects.count()
+        self.assertEqual(initial_number_of_comments, number_of_comments)
+
+    def test_post_comment_with_authenticated_user_but_invalid_data(self):
+        user_obj = User(username='testuserN2', email='test@testN2.com')
+        user_obj.set_password("somepassrandomN2")
+        user_obj.save()
+        self.client.login(username='testuserN2', password='somepassrandomN2')
+
+        product = Product.objects.first()
+        parent_comment = Comment.objects.first()
+        initial_number_of_comments = Comment.objects.count()
+
+        content = 'Test comment from unauthenticated user'
+        url = product.get_absolute_url()
+        response = self.client.post(url, {
+            'content': content,
+            'content_type': product.get_content_type,
+            # 'object_id': product.id,
+            'parent_id': parent_comment.id
+        })
 
         number_of_comments = Comment.objects.count()
         self.assertEqual(initial_number_of_comments, number_of_comments)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'products/product_detail.html')
+
+        response = self.client.post(url, {
+            'content': content,
+            # 'content_type': product.get_content_type,
+            'object_id': product.id,
+            # 'parent_id': parent_comment.id
+        })
+
+        number_of_comments = Comment.objects.count()
+        self.assertEqual(initial_number_of_comments, number_of_comments)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'products/product_detail.html')

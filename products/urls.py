@@ -19,5 +19,5 @@ from django.contrib import admin
 from . import views
 
 urlpatterns = [
-    url(r'^(?P<slug>[\w-]+)/$', views.product_detail, name='product'),
+    url(r'^(?P<slug>[\w-]+)/$', views.ProductDetailView.as_view(), name='product'),
 ]

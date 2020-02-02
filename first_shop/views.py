@@ -18,7 +18,7 @@ class MainView(ListView, FormMixin):
 
 
 class FilteredProductsView(ListView):
-
+# TODO: refactor this class.
     model = Product
     template_name = 'products_on_main_page.html'
     form_class = FilterForm

@@ -40,8 +40,6 @@ urlpatterns = [
     url(r'^products/', include('products.urls', namespace='products')),
     url(r'^success/', views.SuccessView.as_view(), name='success'),
     url(r'^filtered_products/', views.FilteredProductsView.as_view(), name='filtered_products'),
-    # url(r'^forging_comments/', views.forging_comments, name='forging_comments'),
-    # url(r'^comments/', include("comments.urls", namespace='comments')),
 ]
 
 
