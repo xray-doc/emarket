@@ -375,4 +375,4 @@ class SuccessViewTestCase(TestCase):
         response = self.client.get(reverse('orders:success'))
         expected_context_key = 'user_profile_url'
         self.assertIn(expected_context_key, response.context)
-        self.assertEqual(response.context['user_profile_url'], user.profile_set.first().get_absolute_url())
+        self.assertEqual(response.context['user_profile_url'], user.profile.get_absolute_url())

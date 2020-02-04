@@ -24,42 +24,34 @@ class FilteredProductsView(FormView):
 
     def form_valid(self, form):
         prs = self.queryset
-        # TODO: refactor filter
-        oses = form.cleaned_data['os']
-        if oses:
-            prs = prs.filter(os__in=oses)
+        data = form.cleaned_data
 
-        diagonals = form.cleaned_data['diagonal']
-        if diagonals:
-            prs = prs.filter(diagonal__in=diagonals)
+        oses = data['os']
+        if oses: prs = prs.filter(os__in=oses)
 
-        processors = form.cleaned_data['processor']
-        if processors:
-            prs = prs.filter(processor__in=processors)
+        diagonals = data['diagonal']
+        if diagonals: prs = prs.filter(diagonal__in=diagonals)
 
-        rams = form.cleaned_data['ram']
-        if rams:
-            prs = prs.filter(ram__in=rams)
+        processors = data['processor']
+        if processors: prs = prs.filter(processor__in=processors)
 
-        mmin = form.cleaned_data['memory_min']
-        if mmin:
-            prs = prs.filter(built_in_memory__gte=mmin)
+        rams = data['ram']
+        if rams: prs = prs.filter(ram__in=rams)
 
-        mmax = form.cleaned_data['memory_max']
-        if mmax:
-            prs = prs.filter(built_in_memory__lte=mmax)
+        mmin = data['memory_min']
+        if mmin: prs = prs.filter(built_in_memory__gte=mmin)
 
-        minprice = form.cleaned_data['min_price']
-        if minprice and minprice > 0:
-            prs = prs.filter(price__gte=minprice)
+        mmax = data['memory_max']
+        if mmax: prs = prs.filter(built_in_memory__lte=mmax)
 
-        maxprice = form.cleaned_data['max_price']
-        if maxprice and maxprice > 0:
-            prs = prs.filter(price__lte=maxprice)
+        minprice = data['min_price']
+        if minprice and minprice > 0: prs = prs.filter(price__gte=minprice)
 
-        search = form.cleaned_data['search']
-        if search:
-            prs = prs.filter(name__icontains=search)
+        maxprice = data['max_price']
+        if maxprice and maxprice > 0: prs = prs.filter(price__lte=maxprice)
+
+        search = data['search']
+        if search: prs = prs.filter(name__icontains=search)
 
         return super().render_to_response({'product_list': prs})
 
@@ -91,10 +83,7 @@ Message from: {sender}
         subject = '[Django Contacts] ' + subject
         copy = form.cleaned_data['copy']
         recepients = [settings.ADMINS[0][1]]
-        if copy:
-            recepients.append(sender)
-        try:
-            send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, recepients)
-        except BadHeaderError:
-            return HttpResponse('Invalid header found')
+        if copy: recepients.append(sender)
+        try: send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, recepients)
+        except BadHeaderError: return HttpResponse('Invalid header found')
         return super().form_valid(form)

@@ -99,7 +99,7 @@ class ProfileView(TemplateView):
             # but you can't see other's people orders on their pages
             context['orders'] = self.user.order_set.all() #Order.objects.filter(user=self.user)
         try:
-            context['profile'] = self.user.profile_set.first() #Profile.objects.get(user=self.user)
+            context['profile'] = self.user.profile #Profile.objects.get(user=self.user)
         except:
             pass
         context['user'] = self.user

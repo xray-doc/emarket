@@ -15,7 +15,7 @@ class UpdateBasketList(TemplateView):
     """
     This view accepts post request with product_id and nmb of products to add to basket
     or remove_product_id to remove from basket.
-    Returns html response for inserting into basket list in navbar.
+    Returns html response that should be inserted by javascript into basket list in navbar.
     """
 
     template_name = 'basket_items_list.html'
@@ -123,7 +123,7 @@ class CheckoutView(CreateView):
         initial = super().get_initial()
 
         try:
-            profile = self.request.user.profile_set.get()
+            profile = self.request.user.profile
         except:
             return initial
 
@@ -188,7 +188,7 @@ class SuccessView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         try:
-            user_profile_url = self.request.user.profile_set.first().get_absolute_url()
+            user_profile_url = self.request.user.profile.get_absolute_url()
         except:
             user_profile_url = None
 
