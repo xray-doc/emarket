@@ -24,7 +24,7 @@ class FilteredProductsView(FormView):
 
     def form_valid(self, form):
         prs = self.queryset
-
+        # TODO: refactor filter
         oses = form.cleaned_data['os']
         if oses:
             prs = prs.filter(os__in=oses)

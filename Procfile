@@ -1,1 +1,1 @@
-web: gunicorn first_shop.wsgi --log-file - 
+web: gunicorn emarket.wsgi --log-file - 
