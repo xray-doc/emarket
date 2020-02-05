@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'emarket/base.html' %}
 {% load static %}
 
 
@@ -33,11 +33,11 @@
                 <div class="col-md-3 col-sm-10 col-md-offset-0 col-sm-offset-1 filter-div">
                     <h3>Filter</h3>
                     <hr>
-                    {% include 'filter_form.html' %}
+                    {% include 'emarket/filter_form.html' %}
                 </div>
                 <div class="col-md-9 col-sm-12">
                     <div id="product_items">
-                        {% include 'products_on_main_page.html' %}
+                        {% include 'emarket/products_on_main_page.html' %}
                     </div>
                 </div>
             </div>

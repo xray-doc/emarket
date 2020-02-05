@@ -18,7 +18,7 @@ class UpdateBasketList(TemplateView):
     Returns html response that should be inserted by javascript into basket list in navbar.
     """
 
-    template_name = 'basket_items_list.html'
+    template_name = 'emarket/basket_items_list.html'
 
     def post(self, request, *args, **kwargs):
         data = request.POST

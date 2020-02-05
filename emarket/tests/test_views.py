@@ -68,7 +68,7 @@ class MainTestCase(TestCase):
     def test_view_uses_correct_template(self):
         response = self.client.get(reverse('main'))
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'home.html')
+        self.assertTemplateUsed(response, 'emarket/home.html')
 
 
 class FilteredProductsTestCase(TestCase):
@@ -86,7 +86,7 @@ class FilteredProductsTestCase(TestCase):
     def test_view_uses_correct_template(self):
         response = self.client.post(reverse('filtered_products'))
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'products_on_main_page.html')
+        self.assertTemplateUsed(response, 'emarket/products_on_main_page.html')
 
     def test_context(self):
         response = self.client.post(reverse('filtered_products'))
@@ -170,7 +170,7 @@ class DeliveryTestCase(TestCase):
     def test_view_uses_correct_template(self):
         response = self.client.get(reverse('delivery'))
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'delivery.html')
+        self.assertTemplateUsed(response, 'emarket/delivery.html')
 
 
 class ContactsTestCase(TestCase):
@@ -185,7 +185,7 @@ class ContactsTestCase(TestCase):
     def test_view_uses_correct_template(self):
         response = self.client.get(reverse('contacts'))
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'contacts.html')
+        self.assertTemplateUsed(response, 'emarket/contacts.html')
 
     def test_view_uses_correct_form(self):
         response = self.client.get(reverse('contacts'))

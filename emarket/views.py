@@ -13,12 +13,12 @@ from .forms import ContactForm, FilterForm
 
 class MainView(ListView, FormMixin):
     model = Product
-    template_name = 'home.html'
+    template_name = 'emarket/home.html'
     form_class = FilterForm
 
 
 class FilteredProductsView(FormView):
-    template_name   = 'products_on_main_page.html'
+    template_name   = 'emarket/products_on_main_page.html'
     form_class      = FilterForm
     queryset        = Product.objects.all()
 
@@ -57,15 +57,15 @@ class FilteredProductsView(FormView):
 
 
 class DeliveryView(TemplateView):
-    template_name = 'delivery.html'
+    template_name = 'emarket/delivery.html'
 
 
 class SuccessView(TemplateView):
-    template_name = 'success.html'
+    template_name = 'emarket/success.html'
 
 
 class ContactsView(FormView):
-    template_name = 'contacts.html'
+    template_name = 'emarket/contacts.html'
     form_class = ContactForm
 
     def get_success_url(self):

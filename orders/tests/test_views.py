@@ -53,7 +53,7 @@ class UpdateBasketListViewTestCase(TestCase):
     def test_view_uses_correct_template(self):
         response = self.client.get(reverse('orders:basket_list'))
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'basket_items_list.html')
+        self.assertTemplateUsed(response, 'emarket/basket_items_list.html')
 
     def test_view_context_keys(self):
         response = self.client.get(reverse('orders:basket_list'))
