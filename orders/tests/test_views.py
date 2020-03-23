@@ -195,10 +195,9 @@ class ChangeProductInBasketViewTestCase(TestCase):
         self.client.login(username='testuser1', password='somep')
         response = self.client.post(reverse('orders:changeProductQuantity'), data=data)
 
-        resp = json.loads(response.content)
-        self.assertTrue('total_product_price' in resp)
-        self.assertEqual(resp['total_product_price'], self.pr1.price * 11)
-
+        self.assertEqual(response.status_code, 200)
+        product = ProductInBasket.objects.filter(user=self.user1, product=self.pr1).first()
+        self.assertEqual(product.nmb, 11)
 
 class CheckoutViewTestCase(TestCase):
 

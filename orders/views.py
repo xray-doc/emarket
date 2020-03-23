@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django.core import mail
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import FormView, CreateView
@@ -90,18 +90,19 @@ def changeProductInBasketQuantity(request):
     product_id = data.get("product_id")
     nmb = data.get("nmb")
 
-    product = ProductInBasket.get_for_user_or_session_key(
-        user=user,
-        session_key=session_key,
-        product_id=product_id
-    ).first()
+    try:
+        product = ProductInBasket.get_for_user_or_session_key(
+            user=user,
+            session_key=session_key,
+            product_id=product_id
+        ).first()
 
-    product.nmb = int(nmb)
-    product.save(force_update=True)
+        product.nmb = int(nmb)
+        product.save(force_update=True)
+    except:
+        return HttpResponse(status=400)
 
-    return_dict = {}
-    return_dict["total_product_price"] = product.total_price
-    return JsonResponse(return_dict)
+    return HttpResponse(status=200)
 
 
 class CheckoutView(CreateView):

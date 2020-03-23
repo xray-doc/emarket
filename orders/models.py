@@ -147,7 +147,7 @@ class ProductInBasket(models.Model):
         obj = get_user_or_session_key(user, session_key)
         products = ProductInBasket.objects.filter(**obj, is_active=True)
         if product_id:
-            products.filter(product_id=product_id)
+            products = products.filter(product_id=product_id)
         return products
 
     @staticmethod

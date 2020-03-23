@@ -67,6 +67,31 @@ class ProductInBasketTestCase(TestCase):
         self.prod2 = mixer.blend(Product, price=8500)
         self.prod3 = mixer.blend(Product, price=12000, discount=12)
 
+    def test_get_for_user_or_session_key(self):
+        user1 = mixer.blend(User)
+        user2 = mixer.blend(User)
+        session_key = 'asdfsljkljlk2j34234012'
+
+        prod_in_basket1 = mixer.blend(ProductInBasket, user=user1, product=self.prod1)
+        prod_in_basket2 = mixer.blend(ProductInBasket, user=user1, product=self.prod2)
+        prod_in_basket3 = mixer.blend(ProductInBasket, user=user2, product=self.prod3)
+        prod_in_basket4 = mixer.blend(ProductInBasket, user=user2, product=self.prod2)
+        prod_in_basket5 = mixer.blend(ProductInBasket, session_key=session_key, product=self.prod1)
+
+        result = ProductInBasket.get_for_user_or_session_key(user=user1, product_id=self.prod1.id)
+        self.assertEqual(prod_in_basket1, result.first())
+        result = ProductInBasket.get_for_user_or_session_key(user=user1, product_id=self.prod2.id)
+        self.assertEqual(prod_in_basket2, result.first())
+        self.assertNotEqual(prod_in_basket1, result.first())
+
+        result = ProductInBasket.get_for_user_or_session_key(user=user2, product_id=self.prod3.id)
+        self.assertEqual(prod_in_basket3, result.first())
+        result = ProductInBasket.get_for_user_or_session_key(user=user2, product_id=self.prod2.id)
+        self.assertEqual(prod_in_basket4, result.first())
+
+        result = ProductInBasket.get_for_user_or_session_key(session_key=session_key, product_id=self.prod1.id)
+        self.assertEqual(prod_in_basket5, result.first())
+
     def test_get_busket_total_price_with_user(self):
         user = mixer.blend(User)
 

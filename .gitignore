@@ -26,6 +26,8 @@
 # Static
 static/media/
 
+db.sqlite3
+
 # Sensitive or high-churn files:
 .idea/dataSources.ids
 .idea/dataSources.xml
