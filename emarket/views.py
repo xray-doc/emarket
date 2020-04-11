@@ -84,6 +84,8 @@ Message from: {sender}
         copy = form.cleaned_data['copy']
         recepients = [settings.ADMINS[0][1]]
         if copy: recepients.append(sender)
-        try: send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, recepients)
-        except BadHeaderError: return HttpResponse('Invalid header found')
+        try:
+            send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, recepients)
+        except BadHeaderError:
+            return HttpResponse('Invalid header found')
         return super().form_valid(form)
